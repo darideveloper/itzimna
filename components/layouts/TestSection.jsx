@@ -1,9 +1,16 @@
+import { fontTitle } from "@/libs/fonts"
+
 export default function TestSection() {
   return (
     <section>
-      <p>
+      <h1
+        className={`
+          ${fontTitle.className}
+          text-5xl
+        `}
+      >
         Hello world
-      </p>
+      </h1>
     </section>
   )
 }
