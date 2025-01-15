@@ -27,7 +27,7 @@ export default function Footer() {
           {/* Render powered by */}
           Powered by&nbsp;
           <Link 
-            href="mailto:darideveloper@gmail.com"
+            href="https://api.whatsapp.com/send?phone=5214493402622"
             target="_blank"
             className={`
               creator-link

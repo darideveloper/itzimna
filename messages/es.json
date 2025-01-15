@@ -1,0 +1,20 @@
+{
+    "Meta": {
+      "title": "Itzimna Real State",
+      "description": {
+        "home": "Descripción de la página aquí"
+      },
+      "keywords": "algunas, palabras clave, aquí",
+      "author": "Itzimna Real State Team"
+    },
+    "Header": {
+        "nav": {
+            "link1": "Enlace 1",
+            "link2": "Enlace 2"
+        }
+    },
+    "Langs": {
+        "es": "Español",
+        "en": "Inglés"
+    }
+}

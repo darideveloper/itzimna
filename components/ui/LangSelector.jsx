@@ -22,7 +22,7 @@ import Image from 'next/image'
 export default function LangSelector({ className }) {
 
   // Get translations
-  const t = useTranslations('General.Langs')
+  const t = useTranslations('Langs')
 
   const router = useRouter()
 

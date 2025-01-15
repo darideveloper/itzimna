@@ -16,7 +16,7 @@ import LangSelector from '@/components/ui/LangSelector'
 export default function Header() {
 
   // Get translations
-  const t = useTranslations('General.Header')
+  const t = useTranslations('Header')
   const tMeta = useTranslations('Meta')
 
   // Header state
