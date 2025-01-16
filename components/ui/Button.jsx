@@ -31,12 +31,13 @@ export default function Button({
   // TODO: add active and disabled logic
   const styles = `
     cta
-    ${className}
     ${fontTitle.className}
     block
-
+    
     // Sample active style
     ${active && 'debug'}
+    
+    ${className}
   `
 
   const content = (

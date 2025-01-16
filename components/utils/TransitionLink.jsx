@@ -27,22 +27,18 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
     if (disable === 'true') return
 
     // Validate local link
-    const domain = window.location.origin
-    console.log({ href, domain })
     if (!href.startsWith('/')) {
-      console.error(`TransitionLink: Invalid href: ${href}`)
       return
     }
 
     // Show video
     e.preventDefault()
     const transitionVideoWrapper = document.querySelector('.transition-video-wrapper')
-    const transitionClass = 'play'
     const transitionDuration = 4000
     transitionVideoWrapper.classList.remove("hidden")
     transitionVideoWrapper.classList.add("flex")
     await sleep(300)
-    transitionVideoWrapper.classList.add(transitionClass)
+    transitionVideoWrapper.classList.add("play")
 
     // Play video from start
     const video = transitionVideoWrapper.querySelector("video")
@@ -59,7 +55,7 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
         await sleep(transitionDuration)
         
         // Hide video
-        transitionVideoWrapper.classList.remove(transitionClass)
+        transitionVideoWrapper.classList.remove("play")
         await sleep(300)
         transitionVideoWrapper.classList.add("hidden")
         transitionVideoWrapper.classList.remove("flex")

@@ -51,8 +51,7 @@ export default function HomePage() {
       <hr />
       <p>Button (href)</p>
       <Button
-        href="https://www.google.com"
-        target="_blank"
+        href="/page-1"
       >
         This is a button link
       </Button>
@@ -82,6 +81,9 @@ export default function HomePage() {
       <hr />
       <Title
         isH1={true}
+        className={`
+          debug
+        `}
       >
         This is an h1
       </Title>
