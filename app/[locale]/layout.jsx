@@ -47,6 +47,39 @@ export default async function LocaleLayout({ children, params }) {
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main>
+            <div 
+              className={`
+                transition-video-wrapper
+                opacity-0
+                z-50
+                hidden
+                bg-green
+                w-screen
+                h-screen
+                absolute
+                top-1/2
+                left-1/2
+                -translate-x-1/2
+                -translate-y-1/2
+                duration-300
+                items-center
+                justify-center
+              `}
+            >
+              <video
+                className={`
+                  transition-video
+                  h-full md:h-auto
+                  w-auto md:w-full
+                `}
+              >
+                <source
+                  src="/videos/transition.mp4"
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
             {children}
           </main>
           <Footer />

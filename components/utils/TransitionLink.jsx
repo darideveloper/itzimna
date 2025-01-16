@@ -26,29 +26,40 @@ export function TransitionLink({ href, onClick, disable, ...props }) {
 
     if (disable === 'true') return
 
-    // Start animation
+    // Show video
     e.preventDefault()
-    const transitionClass = 'page-transition'
-    const transitionDuration = 400
-    const body = document.querySelector('main')
-    body.classList.add(transitionClass)
-    await sleep(transitionDuration)
+    const transitionVideoWrapper = document.querySelector('.transition-video-wrapper')
+    const transitionClass = 'play'
+    const transitionDuration = 4000
+    transitionVideoWrapper.classList.remove("hidden")
+    transitionVideoWrapper.classList.add("flex")
+    await sleep(300)
+    transitionVideoWrapper.classList.add(transitionClass)
+
+    // Play video from start
+    const video = transitionVideoWrapper.querySelector("video")
+    video.currentTime = 0
+    video.play()
 
     // Change page
     const old_url = window.location.href
     router.push(href)
 
     // End animation
-    const urlValidationInterval = setInterval(async () => {
-      const newUrl = window.location.href
-      if (old_url != newUrl) {
+    while (true) {
+      if (window.location.href !== old_url) {
         await sleep(transitionDuration)
-        body.classList.remove(transitionClass)
-
-        // Clear the interval when the condition is met
-        clearInterval(urlValidationInterval)
+        
+        // Hide video
+        transitionVideoWrapper.classList.remove(transitionClass)
+        await sleep(300)
+        transitionVideoWrapper.classList.add("hidden")
+        transitionVideoWrapper.classList.remove("flex")
+        
+        break
       }
-    }, 100)
+      await sleep(100)
+    }
   }
 
   return (
@@ -58,6 +69,8 @@ export function TransitionLink({ href, onClick, disable, ...props }) {
         onClick && onClick()
         handleTransition(e)
       }}
+      className={`
+      `}
       {...props}
     />
   )

@@ -34,6 +34,10 @@ export default function Header() {
       "url": "/page-2"
     },
   ]
+  const homePages = [
+    "/es",
+    "/en"
+  ]
 
   // Common style for menu icons (open anc close)
   const menuIconStyles = `
@@ -52,7 +56,10 @@ export default function Header() {
         `}
       >
         {/* Logo with link */}
-        <TransitionLink href="/">
+        <TransitionLink
+          href="/"
+          disable={`${homePages.includes(currentPage)}`}
+        >
           <Image
             src="/images/logo.webp"
             alt={'Logo ' + tMeta('title')}
