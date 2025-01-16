@@ -56,7 +56,7 @@ export default async function LocaleLayout({ children, params }) {
                 bg-green
                 w-screen
                 h-screen
-                absolute
+                fixed
                 top-1/2
                 left-1/2
                 -translate-x-1/2
