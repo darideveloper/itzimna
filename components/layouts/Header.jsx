@@ -1,9 +1,11 @@
 'use client'
 
+// Libs
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 
+// Components
 import { LuMenu, LuX } from "react-icons/lu"
 import TransitionLink from '@/components/utils/TransitionLink'
 import Image from 'next/image'
