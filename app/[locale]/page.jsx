@@ -14,6 +14,31 @@ export default function HomePage() {
   return (
     <>
       <hr />
+      <p>Aos</p>
+      <hr />
+      <p
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        Aos text 1
+      </p>
+      <p
+        data-aos="fade-up"
+        data-aos-delay="300"
+      >
+        Aos text 2
+      </p>
+      <p
+        data-aos="fade-up"
+        data-aos-delay="500"
+      >
+        Aos text 3
+      </p>
+      <br />
+      <br />
+      <br />
+
+      <hr />
       <p>Test section</p>
       <hr />
       <TestSection />
@@ -66,8 +91,14 @@ export default function HomePage() {
       <Subtitle>
         This is an h3
       </Subtitle>
+      <br />
+      <br />
+      <br />
 
       <TestCardsSection/>
+      <br />
+      <br />
+      <br />
     </>
   )
 }
