@@ -1,10 +1,12 @@
-// Sections
-import TestSection from "@/components/layouts/TestSection"
+// Components
 import Button from "@/components/ui/Button"
 import Subtitle from "@/components/ui/Subtitle"
 import Title from "@/components/ui/Title"
 
+// Sections
+import TestSection from "@/components/layouts/TestSection"
 import TestClientSection from "@/components/layouts/TestClientSection"
+import TestCardsSection from "@/components/layouts/TestCardsSection"
 
 
 export default function HomePage() {
@@ -64,6 +66,8 @@ export default function HomePage() {
       <Subtitle>
         This is an h3
       </Subtitle>
+
+      <TestCardsSection/>
     </>
   )
 }
