@@ -18,6 +18,7 @@ export default function TestCard({ text, description, imageSrc }) {
         src={imageSrc}
         width={200}
         height={200}
+        alt="Test image"
       />
     </div>
   )

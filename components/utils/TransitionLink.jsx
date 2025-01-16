@@ -28,7 +28,9 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
 
     // Validate local link
     const domain = window.location.origin
-    if (!href.startsWith(domain)) {
+    console.log({ href, domain })
+    if (!href.startsWith('/')) {
+      console.error(`TransitionLink: Invalid href: ${href}`)
       return
     }
 
