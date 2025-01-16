@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 
 import { LuMenu, LuX } from "react-icons/lu"
-import { TransitionLink } from '@/components/utils/TransitionLink'
+import TransitionLink from '@/components/utils/TransitionLink'
 import Image from 'next/image'
 import LangSelector from '@/components/ui/LangSelector'
 

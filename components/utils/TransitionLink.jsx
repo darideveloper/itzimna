@@ -14,7 +14,7 @@ import { useRouter } from '@/i18n/routing'
  * @param {object} props.props - Other
  * @returns 
  */
-export function TransitionLink({ href, onClick, disable, ...props }) {
+export default function TransitionLink({ href, onClick, disable, ...props }) {
 
   const router = useRouter()
 
@@ -25,6 +25,12 @@ export function TransitionLink({ href, onClick, disable, ...props }) {
   async function handleTransition(e) {
 
     if (disable === 'true') return
+
+    // Validate local link
+    const domain = window.location.origin
+    if (!href.startsWith(domain)) {
+      return
+    }
 
     // Show video
     e.preventDefault()

@@ -1,6 +1,6 @@
 import { fontTitle } from '@/libs/fonts'
 
-import { TransitionLink } from '@/components/utils/TransitionLink'
+import TransitionLink from '@/components/utils/TransitionLink'
 
 /**
  * Cta component with intl routing
@@ -10,19 +10,21 @@ import { TransitionLink } from '@/components/utils/TransitionLink'
  * @param {object} props - Props object
  * @param {string} props.href - URL to route to (link button) (for link buttons)
  * @param {string} props.onClick - Function to run on click (for action buttons)
- * @param {string} props.text - Text to display
  * @param {string} props.className - Additional classes
  * @param {boolean} props.disabled - Disable button
  * @param {boolean} props.active - Active button (for toggle)
+ * @param {object} props.children - Child components
+ * @param {object} props.props - Additional props
  * 
  */
-export default function Button({ 
+export default function Button({
   href = "",
   onClick = null,
-  text,
   className,
   disabled = false,
-  active = false
+  active = false,
+  children,
+  ...props
 }) {
 
   // Global bytton styles
@@ -31,6 +33,10 @@ export default function Button({
     cta
     ${className}
     ${fontTitle.className}
+    block
+
+    // Sample active style
+    ${active && 'debug'}
   `
 
   const content = (
@@ -39,26 +45,27 @@ export default function Button({
         content
       `}
     >
-      <span>
-        {text}
-      </span>
-
+      {children}
     </div>
   )
 
   return (
     (
       href == "" || disabled
-        ? <button
+        ? 
+        <button
           className={styles}
           onClick={onClick}
           disabled={disabled}
+          {...props}
         >
           {content}
         </button>
-        : <TransitionLink
+        : 
+        <TransitionLink
           href={href}
           className={styles}
+          {...props}
         >
           {content}
         </TransitionLink>

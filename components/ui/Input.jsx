@@ -27,8 +27,6 @@ export default function Input({
       className={`
         input-wrapper
       `}
-      data-aos="fade-up"
-      data-aos-delay={index * 500}
     >
       <label 
         htmlFor={`input-${name}`}
@@ -47,6 +45,7 @@ export default function Input({
         className={`
           input
           outline-none focus:outline-none
+          text-green
         `}
       />
       {errors[name]?.type === "required" && (
