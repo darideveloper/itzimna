@@ -7,6 +7,22 @@ import Image from "next/image";
 // UI Components
 import Button from "./Button";
 
+/**
+ * PropertyCard component
+ * @param {object} props - Component props
+ * @param {number} props.id - Property id
+ * @param {string} props.name - Property name
+ * @param {string} props.description - Property description
+ * @param {string} props.imageSrc - Property image URL
+ * @param {string} props.company - Property company
+ * @param {string} props.location - Property location
+ * @param {number} props.price - Property price
+ * @param {string} props.seller - Property seller
+ * @param {number} props.meters - Property area in square meters
+ * @param {string} props.category - Property category
+ * @param {string} props.className - Additional classes
+ * @returns {ReactElement} Card component
+ */
 export default function PropertyCard2({
   id,
   name,
@@ -56,6 +72,36 @@ export default function PropertyCard2({
             `}
           priority
         />
+        {/* Overlay with description */}
+        <div
+          className={`
+              absolute
+              inset-0
+              bg-black/60
+              opacity-0
+              group-hover:opacity-100
+              transition-opacity
+              duration-300
+              flex
+              items-center
+              justify-center
+              p-4
+            `}
+        >
+          <p
+            className={`
+                text-white
+                text-sm
+                opacity-0
+                group-hover:opacity-100
+                transition-opacity
+                duration-300
+                delay-100
+              `}
+          >
+            {description}
+          </p>
+        </div>
       </div>
       <div className="p-5">
         <h2
@@ -70,17 +116,6 @@ export default function PropertyCard2({
         >
           {name}
         </h2>
-        <div className="">
-          <p
-            className={`
-                text-sm
-                mb-3
-                opacity-80
-              `}
-          >
-            {description}
-          </p>
-        </div>
         <div
           className={`
               flex
@@ -164,9 +199,10 @@ export default function PropertyCard2({
               text-yellow
             `}
         >
-          {price}
+          {price}$
         </span>
-        {/* don't remove, we may need it later<button
+        {/* don't remove, we may need it later
+        <button
           className="px-4 py-2 bg-[#234B5C] text-white rounded-md transition-all duration-300 
                      hover:bg-[#1a3a47] hover:shadow-lg active:transform active:scale-95"
         >
