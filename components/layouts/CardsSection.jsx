@@ -4,11 +4,10 @@ import { useTranslations } from "next-intl";
 // Components
 
 import PropertyCard from "@/components/ui/PropertyCard";
-import PropertyCard2 from "@/components/ui/PropertyCard2";
 
 export default function CardsSection() {
   // Get translations
-  const t = useTranslations("Test");
+  const t = useTranslations("Home.CardsSection");
 
   // Section data
 
@@ -18,7 +17,7 @@ export default function CardsSection() {
       name: "Modern Apartment",
       description:
         "A luxurious 3-bedroom apartment with a spacious balcony overlooking the city skyline.",
-      imageSrc: "/images/test.svg",
+      imageSrc: "/images/test2.jpg",
       company: "Urban Living Co.",
       location: "New York, NY",
       price: 450000,
@@ -77,42 +76,38 @@ export default function CardsSection() {
       updated_at: "2025-01-18T12:30:00",
       className: "city-center-studio",
     },
+    {
+      id: 5,
+      name: "Mountain Retreat",
+      description:
+        "A luxurious 3-bedroom apartment with a spacious balcony overlooking the city skyline.",
+      imageSrc: "/images/test.svg",
+      company: "Urban Living Co.",
+      location: "New York, NY",
+      price: 450000,
+      seller: "John Doe Realty",
+      meters: 120,
+      category: "Apartment",
+      created_at: "2025-01-20T14:30:00",
+      updated_at: "2025-01-25T10:00:00",
+      className: "modern-apartment",
+    },
   ];
 
   return (
     <section className="px-4 md:px-8 lg:px-16">
       <hr className="my-4 border-green-light" />
       <p
-        className="text-center text-lg mb-6 text-green-light"
+        className="text-center text-2xl font-bold mb-6 text-green-light"
       >
-        Test cards section
+        {t("title")}
       </p>
       <hr className="my-4 border-green-light" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {propertyCards.map((card, index) => (
-          <PropertyCard
-            key={index}
-            id={card.id}
-            name={card.name}
-            description={card.description}
-            imageSrc={card.imageSrc}
-            company={card.company}
-            location={card.location}
-            price={card.price}
-            seller={card.seller}
-            meters={card.meters}
-            created_at={card.created_at}
-            category={card.category}
-            updated_at={card.updated_at}
-            className={""}
-          />
-        ))}
-      </div>
       <br/>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 xl:max-w-[1400px] mx-auto">
           {propertyCards.map((card, index) => (
-            <PropertyCard2
+            <PropertyCard
               key={index}
               id={card.id}
               name={card.name}

@@ -1,7 +1,13 @@
-import React from "react";
-import { FaMapMarkerAlt, FaRulerCombined } from "react-icons/fa";
+// Icons 
+import { FaMapMarkerAlt, FaArrowsAlt, FaHome, FaBuilding, FaUser } from "react-icons/fa";
 
-const PropertyCard = ({
+//libs
+import Image from "next/image";
+
+// UI Components
+import Button from "./Button";
+
+export default function PropertyCard({
   id,
   name,
   description,
@@ -13,53 +19,246 @@ const PropertyCard = ({
   meters,
   category,
   className,
-}) => {
+}) {
   return (
     <div
-      className={`rounded-2xl shadow-lg transition-transform transform hover:scale-105 bg-black overflow-hidden border-2 border-green-light ${className} text-white`}
+      className={`
+          property-card
+          rounded-2xl
+          shadow-lg
+          transition-transform transform
+          hover:scale-105 
+          bg-black
+          overflow-hidden
+          border-2
+          border-green-light
+          text-white
+          ${className}
+        `}
     >
-      <img
-        src={imageSrc || "images/test.svg"}
-        alt={name}
-        className="w-full h-48 object-cover"
-      />
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-2 text-green-light">
+      <div
+        className={`
+          relative
+          w-full
+          h-64
+          overflow-hidden
+          group
+        `}
+      >
+        <Image
+          src={imageSrc || "images/test.svg"}
+          alt={name}
+          fill
+          className={`
+              object-cover
+              transition-transform duration-500
+              group-hover:scale-110
+            `}
+          priority
+        />
+        {/* Category badge !todo need to change the opacity -- done */}
+        <div
+          className={`
+              absolute
+              top-4
+              right-4
+              bg-black/60
+              px-3
+              py-1
+              rounded-full
+              flex
+              items-center
+              z-10
+            `}
+        >
+          <FaHome
+            className={`
+              w-4
+              h-4
+              mr-2
+              text-green-light
+            `}
+          />
+          <span className={`text-sm font-medium`}>{category}</span>
+        </div>
+        {/* Description overlay */}
+        <div
+          className={`
+              absolute
+              inset-0
+              bg-black/60
+              opacity-0
+              group-hover:opacity-100
+              transition-opacity
+              duration-300
+              flex
+              items-center
+              justify-center
+              p-4
+            `}
+        >
+          <p
+            className={`
+                text-white
+                text-sm
+                opacity-0
+                group-hover:opacity-100
+                transition-opacity
+                duration-300
+                delay-100
+              `}
+          >
+            {description}
+          </p>
+        </div>
+      </div>
+      <div className="p-5">
+        <h2
+          className={`
+              text-xl
+              font-semibold
+              text-green-light
+              mb-2
+              transition-colors
+              duration-200
+            `}
+        >
           {name}
         </h2>
-        <p className="text-sm mb-3">{description}</p>
-        <div className="flex items-center gap-2 mb-3">
-          <FaMapMarkerAlt className="text-blue-light" />
-          <span>{location}</span>
-        </div>
-        <div className="flex justify-between items-center text-xl mb-2">
-          <span className="font-bold text-yellow">
-            ${price.toLocaleString()}
-          </span>
-          <div className="flex items-center gap-1">
-            <FaRulerCombined className="text-green-light text-xs" />
-            <span>{meters} m²</span>
+        <div
+          className={`
+              flex
+              items-center
+              justify-between
+              mb-4
+            `}
+        >
+          <div
+            className={`
+                flex
+                items-center
+                text-white
+                hover:opacity-80
+                transition-colors
+                duration-200
+              `}
+          >
+            <FaMapMarkerAlt
+              className={`
+                      w-4
+                      h-4
+                      mr-1
+                      text-green-light
+                `}
+            />
+            <span className={`text-sm`}>{location}</span>
+          </div>
+          <div
+            className={`
+                flex
+                items-center
+                text-white
+                hover:opacity-80
+                transition-colors
+                duration-200
+              `}
+          >
+            <FaBuilding
+              className={`
+                      w-4
+                      h-4
+                      mr-1
+                      text-green-light
+                `}
+            />
+            <span className={`text-sm text-green-light`}>{company}</span>
           </div>
         </div>
-        <div className="text-xs mb-3">
-          <span>Category: </span>
-          <span className="text-green-light">{category}</span>
+        <div
+          className={`
+              flex
+              items-center
+              text-white
+              hover:opacity-80
+              transition-colors
+              duration-200
+              mb-4
+            `}
+        >
+          <FaArrowsAlt
+            className={`
+                    w-4
+                    h-4
+                    mr-2
+                    text-green-light
+                  `}
+          />
+          <span className={`text-sm`}>
+            {meters} m<sup>2</sup>
+          </span>
         </div>
-        <div className="text-xs mb-1">
-          <span>Company: {company}</span>
+        <div
+          className={`
+              flex
+              items-center
+              text-white
+              hover:opacity-80
+              transition-colors
+              duration-200
+              mb-2
+            `}
+        >
+          <FaUser
+            className={`
+                    w-4
+                    h-4
+                    mr-2
+                    text-green-light
+              `}
+          />
+          <span className={`text-sm`}>Listed by: {seller}</span>
         </div>
-        <div className="text-xs mb-3">
-          <span>Seller: {seller}</span>
-        </div>
+      </div>
+      <div
+        className={`
+                flex
+                items-center
+                justify-between
+                p-5
+                pt-0
+              `}
+      >
+        <span
+          className={`
+              text-2xl
+              font-bold
+              text-yellow
+            `}
+        >
+          {price}
+        </span>
+        {/* don't remove, we may need it later
         <button
-          className="w-full py-2 rounded-lg bg-green-light text-black font-semibold hover:bg-blue-light transition"
+          className="px-4 py-2 bg-[#234B5C] text-white rounded-md transition-all duration-300 
+                     hover:bg-[#1a3a47] hover:shadow-lg active:transform active:scale-95"
         >
           View Details
-        </button>
+        </button> */}
+        <Button
+          className={`
+            px-4
+            py-2
+            bg-green-light
+            font-thin
+            text-black
+            rounded-md
+            transition-all
+            duration-300
+          `}
+        >
+          View Details
+        </Button>
       </div>
     </div>
   );
-};
-
-export default PropertyCard;
-
+}
