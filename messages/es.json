@@ -17,6 +17,11 @@
     "es": "Español",
     "en": "Inglés"
   },
+  "Home": {
+    "CardsSection": {
+      "title": "Sección de tarjetas"
+    }
+  },
   "Test": {
     "card1": {
       "text": "Prueba 1",

@@ -4,9 +4,8 @@ import Subtitle from "@/components/ui/Subtitle"
 import Title from "@/components/ui/Title"
 
 // Sections
-import TestSection from "@/components/layouts/TestSection"
 import TestClientSection from "@/components/layouts/TestClientSection"
-import TestCardsSection from "@/components/layouts/TestCardsSection"
+import CardsSection from "@/components/layouts/CardsSection"
 
 
 export default function HomePage() {
@@ -41,7 +40,6 @@ export default function HomePage() {
       <hr />
       <p>Test section</p>
       <hr />
-      <TestSection />
       <br />
       <br />
       <br />
@@ -96,8 +94,7 @@ export default function HomePage() {
       <br />
       <br />
       <br />
-
-      <TestCardsSection/>
+        <CardsSection />
       <br />
       <br />
       <br />

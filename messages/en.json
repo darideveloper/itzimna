@@ -17,6 +17,11 @@
     "es": "Spanish",
     "en": "English"
   },
+  "Home": {
+    "CardsSection": {
+      "title": "Cards Section"
+    }
+  },
   "Test": {
     "card1": {
       "text": "Test 1",
