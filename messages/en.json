@@ -1,0 +1,34 @@
+{
+  "Meta": {
+    "title": "Itzimna Real State",
+    "description": {
+      "home": "Page description here"
+    },
+    "keywords": "some, keywords, here",
+    "author": "Itzimna Real State Team"
+  },
+  "Header": {
+    "nav": {
+      "link1": "Link 1",
+      "link2": "Link 2"
+    }
+  },
+  "Langs": {
+    "es": "Spanish",
+    "en": "English"
+  },
+  "Test": {
+    "card1": {
+      "text": "Test 1",
+      "description": "Test 1 description"
+    },
+    "card2": {
+      "text": "Test 2",
+      "description": "Test 2 description"
+    },
+    "card3": {
+      "text": "Test 3",
+      "description": "Test 3 description"
+    }
+  }
+}
