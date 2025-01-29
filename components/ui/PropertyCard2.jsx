@@ -199,7 +199,7 @@ export default function PropertyCard2({
               text-yellow
             `}
         >
-          {price}$
+          ${price}
         </span>
         {/* don't remove, we may need it later
         <button
