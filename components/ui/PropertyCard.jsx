@@ -1,5 +1,11 @@
-// Icons 
-import { FaMapMarkerAlt, FaArrowsAlt, FaHome, FaBuilding, FaUser } from "react-icons/fa";
+// Icons
+import {
+  FaMapMarkerAlt,
+  FaArrowsAlt,
+  FaHome,
+  FaBuilding,
+  FaUser,
+} from "react-icons/fa";
 
 //libs
 import Image from "next/image";
@@ -7,24 +13,6 @@ import Image from "next/image";
 // UI Components
 import Button from "./Button";
 
-/**
- * PropertyCard is a UI component for displaying a real estate property
- * in a card format. It receives a bunch of props from the parent component
- * and renders a card with the following elements:
- * 
- * - An image of the property
- * - A category badge
- * - A description overlay that appears on hover
- * - A title and location text
- * - A few other details like company, meters, and seller
- * - A button to view the details of the property
- * 
- * The component has a few custom CSS classes to make it look pretty
- * and a few Tailwind classes to make it responsive
- * 
- * @param {{ id: number, name: string, description: string, imageSrc: string, company: string, location: string, price: number, seller: string, meters: number, category: string}} props
- * @returns {JSX.Element}
- */
 export default function PropertyCard({
   id,
   name,
@@ -44,13 +32,12 @@ export default function PropertyCard({
           property-card
           rounded-2xl
           shadow-lg
-          transition-transform transform
-          hover:scale-105 
           bg-black
           overflow-hidden
           border-2
           border-green-light
           text-white
+          cursor-pointer
           ${className}
         `}
     >
@@ -89,31 +76,23 @@ export default function PropertyCard({
               z-10
             `}
         >
-          <FaHome
-            className={`
-              w-4
-              h-4
-              mr-2
-              text-green-light
-            `}
-          />
           <span className={`text-sm font-medium`}>{category}</span>
         </div>
         {/* Description overlay */}
         <div
           className={`
-              absolute
-              inset-0
-              bg-black/60
-              opacity-0
-              group-hover:opacity-100
-              transition-opacity
-              duration-300
-              flex
-              items-center
-              justify-center
-              p-4
-            `}
+            absolute
+            inset-0
+            bg-black/60
+            opacity-0
+            group-hover:opacity-100
+            transition-opacity
+            duration-300
+            flex
+            items-center
+            justify-center
+            p-4
+        `}
         >
           <p
             className={`
@@ -147,121 +126,98 @@ export default function PropertyCard({
           className={`
               flex
               items-center
-              justify-between
+              text-white
+              hover:opacity-80
+              transition-colors
+              duration-200
               mb-4
             `}
         >
-          <div
+          <FaMapMarkerAlt
             className={`
-                flex
-                items-center
-                text-white
-                hover:opacity-80
-                transition-colors
-                duration-200
-              `}
-          >
-            <FaMapMarkerAlt
-              className={`
-                      w-4
-                      h-4
-                      mr-1
-                      text-green-light
-                `}
-            />
-            <span className={`text-sm`}>{location}</span>
-          </div>
-          <div
-            className={`
-                flex
-                items-center
-                text-white
-                hover:opacity-80
-                transition-colors
-                duration-200
-              `}
-          >
+                w-4
+                h-4
+                mr-1
+                text-green-light
+            `}
+          />
+          <span className={`text-sm`}>{location}</span>
+        </div>
+        <div
+          className={`
+              flex
+              items-center
+              justify-between
+              text-white
+              hover:opacity-80
+              transition-colors
+              duration-200
+              mb-4
+          `}
+        >
+          <div className="flex items-center">
             <FaBuilding
               className={`
-                      w-4
-                      h-4
-                      mr-1
-                      text-green-light
-                `}
+                  w-4
+                  h-4
+                  mr-1
+                  text-green-light
+              `}
             />
-            <span className={`text-sm text-green-light`}>{company}</span>
+            <span
+              className={`
+                  text-sm
+                  text-green-light
+              `}
+            >
+              {company}
+            </span>
+          </div>
+          <div className="flex items-center">
+            <FaArrowsAlt
+              className={`
+                w-4
+                h-4
+                mr-2
+                text-green-light
+              `}
+            />
+            <span className={`text-sm`}>
+              {meters} m<sup>2</sup>
+            </span>
           </div>
         </div>
         <div
           className={`
-              flex
-              items-center
-              text-white
-              hover:opacity-80
-              transition-colors
-              duration-200
-              mb-4
-            `}
-        >
-          <FaArrowsAlt
-            className={`
-                    w-4
-                    h-4
-                    mr-2
-                    text-green-light
-                  `}
-          />
-          <span className={`text-sm`}>
-            {meters} m<sup>2</sup>
-          </span>
-        </div>
-        <div
-          className={`
-              flex
-              items-center
-              text-white
-              hover:opacity-80
-              transition-colors
-              duration-200
-              mb-2
-            `}
+            flex
+            items-center
+            text-white
+            hover:opacity-80
+            transition-colors
+            duration-200
+            mb-2
+        `}
         >
           <FaUser
             className={`
-                    w-4
-                    h-4
-                    mr-2
-                    text-green-light
-              `}
+                w-4
+                h-4
+                mr-2
+                text-green-light
+            `}
           />
           <span className={`text-sm`}>Listed by: {seller}</span>
         </div>
       </div>
       <div
         className={`
-                flex
-                items-center
-                justify-between
-                p-5
-                pt-0
-              `}
+            flex
+            items-center
+            justify-between
+            p-5
+            pt-0
+        `}
       >
-        <span
-          className={`
-              text-2xl
-              font-bold
-              text-yellow
-            `}
-        >
-          {price}
-        </span>
-        {/* don't remove, we may need it later
-        <button
-          className="px-4 py-2 bg-[#234B5C] text-white rounded-md transition-all duration-300 
-                     hover:bg-[#1a3a47] hover:shadow-lg active:transform active:scale-95"
-        >
-          View Details
-        </button> */}
         <Button
           className={`
             px-4
@@ -276,6 +232,15 @@ export default function PropertyCard({
         >
           View Details
         </Button>
+        <span
+          className={`
+              text-2xl
+              font-bold
+              text-yellow
+            `}
+        >
+          ${new Intl.NumberFormat('en-US').format(price)}
+        </span>
       </div>
     </div>
   );

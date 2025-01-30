@@ -42,6 +42,7 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
 
     // Play video from start
     const video = transitionVideoWrapper.querySelector("video")
+    video.volume = 0.1
     video.currentTime = 0
     video.play()
 
