@@ -7,6 +7,24 @@ import Image from "next/image";
 // UI Components
 import Button from "./Button";
 
+/**
+ * PropertyCard is a UI component for displaying a real estate property
+ * in a card format. It receives a bunch of props from the parent component
+ * and renders a card with the following elements:
+ * 
+ * - An image of the property
+ * - A category badge
+ * - A description overlay that appears on hover
+ * - A title and location text
+ * - A few other details like company, meters, and seller
+ * - A button to view the details of the property
+ * 
+ * The component has a few custom CSS classes to make it look pretty
+ * and a few Tailwind classes to make it responsive
+ * 
+ * @param {{ id: number, name: string, description: string, imageSrc: string, company: string, location: string, price: number, seller: string, meters: number, category: string}} props
+ * @returns {JSX.Element}
+ */
 export default function PropertyCard({
   id,
   name,
