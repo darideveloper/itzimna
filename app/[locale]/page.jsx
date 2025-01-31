@@ -8,11 +8,18 @@ import TestClientSection from "@/components/layouts/TestClientSection"
 import CardsSection from "@/components/layouts/CardsSection"
 
 
-export default function HomePage() {
+export default async function HomePage() {
+
+  // Get data from api
+  const host = process.env.NEXT_PUBLIC_HOST
+  const propertiesRes = await fetch(`${host}/api/properties`)
+  const propertiesJson = await propertiesRes.json()
+  const propertiesData = await propertiesJson.results
 
   return (
     <>
-      <hr />
+      <CardsSection propertiesData={propertiesData} />
+      {/* <hr />
       <p>Aos</p>
       <hr />
       <p
@@ -94,10 +101,9 @@ export default function HomePage() {
       <br />
       <br />
       <br />
-        <CardsSection />
       <br />
       <br />
-      <br />
+      <br /> */}
     </>
   )
 }

@@ -10,10 +10,10 @@ export async function fetchJWT(request, endpoint, method, body) {
   const host = process.env.NEXT_PUBLIC_HOST
 
   // Cookies
-  const cookieStore = cookies()
-  const accessToken = cookieStore.get('accessToken')?.value
-  const refreshToken = cookieStore.get('refreshToken')?.value
-  const lang = cookieStore.get('NEXT_LOCALE')?.value
+  const cookieStore = await cookies()
+  const accessToken = cookieStore.get('accessToken')?.value || ''
+  const refreshToken = cookieStore.get('refreshToken')?.value || ''
+  const lang = request.cookies.get("NEXT_LOCALE")?.value || 'es'
 
   const cookiesOptions = {
     httpOnly: true,
