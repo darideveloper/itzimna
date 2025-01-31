@@ -3,7 +3,8 @@ import { useTranslations } from "next-intl"
 
 // Components
 
-import PropertyCard from "@/components/ui/PropertyCard"
+import PropertyCard from "@/components/ui/PropertyCard";
+import TransitionLink from "@/components/utils/TransitionLink";
 
 
 /**
@@ -31,38 +32,72 @@ export default function CardsSection({ propertiesData }) {
   const t = useTranslations("Home.CardsSection")
 
   return (
-    <section className="px-4 md:px-8 lg:px-16">
-      <hr className="my-4 border-green-light" />
+    <section
+      className={`
+          px-4
+          md:px-8
+          lg:px-16
+      `}
+    >
+      <hr
+        className={`
+          my-4
+          border-green-light
+        `} 
+      />
       <p
-        className="text-center text-2xl font-bold mb-6 text-green-light"
+        className={`
+          text-center
+          text-2xl
+          font-bold
+          mb-6
+          text-green-light
+        `}
       >
         {t("title")}
       </p>
-      <hr className="my-4 border-green-light" />
+      <hr
+        className={`
+          my-4
+          border-green-light
+      `}
+      />
       <br />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 xl:max-w-[1400px] mx-auto">
+      <div
+        className={`
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          xl:grid-cols-4
+          gap-6
+          xl:max-w-[1400px]
+          mx-auto
+        `}
+      >
         {propertiesData.map((card, index) => (
-          <PropertyCard
+          <TransitionLink 
+            href={"/page-1"}
             key={index}
-            id={card.id}
-            name={card.name}
-            description={card.description}
-            imageSrc={card.banner.url}
-            imageAlt={card.banner.alt}
-            company={card.company}
-            location={card.location}
-            price={card.price}
-            seller={card.seller}
-            meters={card.meters}
-            created_at={card.created_at}
-            category={card.category}
-            updated_at={card.updated_at}
-            className={""}
-          />
+          >
+            <PropertyCard
+              id={card.id}
+              name={card.name}
+              description={card.description}
+              imageSrc={card.banner.url}
+              company={card.company}
+              location={card.location}
+              price={card.price}
+              seller={card.seller}
+              meters={card.meters}
+              created_at={card.created_at}
+              category={card.category}
+              className={""}
+            />
+          </TransitionLink>
         ))}
       </div>
-
     </section>
   )
 }
