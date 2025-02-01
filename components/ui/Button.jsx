@@ -33,8 +33,14 @@ export default function Button({
     cta
     ${fontTitle.className}
     block
-    
-    // Sample active style
+    px-4 py-2
+    bg-yellow hover:bg-white
+    font-thin
+    text-white hover:text-yellow
+    rounded-md
+    border-2 border-yellow
+    hover:shadow-md hover:shadow-yellow
+    transition-colors duration-200
     ${active && 'debug'}
     
     ${className}

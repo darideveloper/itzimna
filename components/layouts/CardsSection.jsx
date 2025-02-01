@@ -66,14 +66,13 @@ export default function CardsSection({ propertiesData }) {
 
       <div
         className={`
+          container
           grid
           grid-cols-1
           sm:grid-cols-2
           lg:grid-cols-3
           xl:grid-cols-4
           gap-6
-          xl:max-w-[1400px]
-          mx-auto
         `}
       >
         {propertiesData.map((card, index) => (
@@ -82,14 +81,12 @@ export default function CardsSection({ propertiesData }) {
             key={index}
           >
             <PropertyCard
-              id={card.id}
               name={card.name}
               description={card.description}
               imageSrc={card.banner.url}
               company={card.company}
               location={card.location}
               price={card.price}
-              seller={card.seller}
               meters={card.meters}
               created_at={card.created_at}
               category={card.category}

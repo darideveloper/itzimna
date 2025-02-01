@@ -3,7 +3,6 @@ import {
   FaMapMarkerAlt,
   FaArrowsAlt,
   FaBuilding,
-  FaUser,
 } from "react-icons/fa";
 
 //libs
@@ -23,21 +22,18 @@ import Button from "@/components/ui/Button";
  * @param {string} props.company - Company name
  * @param {string} props.location - Location
  * @param {number} props.price - Price
- * @param {string} props.seller - Seller name
  * @param {number} props.meters - Size in m2
  * @param {string} props.category - Category
  * @param {string} props.className - Additional classes
  * @returns {ReactElement} - PropertyCard component
  */
 export default function PropertyCard({
-  id,
   name,
   description,
   imageSrc,
   company,
   location,
   price,
-  seller,
   meters,
   category,
   className,
@@ -48,6 +44,7 @@ export default function PropertyCard({
           property-card
           rounded-2xl
           shadow-lg hover:shadow-green-light
+          hover:transform duration-300
           bg-gray-100
           overflow-hidden
           border-2
@@ -149,9 +146,6 @@ export default function PropertyCard({
               flex
               items-center
               text-gray-800
-              hover:text-green-light
-              transition-colors
-              duration-200
               mb-4
             `}
         >
@@ -171,9 +165,6 @@ export default function PropertyCard({
               items-center
               justify-between
               text-gray-800
-              hover:text-green-light
-              transition-colors
-              duration-200
               mb-4
           `}
         >
@@ -195,10 +186,10 @@ export default function PropertyCard({
               {company}
             </span>
           </div>
-          <div className={
-            `flex
+          <div className={`
+            flex
             items-center
-            `}
+          `}
           >
             <FaArrowsAlt
               className={`
@@ -213,26 +204,6 @@ export default function PropertyCard({
             </span>
           </div>
         </div>
-        <div
-          className={`
-            flex
-            items-center
-            hover:text-green-light
-            transition-colors
-            duration-200
-            mb-2
-        `}
-        >
-          <FaUser
-            className={`
-                w-4
-                h-4
-                mr-2
-                text-green-light
-            `}
-          />
-          <span className={`text-sm`}>Listed by: {seller}</span>
-        </div>
       </div>
       <div
         className={`
@@ -245,23 +216,13 @@ export default function PropertyCard({
       >
         <Button
           className={`
-            px-4 py-2
-            bg-green-light hover:bg-yellow 
-            font-thin
-            text-white
-            rounded-md
-            transition-all
-            duration-300
-            hover:scale-105
-            hover:shadow-md hover:shadow-yellow
-            hover:-translate-y-1 hover:-translate-x-1
           `}
         >
           View Details
         </Button>
         <span
           className={`
-              text-2xl
+              text-xl
               font-bold
               text-yellow
               hover:text-green-light
