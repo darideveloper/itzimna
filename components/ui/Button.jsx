@@ -41,6 +41,13 @@ export default function Button({
     border-2 border-yellow
     hover:shadow-md hover:shadow-yellow
     transition-colors duration-200
+
+    disabled:opacity-80
+    disabled:cursor-not-allowed
+    disabled:shadow-none
+    disabled:bg-yellow
+    disabled:text-white
+
     ${active && 'debug'}
     
     ${className}

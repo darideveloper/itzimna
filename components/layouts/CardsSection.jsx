@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 
 import PropertyCard from "@/components/ui/PropertyCard";
 import TransitionLink from "@/components/utils/TransitionLink";
+import Pagination from "../ui/Pagination";
 
 
 /**
@@ -95,6 +96,7 @@ export default function CardsSection({ propertiesData }) {
           </TransitionLink>
         ))}
       </div>
+      <Pagination/>
     </section>
   )
 }
