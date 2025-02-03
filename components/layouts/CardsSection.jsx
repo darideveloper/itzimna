@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import PropertyCard from "@/components/ui/PropertyCard";
 import TransitionLink from "@/components/utils/TransitionLink";
 import Pagination from "../ui/Pagination";
+import Title from "../ui/Title";
 
 /**
  * Cards section component
@@ -30,7 +31,6 @@ import Pagination from "../ui/Pagination";
 export default function CardsSection({ propertiesData }) {
   // Get translations
   const t = useTranslations("Home.CardsSection");
-
   return (
     <section
       className={`
@@ -39,12 +39,6 @@ export default function CardsSection({ propertiesData }) {
           lg:px-16
       `}
     >
-      <hr
-        className={`
-          my-4
-          border-green-light
-        `}
-      />
       <p
         className={`
           text-center
@@ -54,14 +48,19 @@ export default function CardsSection({ propertiesData }) {
           text-green-light
         `}
       >
-        {t("title")}
+        <Title className={`
+            text-3xl
+            sm:text-4xl
+            font-bold
+            mt-12
+            text-blue 
+          `}
+          isH1={false}
+          >
+              {t("title")}
+        </Title>
       </p>
-      <hr
-        className={`
-          my-4
-          border-green-light
-      `}
-      />
+      
       <br />
 
       <div
@@ -77,6 +76,7 @@ export default function CardsSection({ propertiesData }) {
       >
         {propertiesData.map((card, index) => (
           <PropertyCard
+            key={index}
             name={card.name}
             description={card.description}
             imageSrc={card.banner.url}

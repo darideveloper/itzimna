@@ -6,6 +6,7 @@ import Title from "@/components/ui/Title"
 // Sections
 import TestClientSection from "@/components/layouts/TestClientSection"
 import CardsSection from "@/components/layouts/CardsSection"
+import HeroSection from "@/components/layouts/HeroSection"
 
 
 export default async function HomePage() {
@@ -18,6 +19,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <HeroSection/>
       <CardsSection propertiesData={propertiesData} />
       {/* <hr />
       <p>Aos</p>

@@ -20,6 +20,10 @@
   "Home": {
     "CardsSection": {
       "title": "Sección de tarjetas"
+    },
+    "HeroSection": {
+      "title": "Descubre tu propiedad perfecta de lujo",
+      "description": "Explora una colección exclusiva de propiedades en los mejores lugares. Desde casas modernas hasta estaciones marinas."
     }
   },
   "Test": {

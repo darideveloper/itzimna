@@ -18,8 +18,10 @@
     "en": "English"
   },
   "Home": {
-    "CardsSection": {
-      "title": "Cards Section"
+    "CardsSection": { "title": "Cards Section" },
+    "HeroSection": {
+      "title": "Discover Your Perfect Luxury Property",
+      "description": "Explore an exclusive collection of premium properties in the most desirable locations. From modern penthouses to waterfront estates."
     }
   },
   "Test": {
