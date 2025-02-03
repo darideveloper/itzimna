@@ -1,19 +1,16 @@
 // Icons
-import {
-  FaMapMarkerAlt,
-  FaArrowsAlt,
-  FaBuilding,
-} from "react-icons/fa";
+import { FaMapMarkerAlt, FaArrowsAlt, FaBuilding } from "react-icons/fa";
 
 //libs
 import Image from "next/image";
 
 // UI Components
 import Button from "@/components/ui/Button";
+import TransitionLink from "../utils/TransitionLink";
 
 /**
  * PropertyCard is a component that displays a property card with an image, description, name, location, price, and other details.
- * 
+ *
  * @param {object} props - Component props
  * @param {number} props.id - Property ID
  * @param {string} props.name - Property name
@@ -36,11 +33,13 @@ export default function PropertyCard({
   price,
   meters,
   category,
+  href,
   className,
 }) {
   return (
-    <div
-      className={`
+    <TransitionLink href={href}>
+      <div
+        className={`
           property-card
           rounded-2xl
           shadow-lg hover:shadow-green-light
@@ -53,30 +52,30 @@ export default function PropertyCard({
           cursor-pointer
           ${className}
         `}
-    >
-      <div
-        className={`
+      >
+        <div
+          className={`
           relative
           w-full
           h-64
           overflow-hidden
           group
         `}
-      >
-        <Image
-          src={imageSrc || "images/test.svg"}
-          alt={name}
-          fill
-          className={`
+        >
+          <Image
+            src={imageSrc || "images/test.svg"}
+            alt={name}
+            fill
+            className={`
               object-cover
               transition-transform duration-500
               group-hover:scale-110
             `}
-          priority
-        />
-        {/* Category badge */}
-        <div
-          className={`
+            priority
+          />
+          {/* Category badge */}
+          <div
+            className={`
               absolute
               top-4
               right-4
@@ -88,17 +87,20 @@ export default function PropertyCard({
               items-center
               z-10
             `}
-        >
-          <span className={`
-            text-sm
-            font-medium
-            text-white
+          >
+            <span
+              className={`
+                text-sm
+                font-medium
+                text-white
             `}
-          >{category}</span>
-        </div>
-        {/* Description overlay */}
-        <div
-          className={`
+            >
+              {category}
+            </span>
+          </div>
+          {/* Description overlay */}
+          <div
+            className={`
             absolute
             inset-0
             bg-green/70
@@ -111,9 +113,9 @@ export default function PropertyCard({
             justify-center
             p-4
         `}
-        >
-          <p
-            className={`
+          >
+            <p
+              className={`
                 text-white
                 text-sm
                 opacity-0
@@ -122,14 +124,14 @@ export default function PropertyCard({
                 duration-300
                 delay-100
               `}
-          >
-            {description}
-          </p>
+            >
+              {description}
+            </p>
+          </div>
         </div>
-      </div>
-      <div className={`p-5`}>
-        <h2
-          className={`
+        <div className={`p-5`}>
+          <h2
+            className={`
               text-xl
               font-semibold
               text-green-light
@@ -138,90 +140,91 @@ export default function PropertyCard({
               duration-200
               hover:text-yellow
           `}
-        >
-          {name}
-        </h2>
-        <div
-          className={`
+          >
+            {name}
+          </h2>
+          <div
+            className={`
               flex
               items-center
               text-gray-800
               mb-4
             `}
-        >
-          <FaMapMarkerAlt
-            className={`
+          >
+            <FaMapMarkerAlt
+              className={`
                 w-4
                 h-4
                 mr-1
                 text-green-light
             `}
-          />
-          <span className={`text-sm`}>{location}</span>
-        </div>
-        <div
-          className={`
+            />
+            <span className={`text-sm`}>{location}</span>
+          </div>
+          <div
+            className={`
               flex
               items-center
               justify-between
               text-gray-800
               mb-4
           `}
-        >
-          <div className="flex items-center">
-            <FaBuilding
-              className={`
+          >
+            <div className="flex items-center">
+              <FaBuilding
+                className={`
                   w-4
                   h-4
                   mr-1
                   text-green-light
               `}
-            />
-            <span
-              className={`
+              />
+              <span
+                className={`
                   text-sm
                   text-yellow
               `}
-            >
-              {company}
-            </span>
-          </div>
-          <div className={`
+              >
+                {company}
+              </span>
+            </div>
+            <div
+              className={`
             flex
             items-center
           `}
-          >
-            <FaArrowsAlt
-              className={`
+            >
+              <FaArrowsAlt
+                className={`
                 w-4
                 h-4
                 mr-2
                 text-green-light
               `}
-            />
-            <span className={`text-sm`}>
-              {meters} m<sup>2</sup>
-            </span>
+              />
+              <span className={`text-sm`}>
+                {meters} m<sup>2</sup>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        className={`
+        <div
+          className={`
             flex
             items-center
             justify-between
             p-5
             pt-0
         `}
-      >
-        <Button
-          className={`
-          `}
         >
-          View Details
-        </Button>
-        <span
-          className={`
+          <Button
+            className={`
+          `}
+          >
+            View Details
+          </Button>
+          <span
+            className={`
               text-xl
               font-bold
               text-yellow
@@ -229,10 +232,11 @@ export default function PropertyCard({
               transition-colors
               duration-200
             `}
-        >
-          ${new Intl.NumberFormat('en-US').format(price)}
-        </span>
+          >
+            ${new Intl.NumberFormat("en-US").format(price)}
+          </span>
+        </div>
       </div>
-    </div>
+    </TransitionLink>
   );
 }

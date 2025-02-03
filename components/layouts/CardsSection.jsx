@@ -1,5 +1,5 @@
 // Libs
-import { useTranslations } from "next-intl"
+import { useTranslations } from "next-intl";
 
 // Components
 
@@ -7,10 +7,9 @@ import PropertyCard from "@/components/ui/PropertyCard";
 import TransitionLink from "@/components/utils/TransitionLink";
 import Pagination from "../ui/Pagination";
 
-
 /**
  * Cards section component
- * 
+ *
  * @param {Array} propertiesData - Properties data
  * @param {Object} propertiesData[].banner - Property banner image
  * @param {String} propertiesData[].banner.url - Property banner image URL
@@ -30,7 +29,7 @@ import Pagination from "../ui/Pagination";
  */
 export default function CardsSection({ propertiesData }) {
   // Get translations
-  const t = useTranslations("Home.CardsSection")
+  const t = useTranslations("Home.CardsSection");
 
   return (
     <section
@@ -44,7 +43,7 @@ export default function CardsSection({ propertiesData }) {
         className={`
           my-4
           border-green-light
-        `} 
+        `}
       />
       <p
         className={`
@@ -77,26 +76,22 @@ export default function CardsSection({ propertiesData }) {
         `}
       >
         {propertiesData.map((card, index) => (
-          <TransitionLink 
-            href={"/page-1"}
-            key={index}
-          >
-            <PropertyCard
-              name={card.name}
-              description={card.description}
-              imageSrc={card.banner.url}
-              company={card.company}
-              location={card.location}
-              price={card.price}
-              meters={card.meters}
-              created_at={card.created_at}
-              category={card.category}
-              className={""}
-            />
-          </TransitionLink>
+          <PropertyCard
+            name={card.name}
+            description={card.description}
+            imageSrc={card.banner.url}
+            company={card.company}
+            location={card.location}
+            price={card.price}
+            meters={card.meters}
+            created_at={card.created_at}
+            category={card.category}
+            href={`/properties/${card.id}`}
+            className={""}
+          />
         ))}
       </div>
-      <Pagination/>
+      <Pagination />
     </section>
-  )
+  );
 }

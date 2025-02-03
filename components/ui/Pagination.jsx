@@ -4,6 +4,14 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 // Components
 import Button from "@/components/ui/Button";
 
+/**
+ * Renders a pagination component with the current page, total pages and a function to handle page changes
+ * @param {Object} props - Props object
+ * @param {number} [props.currentPage=1] - Current page number
+ * @param {number} [props.totalPages=10] - Total pages
+ * @param {function} [props.onPageChange] - Function to run when page changes
+ * @returns {JSX.Element} Pagination component
+ */
 const Pagination = ({
   currentPage = 1,
   totalPages = 10,
