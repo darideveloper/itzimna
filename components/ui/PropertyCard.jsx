@@ -27,7 +27,6 @@ import TransitionLink from "../utils/TransitionLink";
  */
 export default function PropertyCard({
   name,
-  description,
   shortDescription,
   imageSrc,
   company,

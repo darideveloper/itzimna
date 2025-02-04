@@ -17,8 +17,6 @@ import Title from "../ui/Title";
  * @param {String} propertiesData[].banner.alt - Property banner image alt text
  * @param {String} propertiesData[].company - Property company builder
  * @param {String} propertiesData[].category - Property category
- * @param {String} propertiesData[].created_at - Property creation date
- * @param {String} propertiesData[].description - Property description
  * @param {Integer} propertiesData[].id - Property ID
  * @param {String} propertiesData[].location - Property location
  * @param {String} propertiesData[].meters - Property size in square meters like "99.00"
@@ -74,11 +72,10 @@ export default function CardsSection({ propertiesData }) {
           gap-6
         `}
       >
-        {propertiesData.map((card, index) => (
+        {propertiesData.map(card => (
           <PropertyCard
-            key={index}
+            key={card.id}
             name={card.name}
-            description={card.description}
             shortDescription={card.short_description}
             imageSrc={card.banner.url}
             company={card.company}
