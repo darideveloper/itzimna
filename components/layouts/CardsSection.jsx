@@ -1,12 +1,16 @@
+"use client"
+
 // Libs
-import { useTranslations } from "next-intl";
+import { useTranslations } from "next-intl"
+import { useEffect, useState } from "react"
+import { getLastProperties } from "@/libs/apiClient"
 
 // Components
+import PropertyCard from "@/components/ui/PropertyCard"
+import Pagination from "../ui/Pagination"
+import Title from "../ui/Title"
 
-import PropertyCard from "@/components/ui/PropertyCard";
-import TransitionLink from "@/components/utils/TransitionLink";
-import Pagination from "../ui/Pagination";
-import Title from "../ui/Title";
+
 
 /**
  * Cards section component
@@ -26,9 +30,31 @@ import Title from "../ui/Title";
  * @param {String} propertiesData[].short_description - Property short description
  * @returns {JSX.Element} Cards section component
  */
-export default function CardsSection({ propertiesData }) {
+export default function CardsSection({ initialPropertiesData }) {
+
+  // States
+  const [propertiesData, setPropertiesData] = useState(initialPropertiesData)
+  const [page, setPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
+
+  // Effects
+  useEffect(() => {
+    console.log("Page changed to: ", page)
+
+    // Enable loading
+    setIsLoading(true)
+
+    // Update properties data when change page
+    getLastProperties(page).then(data => {
+      console.log("Data fetched: ", data)
+      setPropertiesData(data)
+      setIsLoading(false)
+    })
+  }, [page])
+
+
   // Get translations
-  const t = useTranslations("Home.CardsSection");
+  const t = useTranslations("Home.CardsSection")
   return (
     <section
       className={`
@@ -37,28 +63,18 @@ export default function CardsSection({ propertiesData }) {
           lg:px-16
       `}
     >
-      <p
-        className={`
-          text-center
-          text-2xl
+      <Title className={`
+          text-3xl
+          sm:text-4xl
           font-bold
-          mb-6
-          text-green-light
+          mt-12
+          text-blue 
         `}
+        isH1={false}
       >
-        <Title className={`
-            text-3xl
-            sm:text-4xl
-            font-bold
-            mt-12
-            text-blue 
-          `}
-          isH1={false}
-          >
-              {t("title")}
-        </Title>
-      </p>
-      
+        {t("title")}
+      </Title>
+
       <br />
 
       <div
@@ -89,7 +105,15 @@ export default function CardsSection({ propertiesData }) {
           />
         ))}
       </div>
+
+      <button
+        onClick={() => setPage(page + 1)}
+      >
+        next
+      </button>
+
       <Pagination />
+
     </section>
-  );
+  )
 }
