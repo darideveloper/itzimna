@@ -79,6 +79,7 @@ export default function CardsSection({ propertiesData }) {
             key={index}
             name={card.name}
             description={card.description}
+            shortDescription={card.short_description}
             imageSrc={card.banner.url}
             company={card.company}
             location={card.location}

@@ -15,6 +15,7 @@ import TransitionLink from "../utils/TransitionLink";
  * @param {number} props.id - Property ID
  * @param {string} props.name - Property name
  * @param {string} props.description - Property description
+ * @param {string} props.shortDescription - Property short description
  * @param {string} props.imageSrc - Image URL
  * @param {string} props.company - Company name
  * @param {string} props.location - Location
@@ -27,6 +28,7 @@ import TransitionLink from "../utils/TransitionLink";
 export default function PropertyCard({
   name,
   description,
+  shortDescription,
   imageSrc,
   company,
   location,
@@ -124,8 +126,8 @@ export default function PropertyCard({
                 duration-300
                 delay-100
               `}
-            >
-              {description}
+            > 
+              {shortDescription}
             </p>
           </div>
         </div>
