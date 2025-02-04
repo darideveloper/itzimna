@@ -9,7 +9,7 @@ import { getLastProperties } from "@/libs/apiClient"
 import PropertyCard from "@/components/ui/PropertyCard"
 import Pagination from "../ui/Pagination"
 import Title from "../ui/Title"
-
+import Spinner from "@/components/ui/Spinner"
 
 
 /**
@@ -28,9 +28,10 @@ import Title from "../ui/Title"
  * @param {String} propertiesData[].price - Property price like "1,000.00"
  * @param {String} propertiesData[].seller - Property seller name
  * @param {String} propertiesData[].short_description - Property short description
+ * @param {String} id - Section ID
  * @returns {JSX.Element} Cards section component
  */
-export default function CardsSection({ initialPropertiesData }) {
+export default function CardsSection({ initialPropertiesData, id }) {
 
   // States
   const [propertiesData, setPropertiesData] = useState(initialPropertiesData)
@@ -39,16 +40,20 @@ export default function CardsSection({ initialPropertiesData }) {
 
   // Effects
   useEffect(() => {
-    console.log("Page changed to: ", page)
-
     // Enable loading
     setIsLoading(true)
 
     // Update properties data when change page
     getLastProperties(page).then(data => {
-      console.log("Data fetched: ", data)
       setPropertiesData(data)
-      setIsLoading(false)
+
+      // Move to top of the section
+      document.querySelector(`#${id}`).scrollIntoView({ behavior: 'smooth' })
+
+      // Hide loading spinner
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1500)
     })
   }, [page])
 
@@ -58,61 +63,66 @@ export default function CardsSection({ initialPropertiesData }) {
   return (
     <section
       className={`
-          px-4
-          md:px-8
-          lg:px-16
+        cards
+        w-full
+        relative
+        py-12
       `}
+      id={id}
     >
-      <Title className={`
-          text-3xl
-          sm:text-4xl
-          font-bold
-          mt-12
-          text-blue 
-        `}
-        isH1={false}
-      >
-        {t("title")}
-      </Title>
-
-      <br />
-
       <div
         className={`
           container
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          lg:grid-cols-3
-          xl:grid-cols-4
-          gap-6
         `}
       >
-        {propertiesData.map(card => (
-          <PropertyCard
-            key={card.id}
-            name={card.name}
-            shortDescription={card.short_description}
-            imageSrc={card.banner.url}
-            company={card.company}
-            location={card.location}
-            price={card.price}
-            meters={card.meters}
-            created_at={card.created_at}
-            category={card.category}
-            href={`/properties/${card.id}`}
-            className={""}
-          />
-        ))}
+
+        <Title>
+          {t("title")}
+        </Title>
+
+        <br />
+
+        <div
+          className={`
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-3
+            xl:grid-cols-4
+            gap-6
+            relative
+          `}
+        >
+          {/* Loading spinner */}
+          <Spinner isLoading={isLoading} />
+
+          {/* Cards */}
+          {propertiesData.map(card => (
+            <PropertyCard
+              key={card.id}
+              name={card.name}
+              shortDescription={card.short_description}
+              imageSrc={card.banner.url}
+              company={card.company}
+              location={card.location}
+              price={card.price}
+              meters={card.meters}
+              created_at={card.created_at}
+              category={card.category}
+              href={`/properties/${card.id}`}
+              className={""}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={() => setPage(page + 1)}
+        >
+          next
+        </button>
+
+        <Pagination />
       </div>
-
-      <button
-        onClick={() => setPage(page + 1)}
-      >
-        next
-      </button>
-
-      <Pagination />
 
     </section>
   )

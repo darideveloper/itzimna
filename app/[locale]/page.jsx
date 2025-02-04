@@ -1,8 +1,8 @@
 // Sections
 import CardsSection from "@/components/layouts/CardsSection"
-// import Hero from "@/components/layouts/Hero"
+import Hero from "@/components/layouts/Hero"
 
-// lIbs
+// LIbs
 import { getLastProperties } from "@/libs/apiClient"
 
 
@@ -13,8 +13,11 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* <Hero/> */}
-      <CardsSection initialPropertiesData={propertiesData} />
+      <Hero/>
+      <CardsSection 
+        initialPropertiesData={propertiesData}
+        id="last-properties"
+      />
     </>
   )
 }
