@@ -9,13 +9,14 @@ import { getLastProperties } from "@/libs/apiClient"
 export default async function HomePage() {
 
   // Get data from api in server side
-  const propertiesData = await getLastProperties()
+  const { propertiesData, count } = await getLastProperties()
 
   return (
     <>
       <Hero/>
       <CardsSection 
         initialPropertiesData={propertiesData}
+        totalProperties={count}
         id="last-properties"
       />
     </>

@@ -1,8 +1,8 @@
 // Icons
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi"
 
 // Components
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/Button"
 
 /**
  * Renders a pagination component with the current page, total pages and a function to handle page changes
@@ -26,7 +26,10 @@ const Pagination = ({
         space-x-4 mt-8
      `}
     >
-      <Button disabled={currentPage === 1}>
+      <Button 
+        disabled={currentPage === 1}
+        onClick={() => onPageChange(currentPage - 1)}
+      >
         <HiChevronLeft
           className={`
             w-5
@@ -43,7 +46,10 @@ const Pagination = ({
         {currentPage} / {totalPages}
       </span>
 
-      <Button disabled={currentPage === totalPages}>
+      <Button 
+        disabled={currentPage === totalPages}
+        onClick={() => onPageChange(currentPage + 1)}
+      >
         <HiChevronRight className={`
             w-5
             h-5
@@ -51,7 +57,7 @@ const Pagination = ({
         />
       </Button>
     </nav>
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination

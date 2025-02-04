@@ -31,12 +31,13 @@ import Spinner from "@/components/ui/Spinner"
  * @param {String} id - Section ID
  * @returns {JSX.Element} Cards section component
  */
-export default function CardsSection({ initialPropertiesData, id }) {
+export default function CardsSection({ initialPropertiesData, totalProperties, id }) {
 
   // States
   const [propertiesData, setPropertiesData] = useState(initialPropertiesData)
   const [page, setPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
+  const totalPages = Math.ceil(totalProperties / 8)
 
   // Effects
   useEffect(() => {
@@ -44,8 +45,8 @@ export default function CardsSection({ initialPropertiesData, id }) {
     setIsLoading(true)
 
     // Update properties data when change page
-    getLastProperties(page).then(data => {
-      setPropertiesData(data)
+    getLastProperties(page).then(({ propertiesData }) => {
+      setPropertiesData(propertiesData)
 
       // Move to top of the section
       document.querySelector(`#${id}`).scrollIntoView({ behavior: 'smooth' })
@@ -115,13 +116,11 @@ export default function CardsSection({ initialPropertiesData, id }) {
           ))}
         </div>
 
-        <button
-          onClick={() => setPage(page + 1)}
-        >
-          next
-        </button>
-
-        <Pagination />
+        <Pagination 
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       </div>
 
     </section>

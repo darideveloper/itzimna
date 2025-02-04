@@ -1,11 +1,11 @@
 // Libs
-import { useTranslations } from "next-intl";
+import { useTranslations } from "next-intl"
 
 // Components
-import Title from "@/components/ui/Title";
+import Title from "@/components/ui/Title"
 
 const HeroSection = () => {
-  const t = useTranslations("Home.HeroSection");
+  const t = useTranslations("Home.HeroSection")
 
   return (
     <div
@@ -73,7 +73,7 @@ const HeroSection = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HeroSection;
+export default HeroSection
