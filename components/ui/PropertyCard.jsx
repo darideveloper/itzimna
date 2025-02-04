@@ -44,13 +44,15 @@ export default function PropertyCard({
         className={`
           property-card
           rounded-2xl
-          shadow-lg hover:shadow-green-light
-          hover:transform duration-300
-          bg-gray-100
+          shadow-sm hover:shadow-lg
+          hover:shadow-green
+          hover:scale-105
+          duration-300
+          bg-grey
           overflow-hidden
           border-2
-          border-green-light
-          text-gray-800
+          border-white hover:border-green
+          text-green
           cursor-pointer
           ${className}
         `}
@@ -81,7 +83,7 @@ export default function PropertyCard({
               absolute
               top-4
               right-4
-              bg-green-light/80
+              bg-green/80
               px-3
               py-1
               rounded-full
@@ -136,11 +138,12 @@ export default function PropertyCard({
             className={`
               text-xl
               font-semibold
-              text-green-light
+              text-green
               mb-2
               transition-colors
               duration-200
               hover:text-yellow
+              capitalize
           `}
           >
             {name}
@@ -158,7 +161,7 @@ export default function PropertyCard({
                 w-4
                 h-4
                 mr-1
-                text-green-light
+                text-green
             `}
             />
             <span className={`text-sm`}>{location}</span>
@@ -178,13 +181,13 @@ export default function PropertyCard({
                   w-4
                   h-4
                   mr-1
-                  text-green-light
+                  text-green
               `}
               />
               <span
                 className={`
                   text-sm
-                  text-yellow
+                  text-green
               `}
               >
                 {company}
@@ -201,7 +204,7 @@ export default function PropertyCard({
                 w-4
                 h-4
                 mr-2
-                text-green-light
+                text-green
               `}
               />
               <span className={`text-sm`}>
@@ -227,15 +230,20 @@ export default function PropertyCard({
           </Button>
           <span
             className={`
-              text-xl
+              text-2xl
               font-bold
-              text-yellow
-              hover:text-green-light
+              text-green
+              hover:text-yellow
               transition-colors
               duration-200
             `}
           >
-            ${new Intl.NumberFormat("en-US").format(price)}
+            ${
+              new Intl.NumberFormat("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }).format(price)
+            }
           </span>
         </div>
       </div>
