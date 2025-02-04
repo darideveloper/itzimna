@@ -28,19 +28,17 @@ export default function Button({
 }) {
 
   // Global bytton styles
-  // TODO: add active and disabled logic
   const styles = `
     cta
     ${fontTitle.className}
     block
     px-4 py-2
-    bg-yellow hover:bg-white
+    bg-green hover:bg-yellow
     font-thin
-    text-white hover:text-yellow
+    text-white
     rounded-md
-    border-2 border-yellow
-    hover:shadow-md hover:shadow-yellow
-    transition-colors duration-200
+    duration-300
+    hover:scale-105
 
     disabled:opacity-80
     disabled:cursor-not-allowed

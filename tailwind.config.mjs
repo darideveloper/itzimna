@@ -8,12 +8,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        'green': '#0c2110',
+        'green': '#2e4f34',
         'green-light': '#8bb138',
         'white': '#fefefe',
         'yellow': '#b79651',
         'black': '#010d04',
         'blue-light': '#7adcad',
+        'grey': '#f5f5f5',
       },
     },
   },
