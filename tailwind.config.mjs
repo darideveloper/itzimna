@@ -10,6 +10,7 @@ export default {
       colors: {
         'green': '#2e4f34',
         'green-light': '#8bb138',
+        'green-dark': '#0c2110',
         'white': '#fefefe',
         'yellow': '#a27c3b',
         'black': '#010d04',

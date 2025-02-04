@@ -53,7 +53,7 @@ export default async function LocaleLayout({ children, params }) {
                 opacity-0
                 z-50
                 hidden
-                bg-green
+                bg-green-dark
                 w-screen
                 h-screen
                 fixed
