@@ -237,12 +237,7 @@ export default function PropertyCard({
               duration-200
             `}
           >
-            ${
-              new Intl.NumberFormat("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }).format(price)
-            }
+            ${price}
           </span>
         </div>
       </div>
