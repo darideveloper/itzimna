@@ -14,15 +14,19 @@ export default function Title ({ children, className, isH1=false }) {
   // Base style
   let style = `
     title
+    font-bold
+    mt-16
+    mb-8
+    text-center
     ${fontTitle.className}
     ${className}
   `
 
   // Change size if h1 or h2
   if (isH1) {
-    style += ' text-3xl'
+    style += 'text-4xl sm:text-5xl md:text-6xl'
   } else {
-    style += ' text-2xl'
+    style += 'text-3xl sm:text-4xl'
   }
   
   return (

@@ -20,6 +20,7 @@ const HeroSection = () => {
         bg-fixed
      `}
     >
+
       <div
         className={`
             overlay-effect
@@ -52,10 +53,8 @@ const HeroSection = () => {
           <Title
             isH1={true}
             className={`
-                text-4xl sm:text-5xl md:text-6xl
-                font-bold
-                text-white
-                mb-6
+              text-white
+              !mt-0
             `}
           >
             {t("title")}
