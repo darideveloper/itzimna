@@ -1,7 +1,5 @@
 import { fontTitle } from '@/libs/fonts'
-
 import TransitionLink from '@/components/utils/TransitionLink'
-
 /**
  * Cta component with intl routing
  * It can be an action/funtion button or a link button
@@ -26,31 +24,23 @@ export default function Button({
   children,
   ...props
 }) {
-
   // Global bytton styles
   const styles = `
     cta
     ${fontTitle.className}
     block
     px-4 py-2
-    bg-green hover:bg-yellow
+    ${!active ? 'bg-green hover:bg-yellow text-white' : 'bg-transparent border-2 border-green-dark text-green hover:bg-transparent'}
     font-thin
-    text-white
     rounded-md
     duration-300
     hover:scale-105
-
-    disabled:opacity-80
-    disabled:cursor-not-allowed
+    disabled:opacity-70
     disabled:shadow-none
-    disabled:bg-yellow
-    disabled:text-white
-
-    ${active && 'debug'}
+    disabled:bg-green-dark
     
     ${className}
   `
-
   const content = (
     <div
       className={`
@@ -60,7 +50,6 @@ export default function Button({
       {children}
     </div>
   )
-
   return (
     (
       href == "" || disabled
@@ -83,5 +72,4 @@ export default function Button({
         </TransitionLink>
     )
   )
-
 }

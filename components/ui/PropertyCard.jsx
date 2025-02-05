@@ -6,24 +6,23 @@ import Image from "next/image";
 
 // UI Components
 import Button from "@/components/ui/Button";
-import TransitionLink from "../utils/TransitionLink";
+import TransitionLink from "@/components/utils/TransitionLink";
 
 /**
- * PropertyCard is a component that displays a property card with an image, description, name, location, price, and other details.
+ * Property card component
  *
- * @param {object} props - Component props
- * @param {number} props.id - Property ID
+ * @param {object} props - Props object
  * @param {string} props.name - Property name
- * @param {string} props.description - Property description
  * @param {string} props.shortDescription - Property short description
- * @param {string} props.imageSrc - Image URL
- * @param {string} props.company - Company name
- * @param {string} props.location - Location
- * @param {number} props.price - Price
- * @param {number} props.meters - Size in m2
- * @param {string} props.category - Category
+ * @param {string} props.imageSrc - Property image URL
+ * @param {string} props.company - Property company builder
+ * @param {string} props.location - Property location
+ * @param {string} props.price - Property price like "1,000.00"
+ * @param {string} props.meters - Property size in square meters like "99.00"
+ * @param {string} props.category - Property category
+ * @param {string} props.href - URL to route to
  * @param {string} props.className - Additional classes
- * @returns {ReactElement} - PropertyCard component
+ * @returns {JSX.Element} Property card component
  */
 export default function PropertyCard({
   name,
