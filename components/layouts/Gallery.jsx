@@ -20,7 +20,6 @@ export default function Gallery() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(1)
   const [modalImage, setModalImage] = useState(null)
   const [modalLoading, setModalLoading] = useState(false)
-  const [swiper, setSwiper] = useState(null)
 
   // Images keys 
   // (same file names without extension and with spaces replaced by underscores)
@@ -94,7 +93,6 @@ export default function Gallery() {
         onSlideChange={(swiper) => {
           setActiveSlideIndex(swiper.activeIndex + 1)
         }}
-        onSwiper={(swiper) => setSwiper(swiper)}
       >
         {
           images.map((image, index) => {

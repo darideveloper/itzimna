@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react'
 
 /**
  * Spinner animating favicon
+ * @param {Object} props - Component props
+ * @param {Boolean} props.isLoading - Loading state
+ * @param {String} props.className - Component classes
  */
-export default function Spinner({ isLoading }) {
+export default function Spinner({ isLoading, className }) {
 
   // States
   const [display, setDisplay] = useState('hidden')
@@ -45,6 +48,7 @@ export default function Spinner({ isLoading }) {
         ${display}
         opacity-${opacity}
         z-20
+        ${className}
       `}
     >
       <Image
@@ -56,8 +60,8 @@ export default function Spinner({ isLoading }) {
           animate-spin
           duration-600
           my-12
-          w-36
-          h-36
+          w-28
+          h-28
         `}
       />
     </div>

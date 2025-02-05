@@ -4,9 +4,10 @@ import anime from 'animejs'
 
 // Components
 import Image from 'next/image'
+import Spinner from '@/components/ui/Spinner'
 
 /**
- * ModalImage component
+ * Full screen modal image component
  * @param {Object} props - Component props
  * @param {String} props.image - Image src
  * @param {String} props.alt - Image alt
@@ -17,10 +18,11 @@ import Image from 'next/image'
 export default function ModalImage({ image, alt, hide, setLoading }) {
 
   const [currentImage, setCurrentImage] = useState(image)
+  const [imageLoading, setImageLoading] = useState(false)
 
   useEffect(() => {
-    console.log({ image, currentImage })
-  }, [currentImage, image])
+    console.log({ image, currentImage, imageLoading })
+  }, [currentImage, image, imageLoading])
 
   // Animate when image is shown
   useEffect(() => {
@@ -72,6 +74,7 @@ export default function ModalImage({ image, alt, hide, setLoading }) {
         setTimeout(() => {
           setCurrentImage(null)
           setLoading(false)
+          setImageLoading(true)
         }, 100)
       })
     }
@@ -102,13 +105,24 @@ export default function ModalImage({ image, alt, hide, setLoading }) {
         className={`
           image-wrapper
           h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh]
-          w-auto
           bg-green-dark
           p-3
           rounded-md
           shadow-lg
+          relative
         `}
       >
+        {
+          imageLoading
+          &&
+          <Spinner 
+            isLoading={imageLoading}
+            className={`
+              !bg-green-dark
+              items-center
+            `}
+          />
+        }
         {
           currentImage
           &&
@@ -124,6 +138,9 @@ export default function ModalImage({ image, alt, hide, setLoading }) {
               rounded-md
               object-cover
             `}
+            onLoad={() => {
+              setTimeout(() => setImageLoading(false), 500)
+            }}
           />
         }
       </div>
