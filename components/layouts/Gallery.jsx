@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react'
 
 // Component:
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, A11y, Autoplay, Pagination, Zoom } from 'swiper/modules'
-import Image from 'next/image'
+import { Navigation, A11y, Autoplay, Pagination } from 'swiper/modules'
 import ModalImage from '@/components/ui/ModalImage'
+import SlideImage from '@/components/ui/Slides/SlideImage'
 
 // Styles
 import 'swiper/css'
@@ -94,51 +94,22 @@ export default function Gallery() {
           setActiveSlideIndex(swiper.activeIndex + 1)
         }}
       >
+        {/* Render slides */}
         {
-          images.map((image, index) => {
-            const imageSrc = `/images/gallery/${image.replace(" ", "_")}.webp`
-
-            return (
+          images.map((image, index) => (
               <SwiperSlide
                 key={index}
-                className={`
-                  relative
-                  ${slidesPerView == 3 && activeSlideIndex != index ? "cursor-default" : "cursor-pointer"}
-                `}
-                onClick={() => {
-                  // Zoom active image
-                  if (!modalLoading && activeSlideIndex == index) {
-                    setModalImage(imageSrc)
-                  }
-                }}
               >
-                <div
-                  className={`
-                  overlay
-                  absolute
-                  w-full
-                  h-full
-                  bg-white
-                  duration-300
-                  z-10
-                  ${slidesPerView == 3 && activeSlideIndex != index ? "opacity-50" : "opacity-0"}
-                `}
-                >
-
-                </div>
-                <Image
-                  src={imageSrc}
-                  alt={image}
-                  width={600}
-                  height={400}
-                  loading="lazy"
-                  className={`
-                  mx-auto
-                `}
-                />
+                <SlideImage
+                  isActive={slidesPerView == 3 && activeSlideIndex == index}
+                  imageSrc={`/images/gallery/${image.replace(" ", "_")}.webp`}
+                  imageAlt={'test alt'}
+                  modalLoading={modalLoading}
+                  setModalImage={setModalImage}
+                />              
               </SwiperSlide>
             )
-          })
+          )
         }
       </Swiper>
     </section>
