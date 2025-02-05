@@ -3,7 +3,7 @@
 // Libs
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
-import { getLastProperties } from "@/libs/apiClient"
+import { getProperties } from "@/libs/apiClient"
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
@@ -45,7 +45,7 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
     setIsLoading(true)
 
     // Update properties data when change page
-    getLastProperties(page).then(({ propertiesData }) => {
+    getProperties(page).then(({ propertiesData }) => {
       setPropertiesData(propertiesData)
 
       // Move to top of the section
