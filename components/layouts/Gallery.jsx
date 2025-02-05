@@ -18,7 +18,9 @@ export default function Gallery() {
 
   const [slidesPerView, setSlidesPerView] = useState(3)
   const [activeSlideIndex, setActiveSlideIndex] = useState(1)
-  const [modelImage, setModelImage] = useState(null)
+  const [modalImage, setModalImage] = useState(null)
+  const [modalLoading, setModalLoading] = useState(false)
+  const [swiper, setSwiper] = useState(null)
 
   // Images keys 
   // (same file names without extension and with spaces replaced by underscores)
@@ -32,6 +34,10 @@ export default function Gallery() {
     "punta_cometas",
     "zendera"
   ]
+
+  // Add white image to start and end of images array
+  images.unshift("white")
+  images.push("white")
 
   useEffect(() => {
     // Get slides per view when resizing and when component mounts
@@ -55,9 +61,10 @@ export default function Gallery() {
 
       {/* Modal for zoom images */}
       <ModalImage
-        image={modelImage}
+        image={modalImage}
         alt={"test alt"}
-        hideModel={() => setModelImage(null)}
+        hide={() => setModalImage(null)}
+        setLoading={setModalLoading}
       />
 
       {/* Slider */}
@@ -68,7 +75,7 @@ export default function Gallery() {
         pagination={{ clickable: true }}
         autoplay={{
           delay: 3000,
-          disableOnInteraction: false,
+          disableOnInteraction: true,
         }}
         breakpoints={{
           320: {
@@ -87,6 +94,7 @@ export default function Gallery() {
         onSlideChange={(swiper) => {
           setActiveSlideIndex(swiper.activeIndex + 1)
         }}
+        onSwiper={(swiper) => setSwiper(swiper)}
       >
         {
           images.map((image, index) => {
@@ -96,11 +104,16 @@ export default function Gallery() {
               <SwiperSlide
                 key={index}
                 className={`
-                relative
-              `}
-                onClick={() => setModelImage(imageSrc)}
+                  relative
+                  ${slidesPerView == 3 && activeSlideIndex != index ? "cursor-default" : "cursor-pointer"}
+                `}
+                onClick={() => {
+                  // Zoom active image
+                  if (!modalLoading && activeSlideIndex == index) {
+                    setModalImage(imageSrc)
+                  }
+                }}
               >
-
                 <div
                   className={`
                   overlay

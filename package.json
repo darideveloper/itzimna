@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "animejs": "^3.2.2",
     "aos": "^2.3.4",
     "axios": "^1.7.9",
     "axios-auth-refresh": "^3.3.6",
