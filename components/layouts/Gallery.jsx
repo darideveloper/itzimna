@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react'
 
 // Component:
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, A11y, Autoplay, Pagination } from 'swiper/modules'
+import { Navigation, A11y, Autoplay, Pagination, Zoom } from 'swiper/modules'
 import Image from 'next/image'
+import ModalImage from '@/components/ui/ModalImage'
 
 // Styles
 import 'swiper/css'
@@ -17,6 +18,7 @@ export default function Gallery() {
 
   const [slidesPerView, setSlidesPerView] = useState(3)
   const [activeSlideIndex, setActiveSlideIndex] = useState(1)
+  const [modelImage, setModelImage] = useState(null)
 
   // Images keys 
   // (same file names without extension and with spaces replaced by underscores)
@@ -30,10 +32,6 @@ export default function Gallery() {
     "punta_cometas",
     "zendera"
   ]
-
-  useEffect(() => {
-    console.log({ slidesPerView, activeSlideIndex })
-  }, [slidesPerView, activeSlideIndex])
 
   useEffect(() => {
     // Get slides per view when resizing and when component mounts
@@ -54,6 +52,15 @@ export default function Gallery() {
         gallery
       `}
     >
+
+      {/* Modal for zoom images */}
+      <ModalImage
+        image={modelImage}
+        alt={"test alt"}
+        hideModel={() => setModelImage(null)}
+      />
+
+      {/* Slider */}
       <Swiper
         slidesPerView={slidesPerView}
         modules={[Navigation, A11y, Autoplay, Pagination]}
@@ -82,16 +89,20 @@ export default function Gallery() {
         }}
       >
         {
-          images.map((image, index) => (
-            <SwiperSlide
-              key={index}
-              className={`
+          images.map((image, index) => {
+            const imageSrc = `/images/gallery/${image.replace(" ", "_")}.webp`
+
+            return (
+              <SwiperSlide
+                key={index}
+                className={`
                 relative
               `}
-            >
+                onClick={() => setModelImage(imageSrc)}
+              >
 
-              <div
-                className={`
+                <div
+                  className={`
                   overlay
                   absolute
                   w-full
@@ -101,21 +112,22 @@ export default function Gallery() {
                   z-10
                   ${slidesPerView == 3 && activeSlideIndex != index ? "opacity-50" : "opacity-0"}
                 `}
-              >
+                >
 
-              </div>
-              <Image
-                src={`/images/gallery/${image.replace(" ", "_")}.webp`}
-                alt={image}
-                width={600}
-                height={400}
-                loading="lazy"
-                className={`
+                </div>
+                <Image
+                  src={imageSrc}
+                  alt={image}
+                  width={600}
+                  height={400}
+                  loading="lazy"
+                  className={`
                   mx-auto
                 `}
-              />
-            </SwiperSlide>
-          ))
+                />
+              </SwiperSlide>
+            )
+          })
         }
       </Swiper>
     </section>
