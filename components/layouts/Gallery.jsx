@@ -2,6 +2,7 @@
 
 // Libs
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 // Component:
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -15,11 +16,6 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 export default function Gallery() {
-
-  const [slidesPerView, setSlidesPerView] = useState(3)
-  const [activeSlideIndex, setActiveSlideIndex] = useState(1)
-  const [modalImage, setModalImage] = useState(null)
-  const [modalLoading, setModalLoading] = useState(false)
 
   // Images keys 
   // (same file names without extension and with spaces replaced by underscores)
@@ -38,6 +34,17 @@ export default function Gallery() {
   images.unshift("white")
   images.push("white")
 
+  // Get translations
+  const t = useTranslations('Home.GallerySection')
+
+  // States
+  const [slidesPerView, setSlidesPerView] = useState(3)
+  const [activeSlideIndex, setActiveSlideIndex] = useState(1)
+  const [modalImage, setModalImage] = useState(null)
+  const [modalLoading, setModalLoading] = useState(false)
+
+
+  // States
   useEffect(() => {
     // Get slides per view when resizing and when component mounts
     const handleResize = () => {
@@ -103,7 +110,7 @@ export default function Gallery() {
                 <SlideImage
                   isActive={slidesPerView == 3 && activeSlideIndex == index}
                   imageSrc={`/images/gallery/${image.replace(" ", "_")}.webp`}
-                  imageAlt={'test alt'}
+                  imageAlt={t(`imagesPre.development`) + " " + image}
                   modalLoading={modalLoading}
                   setModalImage={setModalImage}
                 />              

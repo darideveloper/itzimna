@@ -15,7 +15,13 @@ import 'swiper/css'
  * @param {Boolean} props.modalLoading - If modal is loading
  * @param {Function} props.setModalImage - Set modal image
  */
-export default function SlideImage({ isActive, imageSrc, imageAlt, modalLoading, setModalImage }) {
+export default function SlideImage({ 
+  isActive, 
+  imageSrc, 
+  imageAlt,
+  modalLoading,
+  setModalImage
+}) {
   return (
     <div
       className={`
