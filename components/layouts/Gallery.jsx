@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, A11y, Autoplay, Pagination } from 'swiper/modules'
 import ModalImage from '@/components/ui/ModalImage'
 import SlideImage from '@/components/ui/Slides/SlideImage'
+import Title from '@/components/ui/Title'
 
 // Styles
 import 'swiper/css'
@@ -72,6 +73,24 @@ export default function Gallery() {
         hide={() => setModalImage(null)}
         setLoading={setModalLoading}
       />
+
+      <div 
+        className={`
+          text
+          text-center
+        `}
+      >
+        <Title
+          className={`
+            !mb-2
+          `}
+        >
+          {t('title')}
+        </Title>
+        <p>
+          {t('description')}
+        </p>
+      </div>
 
       {/* Slider */}
       <Swiper

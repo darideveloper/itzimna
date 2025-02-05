@@ -59,6 +59,8 @@ export default function SlideImage({
         loading="lazy"
         className={`
           mx-auto
+          select-none
+          draggable-none
         `}
       />
     </div>

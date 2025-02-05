@@ -26,11 +26,11 @@
       "description": "Explora una colección exclusiva de propiedades en los mejores lugares. Desde casas modernas hasta estaciones marinas."
     },
     "GallerySection": {
-      "title": "Galería",
+      "title": "Mejores desarrollos",
+      "description": "Descubre los desarrollos más exclusivos en los mejores lugares", 
       "imagesPre": {
         "development": "Foto del desarrollo"
-      },
-      "imageTitle": "Click para ver la imagen en tamaño completo"
+      }
     }
   }
 }
