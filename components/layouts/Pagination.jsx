@@ -21,6 +21,7 @@ const Pagination = ({
   return (
     <nav
       className={`
+        pagination
         flex
         items-center
         justify-center

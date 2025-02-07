@@ -7,8 +7,8 @@ import { getLastProperties } from "@/libs/apiClient"
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
-import Pagination from "../ui/Pagination"
-import Title from "../ui/Title"
+import Pagination from "@/components/layouts/Pagination"
+import Title from "@/components/ui/Title"
 import Spinner from "@/components/ui/Spinner"
 
 
@@ -47,9 +47,10 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
     // Update properties data when change page
     getLastProperties(page).then(({ propertiesData }) => {
       setPropertiesData(propertiesData)
-
+      if(page !== 1) {
+        document.querySelector(`#${id}`).scrollIntoView({ behavior: 'smooth' })
+      }
       // Move to top of the section
-      document.querySelector(`#${id}`).scrollIntoView({ behavior: 'smooth' })
 
       // Hide loading spinner
       setTimeout(() => {

@@ -4,11 +4,12 @@ import { useTranslations } from "next-intl"
 // Components
 import Title from "@/components/ui/Title"
 
-const HeroSection = ({className=''}) => {
+const HeroSection = ({ id = "hero", className = "" }) => {
   const t = useTranslations("Home.HeroSection")
 
   return (
     <div
+      id={id}
       className={`
         hero
         relative
@@ -22,7 +23,6 @@ const HeroSection = ({className=''}) => {
         ${className}
      `}
     >
-
       <div
         className={`
             overlay-effect

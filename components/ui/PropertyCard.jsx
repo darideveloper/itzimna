@@ -1,12 +1,12 @@
 // Icons
-import { FaMapMarkerAlt, FaArrowsAlt, FaBuilding } from "react-icons/fa";
+import { FaMapMarkerAlt, FaArrowsAlt, FaBuilding } from "react-icons/fa"
 
 //libs
-import Image from "next/image";
+import Image from "next/image"
 
 // UI Components
-import Button from "@/components/ui/Button";
-import TransitionLink from "@/components/utils/TransitionLink";
+import Button from "@/components/ui/Button"
+import TransitionLink from "@/components/utils/TransitionLink"
 
 /**
  * Property card component
@@ -126,7 +126,7 @@ export default function PropertyCard({
                 duration-300
                 delay-100
               `}
-            > 
+            >
               {shortDescription}
             </p>
           </div>
@@ -241,5 +241,5 @@ export default function PropertyCard({
         </div>
       </div>
     </TransitionLink>
-  );
+  )
 }
