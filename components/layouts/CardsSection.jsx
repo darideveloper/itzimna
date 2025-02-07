@@ -34,6 +34,7 @@ export default function CardsSection({
   initialPropertiesData,
   totalProperties,
   id,
+  title
 }) {
   // States
   const [propertiesData, setPropertiesData] = useState(initialPropertiesData)
@@ -63,7 +64,7 @@ export default function CardsSection({
   }, [page])
 
   // Get translations
-  const t = useTranslations("Home.CardsSection")
+  // const t = useTranslations("Home.CardsSection")
   return (
     <section
       className={`
@@ -79,7 +80,7 @@ export default function CardsSection({
           container
         `}
       >
-        <Title>{t("title")}</Title>
+        <Title>{title}</Title>
 
         <br />
 

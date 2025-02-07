@@ -34,6 +34,7 @@ const HeroSection = ({ id = "hero", className = "" }) => {
 
       <div
         className={`
+            container
             relative
             h-full
             flex
