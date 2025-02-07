@@ -36,6 +36,7 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
   // States
   const [propertiesData, setPropertiesData] = useState(initialPropertiesData)
   const [page, setPage] = useState(1)
+  const [lastPage, setLastPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const totalPages = Math.ceil(totalProperties / 8)
 
@@ -49,7 +50,9 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
       setPropertiesData(propertiesData)
 
       // Move to top of the section
-      document.querySelector(`#${id}`).scrollIntoView({ behavior: 'smooth' })
+      if (lastPage !== page) {
+        document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth" })
+      } 
 
       // Hide loading spinner
       setTimeout(() => {
@@ -119,7 +122,10 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
         <Pagination 
           currentPage={page}
           totalPages={totalPages}
-          onPageChange={setPage}
+          onPageChange={(newPage) => {
+            setLastPage(page)
+            setPage(newPage)
+          }}
         />
       </div>
 
