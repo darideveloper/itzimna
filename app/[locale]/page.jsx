@@ -14,12 +14,12 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* <Hero/> */}
-      {/* <CardsSection 
+      <Hero/>
+      <CardsSection 
         initialPropertiesData={propertiesData}
         totalProperties={count}
         id="last-properties"
-      /> */}
+      />
       <Gallery />
     </>
   )

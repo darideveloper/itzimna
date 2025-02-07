@@ -18,23 +18,6 @@ import 'swiper/css/pagination'
 
 export default function Gallery() {
 
-  // Images keys 
-  // (same file names without extension and with spaces replaced by underscores)
-  const images = [
-    "airepuro",
-    "aloma",
-    "copaura",
-    "lumara",
-    "najau",
-    "puerta xaibe",
-    "punta_cometas",
-    "zendera"
-  ]
-
-  // Add white image to start and end of images array
-  images.unshift("white")
-  images.push("white")
-
   // Get translations
   const t = useTranslations('Home.GallerySection')
 
@@ -43,6 +26,16 @@ export default function Gallery() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(1)
   const [modalImage, setModalImage] = useState(null)
   const [modalLoading, setModalLoading] = useState(false)
+  const [images, setImages] = useState([
+    "airepuro",
+    "aloma",
+    "copaura",
+    "lumara",
+    "najau",
+    "puerta xaibe",
+    "punta_cometas",
+    "zendera"
+  ])
 
 
   // States
@@ -51,8 +44,11 @@ export default function Gallery() {
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setSlidesPerView(1)
+        const imagesNoWhite = images.filter(image => image != "white")
+        setImages(imagesNoWhite)
       } else {
         setSlidesPerView(3)
+        setImages(["white", ...images, "white"])
       }
     }
     window.addEventListener('resize', handleResize)
@@ -127,7 +123,7 @@ export default function Gallery() {
                 key={index}
               >
                 <SlideImage
-                  isActive={slidesPerView == 3 && activeSlideIndex == index}
+                  isActive={slidesPerView != 3 || activeSlideIndex == index}
                   imageSrc={`/images/gallery/${image.replace(" ", "_")}.webp`}
                   imageAlt={t(`imagesPre.development`) + " " + image}
                   modalLoading={modalLoading}
