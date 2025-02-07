@@ -4,12 +4,13 @@ import { useTranslations } from "next-intl"
 // Components
 import Title from "@/components/ui/Title"
 
-const HeroSection = () => {
+const HeroSection = ({className=''}) => {
   const t = useTranslations("Home.HeroSection")
 
   return (
     <div
       className={`
+        hero
         relative
         h-screen
         w-full
@@ -18,6 +19,7 @@ const HeroSection = () => {
         bg-cover
         bg-center
         bg-fixed
+        ${className}
      `}
     >
 
