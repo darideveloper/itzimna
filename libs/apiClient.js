@@ -5,9 +5,13 @@
  * @returns {Array} return.propertiesData - Properties data
  * @returns {Number} return.count - Total count of properties
  */
-export async function getLastProperties(page = 1) {
+export async function getProperties(page = 1, filterFeatured = false) {
   const host = process.env.NEXT_PUBLIC_HOST
-  const propertiesRes = await fetch(`${host}/api/properties?page=${page}`)
+  let endpoint = `${host}/api/properties?page=${page}`
+  if (filterFeatured) {
+    endpoint += `&featured=true`
+  }
+  const propertiesRes = await fetch(endpoint)
   const propertiesJson = await propertiesRes.json()
   const propertiesData = await propertiesJson.results
   const count = await propertiesJson.count

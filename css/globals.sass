@@ -4,6 +4,7 @@
 
 $color-green: theme('colors.green')
 $color-green-light: theme('colors.green-light')
+$color-green-dark: theme('colors.green-dark')
 $color-white: theme('colors.white')
 $color-yellow: theme('colors.yellow')
 $color-black: theme('colors.black')
@@ -13,7 +14,7 @@ html
   scroll-behavior: smooth
 
 body
-  color: $color-green
+  color: $color-green-dark
   background: $color-white
   overflow-x: hidden
   padding-top: 0px
@@ -31,26 +32,6 @@ body
 
 .hidden 
   display: none
-
-// swipper custom styles
-.swiper-button-next, .swiper-button-prev
-  color: $color-yellow !important
-
-.swiper-button-next::after, .swiper-button-prev::after
-  font-size: 15px !important
-
-.swiper-pagination-bullet-active
-  background-color: $color-yellow !important
-
-.small
-  .swiper-button-next, .swiper-button-prev
-    background-color: $color-yellow !important
-    border-radius: 50%
-    width: 30px
-    height: 30px
-
-    &:after
-      font-size: 20px
 
 // Custom scroll bar
 ::-webkit-scrollbar
@@ -82,3 +63,23 @@ body
 .transition-video-wrapper
   &.play
     opacity: 1
+
+
+// swipper custom styles
+.swiper-button-next, .swiper-button-prev
+  color: $color-white !important
+  background-color: $color-yellow !important
+  width: 40px !important
+  height: 40px !important
+  border-radius: 50%
+  transition-duration: 0.2s !important
+
+  &:hover
+    background-color: $color-green-dark !important
+    color: $color-white !important
+
+.swiper-button-next::after, .swiper-button-prev::after
+  font-size: 15px !important
+
+.swiper-pagination-bullet-active
+  background-color: $color-yellow !important

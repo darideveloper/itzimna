@@ -24,20 +24,13 @@
     "HeroSection": {
       "title": "Descubre tu propiedad perfecta de lujo",
       "description": "Explora una colección exclusiva de propiedades en los mejores lugares. Desde casas modernas hasta estaciones marinas."
-    }
-  },
-  "Test": {
-    "card1": {
-      "text": "Prueba 1",
-      "description": "Descripción de la prueba 1"
     },
-    "card2": {
-      "text": "Prueba 2",
-      "description": "Descripción de la prueba 2"
-    },
-    "card3": {
-      "text": "Prueba 3",
-      "description": "Descripción de la prueba 3"
+    "GallerySection": {
+      "title": "Mejores desarrollos",
+      "description": "Descubre los desarrollos más exclusivos en los mejores lugares", 
+      "imagesPre": {
+        "development": "Foto del desarrollo"
+      }
     }
   }
 }

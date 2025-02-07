@@ -3,14 +3,13 @@
 // Libs
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
-import { getLastProperties } from "@/libs/apiClient"
+import { getProperties } from "@/libs/apiClient"
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
 import Pagination from "@/components/layouts/Pagination"
 import Title from "@/components/ui/Title"
 import Spinner from "@/components/ui/Spinner"
-
 
 /**
  * Cards section component
@@ -31,11 +30,15 @@ import Spinner from "@/components/ui/Spinner"
  * @param {String} id - Section ID
  * @returns {JSX.Element} Cards section component
  */
-export default function CardsSection({ initialPropertiesData, totalProperties, id }) {
-
+export default function CardsSection({
+  initialPropertiesData,
+  totalProperties,
+  id,
+}) {
   // States
   const [propertiesData, setPropertiesData] = useState(initialPropertiesData)
   const [page, setPage] = useState(1)
+  const [lastPage, setLastPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const totalPages = Math.ceil(totalProperties / 8)
 
@@ -45,12 +48,12 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
     setIsLoading(true)
 
     // Update properties data when change page
-    getLastProperties(page).then(({ propertiesData }) => {
+    getProperties(page).then(({ propertiesData }) => {
       setPropertiesData(propertiesData)
-      if(page !== 1) {
-        document.querySelector(`#${id}`).scrollIntoView({ behavior: 'smooth' })
-      }
       // Move to top of the section
+      if (lastPage !== page) {
+        document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth" })
+      }
 
       // Hide loading spinner
       setTimeout(() => {
@@ -58,7 +61,6 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
       }, 1500)
     })
   }, [page])
-
 
   // Get translations
   const t = useTranslations("Home.CardsSection")
@@ -77,13 +79,10 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
           container
         `}
       >
-
-        <Title>
-          {t("title")}
-        </Title>
+        <Title>{t("title")}</Title>
 
         <br />
-        
+
         <div
           className={`
             grid
@@ -99,7 +98,7 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
           <Spinner isLoading={isLoading} />
 
           {/* Cards */}
-          {propertiesData.map(card => (
+          {propertiesData.map((card) => (
             <PropertyCard
               key={card.id}
               name={card.name}
@@ -117,13 +116,15 @@ export default function CardsSection({ initialPropertiesData, totalProperties, i
           ))}
         </div>
 
-        <Pagination 
+        <Pagination
           currentPage={page}
           totalPages={totalPages}
-          onPageChange={setPage}
+          onPageChange={(newPage) => {
+            setLastPage(page)
+            setPage(newPage)
+          }}
         />
       </div>
-
     </section>
   )
 }
