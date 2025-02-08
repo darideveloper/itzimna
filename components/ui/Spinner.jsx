@@ -52,13 +52,11 @@ export default function Spinner({ isLoading, className }) {
       `}
     >
       <Image
-        src="/favicon.ico"
+        src="/images/loading-icon/cube.gif"
         alt="Spinner"
         width={100}
         height={100}
         className={`
-          animate-spin
-          duration-600
           my-12
           w-28
           h-28
