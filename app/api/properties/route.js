@@ -1,4 +1,4 @@
-import { fetchJWT } from "@/libs/apiServer"
+import { fetchJWT } from "@/libs/jwt"
 
 export async function GET(request) {
 
