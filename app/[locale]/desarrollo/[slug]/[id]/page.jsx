@@ -1,13 +1,11 @@
 // Libs
 import { redirect } from "next/navigation"
-// import { fetchPropertiesNames } from "@/libs/api/properties"
+import { getPropertiesNames, getProperty } from "@/libs/api/property"
 
 
 export async function generateStaticParams() {
 
-  const propertiesNames = await fetchPropertiesNames()
-
-  console.log({ propertiesNames })
+  const propertiesNames = await getPropertiesNames()
 
   return propertiesNames.map((property) => {
     return {
@@ -22,10 +20,9 @@ export async function generateStaticParams() {
 export default async function PropertyDevelopment({ params }) {
   const { slug, id } = await params
 
-  console.log({ slug, id })
-
   // Simulated fetching of property data
-  const propertyData = await fetchPropertyData(slug, id)
+  const propertyData = await getProperty(id)
+  console.log({ propertyData })
 
   // Redirect to 404 if property not found
   if (!propertyData) {
