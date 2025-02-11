@@ -30,7 +30,9 @@ export async function getPropertiesSummary(page = 1, filterFeatured = false) {
   const res = await fetch(endpoint)
   const jsonData = await res.json()
   const results = await jsonData.results
-  const count = await results.count
+  const count = await jsonData.count
+
+  console.log({ results, count })
 
   return { results, count }
 }

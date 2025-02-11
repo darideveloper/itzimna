@@ -34,10 +34,10 @@ export default function CardsSection({
     setIsLoading(true)
 
     // Update properties data when change page and when component mounts
-    getPropertiesSummary(page).then(({ propertiesData, count }) => {
+    getPropertiesSummary(page).then(({ results, count }) => {
 
       // Update properties data and total pages
-      setPropertiesData(propertiesData)
+      setPropertiesData(results)
       setTotalPages(Math.ceil(count / 8))
 
       // Move to top of the section
@@ -88,7 +88,8 @@ export default function CardsSection({
           <Spinner isLoading={isLoading} />
 
           {/* Cards */}
-          {propertiesData.map((card) => (
+          {
+            propertiesData.map((card) => (
             <PropertyCard
               key={card.id}
               name={card.name}
@@ -100,8 +101,8 @@ export default function CardsSection({
               meters={card.meters}
               created_at={card.created_at}
               category={card.category}
-              href={`/properties/${card.id}`}
-              className={""}
+              href={`/desarrollos/${card.slug}/${card.id}`}
+
             />
           ))}
         </div>
