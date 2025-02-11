@@ -61,6 +61,9 @@ export default function SlideImage({
           mx-auto
           select-none
           draggable-none
+          w-full
+          h-auto
+          cover
         `}
       />
     </div>

@@ -26,10 +26,11 @@ import 'swiper/css/pagination'
  * @param {String} props.imagesData[].name - Image alt
  * @param {String} props.title - Component title
  * @param {String} props.description - Component description
+ * @param {Number} props.maxSlides - Maximum number of slides. Default is 3
  * 
  * @returns {JSX.Element} Swiper slider component
  */
-export default function Slider({ id, imagesData, title, description }) {
+export default function Slider({ id, imagesData, title, description, maxSlides = 3 }) {
 
   // States
   const [slidesPerView, setSlidesPerView] = useState(3)
@@ -43,13 +44,15 @@ export default function Slider({ id, imagesData, title, description }) {
   useEffect(() => {
     // Get slides per view when resizing and when component mounts
     const handleResize = () => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 768 || maxSlides == 1) {
         setSlidesPerView(1)
         const imagesNoWhite = images.filter(image => image.name != "white")
         setImages(imagesNoWhite)
+        console.log({maxSlides})
       } else {
         setSlidesPerView(3)
         setImages(imagesData)
+        console.log({maxSlides})
       }
     }
     window.addEventListener('resize', handleResize)
@@ -113,7 +116,7 @@ export default function Slider({ id, imagesData, title, description }) {
             spaceBetween: 0,
           },
           768: {
-            slidesPerView: 3,
+            slidesPerView: maxSlides,
             spaceBetween: 10,
           },
         }}
@@ -130,6 +133,8 @@ export default function Slider({ id, imagesData, title, description }) {
           images.map((image, index) => (
             <SwiperSlide
               key={index}
+              className={`
+              `}
             >
               <SlideImage
                 isActive={slidesPerView != 3 || activeSlideIndex == index}
