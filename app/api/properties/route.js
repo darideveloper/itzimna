@@ -4,10 +4,9 @@ export async function GET(request) {
 
   // Get page from get params 
   const url = new URL(request.url)
-  const page = url.searchParams.get('page')
-  const featured = url.searchParams.get('featured')
+  const getParams = url.searchParams
 
-  const endpoint = `properties?page=${page}${featured ? `&featured=${featured}` : ''}`
+  const endpoint = `properties?${getParams}`
   const apiResponse = await fetchJWT(request, endpoint, 'GET')
 
   // Return formatted response
