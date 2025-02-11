@@ -1,12 +1,19 @@
 "use client"
 
-import React, { useState } from "react"
+// Icons
 import { HiMenu } from "react-icons/hi"
 import { IoMdClose } from "react-icons/io"
-import Button from "../ui/Button"
+
+// Components
+
+import Button from "@/components/ui/Button"
+
+import TransitionLink from "@/components/utils/TransitionLink"
+import LangSelector from "@/components/ui/LangSelector"
+
+// Libs
+import { useState } from "react"
 import { usePathname } from "next/navigation"
-import TransitionLink from "../utils/TransitionLink"
-import LangSelector from "../ui/LangSelector"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 
@@ -229,7 +236,7 @@ const Header = () => {
             <LangSelector />
           </div>
 
-          {/* Contact Us Button */}
+          {/* Contact Us Button TODO: need to add varient paramemeter in button*/}
           <div className="hidden sm:block">
             <Button
               variant="ghost"
