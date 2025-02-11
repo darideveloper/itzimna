@@ -1,92 +1,58 @@
 'use client'
 
-// Lang
 import { useTranslations } from 'next-intl'
-
-// Routing
 import { useRouter } from '@/i18n/routing'
 import { usePathname } from 'next/navigation'
-
-// Components
 import LangBtn from '@/components/ui/LangBtn'
 import Image from 'next/image'
 
-
-/**
- * Language selector component
- * 
- * @param {object} props - Props object
- * @param {string} props.className - Additional classes
- * @returns 
- */
 export default function LangSelector({ className }) {
-
-  // Get translations
   const t = useTranslations('Langs')
-
   const router = useRouter()
-
-  const langs = [
-    "es",
-    "en",
-  ]
+  const langs = ["es", "en"]
   const currentPage = usePathname()
   const currentlang = currentPage.split('/')[1]
   const currentPageNoLang = currentPage.split('/').slice(2).join('/')
 
   return (
-    <div
-      className={`
-        lang-selector
-        ${className}
-      `}>
-      {
-        langs.map(lang => (
-          <LangBtn
-            key={lang}
-            icon={false}
-            active={currentlang === lang}
-            onClick={() => router.replace(`/${currentPageNoLang}`, { locale: lang })}
-            className={`
-              
-            `}
-          >
-            <div
-              className={`
-                lang-content
-              `}
-            >
-              <p
-                className={`
-                  regular-text
-                  full-text
-                  hidden sm:block
-                `}
-              >
+    <div className={`flex items-center gap-2 lg:gap-3 ${className}`}>
+      {langs.map(lang => (
+        <LangBtn
+          key={lang}
+          icon={false}
+          active={currentlang === lang}
+          onClick={() => router.replace(`/${currentPageNoLang}`, { locale: lang })}
+          className={`
+            px-2 py-1.5 
+            rounded-lg
+            transition-all duration-200
+            hover:bg-white/10
+            ${currentlang === lang ? 'bg-white/5' : ''}
+          `}
+        >
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col items-end">
+              <span className="hidden sm:block text-white text-sm font-medium">
                 {t(lang)}
-              </p>
-              <p
-                className={`
-                  small-text
-                  sm:hidden
-                `}	
-              >
+              </span>
+              <span className="sm:hidden text-white text-xs uppercase font-medium">
                 {lang}
-              </p>
+              </span>
+            </div>
+            
+            <div className="relative w-6 h-4 lg:w-7 lg:h-5">
               <Image 
                 src={`/images/flags/${lang}.webp`}
                 alt={t(lang)}
-                width={50}
-                height={50}
-                className={`
-                  lang-flag             
-                `}
+                fill
+                className="object-cover rounded"
+                sizes="(max-width: 768px) 24px, 28px"
+                priority
               />
             </div>
-          </LangBtn>
-        ))
-      }
-
+          </div>
+        </LangBtn>
+      ))}
     </div>
   )
 }
