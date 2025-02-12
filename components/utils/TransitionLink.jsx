@@ -33,7 +33,7 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
     // Show video
     e.preventDefault()
     const transitionVideoWrapper = document.querySelector('.transition-video-wrapper')
-    const transitionDuration = 1000
+    const transitionDuration = 3000
     transitionVideoWrapper.classList.remove("hidden")
     transitionVideoWrapper.classList.add("flex")
     await sleep(300)
