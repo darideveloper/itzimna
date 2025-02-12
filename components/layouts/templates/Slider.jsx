@@ -48,11 +48,9 @@ export default function Slider({ id, imagesData, title, description, maxSlides =
         setSlidesPerView(1)
         const imagesNoWhite = images.filter(image => image.name != "white")
         setImages(imagesNoWhite)
-        console.log({maxSlides})
       } else {
         setSlidesPerView(3)
         setImages(imagesData)
-        console.log({maxSlides})
       }
     }
     window.addEventListener('resize', handleResize)

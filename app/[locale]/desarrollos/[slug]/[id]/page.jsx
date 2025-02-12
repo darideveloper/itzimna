@@ -1,7 +1,9 @@
 // Libs
 import { redirect } from "next/navigation"
 import { getPropertiesNames, getProperty } from "@/libs/api/property"
+import { cookies } from "next/headers"
 import remarkGfm from 'remark-gfm'
+
 
 // Components
 import Slider from '@/components/layouts/templates/Slider'
@@ -27,11 +29,17 @@ export async function generateStaticParams() {
 }
 
 export default async function PropertyDevelopment({ params }) {
+
   const { id } = await params
 
+  // Get cookies
+  const cookieStore = await cookies()
+  const accessToken = cookieStore.get('accessToken')?.value || ''
+  const refreshToken = cookieStore.get('refreshToken')?.value || ''
+  const lang = cookieStore.get("NEXT_LOCALE")?.value || 'es'
+
   // Simulated fetching of property data
-  const propertyData = await getProperty(id)
-  console.log({ propertyData })
+  const propertyData = await getProperty(id, accessToken, refreshToken, lang)
 
   // Redirect to 404 if property not found
   if (!propertyData) {
