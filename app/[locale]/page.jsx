@@ -15,17 +15,14 @@ export default async function HomePage() {
     <>
       <Hero />
       <CardsSection
-        initialPropertiesData={propertiesData}
-        totalProperties={count}
         id="last-properties"
         title={t('LastProperties.title')}
       />
 
       <CardsSection
-        initialPropertiesData={propertiesData}
-        totalProperties={count}
         id="featured-properties"
         title={t('FeaturedProperties.title')}
+        filterFeatured={true}
       />
       <Gallery />
     </>

@@ -1,7 +1,6 @@
 "use client"
 
 // Libs
-import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { getProperties } from "@/libs/apiClient"
 
@@ -14,34 +13,22 @@ import Spinner from "@/components/ui/Spinner"
 /**
  * Cards section component
  *
- * @param {Array} propertiesData - Properties data
- * @param {Object} propertiesData[].banner - Property banner image
- * @param {String} propertiesData[].banner.url - Property banner image URL
- * @param {String} propertiesData[].banner.alt - Property banner image alt text
- * @param {String} propertiesData[].company - Property company builder
- * @param {String} propertiesData[].category - Property category
- * @param {Integer} propertiesData[].id - Property ID
- * @param {String} propertiesData[].location - Property location
- * @param {String} propertiesData[].meters - Property size in square meters like "99.00"
- * @param {String} propertiesData[].name - Property name
- * @param {String} propertiesData[].price - Property price like "1,000.00"
- * @param {String} propertiesData[].seller - Property seller name
- * @param {String} propertiesData[].short_description - Property short description
  * @param {String} id - Section ID
+ * @param {String} title - Section title
+ * @param {Boolean} filterFeatured - Filter featured properties. Default is false
  * @returns {JSX.Element} Cards section component
  */
 export default function CardsSection({
-  initialPropertiesData,
-  totalProperties,
   id,
-  title
+  title,
+  filterFeatured = false,
 }) {
   // States
-  const [propertiesData, setPropertiesData] = useState(initialPropertiesData)
+  const [propertiesData, setPropertiesData] = useState([])
   const [page, setPage] = useState(1)
   const [lastPage, setLastPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
-  const totalPages = Math.ceil(totalProperties / 8)
+  const [totalPages, setTotalProperties] = useState(0)
 
   // Effects
   useEffect(() => {
@@ -49,12 +36,18 @@ export default function CardsSection({
     setIsLoading(true)
 
     // Update properties data when change page
-    getProperties(page).then(({ propertiesData }) => {
+    getProperties(page, filterFeatured).then(({ propertiesData, count }) => {
+      
       setPropertiesData(propertiesData)
+
       // Move to top of the section
       if (lastPage !== page) {
         document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth" })
       }
+
+      // Update total properties
+      console.log({ count, propertiesData })
+      setTotalProperties(Math.ceil(count / 8))
 
       // Hide loading spinner
       setTimeout(() => {
