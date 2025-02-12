@@ -3,11 +3,10 @@
 // Icons
 import { HiMenu } from "react-icons/hi"
 import { IoMdClose } from "react-icons/io"
+import { FaWhatsapp, FaPhone } from "react-icons/fa"
 
 // Components
-
 import Button from "@/components/ui/Button"
-
 import TransitionLink from "@/components/utils/TransitionLink"
 import LangSelector from "@/components/ui/LangSelector"
 
@@ -19,21 +18,23 @@ import Image from "next/image"
 
 const Header = () => {
   const tMeta = useTranslations("Meta")
+  const tNav = useTranslations("Header.nav")
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const currentPage = usePathname()
   const homePages = ["/es", "/en"]
+  const phoneNumber = "+1 245 7845"
 
   const links = [
     {
-      name: "Best Properties",
+      name: tNav("link1"),
       url: "#last-properties",
     },
     {
-      name: "Fetures Properties",
+      name: tNav("link2"),
       url: "#featured-properties",
     },
     {
-      name: "Contacts",
+      name: tNav("link3"),
       url: "#contacts",
     },
   ]
@@ -62,12 +63,16 @@ const Header = () => {
           left-0 
           h-full 
           w-64 
-          bg-green-dark
+          bg-green-dark/60
+          backdrop-blur-md
           z-50 
           transform 
           transition-transform 
           duration-300 
           ease-in-out
+          flex
+          items-center
+          justify-center
           ${isDrawerOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
@@ -100,7 +105,8 @@ const Header = () => {
             className={`
               flex 
               flex-col 
-              space-y-6 
+              items-center
+              space-y-12 
               mt-12
             `}
           >
@@ -149,9 +155,13 @@ const Header = () => {
             <Image
               src="/images/logo.webp"
               alt={"Logo " + tMeta("title")}
-              width={150}
-              height={150}
-              className="logo hover:opacity-90 transition-opacity duration-200"
+              width={60}
+              height={60}
+              className={`
+                logo
+                hover:opacity-90
+                transition-opacity
+                duration-200`}
             />
           </TransitionLink>
         </div>
@@ -174,10 +184,11 @@ const Header = () => {
               h-[600px] 
               bg-green-light/10 
               absolute 
-              top-[-440px] 
+              top-[-510px] 
               mx-auto 
               rounded-full 
               z-10
+              overflow-hidden
             `}
           ></div>
           {links.map((item) => (
@@ -209,21 +220,53 @@ const Header = () => {
             lg:gap-4
           `}
         >
-          {/* Phone Number */}
+          {/* Phone Number with Icons */}
           <div
             className={`
-              hidden 
-              sm:block 
+              flex 
+              items-center 
+              gap-2
               text-white
               text-sm 
               lg:text-base 
-              hover:text-white/80
-              transition-colors
-              duration-200
             `}
           >
-            (+1) 245 7845
+            <a
+              href={`tel:${phoneNumber}`}
+              className={`
+                hidden
+                sm:inline-block
+                hover:text-white/80
+                transition-colors
+                duration-200
+              `}
+            >
+              {phoneNumber}
+            </a>
+            <a
+              href={`https://wa.me/${phoneNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`
+                hover:text-white/80
+                transition-colors
+                duration-200
+              `}
+            >
+              <FaWhatsapp className="w-5 h-5" />
+            </a>
+            <a
+              href={`tel:${phoneNumber}`}
+              className={`
+                hover:text-white/80
+                transition-colors
+                duration-200
+              `}
+            >
+              <FaPhone className="w-4 h-4" />
+            </a>
           </div>
+
           {/* Language Selectors */}
           <div
             className={`
@@ -236,7 +279,7 @@ const Header = () => {
             <LangSelector />
           </div>
 
-          {/* Contact Us Button TODO: need to add varient paramemeter in button*/}
+          {/* Contact Us Button*/}
           <div className="hidden sm:block">
             <Button
               variant="ghost"
@@ -250,7 +293,7 @@ const Header = () => {
                 duration-200
               `}
             >
-              Contact Us
+              {tNav("cta")}
             </Button>
           </div>
 
