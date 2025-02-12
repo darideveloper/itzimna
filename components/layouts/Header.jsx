@@ -1,156 +1,329 @@
-'use client'
+"use client"
 
-// Libs
-import { useState } from 'react'
-import { useTranslations } from 'next-intl'
-import { usePathname } from 'next/navigation'
+// Icons
+import { HiMenu } from "react-icons/hi"
+import { IoMdClose } from "react-icons/io"
+import { FaWhatsapp, FaPhone } from "react-icons/fa"
 
 // Components
-import { LuMenu, LuX } from "react-icons/lu"
-import TransitionLink from '@/components/utils/TransitionLink'
-import Image from 'next/image'
-import LangSelector from '@/components/ui/LangSelector'
+import Button from "@/components/ui/Button"
+import TransitionLink from "@/components/utils/TransitionLink"
+import LangSelector from "@/components/ui/LangSelector"
 
+// Libs
+import { useState } from "react"
+import { usePathname } from "next/navigation"
+import { useTranslations } from "next-intl"
+import Image from "next/image"
 
-/**
- * Global Header section of the layout
- */
-export default function Header() {
-
-  // Get translations
-  const t = useTranslations('Header')
-  const tMeta = useTranslations('Meta')
-
-  // Header state
-  const [menuOpen, setMenuOpen] = useState(false)
+const Header = () => {
+  const tMeta = useTranslations("Meta")
+  const tNav = useTranslations("Header.nav")
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const currentPage = usePathname()
+  const homePages = ["/es", "/en"]
+  const phoneNumber = "+1 245 7845"
 
-  // Header data
   const links = [
     {
-      "name": "link1",
-      "url": "/page-1"
+      name: tNav("link1"),
+      url: "#last-properties",
     },
     {
-      "name": "link2",
-      "url": "/page-2"
+      name: tNav("link2"),
+      url: "#featured-properties",
+    },
+    {
+      name: tNav("link3"),
+      url: "#contacts",
     },
   ]
-  const homePages = [
-    "/es",
-    "/en"
-  ]
-
-  // Common style for menu icons (open anc close)
-  const menuIconStyles = `
-    w-full
-    h-full
-  `
 
   return (
-    <header
-      className={`
-      `}
-    >
-      <div
-        className={`
-          content
-        `}
-      >
-        {/* Logo with link */}
-        <TransitionLink
-          href="/"
-          disable={`${homePages.includes(currentPage)}`}
-        >
-          <Image
-            src="/images/logo.webp"
-            alt={'Logo ' + tMeta('title')}
-            width={150}
-            height={150}
-            className={`
-              logo
-            `}
-          />
-        </TransitionLink>
-
+    <div className="relative">
+      {/* Overlay */}
+      {isDrawerOpen && (
         <div
           className={`
-            nav-wrapper
+            fixed 
+            inset-0 
+            bg-black 
+            bg-opacity-50 
+            z-40
           `}
-        >
-          {/* Nav */}
-          <nav>
-            <ul
-              className={`
-                nav-items
-              `}
-            >
-              {links.map((link, index) => {
+          onClick={() => setIsDrawerOpen(false)}
+        />
+      )}
 
-                let activeLink = currentPage.endsWith(link.url)
-
-                return (
-                  <li
-                    key={index}
-                    className={`
-                      nav-item
-                    `}
-                  >
-                    <TransitionLink
-                      href={link.url}
-                      className={`
-                        nav-link
-                      `}
-                      disable={`${activeLink}`}
-                      onClick={(e) => {
-
-                        // Hide menu on click (for mobile)
-                        if (activeLink) e.preventDefault()
-                        setMenuOpen(false)
-
-                      }}
-                    >
-                      {t(`nav.${link.name}`)}
-                    </TransitionLink>
-                  </li>
-                )
-              })}
-            </ul>
-          </nav>
-
-          {/* Lang */}
-          <LangSelector
-            className={`
-              
-            `}
-          />
-
-          {/* Menu button */}
+      {/* Left Drawer */}
+      <div
+        className={`
+          fixed 
+          top-0 
+          left-0 
+          h-full 
+          w-64 
+          bg-green-dark/60
+          backdrop-blur-md
+          z-50 
+          transform 
+          transition-transform 
+          duration-300 
+          ease-in-out
+          flex
+          items-center
+          justify-center
+          ${isDrawerOpen ? "translate-x-0" : "-translate-x-full"}
+        `}
+      >
+        <div className="p-4">
           <button
+            onClick={() => setIsDrawerOpen(false)}
             className={`
-              menu-button
+              absolute 
+              top-4 
+              right-4 
+              p-1 
+              hover:bg-white/20
+              rounded-full
+              transition-colors
+              duration-200
             `}
-            onClick={() => setMenuOpen(!menuOpen)}
           >
-            {/* Menu icons */}
-            {/* TODO: change it */}
-            <LuMenu
+            <IoMdClose
               className={`
-                ${menuOpen ? 'opacity-0' : 'opacity-100'}
-                ${menuIconStyles}
+                h-6 
+                w-6 
+                text-white
+                hover:scale-110
+                transition-transform
+                duration-200
               `}
             />
-            <LuX
+          </button>
+          <div
+            className={`
+              flex 
+              flex-col 
+              items-center
+              space-y-12 
+              mt-12
+            `}
+          >
+            {links.map((item) => (
+              <a
+                key={item.name}
+                href={item.url}
+                className={`
+                  text-white
+                  hover:text-white/80
+                  hover:translate-x-2
+                  text-lg 
+                  px-2 
+                  py-1
+                  transition-all
+                  duration-200
+                `}
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navbar */}
+      <nav
+        className={`
+          flex 
+          items-center 
+          justify-between 
+          px-4 
+          xl:px-8 
+          py-4 
+          bg-green-dark 
+          z-[-1]
+        `}
+      >
+        {/* Logo */}
+        <div className="flex-shrink-0">
+          <TransitionLink
+            href="/"
+            disable={`${homePages.includes(currentPage)}`}
+          >
+            <Image
+              src="/images/logo.webp"
+              alt={"Logo " + tMeta("title")}
+              width={60}
+              height={60}
               className={`
-                ${!menuOpen ? 'opacity-0' : 'opacity-100'}
-                ${menuIconStyles}
+                logo
+                hover:opacity-90
+                transition-opacity
+                duration-200`}
+            />
+          </TransitionLink>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div
+          className={`
+            hidden 
+            xl:flex 
+            items-center 
+            justify-center 
+            flex-1 
+            mx-8 
+            z-2
+          `}
+        >
+          <div
+            className={`
+              w-[800px] 
+              h-[600px] 
+              bg-green-light/10 
+              absolute 
+              top-[-510px] 
+              mx-auto 
+              rounded-full 
+              z-10
+              overflow-hidden
+            `}
+          ></div>
+          {links.map((item) => (
+            <a
+              key={item.name}
+              href={item.url}
+              className={`
+                text-white 
+                hover:text-white/80
+                transition-all
+                duration-200
+                px-4 
+                py-2
+                hover:scale-105
+              `}
+              style={{ zIndex: "101" }}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Right Section */}
+        <div
+          className={`
+            flex 
+            items-center 
+            gap-2 
+            lg:gap-4
+          `}
+        >
+          {/* Phone Number with Icons */}
+          <div
+            className={`
+              flex 
+              items-center 
+              gap-2
+              text-white
+              text-sm 
+              lg:text-base 
+            `}
+          >
+            <a
+              href={`tel:${phoneNumber}`}
+              className={`
+                hidden
+                sm:inline-block
+                hover:text-white/80
+                transition-colors
+                duration-200
+              `}
+            >
+              {phoneNumber}
+            </a>
+            <a
+              href={`https://wa.me/${phoneNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`
+                hover:text-white/80
+                transition-colors
+                duration-200
+              `}
+            >
+              <FaWhatsapp className="w-5 h-5" />
+            </a>
+            <a
+              href={`tel:${phoneNumber}`}
+              className={`
+                hover:text-white/80
+                transition-colors
+                duration-200
+              `}
+            >
+              <FaPhone className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* Language Selectors */}
+          <div
+            className={`
+              flex 
+              gap-2 
+              flex-col 
+              items-center
+            `}
+          >
+            <LangSelector />
+          </div>
+
+          {/* Contact Us Button*/}
+          <div className="hidden sm:block">
+            <Button
+              variant="ghost"
+              className={`
+                border 
+                border-white 
+                text-white 
+                hover:bg-white/20
+                hover:scale-105
+                transition-all
+                duration-200
+              `}
+            >
+              {tNav("cta")}
+            </Button>
+          </div>
+
+          {/* Hamburger Menu */}
+          <button
+            className={`
+              xl:hidden 
+              p-1 
+              hover:bg-white/20
+              rounded-full
+              transition-colors
+              duration-200
+            `}
+            onClick={() => setIsDrawerOpen(true)}
+          >
+            <HiMenu
+              className={`
+                h-6 
+                w-6 
+                text-white
+                hover:scale-110
+                transition-transform
+                duration-200
               `}
             />
           </button>
         </div>
-        
-      </div>
-
-    </header>
+      </nav>
+    </div>
   )
 }
+
+export default Header

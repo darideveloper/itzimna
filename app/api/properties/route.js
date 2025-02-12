@@ -21,7 +21,8 @@ export async function GET(request) {
   
   // Get page from get params 
   const url = new URL(request.url)
-  const getParams = url.searchParams
+  const page = url.searchParams.get('page')
+  const featured = url.searchParams.get('featured')
 
   // Get id from params and remove it from the params
   const id = getParams.get('id', null)
@@ -48,7 +49,7 @@ export async function GET(request) {
   const data = await apiResponse.json()
   return new Response(JSON.stringify(data), {
     status: apiResponse.status,
-    headers: {
+    headers: { 
       'Content-Type': 'application/json',
     },
   })
