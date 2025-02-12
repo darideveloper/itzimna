@@ -9,8 +9,11 @@
   },
   "Header": {
     "nav": {
-      "link1": "Enlace 1",
-      "link2": "Enlace 2"
+      "link1": "Majores Desarrollos",
+      "link2": "Desarrollos Destacados",
+      "link3": "Contacto",
+
+      "cta": "Contáct Us"
     }
   },
   "Langs": {
@@ -26,7 +29,7 @@
     },
     "GallerySection": {
       "title": "Mejores desarrollos",
-      "description": "Descubre los desarrollos más exclusivos en los mejores lugares", 
+      "description": "Descubre los desarrollos más exclusivos en los mejores lugares",
       "imagesPre": {
         "development": "Foto del desarrollo"
       }

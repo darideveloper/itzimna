@@ -1,5 +1,9 @@
-import { fontTitle } from "@/libs/fonts";
-import TransitionLink from "@/components/utils/TransitionLink";
+//components
+import TransitionLink from "@/components/utils/TransitionLink"
+
+// Libs
+import { fontTitle } from "@/libs/fonts"
+
 /**
  * Cta component with intl routing
  * It can be an action/funtion button or a link button
@@ -11,6 +15,7 @@ import TransitionLink from "@/components/utils/TransitionLink";
  * @param {string} props.className - Additional classes
  * @param {boolean} props.disabled - Disable button
  * @param {boolean} props.active - Active button (for toggle)
+ * @param {string} props.variant - Button variant ('default' or 'ghost')
  * @param {object} props.children - Child components
  * @param {object} props.props - Additional props
  *
@@ -21,29 +26,41 @@ export default function Button({
   className,
   disabled = false,
   active = false,
+  variant = "default",
   children,
   ...props
 }) {
-  // Global bytton styles
+  // Variant styles TODO: add more variants
+  const getVariantStyles = () => {
+    switch (variant) {
+      case "ghost":
+        return !active
+          ? "bg-transparent border-2 border-white text-white hover:bg-white hover:text-green-dark"
+          : "bg-transparent border-2 border-green-dark text-green hover:bg-transparent cursor-default"
+      default:
+        return !active
+          ? "bg-green hover:bg-yellow text-white"
+          : "bg-transparent border-2 border-green-dark text-green hover:bg-transparent cursor-default"
+    }
+  }
+
+  // Global button styles
   const styles = `
     cta
     ${fontTitle.className}
     block
     px-4 py-2
-    ${
-      !active
-        ? "bg-green hover:bg-yellow text-white"
-        : "bg-transparent border-2 border-green-dark text-green hover:bg-transparent cursor-default"
-    }
+    ${getVariantStyles()}
     font-thin
     rounded-md
     duration-300
-    ${!disabled && !active && "hover:scale-105"}
+    ${!disabled ? "hover:scale-105" : ""}
     disabled:opacity-70
     disabled:shadow-none
     disabled:bg-green-dark
     ${className}
-  `;
+  `
+
   const content = (
     <div
       className={`
@@ -52,7 +69,8 @@ export default function Button({
     >
       {children}
     </div>
-  );
+  )
+
   return href == "" || disabled ? (
     <button className={styles} onClick={onClick} disabled={disabled} {...props}>
       {content}
@@ -61,5 +79,5 @@ export default function Button({
     <TransitionLink href={href} className={styles} {...props}>
       {content}
     </TransitionLink>
-  );
+  )
 }
