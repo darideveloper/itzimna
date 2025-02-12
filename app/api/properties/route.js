@@ -18,11 +18,8 @@ export async function GET(request) {
     lang = request.headers.get('lang') || 'es'
   }
 
-  
-  // Get page from get params 
-  const url = new URL(request.url)
-  const page = url.searchParams.get('page')
-  const featured = url.searchParams.get('featured')
+  // read all params
+  const getParams = new URLSearchParams(request.url.split('?')[1])
 
   // Get id from params and remove it from the params
   const id = getParams.get('id', null)
