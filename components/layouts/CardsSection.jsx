@@ -3,7 +3,7 @@
 // Libs
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
-import { getPropertiesSummary } from "@/libs/api/property"
+import { getProperties } from "@/libs/apiClient"
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
@@ -13,34 +13,44 @@ import Spinner from "@/components/ui/Spinner"
 
 /**
  * Cards section component
- * 
+ *
+ * @param {Array} propertiesData - Properties data
+ * @param {Object} propertiesData[].banner - Property banner image
+ * @param {String} propertiesData[].banner.url - Property banner image URL
+ * @param {String} propertiesData[].banner.alt - Property banner image alt text
+ * @param {String} propertiesData[].company - Property company builder
+ * @param {String} propertiesData[].category - Property category
+ * @param {Integer} propertiesData[].id - Property ID
+ * @param {String} propertiesData[].location - Property location
+ * @param {String} propertiesData[].meters - Property size in square meters like "99.00"
+ * @param {String} propertiesData[].name - Property name
+ * @param {String} propertiesData[].price - Property price like "1,000.00"
+ * @param {String} propertiesData[].seller - Property seller name
+ * @param {String} propertiesData[].short_description - Property short description
  * @param {String} id - Section ID
  * @returns {JSX.Element} Cards section component
  */
 export default function CardsSection({
+  initialPropertiesData,
+  totalProperties,
   id,
   title
 }) {
-
   // States
-  const [propertiesData, setPropertiesData] = useState([])
+  const [propertiesData, setPropertiesData] = useState(initialPropertiesData)
   const [page, setPage] = useState(1)
   const [lastPage, setLastPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
-  const [totalPages, setTotalPages] = useState(1)
+  const totalPages = Math.ceil(totalProperties / 8)
 
   // Effects
   useEffect(() => {
     // Enable loading
     setIsLoading(true)
 
-    // Update properties data when change page and when component mounts
-    getPropertiesSummary(page).then(({ results, count }) => {
-
-      // Update properties data and total pages
-      setPropertiesData(results)
-      setTotalPages(Math.ceil(count / 8))
-
+    // Update properties data when change page
+    getProperties(page).then(({ propertiesData }) => {
+      setPropertiesData(propertiesData)
       // Move to top of the section
       if (lastPage !== page) {
         document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth" })
@@ -89,8 +99,7 @@ export default function CardsSection({
           <Spinner isLoading={isLoading} />
 
           {/* Cards */}
-          {
-            propertiesData.map((card) => (
+          {propertiesData.map((card) => (
             <PropertyCard
               key={card.id}
               name={card.name}
@@ -102,8 +111,8 @@ export default function CardsSection({
               meters={card.meters}
               created_at={card.created_at}
               category={card.category}
-              href={`/desarrollos/${card.slug}/${card.id}`}
-
+              href={`/properties/${card.id}`}
+              className={""}
             />
           ))}
         </div>

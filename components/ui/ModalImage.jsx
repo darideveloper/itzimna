@@ -20,6 +20,10 @@ export default function ModalImage({ image, alt, hide, setLoading }) {
   const [currentImage, setCurrentImage] = useState(image)
   const [imageLoading, setImageLoading] = useState(false)
 
+  useEffect(() => {
+    console.log({ image, currentImage, imageLoading })
+  }, [currentImage, image, imageLoading])
+
   // Animate when image is shown
   useEffect(() => {
 
