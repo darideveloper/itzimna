@@ -54,7 +54,7 @@ export default function Button({
     font-thin
     rounded-md
     duration-300
-    ${!disabled && !active && "hover:scale-105"}
+    ${!disabled ? "hover:scale-105" : ""}
     disabled:opacity-70
     disabled:shadow-none
     disabled:bg-green-dark
