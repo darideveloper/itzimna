@@ -26,16 +26,18 @@ export default function LangSelector({ className }) {
             px-2 py-1.5 
             rounded-lg
             transition-all duration-200
-            hover:bg-white/10
+            bg-white
+            hover:bg-white/80
+            disabled:bg-white/80
             ${currentlang === lang ? 'bg-white/5' : ''}
           `}
         >
           <div className="flex items-center gap-2">
             <div className="flex flex-col items-end">
-              <span className="hidden sm:block text-white text-sm font-medium">
+              <span className="hidden sm:block text-green-dark text-sm font-medium">
                 {t(lang)}
               </span>
-              <span className="sm:hidden text-white text-xs uppercase font-medium">
+              <span className="sm:hidden text-green-dark text-xs uppercase font-medium">
                 {lang}
               </span>
             </div>
