@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 
 import Link from 'next/link'
+import Contact from '@/components/layouts/Contact'
 
 
 /**
@@ -15,6 +16,7 @@ export default function Footer() {
 
   return (
     <footer>
+      <Contact/>
       <div className="bottom-bar">
         <p
           className={`
