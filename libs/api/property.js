@@ -32,8 +32,6 @@ export async function getPropertiesSummary(page = 1, filterFeatured = false) {
   const results = await jsonData.results
   const count = await jsonData.count
 
-  console.log({ results, count })
-
   return { results, count }
 }
 
@@ -59,7 +57,7 @@ export async function getPropertiesNames() {
   const res = await fetch(endpoint)
   const jsonData = await res.json()
   const propertiesNames = await jsonData.results
-  
+
   return propertiesNames
 }
 
@@ -88,10 +86,17 @@ export async function getPropertiesNames() {
  * @returns {String} return.propertiesData[].short_description - Property short description
  * @returns {String} return.propertiesData[].slug - Property slug from name
  */
-export async function getProperty(id) {
+export async function getProperty(id, accessToken, refreshToken, lang) {
+  
   const host = process.env.NEXT_PUBLIC_HOST
   let endpoint = `${host}/api/properties/?details=true&id=${id}`
-  const res = await fetch(endpoint)
+  const res = await fetch(endpoint, {
+    headers: {
+      'accessToken': accessToken,
+      'refreshToken': refreshToken,
+      'lang': lang
+    }
+  })
 
   // Validate if property exists
   if (res.status === 404) {

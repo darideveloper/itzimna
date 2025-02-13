@@ -1,14 +1,46 @@
-import { fetchJWT } from "@/libs/apiServer"
+import { fetchJWT } from "@/libs/jwt"
+import { cookies } from "next/headers"
 
 export async function GET(request) {
 
-  // Get page from get params 
-  const url = new URL(request.url)
-  const page = url.searchParams.get('page')
-  const featured = url.searchParams.get('featured')
+  const cookieStore = await cookies()
+  let accessToken = cookieStore.get('accessToken')?.value || ''
+  let refreshToken = cookieStore.get('refreshToken')?.value || ''
+  let lang = request.cookies.get("NEXT_LOCALE")?.value || ''
 
-  const endpoint = `properties?page=${page}${featured ? `&featured=${featured}` : ''}`
-  const apiResponse = await fetchJWT(request, endpoint, 'GET')
+  // Get data from headers if not exist
+  if (!accessToken || !refreshToken) {
+    accessToken = request.headers.get('accessToken') || ''
+    refreshToken = request.headers.get('refreshToken') || ''
+  }
+
+  if (!lang) {
+    lang = request.headers.get('lang') || 'es'
+  }
+
+  // read all params
+  const getParams = new URLSearchParams(request.url.split('?')[1])
+
+  // Get id from params and remove it from the params
+  const id = getParams.get('id', null)
+  getParams.delete('id')
+
+  let endpoint
+  if (id) {
+    endpoint = `properties/${id}?${getParams}`
+  } else {
+    endpoint = `properties?${getParams}`
+  }
+
+  const apiResponse = await fetchJWT(
+    request,
+    endpoint,
+    'GET',
+    null,
+    accessToken,
+    refreshToken,
+    lang
+  )
 
   // Return formatted response
   const data = await apiResponse.json()

@@ -12,6 +12,7 @@ export async function getProperties(page = 1, filterFeatured = false) {
     endpoint += `&featured=true`
   }
   const propertiesRes = await fetch(endpoint)
+  console.log({propertiesRes, endpoint})
   const propertiesJson = await propertiesRes.json()
   const propertiesData = await propertiesJson.results
   const count = await propertiesJson.count
