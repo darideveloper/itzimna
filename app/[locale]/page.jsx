@@ -6,6 +6,7 @@ import Gallery from "@/components/layouts/Gallery"
 // LIbs
 import { getProperties } from "@/libs/apiClient"
 import { getTranslations } from "next-intl/server"
+import Contact from "@/components/layouts/Contact"
 
 export default async function HomePage() {
   // Get data from api in server side
@@ -25,6 +26,7 @@ export default async function HomePage() {
         filterFeatured={true}
       />
       <Gallery />
+     <Contact/> 
     </>
   )
 }
