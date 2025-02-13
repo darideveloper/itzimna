@@ -32,6 +32,7 @@ const Contact = () => {
       bg-black
       text-white
     `}
+    id="contacts"
     >
       <div
         className={`
