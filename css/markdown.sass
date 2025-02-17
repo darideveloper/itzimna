@@ -1,2 +1,71 @@
+@use 'globals'
+    
 .markdown
-    border: 1px solid red
+    h2
+        font-size: 1.5rem
+
+    h3 
+        font-size: 1.25rem
+
+    h2, h3    
+        font-weight: bold
+        margin: 2.5rem 0 1rem 0
+
+        &:first-child
+            margin-top: 0
+
+    ul:not(.contains-task-list) li
+        list-style-type: disc
+        margin-left: 1rem
+
+    ol li
+        list-style-type: decimal
+        margin-left: 1rem
+
+    table
+        width: 80%
+        margin: 0 auto
+
+        td
+            text-align: center
+
+        th
+            background-color: globals.$color-green-dark
+            color: globals.$color-white
+
+            &:first-child
+                border-radius: 10px 0 0 0
+            
+            &:last-child
+                border-radius: 0 10px 0 0
+
+        tr:nth-child(even)
+            background-color: globals.$color-green-dark-10
+
+        tr:last-child
+            td
+                &:first-child
+                    border-radius: 0 0 0 10px
+            
+                &:last-child
+                    border-radius: 0 0 10px 0
+
+    pre
+        background-color: globals.$color-green-dark-10
+        padding: 1rem
+        border-radius: 10px
+        overflow-x: auto
+
+    code
+        background-color: globals.$color-green-dark-10
+        padding: 0.25rem
+        border-radius: 5px
+        font-size: 0.9rem
+        font-family: monospace
+
+    a
+        color: globals.$color-green-dark
+        transition: color 0.2s
+
+        &:hover
+            color: globals.$color-green

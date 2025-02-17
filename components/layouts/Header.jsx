@@ -180,7 +180,7 @@ const Header = () => {
         >
           <div
             className={`
-              w-[900px] 
+              w-[820px] 
               h-[600px] 
               bg-green-light/10 
               absolute 

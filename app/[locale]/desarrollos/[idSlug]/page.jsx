@@ -91,6 +91,7 @@ export default async function PropertyDevelopment({ params }) {
             <Title
               className={`
                 capitalize
+                !mt-0
               `}
             >
               {propertyData.name}
@@ -112,6 +113,15 @@ export default async function PropertyDevelopment({ params }) {
             {propertyData.location}
           </p>
 
+          {/* Render location here with icon */}
+          <p
+            className={`
+              capitalize
+            `}
+          >
+            {propertyData.company}
+          </p>
+
           <p>
             {propertyData.short_description}
           </p>
@@ -131,21 +141,11 @@ export default async function PropertyDevelopment({ params }) {
             p-8
           `}
         >
-          <p>
-            {/* TODO: this texts comes from the lang */}
-            Descripción
-          </p>
-          <hr />
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             children={propertyData.description}
             className="markdown"
           />
-
-
-
-
-
 
         </div>
 
