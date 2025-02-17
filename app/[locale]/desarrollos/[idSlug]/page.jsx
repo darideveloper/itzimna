@@ -21,8 +21,7 @@ export async function generateStaticParams() {
   return propertiesNames.map((property) => {
     return {
       params: {
-        slug: property.slug,
-        id: property.id.toString(),
+        idSlug: property.id.toString() + "-" + property.slug,
       },
     }
   })
@@ -30,7 +29,10 @@ export async function generateStaticParams() {
 
 export default async function PropertyDevelopment({ params }) {
 
-  const { id } = await params
+  const { idSlug } = await params
+  const id = idSlug.split('-')[0]
+  const slug = idSlug.split('-').slice(1).join('-')
+  console.log({ id, slug })
 
   // Get cookies
   const cookieStore = await cookies()
@@ -42,9 +44,9 @@ export default async function PropertyDevelopment({ params }) {
   const propertyData = await getProperty(id, accessToken, refreshToken, lang)
 
   // Redirect to 404 if property not found
-  if (!propertyData) {
-    redirect(`../../404`)
-  }
+  // if (!propertyData) {
+  //   redirect(`../../404`)
+  // }
 
   return (
     <section
@@ -56,6 +58,7 @@ export default async function PropertyDevelopment({ params }) {
         justify-between
         items-start
         gap-8
+        !my-8
       `}
     >
 
