@@ -3,6 +3,7 @@ import { FaMapMarkerAlt, FaArrowsAlt, FaBuilding } from "react-icons/fa"
 
 //libs
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 // UI Components
 import Button from "@/components/ui/Button"
@@ -36,6 +37,9 @@ export default function PropertyCard({
   href,
   className,
 }) {
+
+  const t = useTranslations("PropertyCard")
+
   return (
     <TransitionLink href={href}>
       <div
@@ -224,7 +228,7 @@ export default function PropertyCard({
             className={`
           `}
           >
-            View Details
+            {t("cta")}
           </Button>
           <span
             className={`

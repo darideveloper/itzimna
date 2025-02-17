@@ -20,6 +20,9 @@
     "es": "Español",
     "en": "Inglés"
   },
+  "PropertyCard": {
+      "cta": "Ver Detalles"
+  },
   "Home": {
     "LastProperties": { "title": "Desarrollos mas nuevos en yucatan" },
     "FeaturedProperties": { "title": "Desarrollos destacados en yucatan" },
