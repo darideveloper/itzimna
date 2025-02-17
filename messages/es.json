@@ -13,12 +13,15 @@
       "link2": "Desarrollos Destacados",
       "link3": "Contacto",
 
-      "cta": "Contáct Us"
+      "cta": "Contáctanos"
     }
   },
   "Langs": {
     "es": "Español",
     "en": "Inglés"
+  },
+  "PropertyCard": {
+      "cta": "Ver Detalles"
   },
   "Home": {
     "LastProperties": { "title": "Desarrollos mas nuevos en yucatan" },

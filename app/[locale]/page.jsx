@@ -6,6 +6,8 @@ import Gallery from "@/components/layouts/Gallery"
 // LIbs
 import { getProperties } from "@/libs/apiClient"
 import { getTranslations } from "next-intl/server"
+import Contact from "@/components/layouts/Contact"
+import Footer from "@/components/layouts/Footer"
 
 export default async function HomePage() {
   // Get data from api in server side

@@ -22,7 +22,7 @@ const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const currentPage = usePathname()
   const homePages = ["/es", "/en"]
-  const phoneNumber = "+1 245 7845"
+  const phoneNumber = "(+52) 9999 07 48 76"
 
   const links = [
     {
@@ -68,7 +68,7 @@ const Header = () => {
           z-50 
           transform 
           transition-transform 
-          duration-300 
+          duration-700
           ease-in-out
           flex
           items-center
@@ -225,14 +225,14 @@ const Header = () => {
             className={`
               flex 
               items-center 
-              gap-2
+              gap-1
               text-white
               text-sm 
               lg:text-base 
             `}
           >
             <a
-              href={`tel:${phoneNumber}`}
+              href={`tel:${phoneNumber.replace(/\D/g, "")}`}
               className={`
                 hidden
                 sm:inline-block
@@ -244,7 +244,7 @@ const Header = () => {
               {phoneNumber}
             </a>
             <a
-              href={`https://wa.me/${phoneNumber}`}
+              href={`https://wa.me/${phoneNumber.replace(/\D/g, "")}`}
               target="_blank"
               rel="noopener noreferrer"
               className={`
@@ -256,7 +256,7 @@ const Header = () => {
               <FaWhatsapp className="w-5 h-5" />
             </a>
             <a
-              href={`tel:${phoneNumber}`}
+              href={`tel:${phoneNumber.replace(/\D/g, "")}`}
               className={`
                 hover:text-white/80
                 transition-colors
@@ -283,6 +283,7 @@ const Header = () => {
           <div className="hidden sm:block">
             <Button
               variant="ghost"
+              href="#contact"
               className={`
                 border 
                 border-white 
@@ -327,3 +328,4 @@ const Header = () => {
 }
 
 export default Header
+
