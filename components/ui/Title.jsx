@@ -14,7 +14,6 @@ export default function Title ({ children, className, isH1=false }) {
   // Base style
   let style = `
     title
-    font-bold
     mt-16
     mb-8
     text-center

@@ -37,6 +37,11 @@ export default function Button({
         return !active
           ? "bg-transparent border-2 border-white text-white hover:bg-white hover:text-green-dark"
           : "bg-transparent border-2 border-green-dark text-green hover:bg-transparent cursor-default"
+      case "ghost-green":
+        return !active
+          ? "bg-transparent border-2 border-green text-green hover:bg-green hover:text-white"
+          : "bg-transparent border-2 border-green text-green hover:bg-transparent cursor-default"
+      
       default:
         return !active
           ? "bg-green hover:bg-yellow text-white"

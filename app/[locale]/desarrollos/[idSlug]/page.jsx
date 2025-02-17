@@ -6,9 +6,9 @@ import remarkGfm from 'remark-gfm'
 
 
 // Components
-import Slider from '@/components/layouts/templates/Slider'
-import Title from '@/components/ui/Title'
 import ReactMarkdown from 'react-markdown'
+import PropertyGeneral from '@/components/layouts/PropertyGeneral'
+import PropertySeller from '@/components/layouts/PropertySeller'
 
 // Style
 import '@/css/markdown.sass'
@@ -42,14 +42,15 @@ export default async function PropertyDevelopment({ params }) {
 
   // Simulated fetching of property data
   const propertyData = await getProperty(id, accessToken, refreshToken, lang)
+  console.log({ propertyData })
 
   // Redirect to 404 if property not found
-  // if (!propertyData) {
-  //   redirect(`../../404`)
-  // }
+  if (!propertyData) {
+    redirect(`../../404`)
+  }
 
   return (
-    <section
+    <div
       className={`
         details-page
         container
@@ -73,7 +74,7 @@ export default async function PropertyDevelopment({ params }) {
         `}
       >
 
-        <div
+        <section
           className={`
             general
             bg-grey
@@ -82,58 +83,18 @@ export default async function PropertyDevelopment({ params }) {
             p-8
           `}
         >
-
-          <div
-            className={`
-              header
-            `}
-          >
-            <Title
-              className={`
-                capitalize
-                !mt-0
-              `}
-            >
-              {propertyData.name}
-            </Title>
-
-            <p>
-              $ {propertyData.price} MXN
-            </p>
-          </div>
-
-
-          {/* TODO: Render category here, as tag badg */}
-          <p>
-            {propertyData.category}
-          </p>
-
-          {/* Render location here with icon */}
-          <p>
-            {propertyData.location}
-          </p>
-
-          {/* Render location here with icon */}
-          <p
-            className={`
-              capitalize
-            `}
-          >
-            {propertyData.company}
-          </p>
-
-          <p>
-            {propertyData.short_description}
-          </p>
-
-          <Slider
-            id="property-gallery"
-            imagesData={propertyData.images}
-            maxSlides={1}
+          <PropertyGeneral 
+            name={propertyData.name}
+            price={propertyData.price}
+            category={propertyData.category}
+            location={propertyData.location}
+            company={propertyData.company}
+            short_description={propertyData.short_description}
+            images={propertyData.images}
           />
-        </div>
+        </section>
 
-        <div
+        <section
           className={`
             details
             bg-grey
@@ -147,7 +108,7 @@ export default async function PropertyDevelopment({ params }) {
             className="markdown"
           />
 
-        </div>
+        </section>
 
       </div>
 
@@ -161,8 +122,16 @@ export default async function PropertyDevelopment({ params }) {
           p-8
         `}
       >
+        <PropertySeller 
+          name={propertyData.seller.first_name + ' ' + propertyData.seller.last_name}
+          profileImage="/images/logo.webp"
+          has_whatsapp={propertyData.seller.has_whatsapp}
+          phone={propertyData.seller.phone}
+          email={propertyData.seller.email}
+        />
 
+        
       </div>
-    </section>
+    </div>
   )
 }
