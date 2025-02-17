@@ -13,6 +13,13 @@ const nextConfig = {
         pathname: '/media/**',
         search: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'itzimna.s3.amazonaws.com',
+        port: '',
+        pathname: '/media/**',
+        search: '',
+      },
     ],
   },
 }
