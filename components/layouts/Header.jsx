@@ -180,13 +180,13 @@ const Header = () => {
         >
           <div
             className={`
-              w-[800px] 
+              w-[900px] 
               h-[600px] 
               bg-green-light/10 
               absolute 
               top-[-510px] 
               mx-auto 
-              rounded-full 
+              rounded-full
               z-10
               overflow-hidden
             `}
