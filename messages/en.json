@@ -35,7 +35,10 @@
     },
     "GallerySection": {
       "title": "Best Developments",
-      "description": "Discover the most exclusive developments in the most desirable locations"
+      "description": "Discover the most exclusive developments in the most desirable locations",
+      "imagesPre": {
+        "development": "Development photo"
+      }
     }
   },
   "Test": {
