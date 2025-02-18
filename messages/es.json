@@ -16,12 +16,35 @@
       "cta": "Contáctanos"
     }
   },
+  "Form": {
+    "name": "Nombre Completo",
+    "name_error": "El nombre es requerido",
+    "email": "Correo Electrónico",
+    "email_invalid" : "El correo debe tener un formato valido",
+    "email_error": "El correo es requerido",
+    "phone": "Teléfono",
+    "phone_invalid": "El telfón debe tener 10 digitos",
+    "phone_error": "El teléfono es requerido",
+    "message": "Mensaje",
+    "message_error": "El mensaje es requerido",
+    "send": "Enviar Mensaje"
+  },
+  "Contact": {
+    "title": "¿Quieres que nos pongamos en contacto contigo?",
+    "sub_title": "Rellena el formulario y uno de nuestros asesores se pondrá en contacto contigo.",
+    "office": "Oficinas",
+    "customer_service": "Atención a clientes e inmobiliarias",
+    "email": "Correo"
+  },
+  "Footer": {
+    "copy": "Todos los derechos reservados. Diseñado por Dari Dev"
+  },
   "Langs": {
     "es": "Español",
     "en": "Inglés"
   },
   "PropertyCard": {
-      "cta": "Ver Detalles"
+    "cta": "Ver Detalles"
   },
   "Home": {
     "LastProperties": { "title": "Desarrollos mas nuevos en yucatan" },

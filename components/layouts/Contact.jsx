@@ -5,23 +5,36 @@ import { FaMapMarkerAlt } from "react-icons/fa"
 
 // Components
 import Button from "@/components/ui/Button"
-
+import Input from "@/components/ui/Input"
+import Title from "@/components/ui/Title"
 // Libs
 import React from "react"
 import Image from "next/image"
 import { useForm } from "react-hook-form"
+import { useTranslations } from "next-intl"
 
 const Contact = () => {
+  const t = useTranslations("Contact")
+  const tForm = useTranslations("Form")
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
-  const listOffice = ["Office 1", "Office 2", "Office 3", "Office 4"]
+  const listOffice = ["Office 1", "New Market, Dhaka, Bangladesh", "Office 3", "Office 4"]
   const phone = "(+52) 9999 07 48 76"
-  const onSubmit = (data) => {
-    console.log("Form submitted:", data)
+  const email = "admin@itzimna.com"
+  const onSubmit = async (data) => {
+    await fetch("/api/form", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      console.log(res)
+    })
   }
 
   return (
@@ -29,10 +42,10 @@ const Contact = () => {
       className={`
       relative
       min-h-[600px]
-      bg-black
+      bg-green-dark
       text-white
     `}
-    id="contacts"
+      id="contact"
     >
       <div
         className={`
@@ -84,72 +97,81 @@ const Contact = () => {
         `}
         >
           <div>
-            <h2
-              className={`
-              text-4xl
-              font-light
-              mb-4
-            `}
-            >
-              ¿Quieres que nos pongamos en contacto contigo?
-            </h2>
+            <Title isH1={false} className="mt-0">
+              {t("title")}
+            </Title>
             <p
               className={`
-              text-gray-300
+              text-green-light
+              text-center
             `}
             >
-              Rellena el formulario y uno de nuestros asesores se pondrá en
-              contacto contigo.
+              {t("sub_title")}
             </p>
           </div>
 
-          <div>
-            <h3
-              className={`
-              text-2xl
-              mb-4
+          <div
+            className={`
+            flex
+            sm:flex-col sm:gap-4
+            md:flex-col
+            lg:flex-row
+            justify-between
+            gap-2  
             `}
-            >
-              Oficinas:
-            </h3>
-            <ul
-              className={`
-              space-y-2
-            `}
-            >
-              {listOffice.map((office) => (
-                <li
-                  key={office}
-                  className={`
-                  flex
-                  items-center
-                  gap-2
-                `}
-                >
-                  <FaMapMarkerAlt size={16} />
-                  <span>{office}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3
-              className={`
-              text-2xl
-              mb-4
-            `}
-            >
-              Atención a clientes e inmobiliarias
-            </h3>
-            <a
-              href={`tel:${phone}`}
-              className={`
-              text-xl
-            `}
-            >
-              {phone}
-            </a>
+          >
+            <div>
+              <h3
+                className={`
+                text-2xl
+                mb-4
+                text-white
+              `}
+              >
+                {t("office")}
+              </h3>
+              <ul
+                className={`
+                space-y-2
+              `}
+              >
+                {listOffice.map((office) => (
+                  <li
+                    key={office}
+                    className={`
+                    flex
+                    items-center
+                    gap-2
+                    text-white
+                  `}
+                  >
+                    <FaMapMarkerAlt size={16} className="text-green-light" />
+                    <span>{office}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3
+                className={`
+                text-2xl
+                mb-4
+                text-white
+              `}
+              >
+                {t("customer_service")}
+              </h3>
+              <a
+                href={`tel:${phone.replace(/\D/g, "")}`}
+                className={`
+                text-xl
+                text-green-light
+                hover:opacity-80
+              `}
+              >
+                {phone}
+              </a>
+            </div>
           </div>
 
           <div>
@@ -157,18 +179,19 @@ const Contact = () => {
               className={`
               text-2xl
               mb-2
+              text-white
             `}
             >
-              Correo
+              {t("email")}
             </h3>
             <a
-              href="mailto:info@tecadesarrollos.com"
+              href={`mailto:${email}`}
               className={`
-                text-white
-                hover:text-white
+                text-green-light
+                hover:opacity-80
               `}
             >
-              admin@itzimna.com
+              {email}
             </a>
           </div>
         </div>
@@ -181,134 +204,74 @@ const Contact = () => {
             space-y-6
           `}
           >
-            <div>
-              <input
-                {...register("fullName", { required: "Nombre es requerido" })}
-                type="text"
-                placeholder="Nombre completo"
-                className={`
-                  w-full
-                  p-3
-                  rounded
-                  bg-transparent
-                  border
-                  border-white/30
-                  text-white
-                  placeholder-gray-400
-                `}
-              />
-              {errors.fullName && (
-                <span
-                  className={`
-                  text-red-400
-                  text-sm
-                  mt-1
-                `}
-                >
-                  {errors.fullName.message}
-                </span>
-              )}
-            </div>
+            <Input
+              name="fullName"
+              register={register}
+              required={true}
+              errors={errors}
+              placeholder={tForm("name")}
+              errorMessage={tForm("name_error")}
+              rules={{
+                required: tForm("name_error"),
+              }}
+            />
 
-            <div>
-              <input
-                {...register("email", {
-                  required: "Email es requerido",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Email inválido",
-                  },
-                })}
-                type="email"
-                placeholder="Correo electrónico"
-                className={`
-                  w-full
-                  p-3
-                  rounded
-                  bg-transparent
-                  border
-                  border-white/30
-                  text-white
-                  placeholder-gray-400
-                `}
-              />
-              {errors.email && (
-                <span
-                  className={`
-                  text-red-400
-                  text-sm
-                  mt-1
-                `}
-                >
-                  {errors.email.message}
-                </span>
-              )}
-            </div>
+            <Input
+              name="email"
+              type="email"
+              register={register}
+              required={true}
+              errors={errors}
+              placeholder={tForm("email")}
+              errorMessage={
+                errors.email?.type === "pattern"
+                  ? tForm("email_invalid")
+                  : tForm("email_error")
+              }
+              rules={{
+                required: tForm("email_error"),
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: tForm("email_invalid"),
+                },
+              }}
+            />
 
-            <div>
-              <input
-                {...register("phone", {
-                  required: "Teléfono es requerido",
-                  pattern: {
-                    value: /^[0-9]{10}$/,
-                    message: "Teléfono debe tener 10 dígitos",
-                  },
-                })}
-                type="tel"
-                placeholder="Teléfono"
-                className={`
-                  w-full
-                  p-3
-                  rounded
-                  bg-transparent
-                  border
-                  border-white/30
-                  text-white
-                  placeholder-gray-400
-                `}
-              />
-              {errors.phone && (
-                <span
-                  className={`
-                  text-red-400
-                  text-sm
-                  mt-1
-                `}
-                >
-                  {errors.phone.message}
-                </span>
-              )}
-            </div>
+            <Input
+              name="phone"
+              type="tel"
+              register={register}
+              required={true}
+              errors={errors}
+              placeholder={tForm("phone")}
+              errorMessage={
+                errors.phone?.type === "pattern"
+                  ? tForm("phone_invalid")
+                  : tForm("phone_error")
+              }
+              rules={{
+                required: tForm("phone_error"),
+                pattern: {
+                  value: /^[0-9]{10}$/,
+                },
+              }}
+            />
 
-            <div>
-              <textarea
-                {...register("message", { required: "Mensaje es requerido" })}
-                placeholder="Mensaje"
-                rows={4}
-                className={`
-                  w-full
-                  p-3
-                  rounded
-                  bg-transparent
-                  border
-                  border-white/30
-                  text-white
-                  placeholder-gray-400
-                `}
-              />
-              {errors.message && (
-                <span
-                  className={`
-                  text-red-400
-                  text-sm
-                  mt-1
-                `}
-                >
-                  {errors.message.message}
-                </span>
-              )}
-            </div>
-            <Button>Enviar mensaje</Button>
+            <Input
+              name="message"
+              type="textarea"
+              register={register}
+              required={true}
+              errors={errors}
+              placeholder={tForm("message")}
+              errorMessage={tForm("message_error")}
+              rows={4}
+              rules={{
+                required: tForm("message_error"),
+              }}
+            />
+
+            <Button>{tForm("send")}</Button>
           </form>
         </div>
       </div>
@@ -317,3 +280,4 @@ const Contact = () => {
 }
 
 export default Contact
+

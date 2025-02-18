@@ -15,6 +15,29 @@
       "cta": "Contact Us"
     }
   },
+  "Form": {
+    "name" : "Full Name",
+    "name_error" : "The name is required",
+    "email" : "Email",
+    "email_invalid" : "The email is invalid",
+    "email_error" : "The email is required",
+    "phone" : "Phone",
+    "phone_error" : "The phone is required",
+    "phone_invalid" : "The phone length must be 10",
+    "message" : "Message",
+    "message_error" : "The message is required",
+    "send" : "Send Message"
+  },
+  "Contact": {
+    "title": "Do you want us to contact you?",
+    "sub_title": "Fill out the form and one of our consultants will contact you.",
+    "office": "Offices",
+    "customer_service": "Customer service and real estate agents",
+    "email": "Email"
+  },
+  "Footer": {
+    "copy": "All rights reserved. Designed by Dari Dev"
+  },
   "Langs": {
     "es": "Spanish",
     "en": "English"

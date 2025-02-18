@@ -35,7 +35,7 @@ const Header = () => {
     },
     {
       name: tNav("link3"),
-      url: "#contacts",
+      url: "#contact",
     },
   ]
 
@@ -225,7 +225,7 @@ const Header = () => {
             className={`
               flex 
               items-center 
-              gap-1
+              gap-2
               text-white
               text-sm 
               lg:text-base 
@@ -284,15 +284,6 @@ const Header = () => {
             <Button
               variant="ghost"
               href="#contact"
-              className={`
-                border 
-                border-white 
-                text-white 
-                hover:bg-white/20
-                hover:scale-105
-                transition-all
-                duration-200
-              `}
             >
               {tNav("cta")}
             </Button>

@@ -1,44 +1,184 @@
 "use client"
 
-import { useTranslations } from 'next-intl'
+// Icons
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa"
 
-import Link from 'next/link'
-import Contact from '@/components/layouts/Contact'
+// Libs
+import { useTranslations } from "next-intl"
+import Link from "next/link"
+import Image from "next/image"
 
-
-/**
- * Global Footer section of the layout
- */
+// Components
+import Contact from "@/components/layouts/Contact"
 export default function Footer() {
 
-  // Get translations
-  const tMeta = useTranslations('Meta')
+  const tMeta = useTranslations("Meta")
+  const tNav = useTranslations("Header.nav")
+  const tFooter = useTranslations("Footer")
+  const links = [
+    {
+      name: tNav("link1"),
+      url: "#last-properties",
+    },
+    {
+      name: tNav("link2"),
+      url: "#featured-properties",
+    },
+    {
+      name: tNav("link3"),
+      url: "#contact",
+    },
+  ]
 
   return (
-    <footer>
-      <Contact/>
-      <div className="bottom-bar">
-        <p
-          className={`
-            copyrigth
-          `}
-        >
-          {/* Render company name */}
-          {tMeta('title')}&nbsp; © 2025 - All rights reserved
+    <footer
+      className={`
+      w-full
+      bg-green-dark
+      text-white
+    `}
+    >
+      <Contact />
 
-          {/* Render powered by */}
-          Powered by&nbsp;
-          <Link 
-            href="https://api.whatsapp.com/send?phone=5214493402622"
-            target="_blank"
+      <div
+        className={`
+        flex
+        flex-col
+        items-center
+        py-4
+      `}
+      >
+        <div
+          className={`
+          my-4
+        `}
+        >
+          <Image
+            src="/images/logo.webp"
+            alt={tMeta("title")}
+            width={280}
+            height={90}
             className={`
-              creator-link
+              w-64
+              hover:opacity-80
+              transition-duration-500
+              transition-opacity
+            `}
+          />
+        </div>
+
+        <div
+          className={`
+          flex
+          gap-4
+          my-4
+        `}
+        >
+          <Link
+            href="https://facebook.com"
+            aria-label="Facebook"
+            className={`
+              text-white
+              hover:text-green-light
             `}
           >
-           Dari Dev Team
+            <FaFacebookF
+              className={`
+              text-2xl
+            `}
+            />
           </Link>
-        </p>
+          <Link
+            href="https://instagram.com"
+            aria-label="Instagram"
+            className={`
+              text-white
+              hover:text-green-light
+            `}
+          >
+            <FaInstagram
+              className={`
+              text-2xl
+            `}
+            />
+          </Link>
+          <Link
+            href="https://youtube.com"
+            aria-label="YouTube"
+            className={`
+              text-white
+              hover:text-green-light
+            `}
+          >
+            <FaYoutube
+              className={`
+              text-2xl
+            `}
+            />
+          </Link>
+        </div>
 
+        <nav
+          className={`
+          flex
+          justify-center
+          flex-wrap
+          gap-6
+          my-4
+        `}
+        >
+          {links.map((link, index) => (
+            <Link
+              key={index}
+              href={link.url}
+              className={`
+                text-white
+                hover:text-green-light
+                text-sm
+              `}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+
+        <div
+          className={`
+          bottom-bar
+          w-full
+          py-3
+        `}
+        >
+          <p
+            className={`
+            copyrigth
+            text-xs
+            text-center
+          `}
+          >
+            {tMeta("title")}&nbsp; © {new Date().getFullYear()} - {tFooter("copy")}
+          </p>
+          <p
+            className={`
+            text-xs
+            text-center
+            mt-1
+          `}
+          >
+            Powered by&nbsp;
+            <Link
+              href="https://api.whatsapp.com/send?phone=5214493402622"
+              target="_blank"
+              className={`
+                creator-link
+                text-green-light
+                hover:text-white
+              `}
+            >
+              Dari Dev Team
+            </Link>
+          </p>
+        </div>
       </div>
     </footer>
   )
