@@ -6,7 +6,6 @@ import { FaMapMarkerAlt } from "react-icons/fa"
 // Components
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
-import Title from "@/components/ui/Title"
 // Libs
 import React from "react"
 import Image from "next/image"
@@ -22,7 +21,12 @@ const Contact = () => {
     formState: { errors },
   } = useForm()
 
-  const listOffice = ["Office 1", "New Market, Dhaka, Bangladesh", "Office 3", "Office 4"]
+  const listOffice = [
+    "Office 1",
+    "New Market, Dhaka, Bangladesh",
+    "Office 3",
+    "Office 4",
+  ]
   const phone = "(+52) 9999 07 48 76"
   const email = "admin@itzimna.com"
   const onSubmit = async (data) => {
@@ -97,13 +101,22 @@ const Contact = () => {
         `}
         >
           <div>
-            <Title isH1={false} className="mt-0">
+            <h3
+              className={`
+              text-3xl
+              mb-4
+              text-white
+              mt-0
+              text-center
+              `}
+            >
               {t("title")}
-            </Title>
+            </h3>
             <p
               className={`
               text-green-light
               text-center
+              p-4
             `}
             >
               {t("sub_title")}
@@ -112,14 +125,15 @@ const Contact = () => {
 
           <div
             className={`
-            flex
-            sm:flex-col sm:gap-4
-            md:flex-col
+              flex
+            flex-col
             lg:flex-row
             justify-between
-            gap-2  
+            gap-4
+            lg:gap-8
             `}
           >
+            {/* Office section */}
             <div>
               <h3
                 className={`
@@ -151,6 +165,7 @@ const Contact = () => {
                 ))}
               </ul>
             </div>
+            {/* Customer service agent */}
             <div>
               <h3
                 className={`
@@ -197,7 +212,11 @@ const Contact = () => {
         </div>
 
         {/* Right column - Contact Form */}
-        <div>
+        <div
+          className={`
+            lg:mt-12          
+          `}
+        >
           <form
             onSubmit={handleSubmit(onSubmit)}
             className={`
@@ -280,4 +299,3 @@ const Contact = () => {
 }
 
 export default Contact
-
