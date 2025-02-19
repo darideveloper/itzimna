@@ -91,6 +91,7 @@ export default async function PropertyDevelopment({ params }) {
             company={propertyData.company}
             short_description={propertyData.short_description}
             images={propertyData.images}
+            meters={propertyData.meters}
           />
         </section>
 

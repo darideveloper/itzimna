@@ -6,6 +6,7 @@ import { FaMapMarkerAlt } from "react-icons/fa"
 // Components
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
+import IconText from "@/components/ui/IconText"
 // Libs
 import React from "react"
 import Image from "next/image"
@@ -153,14 +154,14 @@ const Contact = () => {
                   <li
                     key={office}
                     className={`
-                    flex
-                    items-center
-                    gap-2
                     text-white
                   `}
                   >
-                    <FaMapMarkerAlt size={16} className="text-green-light" />
-                    <span>{office}</span>
+                    <IconText
+                      icon={<FaMapMarkerAlt />}
+                      text={office}
+                      className="gap-2"
+                    />
                   </li>
                 ))}
               </ul>
