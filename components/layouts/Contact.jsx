@@ -45,7 +45,7 @@ const Contact = () => {
   }
 
   return (
-    <div
+    <section
       className={`
       relative
       min-h-[600px]
@@ -90,12 +90,12 @@ const Contact = () => {
         z-20
         max-w-7xl
         mx-auto
-        px-4
-        py-16
+        !py-16
         grid
         md:grid-cols-2
         gap-12
         items-center
+        container
       `}
       >
         {/* Left column */}
@@ -114,7 +114,7 @@ const Contact = () => {
               !text-5xl
               !mb-4
               text-white
-              mt-0
+              !mt-0
               !text-left
               `}
             >
@@ -301,7 +301,7 @@ const Contact = () => {
           </form>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
