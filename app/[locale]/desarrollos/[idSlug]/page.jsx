@@ -14,19 +14,6 @@ import PropertySeller from '@/components/layouts/PropertySeller'
 import '@/css/markdown.sass'
 
 
-export async function generateStaticParams() {
-
-  const propertiesNames = await getPropertiesNames()
-
-  return propertiesNames.map((property) => {
-    return {
-      params: {
-        idSlug: property.id.toString() + "-" + property.slug,
-      },
-    }
-  })
-}
-
 export default async function PropertyDevelopment({ params }) {
 
   const { idSlug } = await params
