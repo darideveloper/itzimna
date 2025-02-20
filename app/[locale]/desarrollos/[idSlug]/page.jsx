@@ -67,7 +67,7 @@ export default async function PropertyDevelopment({ params }) {
             bg-grey
             w-full
             rounded-lg
-            p-8
+            p-12
           `}
         >
           <PropertyGeneral 
@@ -87,7 +87,7 @@ export default async function PropertyDevelopment({ params }) {
             details
             bg-grey
             rounded-lg
-            p-8
+            p-12
           `}
         >
           <ReactMarkdown
@@ -107,7 +107,7 @@ export default async function PropertyDevelopment({ params }) {
           bg-grey
           w-full lg:w-4/12
           rounded-lg
-          p-8
+          p-12
         `}
       >
         <PropertySeller 

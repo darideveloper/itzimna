@@ -18,15 +18,16 @@ export default function IconText({
       className={`
         flex
         items-center
-        ${className}`}
+        ${className}
+      `}
     >
       <span
         className={`
-        flex
-        items-center
-        ${iconStyle}
-        mr-2
-        text-green
+          flex
+          items-center
+          ${iconStyle}
+          mr-2
+          text-green
         `}
       >
         {icon}

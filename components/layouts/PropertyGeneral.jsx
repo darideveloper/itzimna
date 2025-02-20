@@ -31,101 +31,137 @@ export default function PropertyGeneral({
 }) {
   return (
     <div>
-      {/* Centered Property Name */}
-      <div
+      <header
         className={`
-        text-center
-        p-6
-        pb-3
-      `}
-      >
-        <Title
-          className={`
-          capitalize
-          text-3xl
-          font-bold
-          text-gray-800
-          !mt-0
-        `}
-        >
-          {name}
-        </Title>
-      </div>
-      {/* Content Section */}
-      <div
-        className={`
-        px-6
-        pb-4
-      `}
-      >
-        {/* Price TODO: need to find better position*/}
-        <p
-          className={`
-          text-2xl
-          font-semibold
-          text-emerald-600
-          text-center
-          mb-4
-        `}
-        >
-          $ {price} MXN
-        </p>
-        {/* Tags and Info Section */}
-        <div
-          className={`
           flex
-          flex-wrap
-          justify-center
-          gap-2
-          mb-4
-        `}
-        >
-          <Badge className={``}>
-            <IconText
-              icon={<FaTag className="text-white" />}
-              text={category}
-              iconStyle="h-4 w-4"
-              className="inline"
-            />
-          </Badge>
-        </div>
-        {/* Location and Company */}
-        <div
-          className={`
-          flex
+          flex-col md:flex-row
           justify-between
-          mr-2
-          ml-2
+          items-start
+          gap-4
         `}
-        >
-          <IconText icon={<FaMapMarkerAlt />} text={location} />
-          <IconText text={`${meters} m²`} icon={<FaArrowsAlt />} />
-          <IconText
-            icon={<FaBuilding />}
-            text={company}
-            className="capitalize"
-          />
-        </div>
-        {/* Description */}
+      >
+        {/* Centered Property Name */}
         <div
           className={`
+          left
+          flex
+          flex-col
+          justify-between
+          items-start
+          w-full md:w-2/3
+        `}
+        >
+          <Title
+            className={`
+              capitalize
+              text-3xl
+              font-bold
+              text-gray-800
+              !text-left
+              w-full
+              !mt-0
+              !mb-4
+            `}
+          >
+            {name}
+          </Title>
+
+          {/* Content Section */}
+          <div
+            className={`
+              
+            `}
+          >
+
+            {/* Location and Company */}
+            <div
+              className={`
+              flex
+              flex-col
+              justify-between
+              mr-2
+              ml-2
+            `}
+            >
+              <IconText icon={<FaMapMarkerAlt />} text={location} />
+              <IconText text={`${meters} m²`} icon={<FaArrowsAlt />} />
+              <IconText
+                icon={<FaBuilding />}
+                text={company}
+                className="capitalize"
+              />
+            </div>
+          </div>
+
+        </div>
+
+        <div 
+          className={`
+            right
+            w-full md:w-1/3
+            flex
+            flex-col
+            justify-center
+            items-end
+          `}
+        >
+          {/* Price */}
+          <p
+            className={`
+              text-2xl
+              font-semibold
+              text-emerald-600
+              text-left
+              my-2
+            `}
+          >
+            $ {price}
+          </p>
+
+          {/* Tags and Info Section */}
+          <div
+            className={`
+              flex
+              flex-wrap
+              justify-start
+              gap-2
+              mb-4
+            `}
+          >
+            <Badge className={``}>
+              <IconText
+                icon={<FaTag className="text-white" />}
+                text={category}
+                iconStyle="h-4 w-4"
+                className="inline"
+              />
+            </Badge>
+          </div>
+        </div>
+      </header>
+
+
+
+      {/* Description */}
+      <div
+        className={`
           border-t
           border-gray-200
           pt-4
-          mb-6
+          my-4
           mx-auto
         `}
+      >
+        <p
+          className={`
+          text-gray-600
+          leading-relaxed
+        `}
         >
-          <p
-            className={`
-            text-gray-600
-            leading-relaxed
-          `}
-          >
-            {short_description}
-          </p>
-        </div>
+          {short_description}
+        </p>
       </div>
+
       {/* Full-width Image Slider Section */}
       <div>
         <Slider id="property-gallery" imagesData={images} maxSlides={1} />
