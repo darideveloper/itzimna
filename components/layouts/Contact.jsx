@@ -101,14 +101,17 @@ const Contact = () => {
           space-y-12
         `}
         >
-          <div>
+          <div
+            className={`
+              text-left
+            `}
+          >
             <h3
               className={`
               text-3xl
               mb-4
               text-white
               mt-0
-              text-center
               `}
             >
               {t("title")}
@@ -116,7 +119,6 @@ const Contact = () => {
             <p
               className={`
               text-green-light
-              text-center
               p-4
             `}
             >
