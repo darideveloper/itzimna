@@ -144,7 +144,7 @@ const Contact = () => {
             <div>
               <h3
                 className={`
-                text-2xl
+                text-xl
                 mb-4
                 text-white
               `}
@@ -176,7 +176,7 @@ const Contact = () => {
             <div>
               <h3
                 className={`
-                text-2xl
+                text-xl
                 mb-4
                 text-white
               `}
@@ -199,7 +199,7 @@ const Contact = () => {
           <div>
             <h3
               className={`
-              text-2xl
+              text-xl
               mb-2
               text-white
             `}
