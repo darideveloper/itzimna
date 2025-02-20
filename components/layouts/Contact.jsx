@@ -70,12 +70,12 @@ const Contact = () => {
         />
         {/* TODO: Change image */}
         <Image
-          src="/images/hero.webp"
+          src="/images/contact.webp"
           alt="Background"
           fill
           className={`
             object-cover
-            opacity-30
+            opacity-10
           `}
           priority
         />
