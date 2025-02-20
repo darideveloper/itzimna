@@ -10,25 +10,22 @@ import Image from "next/image"
 
 // Components
 import Contact from "@/components/layouts/Contact"
+
+// Data
+import { navLinks } from "@/data/links"
+
+
 export default function Footer() {
 
+  // Translate
   const tMeta = useTranslations("Meta")
-  const tNav = useTranslations("Header.nav")
+  const tNav = useTranslations("General.nav")
   const tFooter = useTranslations("Footer")
-  const links = [
-    {
-      name: tNav("link1"),
-      url: "#last-properties",
-    },
-    {
-      name: tNav("link2"),
-      url: "#featured-properties",
-    },
-    {
-      name: tNav("link3"),
-      url: "#contact",
-    },
-  ]
+
+  const links = navLinks.map((item) => ({
+    name: tNav(item.name),
+    url: item.url,
+  }))
 
   return (
     <footer
@@ -59,7 +56,7 @@ export default function Footer() {
             width={280}
             height={90}
             className={`
-              w-64
+              w-24
               hover:opacity-80
               transition-duration-500
               transition-opacity

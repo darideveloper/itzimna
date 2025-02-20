@@ -16,28 +16,21 @@ import { usePathname } from "next/navigation"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 
+// Data
+import { navLinks } from "@/data/links"
+
 const Header = () => {
   const tMeta = useTranslations("Meta")
-  const tNav = useTranslations("Header.nav")
+  const tNav = useTranslations("General.nav")
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const currentPage = usePathname()
   const homePages = ["/es", "/en"]
   const phoneNumber = "(+52) 9999 07 48 76"
 
-  const links = [
-    {
-      name: tNav("link1"),
-      url: "/#last-properties",
-    },
-    {
-      name: tNav("link2"),
-      url: "/#featured-properties",
-    },
-    {
-      name: tNav("link3"),
-      url: "#contact",
-    },
-  ]
+  const links = navLinks.map((item) => ({
+    name: tNav(item.name),
+    url: item.url,
+  }))
 
   return (
     <div className="relative">

@@ -7,11 +7,11 @@
     "keywords": "some, keywords, here",
     "author": "Itzimna Real State Team"
   },
-  "Header": {
+  "General": {
     "nav": {
-      "link1": "Best Properties",
-      "link2": "Featured Properties",
-      "link3": "Contact",
+      "last": "Best Properties",
+      "featured": "Featured Properties",
+      "contact": "Contact",
       "cta": "Contact Us"
     }
   },
