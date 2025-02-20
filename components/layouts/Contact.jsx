@@ -7,6 +7,8 @@ import { FaMapMarkerAlt } from "react-icons/fa"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
 import IconText from "@/components/ui/IconText"
+import Title from "@/components/ui/Title"
+
 // Libs
 import React from "react"
 import Image from "next/image"
@@ -93,6 +95,7 @@ const Contact = () => {
         grid
         md:grid-cols-2
         gap-12
+        items-center
       `}
       >
         {/* Left column */}
@@ -106,20 +109,21 @@ const Contact = () => {
               text-left
             `}
           >
-            <h3
+            <Title
               className={`
-              text-3xl
-              mb-4
+              !text-5xl
+              !mb-4
               text-white
               mt-0
+              !text-left
               `}
             >
               {t("title")}
-            </h3>
+            </Title>
             <p
               className={`
               text-green-light
-              p-4
+              py-4
             `}
             >
               {t("sub_title")}
