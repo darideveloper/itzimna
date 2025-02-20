@@ -27,11 +27,11 @@ const Header = () => {
   const links = [
     {
       name: tNav("link1"),
-      url: "#last-properties",
+      url: "/#last-properties",
     },
     {
       name: tNav("link2"),
-      url: "#featured-properties",
+      url: "/#featured-properties",
     },
     {
       name: tNav("link3"),
@@ -175,7 +175,7 @@ const Header = () => {
             justify-center 
             flex-1 
             mx-8 
-            z-2
+            z-10
           `}
         >
           <div

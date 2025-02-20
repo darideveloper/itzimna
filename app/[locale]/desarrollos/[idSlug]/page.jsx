@@ -19,7 +19,6 @@ export default async function PropertyDevelopment({ params }) {
   const { idSlug } = await params
   const id = idSlug.split('-')[0]
   const slug = idSlug.split('-').slice(1).join('-')
-  console.log({ id, slug })
 
   // Get cookies
   const cookieStore = await cookies()
@@ -29,7 +28,6 @@ export default async function PropertyDevelopment({ params }) {
 
   // Simulated fetching of property data
   const propertyData = await getProperty(id, accessToken, refreshToken, lang)
-  console.log({ propertyData })
 
   // Redirect to 404 if property not found
   if (!propertyData) {

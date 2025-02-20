@@ -15,7 +15,7 @@ export async function getProperties(page = 1, filterFeatured = false) {
   console.log({propertiesRes, endpoint})
   const propertiesJson = await propertiesRes.json()
   const propertiesData = await propertiesJson.results
-  const count = await propertiesJson.count
+  const pages = await Math.ceil(propertiesJson.count / 8)
 
-  return { propertiesData, count }
+  return { propertiesData, pages }
 }

@@ -42,6 +42,10 @@ export default function CardsSection({
   const [isLoading, setIsLoading] = useState(false)
   const [totalPages, setTotalProperties] = useState(initialTotalProperties)
 
+  useEffect(() => {
+    console.log({ initialData, initialTotalProperties, totalPages })
+  }, [totalPages])
+
   // Refs
   const isFirstRender = useRef(true)
 
@@ -58,7 +62,7 @@ export default function CardsSection({
     setIsLoading(true)
 
     // Update properties data when change page
-    getProperties(page, filterFeatured).then(({ propertiesData, count }) => {
+    getProperties(page, filterFeatured).then(({ propertiesData, pages }) => {
       
       setPropertiesData(propertiesData)
 
@@ -68,8 +72,8 @@ export default function CardsSection({
       }
 
       // Update total properties
-      console.log({ count, propertiesData })
-      setTotalProperties(Math.ceil(count / 8))
+      console.log({ pages, propertiesData })
+      setTotalProperties(pages)
 
       // Hide loading spinner
       setTimeout(() => {

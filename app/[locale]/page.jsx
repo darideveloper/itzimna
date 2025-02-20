@@ -21,7 +21,7 @@ export default async function HomePage() {
         id="last-properties"
         title={t('LastProperties.title')}
         initialData={lastProperties.propertiesData}
-        initialTotalProperties={lastProperties.count / 8}
+        initialTotalProperties={lastProperties.pages}
       />
 
       <CardsSection
@@ -29,7 +29,7 @@ export default async function HomePage() {
         title={t('FeaturedProperties.title')}
         filterFeatured={true}
         initialData={featuredProperties.propertiesData}
-        initialTotalProperties={featuredProperties.count / 8}
+        initialTotalProperties={featuredProperties.pages}
       />
       <Gallery />
     </>
