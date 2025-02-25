@@ -51,6 +51,8 @@ const Contact = () => {
       min-h-[600px]
       bg-green-dark
       text-white
+      mt-28
+      py-16
     `}
       id="contact"
     >
