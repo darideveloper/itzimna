@@ -31,17 +31,30 @@ export default function Input({
   errorMessage,
   rows = 4,
   rules = {},
-  className=''
+  className = ''
 }) {
+
+  const inputStyle = `
+    outline-none focus:outline-none
+    text-white
+    w-full
+    p-3
+    rounded
+    bg-transparent
+    border-2
+    border-white/20 focus:border-white/80
+    duration-200
+  `
+
   return (
-    <div  
+    <div
       className={`
         input-wrapper
         ${className}
       `}
     >
       {label && (
-        <label 
+        <label
           htmlFor={`input-${name}`}
           className={`
             input-label
@@ -51,7 +64,7 @@ export default function Input({
           {label}
         </label>
       )}
-      
+
       {type === 'textarea' ? (
         <textarea
           {...register(name, { required, ...rules })}
@@ -61,14 +74,7 @@ export default function Input({
           rows={rows}
           className={`
             input
-            outline-none focus:outline-none
-            text-white
-            w-full
-            p-3
-            rounded
-            bg-transparent
-            border
-            border-white/40
+            ${inputStyle}
           `}
         />
       ) : (
@@ -80,20 +86,13 @@ export default function Input({
           placeholder={placeholder}
           className={`
             input
-            outline-none focus:outline-none
-            text-white
-            w-full
-            p-3
-            rounded
-            bg-transparent
-            border
-            border-white/40
+            ${inputStyle}
           `}
         />
       )}
-      
+
       {errors[name] && (
-        <p 
+        <p
           role="alert"
           className={`
             error-message
