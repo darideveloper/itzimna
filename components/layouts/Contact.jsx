@@ -49,7 +49,7 @@ const Contact = () => {
       bg-green-dark
       text-white
       mt-28
-      py-16
+      py-8
     `}
       id="contact"
     >
@@ -230,7 +230,8 @@ const Contact = () => {
         {/* Right column - Contact Form */}
         <div
           className={`
-            lg:mt-12          
+            form-wrapper
+            lg:mt-6
           `}
         >
           <form
