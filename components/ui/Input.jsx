@@ -85,7 +85,7 @@ export default function Input({
           id={`input-${name}`}
           placeholder={placeholder}
           className={`
-            input
+            text-area
             ${inputStyle}
           `}
         />

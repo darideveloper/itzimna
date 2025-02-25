@@ -25,10 +25,7 @@ const Contact = () => {
   } = useForm()
 
   const listOffice = [
-    "Office 1",
-    "New Market, Dhaka, Bangladesh",
-    "Office 3",
-    "Office 4",
+    "Yocatán, México",
   ]
   const phone = "(+52) 9999 07 48 76"
   const email = "admin@itzimna.com"
@@ -113,11 +110,11 @@ const Contact = () => {
           >
             <Title
               className={`
-              !text-5xl
-              !mb-4
-              text-white
-              !mt-0
-              !text-left
+                !text-5xl
+                !mb-4
+                text-white
+                !mt-0
+                lg:text-left
               `}
             >
               {t("title")}
@@ -126,6 +123,7 @@ const Contact = () => {
               className={`
               text-green-light
               py-4
+              text-center lg:text-left
             `}
             >
               {t("sub_title")}
@@ -134,16 +132,17 @@ const Contact = () => {
 
           <div
             className={`
+              contact-data
               flex
-            flex-col
-            lg:flex-row
-            justify-between
-            gap-4
-            lg:gap-8
+              flex-col
+              lg:flex-row
+              justify-between
+              gap-8
+              text-center lg:text-left
             `}
           >
             {/* Office section */}
-            <div>
+            <div className="office">
               <h3
                 className={`
                 text-xl
@@ -168,14 +167,19 @@ const Contact = () => {
                     <IconText
                       icon={<FaMapMarkerAlt />}
                       text={office}
-                      className="gap-2"
+                      className={`
+                        gap-2
+                        !text-white
+                        !justify-center lg:justify-start
+                      `}
                     />
                   </li>
                 ))}
               </ul>
             </div>
+
             {/* Customer service agent */}
-            <div>
+            <div className="customer-service">
               <h3
                 className={`
                 text-xl
@@ -196,28 +200,31 @@ const Contact = () => {
                 {phone}
               </a>
             </div>
+
+            {/* Email */}
+            <div className="email">
+              <h3
+                className={`
+                  text-xl
+                  mb-2
+                  text-white
+                `}
+              >
+                {t("email")}
+              </h3>
+              <a
+                href={`mailto:${email}`}
+                className={`
+                  text-green-light
+                  hover:opacity-80
+                `}
+              >
+                {email}
+              </a>
+            </div>
           </div>
 
-          <div>
-            <h3
-              className={`
-              text-xl
-              mb-2
-              text-white
-            `}
-            >
-              {t("email")}
-            </h3>
-            <a
-              href={`mailto:${email}`}
-              className={`
-                text-green-light
-                hover:opacity-80
-              `}
-            >
-              {email}
-            </a>
-          </div>
+
         </div>
 
         {/* Right column - Contact Form */}

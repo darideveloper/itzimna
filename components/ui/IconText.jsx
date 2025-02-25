@@ -18,7 +18,9 @@ export default function IconText({
       className={`
         flex
         items-center
+        justify-start
         ${className}
+        text-green
       `}
     >
       <span
@@ -27,12 +29,14 @@ export default function IconText({
           items-center
           ${iconStyle}
           mr-2
-          text-green
+          text-inherit
         `}
       >
         {icon}
       </span>
-      {text}
+      <span>
+        {text}
+      </span>
     </p>
   )
 }
