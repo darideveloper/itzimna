@@ -5,8 +5,9 @@ import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa"
 
 // Libs
 import { useTranslations } from "next-intl"
-import Link from "next/link"
 import Image from "next/image"
+import TransitionLink from "@/components/utils/TransitionLink"
+import Link from "next/link"
 
 // Components
 import Contact from "@/components/layouts/Contact"
@@ -27,6 +28,24 @@ export default function Footer() {
     url: item.url,
   }))
 
+  const socials = [
+    {
+      name: "Facebook",
+      url: "https://facebook.com",
+      icon: <FaFacebookF />,
+    },
+    {
+      name: "Instagram",
+      url: "https://instagram.com",
+      icon: <FaInstagram />,
+    },
+    {
+      name: "YouTube",
+      url: "https://youtube.com",
+      icon: <FaYoutube />,
+    }
+  ]
+
   return (
     <footer
       className={`
@@ -39,142 +58,151 @@ export default function Footer() {
 
       <div
         className={`
-        flex
-        flex-col
-        items-center
-        py-4
-      `}
-      >
-        <div
-          className={`
-          my-4
-        `}
-        >
-          <Image
-            src="/images/logo.webp"
-            alt={tMeta("title")}
-            width={280}
-            height={90}
-            className={`
-              w-24
-              hover:opacity-80
-              transition-duration-500
-              transition-opacity
-            `}
-          />
-        </div>
-
-        <div
-          className={`
+          bottom
           flex
-          gap-4
-          my-4
-        `}
-        >
-          <Link
-            href="https://facebook.com"
-            aria-label="Facebook"
-            className={`
-              text-white
-              hover:text-green-light
-            `}
-          >
-            <FaFacebookF
-              className={`
-              text-2xl
-            `}
-            />
-          </Link>
-          <Link
-            href="https://instagram.com"
-            aria-label="Instagram"
-            className={`
-              text-white
-              hover:text-green-light
-            `}
-          >
-            <FaInstagram
-              className={`
-              text-2xl
-            `}
-            />
-          </Link>
-          <Link
-            href="https://youtube.com"
-            aria-label="YouTube"
-            className={`
-              text-white
-              hover:text-green-light
-            `}
-          >
-            <FaYoutube
-              className={`
-              text-2xl
-            `}
-            />
-          </Link>
-        </div>
-
-        <nav
-          className={`
-          flex
-          justify-center
-          flex-wrap
-          gap-6
-          my-4
-        `}
-        >
-          {links.map((link, index) => (
-            <Link
-              key={index}
-              href={link.url}
-              className={`
-                text-white
-                hover:text-green-light
-                text-sm
-              `}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-
-        <div
-          className={`
-          bottom-bar
+          flex-col md:flex-row
+          items-center
+          justify-between
+          py-4
+          container
+          gap-8
           w-full
-          py-3
         `}
+      >
+
+        <div 
+          className={`
+            logo-socials
+            left
+            flex
+            flex-col sm:flex-row
+            items-center
+            justify-start
+            gap-0 sm:gap-8
+          `}
         >
-          <p
+          {/* Logo */}
+          <TransitionLink
             className={`
-            copyrigth
-            text-xs
-            text-center
-          `}
+              my-4
+            `}
+            href="/"
           >
-            {tMeta("title")}&nbsp; © {new Date().getFullYear()} - {tFooter("copy")}
-          </p>
-          <p
-            className={`
-            text-xs
-            text-center
-            mt-1
-          `}
-          >
-            Powered by&nbsp;
-            <Link
-              href="https://api.whatsapp.com/send?phone=5214493402622"
-              target="_blank"
+            <Image
+              src="/images/logo.webp"
+              alt={tMeta("title")}
+              width={280}
+              height={90}
               className={`
-                creator-link
-                text-green-light
-                hover:text-white
+                w-28
+                hover:opacity-80
+                transition-duration-500
+                transition-opacity
               `}
+            />
+          </TransitionLink>
+            
+          {/* Socials */}
+          <div
+            className={`
+              socials
+              flex
+              gap-4
+              my-4
+            `}
+          >
+            {
+              socials.map((social, index) => (
+                <Link
+                  key={index}
+                  href={social.url}
+                  aria-label={social.name}
+                  className={`
+                    text-white
+                    duration-300
+                    hover:text-green-light
+                    hover:scale-110
+                    text-3xl
+                  `}
+                  target="_blank"
+                >
+                  {social.icon}
+                </Link>
+              ))
+            }
+          </div>
+        </div>
+
+
+
+        <div
+          className={`
+            texts
+            right
+            flex
+            flex-col
+            items-center
+            justify-center
+          `}  
+        >
+          {/* Nav */}
+          <nav
+            className={`
+              flex
+              justify-center
+              flex-col sm:flex-row
+              gap-6
+              my-4
+            `}
+          >
+            {links.map((link, index) => (
+              <TransitionLink
+                key={index}
+                href={link.url}
+                className={`
+                  text-white
+                  duration-300
+                  hover:text-green-light
+                  text-sm
+                  text-center
+                `}
+              >
+                {link.name}
+              </TransitionLink>
+            ))}
+          </nav>
+
+          {/* Copy */}
+          <div
+            className={`
+            bottom-bar
+            w-full
+            py-3
+          `}
+          >
+            <p
+              className={`
+              copyrigth
+              text-xs
+              text-center
+            `}
             >
-              Dari Dev Team
-            </Link>
-          </p>
+              {tMeta("title")}&nbsp; © {new Date().getFullYear()} - {tFooter("copy")}
+              &nbsp; | Powered by&nbsp;
+              <Link
+                href="https://api.whatsapp.com/send?phone=5214493402622"
+                target="_blank"
+                className={`
+                  creator-link
+                  text-green-light
+                  hover:text-white
+                `}
+              >
+                Dari Dev Team
+              </Link>
+            </p>
+          </div>
+
         </div>
       </div>
     </footer>
