@@ -104,7 +104,7 @@ const Header = () => {
             `}
           >
             {links.map((item) => (
-              <a
+              <TransitionLink
                 key={item.name}
                 href={item.url}
                 className={`
@@ -120,7 +120,7 @@ const Header = () => {
                 onClick={() => setIsDrawerOpen(false)}
               >
                 {item.name}
-              </a>
+              </TransitionLink>
             ))}
           </div>
         </div>

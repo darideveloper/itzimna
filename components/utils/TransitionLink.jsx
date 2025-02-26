@@ -25,8 +25,21 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
 
     if (disable === 'true') return
 
-    // Validate local link
-    if (!href.startsWith('/')) {
+    // Target page from href
+    let hrefNoId = href.split('#')[0].trim()
+
+    // Original page
+    const domain = window.location.origin
+    let currentPage = window.location.href.split('#')[0]
+    currentPage = currentPage.replace(domain, '')
+    currentPage = currentPage.replace("/es", "")
+    currentPage = currentPage.replace("/en", "")
+    if (!currentPage) currentPage = "/"
+
+    // If the link is the same page, but with an anchor
+    // Do not animate
+    console.log({currentPage, hrefNoId, href})
+    if (hrefNoId == "" || (href.includes('#') && hrefNoId === currentPage)) {
       return
     }
 
