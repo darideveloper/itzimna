@@ -8,7 +8,6 @@ import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
 import IconText from "@/components/ui/IconText"
 import Title from "@/components/ui/Title"
-import Image from "next/image"
 
 // Libs
 import { useState } from "react"
@@ -25,7 +24,7 @@ const Contact = () => {
 
   // States
   const [isLoading, setIsLoading] = useState(false)
-  
+
   // Form
   const tForm = useTranslations("Form")
   const {
@@ -84,37 +83,23 @@ const Contact = () => {
       text-white
       mt-28
       py-8
+      overflow-hidden
+      bg-[url('/images/contact.webp')]
+      bg-cover
+      bg-center
+      bg-fixed
     `}
       id="contact"
     >
+
       <div
         className={`
-        absolute
-        inset-0
-      `}
-      >
-        <div
-          className={`
+          overlay-effect
           absolute
           inset-0
-          bg-gradient-to-b
-          from-green-dark
-          to-transparent
-          z-10
+          bg-green-dark/95
         `}
-        />
-        {/* TODO: Change image */}
-        <Image
-          src="/images/contact.webp"
-          alt="Background"
-          fill
-          className={`
-            object-cover
-            opacity-10
-          `}
-          priority
-        />
-      </div>
+      />
 
       {/* Content container */}
       <div
@@ -226,10 +211,10 @@ const Contact = () => {
               <a
                 href={`tel:${phone.replace(/\D/g, "")}`}
                 className={`
-                text-xl
-                text-green-light
-                hover:opacity-80
-              `}
+                  text-xl
+                  text-green-light
+                  hover:opacity-80
+                `}
               >
                 {phone}
               </a>
