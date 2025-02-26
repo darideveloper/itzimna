@@ -23,7 +23,7 @@
     "email_error" : "The email is required",
     "phone" : "Phone",
     "phone_error" : "The phone is required",
-    "phone_invalid" : "The phone length must be 10",
+    "phone_invalid" : "The phone length must be 10 and only numbers",
     "message" : "Message",
     "message_error" : "The message is required",
     "send" : "Send Message"

@@ -22,7 +22,7 @@
     "email_invalid" : "El correo debe tener un formato valido",
     "email_error": "El correo es requerido",
     "phone": "Teléfono",
-    "phone_invalid": "El telfón debe tener 10 digitos",
+    "phone_invalid": "El teléfono debe tener 10 digitos",
     "phone_error": "El teléfono es requerido",
     "message": "Mensaje",
     "message_error": "El mensaje es requerido",
