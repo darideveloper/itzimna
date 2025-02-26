@@ -1,5 +1,17 @@
 import { cookies } from "next/headers"
 
+/**
+ * Fetch using JWT. 
+ * Method to use in server API routes.
+ * 
+ * @param {Request} request - Request object from the server
+ * @param {string} endpoint - API endpoint to fetch
+ * @param {string} method - HTTP method to use
+ * @param {string} body - JSON stringified or boday data to send
+ * @param {string} accessTokenDefault - Default access token
+ * @param {string} refreshTokenDefault - Default refresh token
+ * @param {string} langDefault - Default language
+ */
 export async function fetchJWT(
   request,
   endpoint,
@@ -7,13 +19,12 @@ export async function fetchJWT(
   body,
   accessTokenDefault,
   refreshTokenDefault,
-  langDefault
+  langDefault = "es"
 ) {
   // Env vars
   const apiUser = process.env.API_USER
   const apiPass = process.env.API_PASS
   const apiBaseUrl = process.env.API_BASE_URL
-  const host = process.env.NEXT_PUBLIC_HOST
 
   // get cookies
   const cookieStore = await cookies()

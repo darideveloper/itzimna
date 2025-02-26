@@ -1,6 +1,6 @@
 // Libs
 import { redirect } from "next/navigation"
-import { getPropertiesNames, getProperty } from "@/libs/api/property"
+import { getPropertiesSummaryNames, getProperty } from "@/libs/api/properties"
 import { cookies } from "next/headers"
 import remarkGfm from 'remark-gfm'
 

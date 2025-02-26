@@ -2,7 +2,7 @@
 
 // Libs
 import { useEffect, useState, useRef } from "react"
-import { getProperties } from "@/libs/apiClient"
+import { getPropertiesSummary } from "@/libs/api/properties"
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
@@ -62,7 +62,7 @@ export default function CardsSection({
     setIsLoading(true)
 
     // Update properties data when change page
-    getProperties(page, filterFeatured).then(({ propertiesData, pages }) => {
+    getPropertiesSummary(page, filterFeatured).then(({ propertiesData, pages }) => {
       
       setPropertiesData(propertiesData)
 
@@ -72,7 +72,6 @@ export default function CardsSection({
       }
 
       // Update total properties
-      console.log({ pages, propertiesData })
       setTotalProperties(pages)
 
       // Hide loading spinner

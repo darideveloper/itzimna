@@ -1,3 +1,6 @@
+// Global variables
+const host = process.env.NEXT_PUBLIC_HOST
+
 /**
  * Fetch last properties from local API
  * 
@@ -22,28 +25,28 @@
  * @returns {Number} return.count - Total count of properties
  */
 export async function getPropertiesSummary(page = 1, filterFeatured = false) {
-  const host = process.env.NEXT_PUBLIC_HOST
   let endpoint = `${host}/api/properties?page=${page}`
   if (filterFeatured) {
     endpoint += `&featured=true`
   }
-  const res = await fetch(endpoint)
-  const jsonData = await res.json()
-  const results = await jsonData.results
-  const count = await jsonData.count
+  const propertiesRes = await fetch(endpoint)
+  console.log({propertiesRes, endpoint})
+  const propertiesJson = await propertiesRes.json()
+  const propertiesData = await propertiesJson.results
+  const pages = await Math.ceil(propertiesJson.count / 8)
 
-  return { results, count }
+  return { propertiesData, pages }
 }
 
 /**
- * get all properties names
+ * Get all properties names from local API
  * 
  * @returns {Array} - Properties names (name, id and slug)
  * @returns {String} return[].name - Property name
  * @returns {String} return[].id - Property id
  * @returns {String} return[].slug - Property slug
  */
-export async function getPropertiesNames() {
+export async function getPropertiesSummaryNames() {
 
   /**
    * Get slug from text
@@ -52,7 +55,6 @@ export async function getPropertiesNames() {
    * @returns {String} - Slug
    */
 
-  const host = process.env.NEXT_PUBLIC_HOST
   let endpoint = `${host}/api/properties?page-size=10000&only-names=true`
   const res = await fetch(endpoint)
   const jsonData = await res.json()
@@ -88,7 +90,6 @@ export async function getPropertiesNames() {
  */
 export async function getProperty(id, accessToken, refreshToken, lang) {
   
-  const host = process.env.NEXT_PUBLIC_HOST
   let endpoint = `${host}/api/properties/?details=true&id=${id}`
   const res = await fetch(endpoint, {
     headers: {
