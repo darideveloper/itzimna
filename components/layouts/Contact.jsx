@@ -58,17 +58,17 @@ const Contact = () => {
     // Show alert based in the result
     if (leadSaved) {
       Swal.fire({
-        title: "Gracias por tu mensaje",
-        text: "Te contactaremos a la brevedad",
+        title: t('alerts.success.title'),
+        text: t('alerts.success.text'),
         icon: 'success',
-        confirmButtonText: "Continuar",
+        confirmButtonText: t('alerts.confirm'),
       })
     } else {
       Swal.fire({
-        title: "Error",
-        text: "Ocurrió un error al enviar tu mensaje. Por favor, intenta de nuevo",
+        title: t('alerts.error.title'),
+        text: t('alerts.error.text'),
         icon: 'error',
-        confirmButtonText: "Continuar",
+        confirmButtonText: t('alerts.confirm'),
       })
     }
 

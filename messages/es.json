@@ -33,7 +33,18 @@
     "sub_title": "Rellena el formulario y uno de nuestros asesores se pondrá en contacto contigo.",
     "office": "Oficinas",
     "customer_service": "Atención a clientes",
-    "email": "Correo"
+    "email": "Correo",
+    "alerts": {
+      "success": {
+        "title": "Gracias por tu mensaje",
+        "text": "Te contactaremos a la brevedad"
+      },
+      "error": {
+        "title": "Error al enviar el mensaje",
+        "text": "Por favor intenta de nuevo más tarde"
+      },
+      "confirm": "Continuar"
+    }
   },
   "Footer": {
     "copy": "Todos los derechos reservados. Diseñado por Dari Dev"

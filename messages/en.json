@@ -33,7 +33,18 @@
     "sub_title": "Fill out the form and one of our consultants will contact you.",
     "office": "Offices",
     "customer_service": "Customer service",
-    "email": "Email"
+    "email": "Email",
+    "alerts": {
+      "success": {
+        "title": "Thanks for your message",
+        "text": "We will contact you shortly"
+      },
+      "error": {
+        "title": "Error sending the message",
+        "text": "Please try again later"
+      },
+      "confirm": "Continue"
+    }
   },
   "Footer": {
     "copy": "All rights reserved. Designed by Dari Dev"
