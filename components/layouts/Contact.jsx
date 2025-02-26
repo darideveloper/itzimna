@@ -10,14 +10,21 @@ import IconText from "@/components/ui/IconText"
 import Title from "@/components/ui/Title"
 
 // Libs
-import React from "react"
 import Image from "next/image"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useTranslations } from "next-intl"
 import { saveLead } from "@/libs/api/leads"
 
 const Contact = () => {
+
+  // Translations
   const t = useTranslations("Contact")
+
+  // States
+  const [isLoading, setIsLoading] = useState(false)
+  
+  // Form
   const tForm = useTranslations("Form")
   const {
     register,
@@ -25,14 +32,19 @@ const Contact = () => {
     formState: { errors },
   } = useForm()
 
+  // COntactd ata
   const listOffice = [
     "Yocatán, México",
   ]
   const phone = "(+52) 9999 07 48 76"
   const email = "admin@itzimna.com"
 
+  // Handlers
+
   // Handle form submit (create a new lead with info
   const onSubmit = async (data) => {
+
+    setIsLoading(true)
 
     const leadSaved = await saveLead(
       data.fullName,
@@ -48,6 +60,7 @@ const Contact = () => {
       alert("Error saving lead")
     }
 
+    setIsLoading(false)
   }
 
   return (
@@ -246,8 +259,11 @@ const Contact = () => {
           <form
             onSubmit={handleSubmit(onSubmit)}
             className={`
-            space-y-6
-          `}
+              space-y-6
+              duration-300
+              ${isLoading ? "pointer-events-none" : ""}
+              ${isLoading ? "opacity-50" : ""}
+            `}
           >
             <Input
               name="fullName"
