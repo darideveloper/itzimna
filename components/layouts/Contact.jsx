@@ -8,13 +8,15 @@ import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
 import IconText from "@/components/ui/IconText"
 import Title from "@/components/ui/Title"
+import Image from "next/image"
 
 // Libs
-import Image from "next/image"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useTranslations } from "next-intl"
 import { saveLead } from "@/libs/api/leads"
+import Swal from 'sweetalert2'
+
 
 const Contact = () => {
 
@@ -55,9 +57,19 @@ const Contact = () => {
 
     // Show alert based in the result
     if (leadSaved) {
-      alert("Lead saved")
+      Swal.fire({
+        title: "Gracias por tu mensaje",
+        text: "Te contactaremos a la brevedad",
+        icon: 'success',
+        confirmButtonText: "Continuar",
+      })
     } else {
-      alert("Error saving lead")
+      Swal.fire({
+        title: "Error",
+        text: "Ocurrió un error al enviar tu mensaje. Por favor, intenta de nuevo",
+        icon: 'error',
+        confirmButtonText: "Continuar",
+      })
     }
 
     setIsLoading(false)
