@@ -14,6 +14,7 @@ import React from "react"
 import Image from "next/image"
 import { useForm } from "react-hook-form"
 import { useTranslations } from "next-intl"
+import { saveLead } from "@/libs/api/leads"
 
 const Contact = () => {
   const t = useTranslations("Contact")
@@ -29,16 +30,24 @@ const Contact = () => {
   ]
   const phone = "(+52) 9999 07 48 76"
   const email = "admin@itzimna.com"
+
+  // Handle form submit (create a new lead with info
   const onSubmit = async (data) => {
-    await fetch("/api/form", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      console.log(res)
-    })
+
+    const leadSaved = await saveLead(
+      data.fullName,
+      data.email,
+      data.phone,
+      data.message
+    )
+
+    // Show alert based in the result
+    if (leadSaved) {
+      alert("Lead saved")
+    } else {
+      alert("Error saving lead")
+    }
+
   }
 
   return (

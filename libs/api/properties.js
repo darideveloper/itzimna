@@ -30,7 +30,6 @@ export async function getPropertiesSummary(page = 1, filterFeatured = false) {
     endpoint += `&featured=true`
   }
   const propertiesRes = await fetch(endpoint)
-  console.log({propertiesRes, endpoint})
   const propertiesJson = await propertiesRes.json()
   const propertiesData = await propertiesJson.results
   const pages = await Math.ceil(propertiesJson.count / 8)

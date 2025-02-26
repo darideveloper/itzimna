@@ -42,10 +42,6 @@ export default function CardsSection({
   const [isLoading, setIsLoading] = useState(false)
   const [totalPages, setTotalProperties] = useState(initialTotalProperties)
 
-  useEffect(() => {
-    console.log({ initialData, initialTotalProperties, totalPages })
-  }, [totalPages])
-
   // Refs
   const isFirstRender = useRef(true)
 
