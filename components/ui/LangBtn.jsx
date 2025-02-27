@@ -15,7 +15,7 @@ export default function LangBtn({ className, onClick, children, active }) {
     <button
       className={`
         lang-btn
-        ${active && 'opacity-50'}
+        ${active && 'opacity-50 pointer-events-none'}
         ${fontTitle.className}
         ${className}
       `}

@@ -1,4 +1,5 @@
 "use client"
+
 // Libs
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/routing"
@@ -16,9 +17,15 @@ import Image from "next/image"
  *
  */
 export default function LangSelector({ className }) {
+
+  // Translations
   const t = useTranslations("Langs")
+
+  // Router
   const router = useRouter()
   const langs = ["es", "en"]
+
+  // Get current page and language
   const currentPage = usePathname()
   const currentlang = currentPage.split("/")[1]
   const currentPageNoLang = currentPage.split("/").slice(2).join("/")
@@ -38,9 +45,9 @@ export default function LangSelector({ className }) {
           key={lang}
           icon={false}
           active={currentlang === lang}
-          onClick={() =>
+          onClick={() => {
             router.replace(`/${currentPageNoLang}`, { locale: lang })
-          }
+          }}
           className={`
             px-2
             py-1.5 
@@ -52,6 +59,7 @@ export default function LangSelector({ className }) {
             disabled:bg-white/80
             ${currentlang === lang ? "bg-white/5" : ""}
           `}
+          langChanging={langChanging}
         >
           <div
             className={`
