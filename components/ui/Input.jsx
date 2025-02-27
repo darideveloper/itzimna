@@ -17,6 +17,7 @@ import React from "react"
  * @param {number} rows - Number of rows in the textarea
  * @param {Object} rules - React hook form rules object
  * @param {string} className - Additional classes
+ * @param {string} variant - Input variant (light/dark)
  * @returns {JSX.Element} Input component
  */
 export default function Input({
@@ -31,18 +32,24 @@ export default function Input({
   errorMessage,
   rows = 4,
   rules = {},
-  className = ''
+  className = '',
+  variant = "light"
 }) {
 
   const inputStyle = `
     outline-none focus:outline-none
-    text-white
+    ${variant === "light" ? "text-white" : "text-green"}
     w-full
     p-3
     rounded
     bg-transparent
     border-2
-    border-white/20 focus:border-white/80
+    ${variant === "light" ? 
+        "border-white/20 focus:border-white/80"
+      : 
+        "border-green/40 focus:border-green"} 
+    }
+    
     duration-200
   `
 

@@ -70,5 +70,10 @@
         "development": "Foto del desarrollo"
       }
     }
+  },
+  "PropertySeller": {
+    "phofileImageAlt": "Foto de perfil del vendedor",
+    "send": "Enviar mensaje",
+    "call": "Llamar"
   }
 }

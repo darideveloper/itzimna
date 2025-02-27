@@ -75,18 +75,9 @@
       }
     }
   },
-  "Test": {
-    "card1": {
-      "text": "Test 1",
-      "description": "Test 1 description"
-    },
-    "card2": {
-      "text": "Test 2",
-      "description": "Test 2 description"
-    },
-    "card3": {
-      "text": "Test 3",
-      "description": "Test 3 description"
-    }
+  "PropertySeller": {
+    "phofileImageAlt": "Seller profile picture",
+    "send": "Send message",
+    "call": "Call"
   }
 }
