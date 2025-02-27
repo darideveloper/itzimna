@@ -2,7 +2,6 @@
 
 // Libs
 import { useTranslations } from "next-intl"
-import { useRouter } from "@/i18n/routing"
 import { usePathname } from "next/navigation"
 
 // Components
@@ -22,13 +21,12 @@ export default function LangSelector({ className }) {
   const t = useTranslations("Langs")
 
   // Router
-  const router = useRouter()
   const langs = ["es", "en"]
 
   // Get current page and language
   const currentPage = usePathname()
   const currentlang = currentPage.split("/")[1]
-  const currentPageNoLang = currentPage.split("/").slice(2).join("/")
+  
 
   return (
     <div
@@ -45,21 +43,7 @@ export default function LangSelector({ className }) {
           key={lang}
           icon={false}
           active={currentlang === lang}
-          onClick={() => {
-            router.replace(`/${currentPageNoLang}`, { locale: lang })
-          }}
-          className={`
-            px-2
-            py-1.5 
-            rounded-lg
-            transition-all
-            duration-200
-            bg-white
-            hover:bg-white/80
-            disabled:bg-white/80
-            ${currentlang === lang ? "bg-white/5" : ""}
-          `}
-          langChanging={langChanging}
+          lang={lang}
         >
           <div
             className={`

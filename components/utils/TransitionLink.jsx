@@ -3,6 +3,7 @@
 import { Link } from '@/i18n/routing'
 import { useRouter } from '@/i18n/routing'
 
+
 /**
  * Link with transition effect
  * 
@@ -23,11 +24,14 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
 
   async function handleTransition(e) {
 
+    // Skip if disabled
     if (disable === 'true') return
+
+    // Validate id links
 
     // Target page from href
     let hrefNoId = href.split('#')[0].trim()
-
+  
     // Original page
     const domain = window.location.origin
     let currentPage = window.location.href.split('#')[0]
@@ -38,7 +42,6 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
 
     // If the link is the same page, but with an anchor
     // Do not animate
-    console.log({currentPage, hrefNoId, href})
     if (hrefNoId == "" || (href.includes('#') && hrefNoId === currentPage)) {
       return
     }
@@ -58,9 +61,17 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
     video.currentTime = 0
     video.play()
 
-    // Change page
+    // Redirect
     const old_url = window.location.href
-    router.push(href)
+    if (href == "/es" || href == "/en") {
+      // Change lang if /es or /en
+      const lang = href.replace("/", "")
+      await sleep(3000)
+      router.replace(`/${currentPage}`, { locale: lang })
+    } else {
+      // Regular link (change page)
+      router.push(href)
+    }
 
     // End animation
     while (true) {
@@ -69,13 +80,13 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
         
         // Hide video
         transitionVideoWrapper.classList.remove("play")
-        await sleep(300)
+        await sleep(2000)
         transitionVideoWrapper.classList.add("hidden")
         transitionVideoWrapper.classList.remove("flex")
         
         break
       } else {
-        await sleep(100)
+        await sleep(500)
       }
     }
   }
