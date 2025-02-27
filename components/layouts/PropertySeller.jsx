@@ -4,11 +4,29 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Title from '@/components/ui/Title'
-import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
+import ContactForm from "@/components/ui/ContactForm"
+
+
+// Libs
+import { useTranslations } from 'next-intl'
 
 
 export default function PropertySeller({ name, profileImage, has_whatsapp, phone, email }) {
+  
+  // Translate
+  const t = useTranslations("PropertySeller")
+
+  // Handlers
+
+  /**
+   * Submit form using native submit method
+   */
+  function handleClickSubmit() {
+    const form = document.querySelector('.form-seller')
+    form.submit()
+  }
+  
   return (
     <section
       className={`
@@ -26,7 +44,7 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
       >
         <Image
           src={profileImage}
-          alt={"Photo of seller" + name}
+          alt={t('phofileImageAlt') + " " + name}
           width="100"
           height="100"
           className={`
@@ -79,68 +97,47 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
         has_whatsapp
         &&
         <>
-          <form
-            action=""
+          <ContactForm 
+            onSubmit={data => {
+              console.log({data})
+            }}
+            showSubmitBtn={false}
             className={`
+              form-seller
               my-4
             `}
+            variant="dark"
+          />
+
+          <div
+            className={`
+              buttons
+              flex
+              gap-3
+            `}
           >
-            <input
-              name="name"
-              required={true}
-              placeholder="Nombre"
-              type="text"
-            />
-
-            <input
-              name="phone"
-              required={true}
-              placeholder="Phone"
-              type="tel"
-            />
-
-            <input
-              name="email"
-              required={true}
-              placeholder="Email"
-              type="email"
-            />
-
-            <textarea
-              name="message"
-              required={true}
-              placeholder="Message"
-            />
-
-            <div
+            <Button
               className={`
-                buttons
-                flex
-                gap-3
+                w-1/2
               `}
+              onClick={handleClickSubmit}
+              variant="ghost"
             >
-              <input
-                name="email"
-                value="Enviar mensaje"
-                type="submit"
-                className={`
-                  w-1/2
-                `}
-              />
+              {t('send')}
+            </Button>
 
-              <Button
-                className={`
-                  whatsapp
-                  text-xl
-                  text-center
-                  w-1/2
-                `}
-                href={`https://wa.me/${phone}`}
-              >
-                WhatsApp
-              </Button>
-            </div>
-          </form>
+            <Button
+              className={`
+                whatsapp
+                text-xl
+                text-center
+                w-1/2
+              `}
+              href={`https://wa.me/${phone}`}
+            >
+              WhatsApp
+            </Button>
+          </div>
 
         </>
       }
@@ -156,7 +153,7 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
         href={`tel:${phone}`}
         variant="ghost-green"
       >
-        Call
+        {t('call')}
       </Button>
     </section>
   )

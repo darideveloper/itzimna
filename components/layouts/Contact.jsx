@@ -4,14 +4,11 @@
 import { FaMapMarkerAlt } from "react-icons/fa"
 
 // Components
-import Button from "@/components/ui/Button"
-import Input from "@/components/ui/Input"
 import IconText from "@/components/ui/IconText"
 import Title from "@/components/ui/Title"
+import ContactForm from "@/components/ui/ContactForm"
 
 // Libs
-import { useState } from "react"
-import { useForm } from "react-hook-form"
 import { useTranslations } from "next-intl"
 import { saveLead } from "@/libs/api/leads"
 import Swal from 'sweetalert2'
@@ -21,17 +18,6 @@ const Contact = () => {
 
   // Translations
   const t = useTranslations("Contact")
-
-  // States
-  const [isLoading, setIsLoading] = useState(false)
-
-  // Form
-  const tForm = useTranslations("Form")
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
 
   // COntactd ata
   const listOffice = [
@@ -44,8 +30,6 @@ const Contact = () => {
 
   // Handle form submit (create a new lead with info
   const onSubmit = async (data) => {
-
-    setIsLoading(true)
 
     const leadSaved = await saveLead(
       data.fullName,
@@ -70,8 +54,6 @@ const Contact = () => {
         confirmButtonText: t('alerts.confirm'),
       })
     }
-
-    setIsLoading(false)
   }
 
   return (
@@ -81,7 +63,6 @@ const Contact = () => {
       min-h-[600px]
       bg-green-dark
       text-white
-      mt-28
       py-8
       overflow-hidden
       bg-[url('/images/contact.webp')]
@@ -253,84 +234,9 @@ const Contact = () => {
             lg:mt-6
           `}
         >
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className={`
-              space-y-6
-              duration-300
-              ${isLoading ? "pointer-events-none" : ""}
-              ${isLoading ? "opacity-50" : ""}
-            `}
-          >
-            <Input
-              name="fullName"
-              register={register}
-              required={true}
-              errors={errors}
-              placeholder={tForm("name")}
-              errorMessage={tForm("name_error")}
-              rules={{
-                required: tForm("name_error"),
-              }}
-            />
-
-            <Input
-              name="email"
-              type="email"
-              register={register}
-              required={true}
-              errors={errors}
-              placeholder={tForm("email")}
-              errorMessage={
-                errors.email?.type === "pattern"
-                  ? tForm("email_invalid")
-                  : tForm("email_error")
-              }
-              rules={{
-                required: tForm("email_error"),
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: tForm("email_invalid"),
-                },
-              }}
-            />
-
-            <Input
-              name="phone"
-              type="tel"
-              register={register}
-              required={true}
-              errors={errors}
-              placeholder={tForm("phone")}
-              errorMessage={
-                errors.phone?.type === "pattern"
-                  ? tForm("phone_invalid")
-                  : tForm("phone_error")
-              }
-              rules={{
-                required: tForm("phone_error"),
-                pattern: {
-                  value: /^[0-9]{10}$/,
-                },
-              }}
-            />
-
-            <Input
-              name="message"
-              type="textarea"
-              register={register}
-              required={true}
-              errors={errors}
-              placeholder={tForm("message")}
-              errorMessage={tForm("message_error")}
-              rows={4}
-              rules={{
-                required: tForm("message_error"),
-              }}
-            />
-
-            <Button>{tForm("send")}</Button>
-          </form>
+          <ContactForm
+            onSubmit={onSubmit}
+          />          
         </div>
       </div>
     </section>
