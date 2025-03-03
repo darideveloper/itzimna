@@ -1,11 +1,12 @@
 "use client"
 //Libs
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { getPropertiesSummaryNames } from "@/libs/api/properties"
 
 /**
  * A search bar component with autocomplete functionality using property names from API.
+ * Enhanced with keyboard navigation for suggestions.
  *
  * @param {object} props - Props object
  * @param {string} [props.placeholder="Search..."] - Placeholder text
@@ -19,6 +20,10 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
   const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1)
+
+  const suggestionsRef = useRef(null)
+  const inputRef = useRef(null)
 
   // Fetch suggestions when search term changes
   useEffect(() => {
@@ -36,6 +41,8 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
 
           setSuggestions(filteredProperties)
           setShowSuggestions(filteredProperties.length > 0)
+          // Reset selection index when suggestions change
+          setSelectedSuggestionIndex(-1)
         } catch (error) {
           console.error("Error fetching property names:", error)
           setSuggestions([])
@@ -45,6 +52,7 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
       } else {
         setSuggestions([])
         setShowSuggestions(false)
+        setSelectedSuggestionIndex(-1)
       }
     }
 
@@ -52,11 +60,58 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
     return () => clearTimeout(timeoutId)
   }, [searchTerm])
 
+  // Scroll selected suggestion into view
+  useEffect(() => {
+    if (selectedSuggestionIndex >= 0 && suggestionsRef.current) {
+      const suggestionElements =
+        suggestionsRef.current.querySelectorAll(".suggestion-item")
+      if (suggestionElements[selectedSuggestionIndex]) {
+        suggestionElements[selectedSuggestionIndex].scrollIntoView({
+          block: "nearest",
+          behavior: "smooth",
+        })
+      }
+    }
+  }, [selectedSuggestionIndex])
+
   // Handle suggestion selection
   const handleSuggestionClick = (property) => {
     setSearchTerm(property.name)
     setShowSuggestions(false)
     onSearch(property) // Pass the entire property object to the parent
+  }
+
+  // Handle keyboard navigation
+  const handleKeyDown = (e) => {
+    if (!showSuggestions || suggestions.length === 0) return
+
+    // Arrow Down
+    if (e.key === "ArrowDown") {
+      e.preventDefault()
+      setSelectedSuggestionIndex((prev) =>
+        prev < suggestions.length - 1 ? prev + 1 : prev
+      )
+    }
+
+    // Arrow Up
+    else if (e.key === "ArrowUp") {
+      e.preventDefault()
+      setSelectedSuggestionIndex((prev) => (prev > 0 ? prev - 1 : 0))
+    }
+
+    // Enter
+    else if (e.key === "Enter" && selectedSuggestionIndex >= 0) {
+      e.preventDefault()
+      const selectedProperty = suggestions[selectedSuggestionIndex]
+      handleSuggestionClick(selectedProperty)
+    }
+
+    // Escape
+    else if (e.key === "Escape") {
+      setShowSuggestions(false)
+      setSelectedSuggestionIndex(-1)
+      inputRef.current?.blur()
+    }
   }
 
   // Handle form submission
@@ -76,6 +131,19 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
     }
   }
 
+  // Handle input focus
+  const handleFocus = () => {
+    if (suggestions.length > 0) {
+      setShowSuggestions(true)
+    }
+  }
+
+  // Handle input blur
+  const handleBlur = () => {
+    // Delay hiding suggestions to allow for click events on the suggestions
+    setTimeout(() => setShowSuggestions(false), 200)
+  }
+
   return (
     <div
       className={`search-wrapper 
@@ -85,12 +153,14 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
     >
       <form onSubmit={handleSubmit}>
         <input
+          ref={inputRef}
           type="text"
           placeholder={placeholder || "Search..."}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onFocus={() => setShowSuggestions(suggestions.length > 0)}
-          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
           className={`
             outline-none 
             focus:outline-none 
@@ -103,7 +173,7 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
             border-white/20 
             focus:border-white/80 
             duration-200
-            `}
+          `}
         />
       </form>
 
@@ -153,6 +223,7 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
       {/* Suggestions Dropdown */}
       {showSuggestions && (
         <div
+          ref={suggestionsRef}
           className={`
             absolute 
             top-full 
@@ -166,10 +237,9 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
             rounded-sm 
             shadow-lg 
             max-h-60 
-            overflow-y-auto
-          `}
+            overflow-y-auto`}
         >
-          {suggestions.map((property) => (
+          {suggestions.map((property, index) => (
             <div
               key={property.id}
               className={`
@@ -178,8 +248,11 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
                 text-left 
                 text-gray-800 
                 hover:bg-gray-100 
-                cursor-pointer`}
+                cursor-pointer
+                suggestion-item
+                ${selectedSuggestionIndex === index ? "bg-gray-100" : ""}`}
               onMouseDown={() => handleSuggestionClick(property)}
+              onMouseEnter={() => setSelectedSuggestionIndex(index)}
             >
               {property.name}
             </div>
