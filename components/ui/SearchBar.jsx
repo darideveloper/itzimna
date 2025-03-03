@@ -1,8 +1,9 @@
 "use client"
-//Libs
 
+//Libs
 import { useState, useEffect, useRef } from "react"
 import { getPropertiesSummaryNames } from "@/libs/api/properties"
+import TransitionLink from "../utils/TransitionLink"
 
 /**
  * A search bar component with autocomplete functionality using property names from API.
@@ -78,7 +79,8 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
   const handleSuggestionClick = (property) => {
     setSearchTerm(property.name)
     setShowSuggestions(false)
-    onSearch(property) // Pass the entire property object to the parent
+    onSearch(property) // Still call onSearch for backward compatibility
+    // The actual navigation is handled by TransitionLink
   }
 
   // Handle keyboard navigation
@@ -104,6 +106,12 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
       e.preventDefault()
       const selectedProperty = suggestions[selectedSuggestionIndex]
       handleSuggestionClick(selectedProperty)
+      // Programmatically trigger the TransitionLink for the selected item
+      const linkElement =
+        suggestionsRef.current.querySelectorAll("a")[selectedSuggestionIndex]
+      if (linkElement) {
+        linkElement.click()
+      }
     }
 
     // Escape
@@ -125,6 +133,16 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
 
       if (matchingProperty) {
         onSearch(matchingProperty)
+        // If there's a matching property, trigger its TransitionLink
+        const index = suggestions.findIndex((p) => p.id === matchingProperty.id)
+        if (index >= 0) {
+          const linkElement =
+            suggestionsRef.current.querySelectorAll("a")[index]
+          if (linkElement) {
+            linkElement.click()
+            return
+          }
+        }
       } else {
         onSearch({ name: searchTerm })
       }
@@ -146,10 +164,12 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
 
   return (
     <div
-      className={`search-wrapper 
-      relative 
-      flex-grow 
-      ${className}`}
+      className={`
+        search-wrapper 
+        relative 
+        flex-grow 
+        ${className}
+      `}
     >
       <form onSubmit={handleSubmit}>
         <input
@@ -237,12 +257,18 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
             rounded-sm 
             shadow-lg 
             max-h-60 
-            overflow-y-auto`}
+            overflow-y-auto
+          `}
         >
           {suggestions.map((property, index) => (
-            <div
+            <TransitionLink
               key={property.id}
-              className={`
+              href={`/desarrollos/${property.id}-${property.slug}`}
+              className="block"
+              onClick={() => handleSuggestionClick(property)}
+            >
+              <div
+                className={`
                 px-4 
                 py-2 
                 text-left 
@@ -251,11 +277,11 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
                 cursor-pointer
                 suggestion-item
                 ${selectedSuggestionIndex === index ? "bg-gray-100" : ""}`}
-              onMouseDown={() => handleSuggestionClick(property)}
-              onMouseEnter={() => setSelectedSuggestionIndex(index)}
-            >
-              {property.name}
-            </div>
+                onMouseEnter={() => setSelectedSuggestionIndex(index)}
+              >
+                {property.name}
+              </div>
+            </TransitionLink>
           ))}
         </div>
       )}

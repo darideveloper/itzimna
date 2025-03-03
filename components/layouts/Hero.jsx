@@ -8,6 +8,7 @@ import Title from "@/components/ui/Title"
 import Button from "@/components/ui/Button"
 import Select from "@/components/ui/Select"
 import SearchBar from "@/components/ui/SearchBar"
+import TransitionLink from "../utils/TransitionLink"
 
 const HeroSection = ({ id = "hero", className = "" }) => {
   const t = useTranslations("Home.HeroSection")
