@@ -117,7 +117,10 @@ export default async function PropertyDevelopment({ params }) {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               children={propertyData.description}
-              className="markdown"
+              className={`
+                markdown
+                text-center md:text-left
+              `}
             />
           </InfoCard>
         </div>
