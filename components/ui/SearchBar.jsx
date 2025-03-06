@@ -11,156 +11,55 @@ import TransitionLink from "../utils/TransitionLink"
  *
  * @param {object} props - Props object
  * @param {string} [props.placeholder="Search..."] - Placeholder text
- * @param {function} props.onSearch - Function to run when search is submitted
  * @param {string} [props.className=""] - Additional classes
  *
  * @returns {JSX.Element} Search bar component
  */
-const SearchBar = ({ placeholder, onSearch, className = "" }) => {
+const SearchBar = ({ placeholder, className = "" }) => {
   const [searchTerm, setSearchTerm] = useState("")
+  const [options, setOptions] = useState([])
   const [suggestions, setSuggestions] = useState([])
-  const [showSuggestions, setShowSuggestions] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1)
 
   const suggestionsRef = useRef(null)
   const inputRef = useRef(null)
 
-  // Fetch suggestions when search term changes
   useEffect(() => {
+    // Load options on initial render
     const fetchSuggestions = async () => {
-      if (searchTerm.length > 1) {
-        setIsLoading(true)
-        try {
-          // Get properties from API
-          const properties = await getPropertiesSummaryNames()
-
-          // Filter properties based on search term
-          const filteredProperties = properties.filter((property) =>
-            property.name.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-
-          setSuggestions(filteredProperties)
-          setShowSuggestions(filteredProperties.length > 0)
-          // Reset selection index when suggestions change
-          setSelectedSuggestionIndex(-1)
-        } catch (error) {
-          console.error("Error fetching property names:", error)
-          setSuggestions([])
-        } finally {
-          setIsLoading(false)
-        }
-      } else {
-        setSuggestions([])
-        setShowSuggestions(false)
-        setSelectedSuggestionIndex(-1)
+      setIsLoading(true)
+      try {
+        const properties = await getPropertiesSummaryNames()
+        setOptions(properties)
+      } catch (error) {
+        console.error("Error fetching property names:", error)
+        options([])
+      } finally {
+        setIsLoading(false)
       }
     }
+    fetchSuggestions()
+  }, [])
 
-    const timeoutId = setTimeout(fetchSuggestions, 300)
-    return () => clearTimeout(timeoutId)
-  }, [searchTerm])
-
-  // Scroll selected suggestion into view
+  // Monitor options and suggestions
   useEffect(() => {
-    if (selectedSuggestionIndex >= 0 && suggestionsRef.current) {
-      const suggestionElements =
-        suggestionsRef.current.querySelectorAll(".suggestion-item")
-      if (suggestionElements[selectedSuggestionIndex]) {
-        suggestionElements[selectedSuggestionIndex].scrollIntoView({
-          block: "nearest",
-          behavior: "smooth",
-        })
-      }
-    }
-  }, [selectedSuggestionIndex])
+    console.log({ options, suggestions})
+  }, [options, suggestions])
 
-  // Handle suggestion selection
-  const handleSuggestionClick = (property) => {
-    setSearchTerm(property.name)
-    setShowSuggestions(false)
-    onSearch(property) // Still call onSearch for backward compatibility
-    // The actual navigation is handled by TransitionLink
-  }
+  // Update suggestions based on search term
+  useEffect(() => {
 
-  // Handle keyboard navigation
-  const handleKeyDown = (e) => {
-    if (!showSuggestions || suggestions.length === 0) return
-
-    // Arrow Down
-    if (e.key === "ArrowDown") {
-      e.preventDefault()
-      setSelectedSuggestionIndex((prev) =>
-        prev < suggestions.length - 1 ? prev + 1 : prev
-      )
+    // If search term is empty, clear suggestions
+    if (searchTerm.trim() === "") {
+      setSuggestions([])
+      return
     }
 
-    // Arrow Up
-    else if (e.key === "ArrowUp") {
-      e.preventDefault()
-      setSelectedSuggestionIndex((prev) => (prev > 0 ? prev - 1 : 0))
-    }
-
-    // Enter
-    else if (e.key === "Enter" && selectedSuggestionIndex >= 0) {
-      e.preventDefault()
-      const selectedProperty = suggestions[selectedSuggestionIndex]
-      handleSuggestionClick(selectedProperty)
-      // Programmatically trigger the TransitionLink for the selected item
-      const linkElement =
-        suggestionsRef.current.querySelectorAll("a")[selectedSuggestionIndex]
-      if (linkElement) {
-        linkElement.click()
-      }
-    }
-
-    // Escape
-    else if (e.key === "Escape") {
-      setShowSuggestions(false)
-      setSelectedSuggestionIndex(-1)
-      inputRef.current?.blur()
-    }
-  }
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (searchTerm.trim()) {
-      // If there's a matching suggestion, use that; otherwise just use the search term
-      const matchingProperty = suggestions.find(
-        (p) => p.name.toLowerCase() === searchTerm.toLowerCase()
-      )
-
-      if (matchingProperty) {
-        onSearch(matchingProperty)
-        // If there's a matching property, trigger its TransitionLink
-        const index = suggestions.findIndex((p) => p.id === matchingProperty.id)
-        if (index >= 0) {
-          const linkElement =
-            suggestionsRef.current.querySelectorAll("a")[index]
-          if (linkElement) {
-            linkElement.click()
-            return
-          }
-        }
-      } else {
-        onSearch({ name: searchTerm })
-      }
-    }
-  }
-
-  // Handle input focus
-  const handleFocus = () => {
-    if (suggestions.length > 0) {
-      setShowSuggestions(true)
-    }
-  }
-
-  // Handle input blur
-  const handleBlur = () => {
-    // Delay hiding suggestions to allow for click events on the suggestions
-    setTimeout(() => setShowSuggestions(false), 200)
-  }
+    // Filter options based on search term in name
+    const regex = new RegExp(searchTerm, "i")
+    const filteredSuggestions = options.filter((property) => regex.test(property.name))
+    setSuggestions(filteredSuggestions)
+  }, [searchTerm])
 
   return (
     <div
@@ -171,31 +70,26 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
         ${className}
       `}
     >
-      <form onSubmit={handleSubmit}>
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder={placeholder || "Search..."}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
-          className={`
-            outline-none 
-            focus:outline-none 
-            text-white 
-            w-full 
-            p-3 
-            rounded 
-            bg-transparent 
-            border-2 
-            border-white/20 
-            focus:border-white/80 
-            duration-200
-          `}
-        />
-      </form>
+      <input
+        ref={inputRef}
+        type="text"
+        placeholder={placeholder || "Search..."}
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className={`
+          outline-none 
+          focus:outline-none 
+          text-white 
+          w-full 
+          p-3 
+          rounded 
+          bg-transparent 
+          border-2 
+          border-white/20 
+          focus:border-white/80 
+          duration-200
+        `}
+      />
 
       {/* Search Icon */}
       <div
@@ -241,7 +135,7 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
       </div>
 
       {/* Suggestions Dropdown */}
-      {showSuggestions && (
+      {suggestions && (
         <div
           ref={suggestionsRef}
           className={`
@@ -265,22 +159,8 @@ const SearchBar = ({ placeholder, onSearch, className = "" }) => {
               key={property.id}
               href={`/desarrollos/${property.id}-${property.slug}`}
               className="block"
-              onClick={() => handleSuggestionClick(property)}
             >
-              <div
-                className={`
-                px-4 
-                py-2 
-                text-left 
-                text-gray-800 
-                hover:bg-gray-100 
-                cursor-pointer
-                suggestion-item
-                ${selectedSuggestionIndex === index ? "bg-gray-100" : ""}`}
-                onMouseEnter={() => setSelectedSuggestionIndex(index)}
-              >
-                {property.name}
-              </div>
+              {property.name}
             </TransitionLink>
           ))}
         </div>
