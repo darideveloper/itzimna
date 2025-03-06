@@ -37,7 +37,6 @@ export default function PropertyCard({
   href,
   className,
 }) {
-
   const t = useTranslations("PropertyCard")
 
   return (

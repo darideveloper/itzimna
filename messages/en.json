@@ -65,7 +65,8 @@
     },
     "HeroSection": {
       "title": "Discover Your Perfect Luxury Property",
-      "description": "Explore an exclusive collection of premium properties in the most desirable locations. From modern penthouses to waterfront estates."
+      "description": "Explore an exclusive collection of premium properties in the most desirable locations. From modern penthouses to waterfront estates.",
+      "searchPlaceholder": "Search Properties"
     },
     "GallerySection": {
       "title": "Best Developments",

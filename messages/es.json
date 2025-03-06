@@ -61,7 +61,8 @@
     "FeaturedProperties": { "title": "Desarrollos destacados en yucatan" },
     "HeroSection": {
       "title": "Descubre tu propiedad perfecta de lujo",
-      "description": "Explora una colección exclusiva de propiedades en los mejores lugares. Desde casas modernas hasta estaciones marinas."
+      "description": "Explora una colección exclusiva de propiedades en los mejores lugares. Desde casas modernas hasta estaciones marinas.",
+      "searchPlaceholder": "Buscar propiedades"
     },
     "GallerySection": {
       "title": "Mejores desarrollos",
