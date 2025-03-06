@@ -34,7 +34,11 @@ export default function IconText({
       >
         {icon}
       </span>
-      <span>
+      <span
+        className={`
+          capitalize
+        `}
+      >
         {text}
       </span>
     </p>

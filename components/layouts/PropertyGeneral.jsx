@@ -133,7 +133,7 @@ export default function PropertyGeneral({
                 icon={<FaTag className="text-white" />}
                 text={category}
                 iconStyle="h-4 w-4"
-                className="inline"
+                className="inline text-white"
               />
             </Badge>
           </div>
