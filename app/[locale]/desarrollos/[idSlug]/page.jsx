@@ -80,7 +80,7 @@ export default async function PropertyDevelopment({ params }) {
           details-page
           container
           flex
-          flex-col-reverse lg:flex-row
+          flex-col lg:flex-row
           justify-between
           items-start
           gap-8
@@ -130,6 +130,8 @@ export default async function PropertyDevelopment({ params }) {
           className={`
             mx-auto
             max-w-xl
+            lg:sticky
+            lg:top-12
           `}
         >
           <PropertySeller
