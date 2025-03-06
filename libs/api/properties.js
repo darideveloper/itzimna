@@ -86,6 +86,8 @@ export async function getPropertiesSummaryNames() {
  * @returns {String} return.propertiesData[].seller - Property seller name
  * @returns {String} return.propertiesData[].short_description - Property short description
  * @returns {String} return.propertiesData[].slug - Property slug from name
+ * @returns {String} return.propertiesData[].google_maps_src - Google maps iframe src
+ * @returns {String} return.propertiesData[].updated_at - Updated at date (timestamp)
  */
 export async function getProperty(id, accessToken, refreshToken, lang) {
   

@@ -101,7 +101,7 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
         <>
           <ContactForm 
             onSubmit={data => {
-              console.log({data})
+              ({data})
             }}
             showSubmitBtn={false}
             className={`

@@ -42,6 +42,13 @@ export async function GET(request) {
     lang
   )
 
+  // // Debug
+  // // Save html error response in a local temp html file
+  // const htmlError = await apiResponse.text()
+  // if (!apiResponse.ok) {
+  //   console.error('Error:', htmlError)
+  // }
+
   // Return formatted response
   const data = await apiResponse.json()
   return new Response(JSON.stringify(data), {

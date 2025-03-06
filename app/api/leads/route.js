@@ -15,9 +15,7 @@ export async function POST(request) {
   }
 
   // Get post json data
-  console.log("getting json data")
   const jsonData = await request.json()
-  console.log({jsonData})
 
   const apiResponse = await fetchJWT(
     request,

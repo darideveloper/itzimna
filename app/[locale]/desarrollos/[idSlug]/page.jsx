@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation"
 import { getProperty } from "@/libs/api/properties"
 import { cookies } from "next/headers"
+import { getTranslations } from 'next-intl/server'
 import remarkGfm from 'remark-gfm'
 
 // Components
@@ -17,22 +18,53 @@ import '@/css/markdown.sass'
 
 export default async function PropertyDevelopment({ params }) {
 
-  const { idSlug } = await params
-  const id = idSlug.split('-')[0]
-  // const slug = idSlug.split('-').slice(1).join('-')
-
+  // return (
+  //   <p>Hello world</p>
+  // )
+  
   // Get cookies
   const cookieStore = await cookies()
   const accessToken = cookieStore.get('accessToken')?.value || ''
   const refreshToken = cookieStore.get('refreshToken')?.value || ''
   const lang = cookieStore.get("NEXT_LOCALE")?.value || 'es'
 
-  // Simulated fetching of property data
+  // Get property data
+  const { idSlug } = await params
+  const id = idSlug.split('-')[0]
   const propertyData = await getProperty(id, accessToken, refreshToken, lang)
 
   // Redirect to 404 if property not found
   if (!propertyData) {
     redirect(`../../404`)
+  }
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': propertyData.name,
+    'description': propertyData.short_description,
+    'datePublished': propertyData.updated_at,
+    'author': {
+      '@type': 'Person',
+      'name': `${propertyData.seller.first_name} ${propertyData.seller.last_name}`,
+    },
+    'keywords': propertyData.name.split(' ') + "," + propertyData.category + ',' + propertyData.location.split(' '),
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'Itzamna',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': `${process.env.NEXT_PUBLIC_HOST}/images/logo.webp`,
+      },
+    },
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`,
+    },
+    'image': {
+      '@type': 'ImageObject',
+      'url': propertyData.banner.url,
+    },
   }
 
   return (
@@ -43,6 +75,12 @@ export default async function PropertyDevelopment({ params }) {
         relative
       `}
     >
+
+      {/* Render json ld */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       {/* paralax bg */}
       <Image 
@@ -147,4 +185,64 @@ export default async function PropertyDevelopment({ params }) {
     </div>
 
   )
+}
+
+
+export async function generateMetadata({ params }) {
+
+  const { locale, idSlug } = await params
+  const t = await getTranslations({ locale: locale, namespace: 'Meta' })
+
+  
+  // Get property data
+  const id = idSlug.split('-')[0]
+  const propertyData = await getProperty(id, "", "", locale)
+
+  // Default post data
+  if (!propertyData) {
+    propertyData = {
+      title: 'Dessarrollo',
+      description: 'Dessarrollo',
+      lang: locale,
+      keywords: 'Dessarrollo',
+      author: "Itzamna",
+    }
+  }
+
+  const image = {
+    url: propertyData.banner.url,
+    width: 1200,
+    height: 720,
+    alt: propertyData.title,
+  }
+
+  return {
+    title: propertyData.name + ' | ' + t('title'),
+    description: propertyData.short_description,
+    lang: locale,
+    keywords: propertyData.name.split(' ') + "," + propertyData.category + ',' + propertyData.location.split(' '),
+    authors: [
+      { "name": propertyData.seller.first_name + ' ' + propertyData.seller.last_name },
+    ],
+    
+    // Open Graph metadata
+    openGraph: {
+      title: propertyData.name + ' | ' + t('title'),
+      description: propertyData.short_description,
+      url: `${process.env.NEXT_PUBLIC_HOST}/${locale}/desarrollos/${idSlug}`,
+      siteName: t('title'),
+      images: [image],
+      locale,
+      type: "website",
+    },
+
+    // Twitter metadata
+    twitter: {
+      card: "summary_large_image",
+      title: t('title') + ' | ' + propertyData.name,
+      description: propertyData.short_description,
+      images: [image],
+      creator: "@DeveloperDari",
+    },
+  }
 }
