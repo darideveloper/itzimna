@@ -24,7 +24,7 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
    */
   function handleClickSubmit() {
     const form = document.querySelector('.form-seller')
-    form.submit()
+    form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }))
   }
   
   return (
@@ -121,7 +121,7 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
                 w-1/2
               `}
               onClick={handleClickSubmit}
-              variant="ghost"
+              variant="ghost-green"
             >
               {t('send')}
             </Button>

@@ -101,7 +101,7 @@ export default async function PropertyDevelopment({ params }) {
           <section
             className={`
               general
-              bg-grey/80
+              bg-grey
               w-full
               rounded-lg
               p-12
@@ -122,7 +122,7 @@ export default async function PropertyDevelopment({ params }) {
           <section
             className={`
               details
-              bg-grey/80
+              bg-grey
               rounded-lg
               p-12
             `}
@@ -141,10 +141,12 @@ export default async function PropertyDevelopment({ params }) {
         <div
           className={`
             right
-            bg-grey/80
+            bg-grey
             w-full lg:w-4/12
             rounded-lg
             p-12
+            max-w-2xl
+            mx-auto
           `}
         >
           <PropertySeller

@@ -146,7 +146,7 @@ export default function PropertyGeneral({
       <div
         className={`
           border-t
-          border-gray-200
+          border-green
           pt-4
           my-4
           mx-auto
