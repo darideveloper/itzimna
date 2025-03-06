@@ -18,10 +18,6 @@ import '@/css/markdown.sass'
 
 export default async function PropertyDevelopment({ params }) {
 
-  // return (
-  //   <p>Hello world</p>
-  // )
-  
   // Get cookies
   const cookieStore = await cookies()
   const accessToken = cookieStore.get('accessToken')?.value || ''
@@ -178,6 +174,9 @@ export default async function PropertyDevelopment({ params }) {
             has_whatsapp={propertyData.seller.has_whatsapp}
             phone={propertyData.seller.phone}
             email={propertyData.seller.email}
+            whatsapp={propertyData.seller.whatsapp}
+            propertyName={propertyData.name}
+            propertyId={propertyData.id}
           />
         </InfoCard>
 

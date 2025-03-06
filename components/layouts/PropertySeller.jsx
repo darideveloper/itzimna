@@ -11,8 +11,30 @@ import ContactForm from "@/components/ui/ContactForm"
 // Libs
 import { useTranslations } from 'next-intl'
 
-
-export default function PropertySeller({ name, profileImage, has_whatsapp, phone, email }) {
+/**
+ * Property seller layout
+ * 
+ * @param {Object} props - Property seller data
+ * @param {String} props.name - Seller name
+ * @param {String} props.profileImage - Seller profile image URL
+ * @param {Boolean} props.has_whatsapp - Seller has whatsapp
+ * @param {String} props.phone - Seller phone number
+ * @param {String} props.email - Seller email
+ * @param {String} props.whatsapp - Seller whatsapp link
+ * @param {String} props.propertyName - Property name 
+ * @param {String} props.propertyId - Property ID
+ * 
+ */
+export default function PropertySeller({
+  name,
+  profileImage,
+  has_whatsapp=false,
+  phone,
+  email,
+  whatsapp="",
+  propertyName,
+  propertyId
+}) {
   
   // Translate
   const t = useTranslations("PropertySeller")
@@ -101,7 +123,22 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
         <>
           <ContactForm 
             onSubmit={data => {
-              ({data})
+
+              let whatsappTemplate = t(
+                'whatsappTemplate',
+                {
+                  name: data.fullName.toUpperCase(),
+                  email: data.email,
+                  phone: data.phone,
+                  message: data.message,
+                  property: propertyName,
+                  key: propertyId
+                }
+              )
+
+              // Generate full whstapp link
+              const whatsappFullLink = whatsapp + "?text=" + encodeURI(whatsappTemplate)
+              window.open(whatsappFullLink, '_blank')
             }}
             showSubmitBtn={false}
             className={`

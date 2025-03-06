@@ -78,6 +78,7 @@
   "PropertySeller": {
     "phofileImageAlt": "Seller profile picture",
     "send": "Send message",
-    "call": "Call"
+    "call": "Call",
+    "whatsappTemplate": "Hello my name is {name}, I am interested in the property {property} with key {key}. My phone is {phone} and my email is {email}. {message}"
   }
 }
