@@ -40,6 +40,8 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
         flex
         gap-6
         items-center
+        justify-center
+        flex-col sm:flex-row
       `}
       >
         <Image
@@ -58,14 +60,14 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
         <div
           className={`
             texts
-            text-left
+            text-center sm:text-left
           `}
         >
           <Title
             className={`
               !my-0
-              !text-left
               capitalize
+              text-center sm:text-left
             `}
           >
             {name}
@@ -113,12 +115,13 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
             className={`
               buttons
               flex
+              flex-col sm:flex-row
               gap-3
             `}
           >
             <Button
               className={`
-                w-1/2
+                w-full sm:w-1/2
               `}
               onClick={handleClickSubmit}
               variant="ghost-green"
@@ -131,7 +134,7 @@ export default function PropertySeller({ name, profileImage, has_whatsapp, phone
                 whatsapp
                 text-xl
                 text-center
-                w-1/2
+                w-full sm:w-1/2
               `}
               href={`https://wa.me/${phone}`}
             >

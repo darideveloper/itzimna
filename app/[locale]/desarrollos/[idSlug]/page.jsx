@@ -9,6 +9,7 @@ import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import PropertyGeneral from '@/components/layouts/PropertyGeneral'
 import PropertySeller from '@/components/layouts/PropertySeller'
+import InfoCard from '@/components/layouts/templates/InfoSection'
 
 // Style
 import '@/css/markdown.sass'
@@ -62,6 +63,7 @@ export default async function PropertyDevelopment({ params }) {
         
       />
 
+      {/* overlay */}
       <div
         className={`
           overlay-effect
@@ -98,15 +100,7 @@ export default async function PropertyDevelopment({ params }) {
           `}
         >
 
-          <section
-            className={`
-              general
-              bg-grey
-              w-full
-              rounded-lg
-              p-12
-            `}
-          >
+          <InfoCard>
             <PropertyGeneral
               name={propertyData.name}
               price={propertyData.price}
@@ -117,36 +111,22 @@ export default async function PropertyDevelopment({ params }) {
               images={propertyData.images}
               meters={propertyData.meters}
             />
-          </section>
+          </InfoCard>
 
-          <section
-            className={`
-              details
-              bg-grey
-              rounded-lg
-              p-12
-            `}
-          >
+          <InfoCard>
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               children={propertyData.description}
               className="markdown"
             />
-
-          </section>
-
+          </InfoCard>
         </div>
 
 
-        <div
+        <InfoCard
           className={`
-            right
-            bg-grey
-            w-full lg:w-4/12
-            rounded-lg
-            p-12
-            max-w-2xl
             mx-auto
+            max-w-xl
           `}
         >
           <PropertySeller
@@ -156,9 +136,8 @@ export default async function PropertyDevelopment({ params }) {
             phone={propertyData.seller.phone}
             email={propertyData.seller.email}
           />
+        </InfoCard>
 
-
-        </div>
       </div>
     </div>
 
