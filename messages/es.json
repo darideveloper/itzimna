@@ -76,5 +76,9 @@
     "send": "Enviar mensaje",
     "call": "Llamar",
     "whatsappTemplate": "Hola mi nombre es {name}, estoy interesado en la propiedad {property} con clave {key}. Mi teléfono es {phone} y mi correo es {email}. {message}"
+  },
+  "PropertyMap": {
+    "title": "Ubicación"
   }
+
 }

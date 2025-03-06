@@ -11,6 +11,7 @@ import ReactMarkdown from 'react-markdown'
 import PropertyGeneral from '@/components/layouts/PropertyGeneral'
 import PropertySeller from '@/components/layouts/PropertySeller'
 import InfoCard from '@/components/layouts/templates/InfoSection'
+import PropertyMap from '@/components/layouts/PropertyMap'
 
 // Style
 import '@/css/markdown.sass'
@@ -73,13 +74,13 @@ export default async function PropertyDevelopment({ params }) {
     >
 
       {/* Render json ld */}
-      <script 
-        type="application/ld+json" 
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       {/* paralax bg */}
-      <Image 
+      <Image
         src="/images/hero.webp"
         width={1220}
         height={720}
@@ -94,7 +95,7 @@ export default async function PropertyDevelopment({ params }) {
           -z-20
         `}
         alt="bg image"
-        
+
       />
 
       {/* overlay */}
@@ -157,6 +158,17 @@ export default async function PropertyDevelopment({ params }) {
               `}
             />
           </InfoCard>
+
+          {
+            propertyData.google_maps_src
+            &&
+            <InfoCard>
+              <PropertyMap
+                googleMapsSrc={propertyData.google_maps_src}
+              />
+            </InfoCard>
+          }
+
         </div>
 
 
@@ -192,7 +204,7 @@ export async function generateMetadata({ params }) {
   const { locale, idSlug } = await params
   const t = await getTranslations({ locale: locale, namespace: 'Meta' })
 
-  
+
   // Get property data
   const id = idSlug.split('-')[0]
   const propertyData = await getProperty(id, "", "", locale)
@@ -223,7 +235,7 @@ export async function generateMetadata({ params }) {
     authors: [
       { "name": propertyData.seller.first_name + ' ' + propertyData.seller.last_name },
     ],
-    
+
     // Open Graph metadata
     openGraph: {
       title: propertyData.name + ' | ' + t('title'),
