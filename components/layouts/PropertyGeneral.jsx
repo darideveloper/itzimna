@@ -57,7 +57,7 @@ export default function PropertyGeneral({
               text-3xl
               font-bold
               text-gray-800
-              !text-left
+              md:!text-left
               w-full
               !mt-0
               !mb-4
@@ -69,19 +69,21 @@ export default function PropertyGeneral({
           {/* Content Section */}
           <div
             className={`
-              
+              w-full              
             `}
           >
 
             {/* Location and Company */}
             <div
               className={`
-              flex
-              flex-col
-              justify-between
-              mr-2
-              ml-2
-            `}
+                flex
+                flex-col
+                justify-between
+                items-center md:items-start
+                mx-2
+                w-full
+                -ml-0 md:ml-2
+              `}
             >
               <IconText icon={<FaMapMarkerAlt />} text={location} />
               <IconText text={`${meters} m²`} icon={<FaArrowsAlt />} />
@@ -102,7 +104,7 @@ export default function PropertyGeneral({
             flex
             flex-col
             justify-center
-            items-end
+            items-center md:items-end
           `}
         >
           {/* Price */}
@@ -150,6 +152,7 @@ export default function PropertyGeneral({
           pt-4
           my-4
           mx-auto
+          text-center md:text-left
         `}
       >
         <p
