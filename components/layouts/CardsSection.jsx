@@ -33,7 +33,8 @@ export default function CardsSection({
   title,
   filterFeatured = false,
   initialData = [],
-  initialTotalProperties = 0
+  initialTotalProperties = 0,
+  className = "",
 }) {
   // States
   const [propertiesData, setPropertiesData] = useState(initialData)
@@ -83,6 +84,7 @@ export default function CardsSection({
     <section
       className={`
         cards
+        ${className}
         w-full
         relative
         py-12
