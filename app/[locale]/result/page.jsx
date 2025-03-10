@@ -1,10 +1,11 @@
-import { BiSearch } from "react-icons/bi"
-import PropertyCard from "@/components/ui/PropertyCard"
+// Libs
+import { getPropertiesSummary } from "@/libs/api/properties"
+import Image from "next/image"
+
+// Components
 import Select from "@/components/ui/Select"
 import CardsSection from "@/components/layouts/CardsSection"
-import { getPropertiesSummary } from "@/libs/api/properties"
 import SearchBar from "@/components/ui/SearchBar"
-import Image from "next/image"
 const PropertyListingPage = async () => {
   // Fetch data on the server
   const properties = await getPropertiesSummary(1, false)
@@ -103,7 +104,10 @@ const PropertyListingPage = async () => {
       <div className="block md:hidden">
         <div className="container mx-auto p-8">
           <div className="mb-4">
-            <SearchBar className="bg-grey mb-4" placeholder="Search Properties" />
+            <SearchBar
+              className="bg-grey mb-4"
+              placeholder="Search Properties"
+            />
           </div>
           <div className="flex space-x-2 mb-4 bg-green-dark p-2 rounded">
             <Select

@@ -3,7 +3,9 @@
 //Libs
 import { useState, useEffect, useRef } from "react"
 import { getPropertiesSummaryNames } from "@/libs/api/properties"
-import TransitionLink from "../utils/TransitionLink"
+
+//Components
+import TransitionLink from "@/components/utils/TransitionLink"
 
 /**
  * A search bar component with autocomplete functionality using property names from API.
@@ -43,12 +45,11 @@ const SearchBar = ({ placeholder, className = "" }) => {
 
   // Monitor options and suggestions
   useEffect(() => {
-    console.log({ options, suggestions})
+    console.log({ options, suggestions })
   }, [options, suggestions])
 
   // Update suggestions based on search term
   useEffect(() => {
-
     // If search term is empty, clear suggestions
     if (searchTerm.trim() === "") {
       setSuggestions([])
@@ -57,7 +58,9 @@ const SearchBar = ({ placeholder, className = "" }) => {
 
     // Filter options based on search term in name
     const regex = new RegExp(searchTerm, "i")
-    const filteredSuggestions = options.filter((property) => regex.test(property.name))
+    const filteredSuggestions = options.filter((property) =>
+      regex.test(property.name)
+    )
     setSuggestions(filteredSuggestions)
   }, [searchTerm])
 
