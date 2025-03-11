@@ -57,6 +57,7 @@ export default function PropertyCard({
           cursor-pointer
           ${className}
         `}
+        data-aos="zoom-in"
       >
         <div
           className={`
