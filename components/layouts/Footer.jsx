@@ -1,7 +1,7 @@
 "use client"
 
 // Icons
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa"
+import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa"
 
 // Libs
 import { useTranslations } from "next-intl"
@@ -40,9 +40,9 @@ export default function Footer() {
       icon: <FaInstagram />,
     },
     {
-      name: "YouTube",
+      name: "TikTok",
       url: "https://youtube.com",
-      icon: <FaYoutube />,
+      icon: <FaTiktok />,
     }
   ]
 
