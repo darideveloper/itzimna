@@ -84,15 +84,22 @@ const HeroSection = ({ id = "hero", className = "" }) => {
           mx-auto
         `}
         >
-          <Title
-            isH1={true}
+          <div
             className={`
-              text-white
-              !mt-0
+              title-wrapper
             `}
+            data-aos="fade-down"
           >
-            {t("title")}
-          </Title>
+            <Title
+              isH1={true}
+              className={`
+                text-white
+                !mt-0
+              `}
+            >
+              {t("title")}
+            </Title>
+          </div>
           <p
             className={`
               text-xl
@@ -101,6 +108,8 @@ const HeroSection = ({ id = "hero", className = "" }) => {
               max-w-2xl
               mx-auto
             `}
+            data-aos="fade-up"
+            data-aos-delay="600"
           >
             {t("description")}
           </p>
