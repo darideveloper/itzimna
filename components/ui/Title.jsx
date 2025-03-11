@@ -29,7 +29,12 @@ export default function Title ({ children, className, isH1=false }) {
   }
   
   return (
-    <>
+    <div
+      className={`
+        title-wrapper
+      `}
+      data-aos="fade-down"
+    >
       {
         isH1
         ? <h1
@@ -43,6 +48,6 @@ export default function Title ({ children, className, isH1=false }) {
             {children}
           </h2>
       }
-    </>
+    </div>
   )
 }
