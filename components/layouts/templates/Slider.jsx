@@ -82,19 +82,24 @@ export default function Slider({ id, imagesData, title, description, maxSlides =
       >
         {
           title &&
-          <Title
-            className={`
-              !mb-2
-            `}
-          >
-            {title}
-          </Title>
+            <Title
+              className={`
+                !mb-2
+              `}
+            >
+              {title}
+            </Title>
         }
         {
           description &&
-          <p>
-            {description}
-          </p>
+          <div
+            data-aos="fade-up"
+            data-aos-delay="600"
+          >
+            <p>
+              {description}
+            </p>
+          </div>
         }
       </div>
 

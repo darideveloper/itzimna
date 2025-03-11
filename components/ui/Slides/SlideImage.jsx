@@ -65,6 +65,7 @@ export default function SlideImage({
           h-auto
           cover
         `}
+        data-aos="zoom-in"
       />
     </div>
   )
