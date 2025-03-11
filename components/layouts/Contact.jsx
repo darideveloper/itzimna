@@ -142,7 +142,11 @@ const Contact = () => {
             `}
           >
             {/* Office section */}
-            <div className="office">
+            <div 
+              className="office"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <h3
                 className={`
                 text-xl
@@ -179,7 +183,11 @@ const Contact = () => {
             </div>
 
             {/* Customer service agent */}
-            <div className="customer-service">
+            <div 
+              className="customer-service"
+              data-aos="fade-up"
+              data-aos-delay="800"
+            >
               <h3
                 className={`
                 text-xl
@@ -202,7 +210,11 @@ const Contact = () => {
             </div>
 
             {/* Email */}
-            <div className="email">
+            <div 
+              className="email"
+              data-aos="fade-up"
+              data-aos-delay="1200"
+            >
               <h3
                 className={`
                   text-xl
@@ -233,6 +245,8 @@ const Contact = () => {
             form-wrapper
             lg:mt-6
           `}
+          data-aos="fade-down"
+          data-aos-delay="2000"
         >
           <ContactForm
             onSubmit={onSubmit}
