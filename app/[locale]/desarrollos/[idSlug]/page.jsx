@@ -4,6 +4,7 @@ import { getProperty } from "@/libs/api/properties"
 import { cookies } from "next/headers"
 import { getTranslations } from 'next-intl/server'
 import remarkGfm from 'remark-gfm'
+import { getBreadcrumb } from "@/libs/jsonLd"
 
 // Components
 import Image from 'next/image'
@@ -18,27 +19,30 @@ import '@/css/markdown.sass'
 
 
 export default async function PropertyDevelopment({ params }) {
-
+  
   // Get cookies
   const cookieStore = await cookies()
   const accessToken = cookieStore.get('accessToken')?.value || ''
   const refreshToken = cookieStore.get('refreshToken')?.value || ''
   const lang = cookieStore.get("NEXT_LOCALE")?.value || 'es'
-
+  
   // Get property data
   const { idSlug } = await params
   const id = idSlug.split('-')[0]
   const propertyData = await getProperty(id, accessToken, refreshToken, lang)
-
+  
   // Redirect to 404 if property not found
   if (!propertyData) {
     redirect(`../../404`)
   }
 
+  // Translate from server side
+  const tMeta = await getTranslations({ locale: lang, namespace: 'Meta' })
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    'headline': propertyData.name,
+    'headline': propertyData.name + " | " +  tMeta('title'),
     'description': propertyData.short_description,
     'datePublished': propertyData.updated_at,
     'author': {
@@ -62,6 +66,10 @@ export default async function PropertyDevelopment({ params }) {
       '@type': 'ImageObject',
       'url': propertyData.banner.url,
     },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": getBreadcrumb(`${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`)
+    }
   }
 
   return (
