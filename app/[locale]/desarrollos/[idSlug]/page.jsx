@@ -236,7 +236,7 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: propertyData.name + ' | ' + t('title'),
+    title: propertyData.name,
     description: propertyData.short_description,
     lang: locale,
     keywords: propertyData.name.split(' ') + "," + propertyData.category + ',' + propertyData.location.split(' '),
