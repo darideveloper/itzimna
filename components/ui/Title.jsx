@@ -32,6 +32,7 @@ export default function Title ({ children, className, isH1=false }) {
     <div
       className={`
         title-wrapper
+        w-full
       `}
       data-aos="fade-down"
     >
