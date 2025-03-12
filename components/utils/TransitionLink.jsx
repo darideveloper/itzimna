@@ -98,8 +98,6 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
         onClick && onClick()
         handleTransition(e)
       }}
-      className={`
-      `}
       {...props}
     />
   )
