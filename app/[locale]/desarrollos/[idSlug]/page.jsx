@@ -228,6 +228,7 @@ export async function generateMetadata({ params }) {
     }
   }
 
+  // Property image
   const image = {
     url: propertyData.banner.url,
     width: 1200,
@@ -246,7 +247,7 @@ export async function generateMetadata({ params }) {
 
     // Open Graph metadata
     openGraph: {
-      title: propertyData.name + ' | ' + t('title'),
+      title: propertyData.name,
       description: propertyData.short_description,
       url: `${process.env.NEXT_PUBLIC_HOST}/${locale}/desarrollos/${idSlug}`,
       siteName: t('title'),
@@ -258,7 +259,7 @@ export async function generateMetadata({ params }) {
     // Twitter metadata
     twitter: {
       card: "summary_large_image",
-      title: t('title') + ' | ' + propertyData.name,
+      title: t('title'),
       description: propertyData.short_description,
       images: [image],
       creator: "@DeveloperDari",

@@ -41,11 +41,6 @@ const SearchBar = ({ placeholder, className = "" }) => {
     fetchSuggestions()
   }, [])
 
-  // Monitor options and suggestions
-  useEffect(() => {
-    console.log({ options, suggestions})
-  }, [options, suggestions])
-
   // Update suggestions based on search term
   useEffect(() => {
 

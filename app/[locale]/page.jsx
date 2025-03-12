@@ -23,7 +23,7 @@ export default async function HomePage() {
     "@type": "WebPage",
     "headline": tMeta('title'),
     'description': tMeta('description.home'),
-    'keywords': tMeta('keywords.home'),
+    'keywords': tMeta('keywords'),
     "publisher": {
       "@type": "Organization",
       "name": tMeta('title'),
@@ -38,7 +38,7 @@ export default async function HomePage() {
     },
     "image": {
       "@type": "ImageObject",
-      "url": "/images/home-banner.webp"
+      "url": "/images/home-banner.jpg"
     }
   }
   
