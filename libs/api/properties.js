@@ -41,19 +41,13 @@ export async function getPropertiesSummary(page = 1, filterFeatured = false) {
  * Get all properties names from local API
  * 
  * @returns {Array} - Properties names (name, id and slug)
+ * @returns {String} return - Properties data
  * @returns {String} return[].name - Property name
  * @returns {String} return[].id - Property id
  * @returns {String} return[].slug - Property slug
+ * @returns {String} return[].updated_at - Updated at date (timestamp)
  */
 export async function getPropertiesSummaryNames() {
-
-  /**
-   * Get slug from text
-   * 
-   * @param {String} text - Text to convert to slug
-   * @returns {String} - Slug
-   */
-
   let endpoint = `${host}/api/properties?page-size=10000&only-names=true`
   const res = await fetch(endpoint)
   const jsonData = await res.json()
