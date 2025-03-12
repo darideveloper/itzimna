@@ -1,0 +1,3 @@
+# Allow all pages
+User-agent: *
+Disallow:
