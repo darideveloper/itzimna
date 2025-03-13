@@ -78,7 +78,8 @@ const HeroSection = ({ id = "hero", className = "" }) => {
           >
             {t("description")}
           </p>
-
+          
+          {/* Search filters */}
           <Filters />
 
         </div>

@@ -44,7 +44,8 @@ export default function Filters() {
         mt-8
         w-xl
         mx-auto
-        p-8
+        px-6 md:px-16
+        py-10
         rounded
         bg-green-dark/80
         backdrop-filter

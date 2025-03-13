@@ -148,9 +148,7 @@ const SearchBar = ({ placeholder, className = "" }) => {
             right-0 
             mt-1 
             z-10 
-            bg-white 
-            border 
-            border-gray-200 
+            bg-black
             rounded-sm 
             shadow-lg 
             max-h-60 
@@ -161,7 +159,13 @@ const SearchBar = ({ placeholder, className = "" }) => {
             <TransitionLink
               key={property.id}
               href={`/desarrollos/${property.id}-${property.slug}`}
-              className="block"
+              className={`
+                block
+                py-2
+                my-1
+                text-white
+                hover:bg-green/20
+              `}
             >
               {property.name}
             </TransitionLink>
