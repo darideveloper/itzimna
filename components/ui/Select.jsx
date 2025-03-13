@@ -74,7 +74,7 @@ const Select = ({ options, placeholder, onChange = null, className = "" }) => {
             bg-black
             shadow-lg
             overflow-hidden
-            z-10
+            z-50
           `}
         >
           {options.map((option) => (

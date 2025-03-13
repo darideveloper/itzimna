@@ -14,7 +14,7 @@ import { FaSearch } from "react-icons/fa";
 export default function Filters() {
 
   // Translations
-  const t = useTranslations("Home.HeroSection")
+  const t = useTranslations("Filters")
 
   // States
   const [readySubmit, setReadySubmit] = useState(false)

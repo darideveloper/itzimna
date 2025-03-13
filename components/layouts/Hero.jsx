@@ -19,14 +19,15 @@ const HeroSection = ({ id = "hero", className = "" }) => {
       className={`
         hero
         relative
-        h-screen
+        h-auto md:h-screen
         w-full
-        overflow-hidden
+        md:overflow-hidden
         bg-[url('/images/hero.webp')]
         bg-cover
         bg-center
         bg-fixed
         ${className}
+        py-24 md:py-0
       `}
     >
       <div
