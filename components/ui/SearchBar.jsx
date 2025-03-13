@@ -9,6 +9,8 @@ import TransitionLink from "@/components/utils/TransitionLink"
 
 // Icons
 import { FaSearch, FaCircleNotch } from "react-icons/fa";
+import { FaX } from "react-icons/fa6";
+
 
 
 /**
@@ -111,18 +113,33 @@ const SearchBar = ({ placeholder, className = "" }) => {
       />
 
       {/* Search Icon */}
-      <div
+      <button
         className={`
+          icon-wrapper
           absolute 
           right-3 
           top-1/2 
           transform 
           -translate-y-1/2 
           text-gray-500 
-          pointer-events-none
+          p-2
+          z-20
+          ${(!searchTerm || isLoading) && "pointer-events-none"}
         `}
+        onClick={() => {
+          // Reset search term if not loading
+          if (searchTerm && !isLoading) {
+            setSearchTerm("")
+            inputRef.current.focus()
+          }
+        }}
       >
-        {isLoading ? (
+
+        {isLoading ? 
+        
+        /* Loading icon when fetiching data */
+        (
+
           <FaCircleNotch 
             className={`
               animate-spin
@@ -130,16 +147,35 @@ const SearchBar = ({ placeholder, className = "" }) => {
               h-6
             `}
           />
-        ) : (
-          <FaSearch 
-            className={`
-              w-5
-              h-5
-              ${isInputFocused ? "text-white" : "text-white/40"}
-            `}
-          />
-        )}
-      </div>
+        ) : 
+        
+          searchTerm ?
+
+          /* Close icon when searching */
+          (
+            <FaX 
+              className={`
+                w-4
+                h-4
+                ${isInputFocused ? "text-white" : "text-white/40"}
+              `}
+              onClick={() => setSearchTerm("")}
+            />
+          )
+          :
+
+          /* Search icon by default */
+          (
+            <FaSearch 
+              className={`
+                w-5
+                h-5
+                ${isInputFocused ? "text-white" : "text-white/40"}
+              `}
+            />
+          )
+        }
+      </button>
 
       {/* Suggestions Dropdown */}
       {suggestions && (
