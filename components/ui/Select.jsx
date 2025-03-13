@@ -60,6 +60,7 @@ const Select = ({ options, placeholder, onChange = null, className = "" }) => {
           </option>
         ))}
       </select>
+
       {/* Dropdown Icon */}
       <div
         className={`

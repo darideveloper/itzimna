@@ -8,7 +8,7 @@ import { getPropertiesSummary } from "@/libs/api/properties"
 import TransitionLink from "@/components/utils/TransitionLink"
 
 // Icons
-import { FaSearch, FaCircleNotch  } from "react-icons/fa";
+import { FaSearch, FaCircleNotch } from "react-icons/fa";
 
 
 /**

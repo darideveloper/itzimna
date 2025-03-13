@@ -5,12 +5,21 @@ import SearchBar from "@/components/ui/SearchBar"
 
 // Libs
 import { useTranslations } from "next-intl"
+import { useState } from "react"
+
+// Icons
+import { FaSearch } from "react-icons/fa";
 
 
 export default function Filters() {
 
+  // Translations
   const t = useTranslations("Home.HeroSection")
 
+  // States
+  const [readySubmit, setReadySubmit] = useState(false)
+
+  // Handlers
   const handleSearch = (term) => {
     console.log("Search term:", term)
   }
@@ -19,6 +28,7 @@ export default function Filters() {
     console.log("Selected value:", value)
   }
 
+  // Data
   const dataListOptions = [
     { value: "data1", label: "Data 1" },
     { value: "data2", label: "Data 2" },
@@ -95,43 +105,18 @@ export default function Filters() {
         <Button
           type="submit"
           className={`
-              py-3
-              px-4
-              rounded-sm
-              bg-green
-              text-white
-              font-medium
-              focus:outline-none
-              focus:ring-2
-              focus:ring-green/50
-              transition-colors
-              flex
-              items-center
-              justify-center
-            `}
+            flex
+            items-center
+            justify-center
+            flex-row
+            gap-3
+          `}
+          disabled={!readySubmit}
         >
-          <div
-            className={`
-                flex
-                items-center
-              `}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+          <FaSearch />
+          <p>
             Search
-          </div>
+          </p>
         </Button>
       </div>
     </div>

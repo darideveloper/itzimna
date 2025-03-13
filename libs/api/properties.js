@@ -44,6 +44,8 @@ export async function getProperties(page = 1, filterFeatured = false) {
  * @returns {String} return[].name - Property name
  * @returns {String} return[].id - Property id
  * @returns {String} return[].slug - Property slug
+ * @returns {String} return[].location - Property location (in lang)
+ * @returns {String} return[].company - Property company name
  */
 export async function getPropertiesSummary() {
 
