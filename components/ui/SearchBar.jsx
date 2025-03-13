@@ -39,7 +39,16 @@ const SearchBar = ({ placeholder, className = "" }) => {
     const fetchSuggestions = async () => {
       setIsLoading(true)
       try {
-        const properties = await getPropertiesSummary()
+        let properties = await getPropertiesSummary()
+
+        // Add search text to each property (name, location and company)
+        properties = properties.map((property) => {
+            const searchText = `${property.location} - ${property.name} (${property.company})`
+            property["searchText"] = searchText
+            return property
+          }
+        )
+        
         setOptions(properties)
       } catch (error) {
         console.error("Error fetching property names:", error)
@@ -62,8 +71,8 @@ const SearchBar = ({ placeholder, className = "" }) => {
 
     // Filter options based on search term in name
     const regex = new RegExp(searchTerm, "i")
-    const filteredSuggestions = options.filter((property) =>
-      regex.test(property.name)
+    const filteredSuggestions = options.filter((property) => 
+      regex.test(property.searchText)
     )
     setSuggestions(filteredSuggestions)
 
@@ -162,9 +171,10 @@ const SearchBar = ({ placeholder, className = "" }) => {
                 duration-200
                 hover:opacity-80
                 hover:bg-green/20
+                capitalize
               `}
             >
-              {property.name}
+              {property.searchText}
             </TransitionLink>
           ))}
         </div>

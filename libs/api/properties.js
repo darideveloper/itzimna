@@ -54,12 +54,12 @@ export async function getPropertiesSummary() {
    * @returns {String} - Slug
    */
 
-  let endpoint = `${host}/api/properties?page-size=10000&only-names=true`
+  let endpoint = `${host}/api/properties?page-size=10000&summary=true`
   const res = await fetch(endpoint)
   const jsonData = await res.json()
-  const propertiesNames = await jsonData.results
+  const propertiesSummary = await jsonData.results
 
-  return propertiesNames
+  return propertiesSummary
 }
 
 /**
