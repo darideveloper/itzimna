@@ -11,8 +11,6 @@ import TransitionLink from "@/components/utils/TransitionLink"
 import { FaSearch, FaCircleNotch } from "react-icons/fa";
 import { FaX } from "react-icons/fa6";
 
-
-
 /**
  * A search bar component with autocomplete functionality using property names from API.
  * Enhanced with keyboard navigation for suggestions.

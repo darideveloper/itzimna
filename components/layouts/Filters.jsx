@@ -89,17 +89,17 @@ export default function Filters() {
       >
         <Select
           options={dataListOptions}
-          placeholder="Data List"
+          placeholder={t("locationPlaceholder")}
           onChange={handleSelectChange}
         />
         <Select
           options={sizesOptions}
-          placeholder="Sizes"
+          placeholder={t("sizePlaceholder")}
           onChange={handleSelectChange}
         />
         <Select
           options={pricesOptions}
-          placeholder="Prices"
+          placeholder={t("pricePlaceholder")}
           onChange={handleSelectChange}
         />
         <Button

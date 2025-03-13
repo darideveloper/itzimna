@@ -81,7 +81,10 @@
     "title": "Ubicación"
   },
   "Filters": {
-    "searchPlaceholder": "Buscar desarrollos"
+    "searchPlaceholder": "Buscar desarrollos",
+    "locationPlaceholder": "Ubicación",
+    "sizePlaceholder": "Tamaño",
+    "pricePlaceholder": "Precio"
   }
 
 }

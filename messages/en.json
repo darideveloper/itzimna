@@ -85,7 +85,10 @@
     "title": "Location"
   },
   "Filters": {
-    "searchPlaceholder": "Search Developments"
+    "searchPlaceholder": "Search Developments",
+    "locationPlaceholder": "Location",
+    "sizePlaceholder": "Size",
+    "pricePlaceholder": "Price"
   }
 
 }
