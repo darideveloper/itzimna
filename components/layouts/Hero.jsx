@@ -53,10 +53,11 @@ const HeroSection = ({ id = "hero", className = "" }) => {
       >
         <div
           className={`
-          text-center
-          max-w-4xl
-          mx-auto
-        `}
+            text-center
+            max-w-5xl
+            w-full
+            mx-auto
+          `}
         >
           <Title
             isH1={true}

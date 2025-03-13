@@ -52,7 +52,7 @@ export default function Filters() {
       className = {`
         search-container
         mt-8
-        w-xl
+        w-full
         mx-auto
         px-6 md:px-16
         py-10
@@ -83,7 +83,7 @@ export default function Filters() {
             mt-4
             grid
             grid-cols-1
-            sm:grid-cols-4
+            md:grid-cols-3 lg:grid-cols-4
             gap-4
           `}
       >
@@ -110,6 +110,7 @@ export default function Filters() {
             justify-center
             flex-row
             gap-3
+            md:col-span-3 lg:col-span-1
           `}
           disabled={!readySubmit}
         >
