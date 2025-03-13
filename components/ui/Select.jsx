@@ -41,11 +41,11 @@ const Select = ({ options, placeholder, onChange = null, className = "" }) => {
           focus:border-white/80
           duration-200
         `}
+        defaultValue={placeholder}
       >
         <option
-          value=""
-          disabled
-          selected
+          value={placeholder}
+          disabled  
           style={{ backgroundColor: "#1a2e1f" }}
         >
           {placeholder}
