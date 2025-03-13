@@ -41,11 +41,10 @@ const Select = ({ options, placeholder, onChange = null, className = "" }) => {
           pl-10
           rounded
           border-2
-          border-white/20
+          ${isOpen ?  'border-white/80' : 'border-white/20'}
           bg-transparent
           text-white
           cursor-pointer
-          focus:border-white/80
           duration-200
           flex
           items-center
@@ -54,7 +53,15 @@ const Select = ({ options, placeholder, onChange = null, className = "" }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {selected.label}
-        <FaChevronDown className="h-5 w-5 text-gray-500" />
+        <FaChevronDown 
+          className={`
+            h-5
+            w-5
+            duration-200
+            ${isOpen && 'transform rotate-180'}
+            ${isOpen ? 'text-white/80' : 'text-white/20'}
+          `}
+        />
       </div>
 
       {isOpen && (
