@@ -1,32 +1,40 @@
 "use client"
 
-// Icons
-import { FaChevronDown } from "react-icons/fa"
-
+import { useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
 
 /**
- * Select component
- *
- * @param {Array} options - Array of options, each item must have a "value" and a "label" property
- * @param {String} placeholder - Placeholder to show when no option is selected
- * @param {function} onChange - Function to call when an option is selected
- * @param {String} className - Additional classes for styling
- *
+ * Select / dropdown component
+ * 
+ * @param {Object} props - Component props
+ * @param {Array} props.options - Array of options
+ * @param {Array} props.options[].value - Option value
+ * @param {Array} props.options[].label - Option label
+ * @param {string} props.placeholder - Placeholder text
+ * @param {Function} props.onChange - On change event
+ * @param {string} props.className - Additional class name
  * @returns {JSX.Element} Select component
  */
 const Select = ({ options, placeholder, onChange = null, className = "" }) => {
+  const [selected, setSelected] = useState({ value: "", label: placeholder });
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSelect = (value) => {
+    setSelected(value);
+    setIsOpen(false);
+    if (onChange) onChange(value);
+  };
+
   return (
     <div
       className={`
-        sleect-wrapper
         relative
         ${className}
       `}
     >
-      <select
-        onChange={(e) => onChange(e.target.value)}
+      {/* Selected Item */}
+      <div
         className={`
-          appearance-none
           w-full
           py-3
           px-4
@@ -37,46 +45,53 @@ const Select = ({ options, placeholder, onChange = null, className = "" }) => {
           bg-transparent
           text-white
           cursor-pointer
-          focus:outline-none
           focus:border-white/80
           duration-200
+          flex
+          items-center
+          justify-between
         `}
-        defaultValue={placeholder}
+        onClick={() => setIsOpen(!isOpen)}
       >
-        <option
-          value={placeholder}
-          disabled  
-          style={{ backgroundColor: "#1a2e1f" }}
-        >
-          {placeholder}
-        </option>
-        {options.map((option, index) => (
-          <option
-            key={index}
-            value={option.value}
-            style={{ backgroundColor: "#1a2e1f" }}
-          >
-            {option.label}
-          </option>
-        ))}
-      </select>
-
-      {/* Dropdown Icon */}
-      <div
-        className={`
-          absolute
-          left-3
-          top-1/2
-          transform
-          -translate-y-1/2
-          pointer-events-none
-          text-gray-500
-        `}
-      >
-        <FaChevronDown className="h-5 w-5" />
+        {selected.label}
+        <FaChevronDown className="h-5 w-5 text-gray-500" />
       </div>
-    </div>
-  )
-}
 
-export default Select
+      {isOpen && (
+        <ul
+          className={`
+            absolute
+            left-0
+            mt-1
+            w-full
+            bg-black
+            shadow-lg
+            overflow-hidden
+            z-10
+          `}
+        >
+          {options.map((option) => (
+            <li
+              key={option.value}
+              className={`
+                px-4
+                cursor-pointer
+                bg-black hover:bg-white/10
+                hover:bg-green-700
+                text-white
+                transition
+                py-3
+                hover:opacity-80
+              `}
+              onClick={() => handleSelect(option)}
+            >
+              {option.label}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default Select;
