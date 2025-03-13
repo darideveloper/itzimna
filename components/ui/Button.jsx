@@ -66,23 +66,13 @@ export default function Button({
     ${className}
   `
 
-  const content = (
-    <div
-      className={`
-        content
-      `}
-    >
-      {children}
-    </div>
-  )
-
   return href == "" || disabled ? (
     <button className={styles} onClick={onClick} disabled={disabled} {...props}>
-      {content}
+      {children}
     </button>
   ) : (
     <TransitionLink href={href} className={styles} {...props}>
-      {content}
+      {children}
     </TransitionLink>
   )
 }

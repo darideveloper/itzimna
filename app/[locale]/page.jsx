@@ -4,7 +4,7 @@ import Hero from "@/components/layouts/Hero"
 import Gallery from "@/components/layouts/Gallery"
 
 // LIbs
-import { getPropertiesSummary } from "@/libs/api/properties"
+import { getProperties } from "@/libs/api/properties"
 import { getTranslations } from "next-intl/server"
 
 
@@ -15,8 +15,8 @@ export default async function HomePage() {
   const tMeta = await getTranslations('Meta')
 
   // Get initial properties data
-  const lastProperties = await getPropertiesSummary(1)
-  const featuredProperties = await getPropertiesSummary(1, true)
+  const lastProperties = await getProperties(1)
+  const featuredProperties = await getProperties(1, true)
 
   const jsonLd = {
     "@context": "https://schema.org",

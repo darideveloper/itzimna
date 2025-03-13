@@ -6,16 +6,15 @@ import { FaChevronDown } from "react-icons/fa"
 
 /**
  * Select component
- * 
+ *
  * @param {Array} options - Array of options, each item must have a "value" and a "label" property
  * @param {String} placeholder - Placeholder to show when no option is selected
  * @param {function} onChange - Function to call when an option is selected
  * @param {String} className - Additional classes for styling
- * 
+ *
  * @returns {JSX.Element} Select component
  */
-
-const Select = ({ options, placeholder, onChange, className = "" }) => {
+const Select = ({ options, placeholder, onChange = null, className = "" }) => {
   return (
     <div
       className={`
@@ -61,6 +60,7 @@ const Select = ({ options, placeholder, onChange, className = "" }) => {
           </option>
         ))}
       </select>
+
       {/* Dropdown Icon */}
       <div
         className={`

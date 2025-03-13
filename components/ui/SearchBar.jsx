@@ -2,8 +2,14 @@
 
 //Libs
 import { useState, useEffect, useRef } from "react"
-import { getPropertiesSummaryNames } from "@/libs/api/properties"
-import TransitionLink from "../utils/TransitionLink"
+import { getPropertiesSummary } from "@/libs/api/properties"
+
+//Components
+import TransitionLink from "@/components/utils/TransitionLink"
+
+// Icons
+import { FaSearch, FaCircleNotch } from "react-icons/fa";
+
 
 /**
  * A search bar component with autocomplete functionality using property names from API.
@@ -16,11 +22,15 @@ import TransitionLink from "../utils/TransitionLink"
  * @returns {JSX.Element} Search bar component
  */
 const SearchBar = ({ placeholder, className = "" }) => {
+
+  // States
   const [searchTerm, setSearchTerm] = useState("")
   const [options, setOptions] = useState([])
   const [suggestions, setSuggestions] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isInputFocused, setIsInputFocused] = useState(false)
 
+  // Refs
   const suggestionsRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -29,11 +39,20 @@ const SearchBar = ({ placeholder, className = "" }) => {
     const fetchSuggestions = async () => {
       setIsLoading(true)
       try {
-        const properties = await getPropertiesSummaryNames()
+        let properties = await getPropertiesSummary()
+
+        // Add search text to each property (name, location and company)
+        properties = properties.map((property) => {
+            const searchText = `${property.location} - ${property.name} (${property.company})`
+            property["searchText"] = searchText
+            return property
+          }
+        )
+        
         setOptions(properties)
       } catch (error) {
         console.error("Error fetching property names:", error)
-        options([])
+        setOptions([])
       } finally {
         setIsLoading(false)
       }
@@ -52,8 +71,11 @@ const SearchBar = ({ placeholder, className = "" }) => {
 
     // Filter options based on search term in name
     const regex = new RegExp(searchTerm, "i")
-    const filteredSuggestions = options.filter((property) => regex.test(property.name))
+    const filteredSuggestions = options.filter((property) => 
+      regex.test(property.searchText)
+    )
     setSuggestions(filteredSuggestions)
+
   }, [searchTerm])
 
   return (
@@ -84,6 +106,8 @@ const SearchBar = ({ placeholder, className = "" }) => {
           focus:border-white/80 
           duration-200
         `}
+        onFocus={() => setIsInputFocused(true)}
+        onBlur={() => setIsInputFocused(false)}
       />
 
       {/* Search Icon */}
@@ -99,33 +123,21 @@ const SearchBar = ({ placeholder, className = "" }) => {
         `}
       >
         {isLoading ? (
-          <div
+          <FaCircleNotch 
             className={`
-              h-5 
-              w-5 
-              animate-spin 
-              rounded-full 
-              border-2 
-              border-solid 
-              border-current 
-              border-r-transparent
+              animate-spin
+              w-6
+              h-6
             `}
           />
         ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
+          <FaSearch 
+            className={`
+              w-5
+              h-5
+              ${isInputFocused ? "text-white" : "text-white/40"}
+            `}
+          />
         )}
       </div>
 
@@ -140,9 +152,7 @@ const SearchBar = ({ placeholder, className = "" }) => {
             right-0 
             mt-1 
             z-10 
-            bg-white 
-            border 
-            border-gray-200 
+            bg-black
             rounded-sm 
             shadow-lg 
             max-h-60 
@@ -153,9 +163,18 @@ const SearchBar = ({ placeholder, className = "" }) => {
             <TransitionLink
               key={property.id}
               href={`/desarrollos/${property.id}-${property.slug}`}
-              className="block"
+              className={`
+                block
+                py-2
+                my-1
+                text-white
+                duration-200
+                hover:opacity-80
+                hover:bg-green/20
+                capitalize
+              `}
             >
-              {property.name}
+              {property.searchText}
             </TransitionLink>
           ))}
         </div>
