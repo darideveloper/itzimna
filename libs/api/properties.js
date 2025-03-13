@@ -24,7 +24,7 @@ const host = process.env.NEXT_PUBLIC_HOST
  * @returns {String} return.propertiesData[].slug - Property slug from name
  * @returns {Number} return.count - Total count of properties
  */
-export async function getPropertiesSummary(page = 1, filterFeatured = false) {
+export async function getProperties(page = 1, filterFeatured = false) {
   let endpoint = `${host}/api/properties?page=${page}`
   if (filterFeatured) {
     endpoint += `&featured=true`
@@ -45,7 +45,7 @@ export async function getPropertiesSummary(page = 1, filterFeatured = false) {
  * @returns {String} return[].id - Property id
  * @returns {String} return[].slug - Property slug
  */
-export async function getPropertiesSummaryNames() {
+export async function getPropertiesSummary() {
 
   /**
    * Get slug from text

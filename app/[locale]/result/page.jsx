@@ -1,5 +1,5 @@
 // Libs
-import { getPropertiesSummary } from "@/libs/api/properties"
+import { getProperties } from "@/libs/api/properties"
 import Image from "next/image"
 // Components
 import Select from "@/components/ui/Select"
@@ -8,7 +8,7 @@ import PropertyCard from "@/components/ui/PropertyCard"
 
 const PropertySearch = async () => {
   // Fetch data on the server
-  const properties = await getPropertiesSummary(1, false)
+  const properties = await getProperties(1, false)
   const propertyCards = properties.propertiesData || []
 
   const dataListOptions = [

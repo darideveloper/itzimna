@@ -2,7 +2,7 @@
 
 //Libs
 import { useState, useEffect, useRef } from "react"
-import { getPropertiesSummaryNames } from "@/libs/api/properties"
+import { getPropertiesSummary } from "@/libs/api/properties"
 
 //Components
 import TransitionLink from "@/components/utils/TransitionLink"
@@ -39,7 +39,7 @@ const SearchBar = ({ placeholder, className = "" }) => {
     const fetchSuggestions = async () => {
       setIsLoading(true)
       try {
-        const properties = await getPropertiesSummaryNames()
+        const properties = await getPropertiesSummary()
         setOptions(properties)
       } catch (error) {
         console.error("Error fetching property names:", error)

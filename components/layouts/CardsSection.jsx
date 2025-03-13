@@ -2,7 +2,7 @@
 
 // Libs
 import { useEffect, useState, useRef } from "react"
-import { getPropertiesSummary } from "@/libs/api/properties"
+import { getProperties } from "@/libs/api/properties"
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
@@ -59,7 +59,7 @@ export default function CardsSection({
     setIsLoading(true)
 
     // Update properties data when change page
-    getPropertiesSummary(page, filterFeatured).then(({ propertiesData, pages }) => {
+    getProperties(page, filterFeatured).then(({ propertiesData, pages }) => {
       
       setPropertiesData(propertiesData)
 
