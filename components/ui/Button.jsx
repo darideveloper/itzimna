@@ -63,6 +63,7 @@ export default function Button({
     disabled:opacity-70
     disabled:shadow-none
     disabled:bg-green-dark
+    text-lg
     ${className}
   `
 

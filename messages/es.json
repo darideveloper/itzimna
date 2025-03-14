@@ -84,7 +84,8 @@
     "searchPlaceholder": "Buscar desarrollos",
     "locationPlaceholder": "Ubicación",
     "sizePlaceholder": "Tamaño",
-    "pricePlaceholder": "Precio"
+    "pricePlaceholder": "Precio",
+    "searchButton": "Buscar"
   }
 
 }

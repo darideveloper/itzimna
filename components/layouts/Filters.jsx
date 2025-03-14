@@ -134,7 +134,7 @@ export default function Filters() {
         >
           <FaSearch />
           <p>
-            Search
+            {t("searchButton")}
           </p>
         </Button>
       </div>
