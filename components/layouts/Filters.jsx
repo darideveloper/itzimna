@@ -5,7 +5,8 @@ import SearchBar from "@/components/ui/SearchBar"
 
 // Libs
 import { useTranslations } from "next-intl"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { getLocations } from "@/libs/api/locations"
 
 // Icons
 import { FaSearch } from "react-icons/fa";
@@ -18,6 +19,29 @@ export default function Filters() {
 
   // States
   const [readySubmit, setReadySubmit] = useState(false)
+  const [lcoations, setLocations] = useState([])
+
+  // Effects
+
+  useEffect(() => {
+    // Load locations
+    const loadLocations = async () => {
+
+      // get data from api
+      const locations = await getLocations()
+
+      // Format data
+      const locationsData = locations.map((location) => {
+        return {
+          value: location.id,
+          label: location.name
+        }
+      })
+      setLocations(locationsData)
+    }
+    loadLocations()
+  }, [])
+
 
   // Handlers
   const handleSearch = (term) => {
@@ -28,23 +52,17 @@ export default function Filters() {
     console.log("Selected value:", value)
   }
 
-  // Data
-  const dataListOptions = [
-    { value: "data1", label: "Data 1" },
-    { value: "data2", label: "Data 2" },
-    { value: "data3", label: "Data 3" },
-  ]
-
+  // Filters fixed data
   const sizesOptions = [
-    { value: "small", label: "Small" },
-    { value: "medium", label: "Medium" },
-    { value: "large", label: "Large" },
+    { value: "1", label: "Small" },
+    { value: "2", label: "Medium" },
+    { value: "3", label: "Large" },
   ]
 
   const pricesOptions = [
-    { value: "low", label: "$0 - $50" },
-    { value: "medium", label: "$50 - $100" },
-    { value: "high", label: "$100+" },
+    { value: "1", label: "$0 - $50" },
+    { value: "2", label: "$50 - $100" },
+    { value: "3", label: "$100+" },
   ]
 
   return (
@@ -88,7 +106,7 @@ export default function Filters() {
           `}
       >
         <Select
-          options={dataListOptions}
+          options={lcoations}
           placeholder={t("locationPlaceholder")}
           onChange={handleSelectChange}
         />
