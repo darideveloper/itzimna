@@ -1,4 +1,4 @@
-import { getPropertiesSummaryNames } from '@/libs/api/properties'
+import { getPropertiesSummary } from '@/libs/api/properties'
 
 const siteUrl = process.env.NEXT_PUBLIC_HOST
 
@@ -12,7 +12,7 @@ export default async function sitemap() {
   ]
 
   // Fetch dynamic pages
-  const properties = await getPropertiesSummaryNames()
+  const properties = await getPropertiesSummary()
 
   // Generate sitemap array
 
