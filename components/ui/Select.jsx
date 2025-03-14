@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import { useState } from "react"
+import { FaChevronDown } from "react-icons/fa"
 
 /**
  * Select / dropdown component
@@ -13,17 +13,25 @@ import { FaChevronDown } from "react-icons/fa";
  * @param {string} props.placeholder - Placeholder text
  * @param {Function} props.onChange - On change event
  * @param {string} props.className - Additional class name
+ * @param {string} props.prefix - Prefix text
  * @returns {JSX.Element} Select component
  */
-const Select = ({ options, placeholder, onChange = null, className = "" }) => {
-  const [selected, setSelected] = useState({ value: "", label: placeholder });
-  const [isOpen, setIsOpen] = useState(false);
+const Select = ({
+  options,
+  placeholder,
+  onChange = null,
+  className = "",
+  prefix = "",
+  postfix = ""
+}) => {
+  const [selected, setSelected] = useState({ value: "", label: placeholder })
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleSelect = (value) => {
-    setSelected(value);
-    setIsOpen(false);
-    if (onChange) onChange(value);
-  };
+    setSelected(value)
+    setIsOpen(false)
+    if (onChange) onChange(value)
+  }
 
   return (
     <div
@@ -41,7 +49,7 @@ const Select = ({ options, placeholder, onChange = null, className = "" }) => {
           pl-10
           rounded
           border-2
-          ${isOpen ?  'border-white/80' : 'border-white/20'}
+          ${isOpen ? 'border-white/80' : 'border-white/20'}
           bg-transparent
           text-white
           cursor-pointer
@@ -52,8 +60,16 @@ const Select = ({ options, placeholder, onChange = null, className = "" }) => {
         `}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {selected.label}
-        <FaChevronDown 
+        {/* Display label or selected value */}
+        {
+          selected.value === ""
+          ?
+            `${selected.label}`
+          :
+            `${prefix} ${selected.label} ${postfix}`
+        }
+
+        <FaChevronDown
           className={`
             h-5
             w-5
@@ -92,13 +108,13 @@ const Select = ({ options, placeholder, onChange = null, className = "" }) => {
               `}
               onClick={() => handleSelect(option)}
             >
-              {option.label}
+              {prefix} {option.label} {postfix}
             </li>
           ))}
         </ul>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Select;
+export default Select

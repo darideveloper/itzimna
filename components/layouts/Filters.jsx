@@ -54,15 +54,20 @@ export default function Filters() {
 
   // Filters fixed data
   const sizesOptions = [
-    { value: "1", label: "Small" },
-    { value: "2", label: "Medium" },
-    { value: "3", label: "Large" },
+    { value: "50", label: "50" },
+    { value: "100", label: "100" },
+    { value: "500", label: "500" },
+    { value: "1000", label: "1000" },
+    { value: "5000", label: "5000" },
+    { value: "10000", label: "10000" },
   ]
 
   const pricesOptions = [
-    { value: "1", label: "$0 - $50" },
-    { value: "2", label: "$50 - $100" },
-    { value: "3", label: "$100+" },
+    { value: "100000", label: "100,000" },
+    { value: "500000", label: "500,000" },
+    { value: "1500000", label: "1,500,000" },
+    { value: "2000000", label: "2,000,000" },
+    { value: "5000000", label: "5,000,000" },
   ]
 
   return (
@@ -114,11 +119,15 @@ export default function Filters() {
           options={sizesOptions}
           placeholder={t("sizePlaceholder")}
           onChange={handleSelectChange}
+          prefix={t("selectPrefix")}
+          postfix="m²"
         />
         <Select
           options={pricesOptions}
           placeholder={t("pricePlaceholder")}
           onChange={handleSelectChange}
+          prefix={t("selectPrefix")}
+          postfix="MXN"
         />
         <Button
           type="submit"

@@ -89,7 +89,8 @@
     "locationPlaceholder": "Location",
     "sizePlaceholder": "Size",
     "pricePlaceholder": "Price",
-    "searchButton": "Search"
+    "searchButton": "Search",
+    "selectPrefix": "MAX"
   }
 
 }

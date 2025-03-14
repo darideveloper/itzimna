@@ -85,7 +85,8 @@
     "locationPlaceholder": "Ubicación",
     "sizePlaceholder": "Tamaño",
     "pricePlaceholder": "Precio",
-    "searchButton": "Buscar"
+    "searchButton": "Buscar",
+    "selectPrefix": "Hasta"
   }
 
 }

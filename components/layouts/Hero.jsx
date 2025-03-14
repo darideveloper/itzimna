@@ -19,7 +19,7 @@ const HeroSection = ({ id = "hero", className = "" }) => {
       className={`
         hero
         relative
-        h-auto md:h-screen
+        h-auto md:h-[120vh]
         w-full
         md:overflow-hidden
         bg-[url('/images/hero.webp')]
