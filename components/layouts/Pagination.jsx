@@ -1,5 +1,6 @@
 // Icons
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { FaCaretLeft, FaCaretRight } from "react-icons/fa6";
+
 // Components
 import Button from "@/components/ui/Button";
 
@@ -40,7 +41,7 @@ const Pagination = ({
           justify-center
         `}
       >
-        <HiChevronLeft
+        <FaCaretLeft
           className={`
             w-5
             h-5
@@ -74,7 +75,7 @@ const Pagination = ({
           justify-center
         `}
       >
-        <HiChevronRight
+        <FaCaretRight
           className={`
             w-5
             h-5

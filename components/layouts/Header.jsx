@@ -1,9 +1,8 @@
 "use client"
 
 // Icons
-import { HiMenu } from "react-icons/hi"
-import { IoMdClose } from "react-icons/io"
 import { FaWhatsapp, FaPhone } from "react-icons/fa"
+import { FaX, FaBars } from "react-icons/fa6"
 
 // Components
 import Button from "@/components/ui/Button"
@@ -83,7 +82,7 @@ const Header = () => {
               duration-200
             `}
           >
-            <IoMdClose
+            <FaX
               className={`
                 h-6 
                 w-6 
@@ -294,7 +293,7 @@ const Header = () => {
             `}
             onClick={() => setIsDrawerOpen(true)}
           >
-            <HiMenu
+            <FaBars
               className={`
                 h-6 
                 w-6 
