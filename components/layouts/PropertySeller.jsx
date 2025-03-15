@@ -169,11 +169,10 @@ export default function PropertySeller({
             <Button
               className={`
                 whatsapp
-                text-xl
                 text-center
                 w-full sm:w-1/2
               `}
-              href={`https://wa.me/${phone}`}
+              onClick={() => window.open(`https://wa.me/${phone}`, "_blank")}
             >
               WhatsApp
             </Button>
