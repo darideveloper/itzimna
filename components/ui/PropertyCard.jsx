@@ -78,6 +78,7 @@ export default function PropertyCard({
               group-hover:scale-110
             `}
             priority
+            sizes="100%"
           />
           {/* Category badge */}
           <div
