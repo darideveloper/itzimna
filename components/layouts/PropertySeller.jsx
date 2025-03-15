@@ -54,6 +54,7 @@ export default function PropertySeller({
       className={`
         seller
       `}
+      id="seller"
     >
 
       <div

@@ -13,6 +13,7 @@ import PropertyGeneral from '@/components/layouts/PropertyGeneral'
 import PropertySeller from '@/components/layouts/PropertySeller'
 import InfoCard from '@/components/layouts/templates/InfoSection'
 import PropertyMap from '@/components/layouts/PropertyMap'
+import Button from '@/components/ui/Button'
 
 // Style
 import '@/css/markdown.sass'
@@ -38,7 +39,9 @@ export default async function PropertyDevelopment({ params }) {
 
   // Translate from server side
   const tMeta = await getTranslations({ locale: lang, namespace: 'Meta' })
+  const t = await getTranslations({ locale: lang, namespace: 'PropertyDevelopment' })
 
+  // Metadata
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -143,6 +146,7 @@ export default async function PropertyDevelopment({ params }) {
           `}
         >
 
+          {/* General */}
           <InfoCard>
             <PropertyGeneral
               name={propertyData.name}
@@ -154,8 +158,22 @@ export default async function PropertyDevelopment({ params }) {
               images={propertyData.images}
               meters={propertyData.meters}
             />
+
+            {/* Go selecr button */}
+            <Button
+              variant="ghost-green"
+              href="#seller"
+              className={`
+                text-center
+                lg:hidden
+                mt-4
+              `}
+            >
+              {t('contactSeller')}
+            </Button>
           </InfoCard>
 
+          {/* Details */}
           <InfoCard>
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
@@ -179,7 +197,7 @@ export default async function PropertyDevelopment({ params }) {
 
         </div>
 
-
+        {/* Seller */}  
         <InfoCard
           className={`
             mx-auto

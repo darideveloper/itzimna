@@ -87,6 +87,9 @@
     "pricePlaceholder": "Precio",
     "searchButton": "Buscar",
     "selectPrefix": "Hasta"
+  },
+  "PropertyDevelopment": {
+    "contactSeller": "Contactar al vendedor"
   }
 
 }

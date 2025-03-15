@@ -91,6 +91,9 @@
     "pricePlaceholder": "Price",
     "searchButton": "Search",
     "selectPrefix": "MAX"
+  },
+  "PropertyDevelopment": {
+    "contactSeller": "Contact Seller"
   }
 
 }
