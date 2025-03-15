@@ -2,6 +2,7 @@
 import Button from "@/components/ui/Button"
 import Select from "@/components/ui/Select"
 import SearchBar from "@/components/ui/SearchBar"
+import TransitionLink from "@/components/utils/TransitionLink"
 
 // Libs
 import { useTranslations } from "next-intl"
@@ -9,7 +10,7 @@ import { useState, useEffect } from "react"
 import { getLocations } from "@/libs/api/locations"
 
 // Icons
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa"
 
 
 export default function Filters() {
@@ -20,37 +21,10 @@ export default function Filters() {
   // States
   const [readySubmit, setReadySubmit] = useState(false)
   const [lcoations, setLocations] = useState([])
-
-  // Effects
-
-  useEffect(() => {
-    // Load locations
-    const loadLocations = async () => {
-
-      // get data from api
-      const locations = await getLocations()
-
-      // Format data
-      const locationsData = locations.map((location) => {
-        return {
-          value: location.id,
-          label: location.name
-        }
-      })
-      setLocations(locationsData)
-    }
-    loadLocations()
-  }, [])
-
-
-  // Handlers
-  const handleSearch = (term) => {
-    console.log("Search term:", term)
-  }
-
-  const handleSelectChange = (value) => {
-    console.log("Selected value:", value)
-  }
+  const [selectedLocation, setSelectedLocation] = useState({})
+  const [selectedSize, setSelectedSize] = useState({})
+  const [selectedPrice, setSelectedPrice] = useState({})
+  const [query, setQuery] = useState("")
 
   // Filters fixed data
   const sizesOptions = [
@@ -70,9 +44,74 @@ export default function Filters() {
     { value: "5000000", label: "5,000,000" },
   ]
 
+  // Effects
+
+  useEffect(() => {
+    // Load locations data when component is mounted
+    const loadLocations = async () => {
+
+      // get data from api
+      const locations = await getLocations()
+
+      // Format data
+      const locationsData = locations.map((location) => {
+        return {
+          value: location.id,
+          label: location.name
+        }
+      })
+      setLocations(locationsData)
+    }
+    loadLocations()
+  }, [])
+
+  useEffect(() => {
+
+    /**
+     * get query params for range filters
+     * 
+     * @param {Object} value - selected value
+     * @param {array} options - options for the filter
+     * @param {string} paramName - name of the parameter
+     */
+    function getRangeQueryParam(selectedOption, options, paramName) {
+      const selectedOptionIndex = options.findIndex(option => option.value === selectedOption.value)
+      const prevOption = options[selectedOptionIndex - 1] || { value: 0 }
+      const queryText = `${paramName}-desde=${prevOption.value}&${paramName}-hasta=${selectedOption.value}`
+      return queryText
+    }
+
+    // Enable submit button when fill any filter
+    const ready = selectedLocation.value || selectedSize.value || selectedPrice.value
+    if (ready) {
+      setReadySubmit(true)
+    }
+
+    // Update query when any filter is changed
+    const queryParts = []
+    let locationQuery = ""
+    let sizeQuery = ""
+    let priceQuery = ""
+    if (selectedLocation.value) {
+      locationQuery = `ubicacion=${selectedLocation.value}&ubicacion-nombre=${selectedLocation.label}`
+      queryParts.push(locationQuery)
+    }
+    if (selectedSize.value) {
+      sizeQuery = getRangeQueryParam(selectedSize, sizesOptions, "metros")
+      queryParts.push(sizeQuery)
+    }
+    if (selectedPrice.value) {
+      priceQuery = getRangeQueryParam(selectedPrice, pricesOptions, "precio")
+      queryParts.push(priceQuery)
+    }
+    const fullQuery = queryParts.join("&")
+    setQuery(fullQuery)
+  }, [selectedLocation, selectedSize, selectedPrice])
+
+
   return (
     <div
-      className = {`
+      className={`
         search-container
         mt-8
         w-full
@@ -96,7 +135,6 @@ export default function Filters() {
       >
         <SearchBar
           placeholder={t("searchPlaceholder")}
-          onSearch={handleSearch}
         />
       </div>
 
@@ -113,40 +151,52 @@ export default function Filters() {
         <Select
           options={lcoations}
           placeholder={t("locationPlaceholder")}
-          onChange={handleSelectChange}
+          onChange={setSelectedLocation}
         />
         <Select
           options={sizesOptions}
           placeholder={t("sizePlaceholder")}
-          onChange={handleSelectChange}
+          onChange={setSelectedSize}
+          // Prefix and postfix for the select
           prefix={t("selectPrefix")}
           postfix="m²"
         />
         <Select
           options={pricesOptions}
           placeholder={t("pricePlaceholder")}
-          onChange={handleSelectChange}
+          onChange={setSelectedPrice}
           prefix={t("selectPrefix")}
           postfix="MXN"
         />
-        <Button
-          type="submit"
+        <TransitionLink
+          // Dynamic link with query
+          href={`/buscar?${query}`}
           className={`
-            flex
-            items-center
-            justify-center
-            flex-row
-            gap-3
             md:col-span-3 lg:col-span-1
           `}
+          // Disable click when no filters are selected
           disabled={!readySubmit}
         >
-          <FaSearch />
-          <p>
-            {t("searchButton")}
-          </p>
-        </Button>
+          {/* Use button only for style */}
+          <Button
+            disabled={!readySubmit}
+            className={`
+              w-full
+              flex
+              items-center
+              justify-center
+              flex-row
+              gap-3
+            `}
+            // No onclick (used TransitionLink)
+          >
+            <FaSearch />
+            <p>
+              {t("searchButton")}
+            </p>
+          </Button>
+        </TransitionLink>
       </div>
     </div>
-    )
+  )
 }
