@@ -188,6 +188,7 @@ export default function PropertySeller({
           text-xl
           text-center
           mt-2
+          block md:hidden
         `}
         href={`tel:${phone}`}
         variant="ghost-green"
