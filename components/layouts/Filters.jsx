@@ -119,7 +119,7 @@ export default function Filters() {
         px-6 md:px-16
         py-10
         rounded
-        bg-green-dark/80
+        bg-black
         backdrop-filter
         backdrop-blur
       `}
@@ -130,7 +130,6 @@ export default function Filters() {
           relative
           flex
           items-center
-          bg-green-dark
         `}
       >
         <SearchBar

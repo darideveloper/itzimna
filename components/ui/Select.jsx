@@ -87,7 +87,7 @@ const Select = ({
             left-0
             mt-1
             w-full
-            bg-black
+            bg-green-dark
             shadow-lg
             overflow-hidden
             z-50
@@ -99,12 +99,13 @@ const Select = ({
               className={`
                 px-4
                 cursor-pointer
-                bg-black hover:bg-white/10
+                bg-transparent hover:bg-yellow
                 hover:bg-green-700
-                text-white
+                text-white hover:text-black
                 transition
                 py-3
                 hover:opacity-80
+                font-bold
               `}
               onClick={() => handleSelect(option)}
             >

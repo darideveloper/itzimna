@@ -186,7 +186,7 @@ const SearchBar = ({ placeholder, className = "" }) => {
             right-0 
             mt-1 
             z-10 
-            bg-black
+            bg-green-dark
             rounded-sm 
             shadow-lg 
             max-h-60 
@@ -201,11 +201,11 @@ const SearchBar = ({ placeholder, className = "" }) => {
                 block
                 py-2
                 my-1
-                text-white
+                text-white hover:text-black
                 duration-200
-                hover:opacity-80
-                hover:bg-green/20
+                hover:bg-yellow
                 capitalize
+                font-bold
               `}
             >
               {property.searchText}
