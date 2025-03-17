@@ -75,7 +75,7 @@ export default function Filters() {
       setLocations(locationsData)
     }
     loadLocations()
-  }, [])
+  }, [locale])
 
   useEffect(() => {
 
