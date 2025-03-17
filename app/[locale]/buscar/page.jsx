@@ -1,19 +1,21 @@
 // Libs
 import { getProperties } from "@/libs/api/properties"
+import { getTranslations } from "next-intl/server"
 
 // Components
 import Image from "next/image"
-import PropertyCard from "@/components/ui/PropertyCard"
-import Title from "@/components/ui/Title"
 
 // Sections
 import Filters from "@/components/layouts/Filters"
+import CardsSection from "@/components/layouts/CardsSection"
 
 
 const PropertySearch = async () => {
   // Fetch data on the server
   const properties = await getProperties()
   const propertyCards = properties.propertiesData || []
+
+  const t = await getTranslations("Search")
 
   return (
     <div>
@@ -45,56 +47,31 @@ const PropertySearch = async () => {
       />
       <div className="container mx-auto !pt-6 !pb-16">
 
-        {/* full layout container */}
+        {/* Filters */}
         <div
           className={`
-            flex
-            flex-col
+            max-w-5xl
+            mx-auto
           `}
         >
-
           <Filters />
-
-          {/* Content area */}
-          <div className="flex-grow">
-            <Title
-              isH1={true}
-              className={`
-                !text-5xl
-                !text-white
-              `}
-            >
-              Search Results
-            </Title>
-
-            <div
-              className={`
-                grid
-                grid-cols-1
-                sm:grid-cols-2
-                lg:grid-cols-3
-                gap-6
-              `}
-            >
-              {propertyCards.map((property, index) => (
-                <PropertyCard
-                  key={index}
-                  name={property.name}
-                  shortDescription={property.shortDescription}
-                  imageSrc={property.imageSrc}
-                  company={property.company}
-                  location={property.location}
-                  price={property.price}
-                  meters={property.meters}
-                  category={property.category}
-                  href={`/properties/${property.id}`}
-                  className=""
-                />
-              ))}
-            </div>
-          </div>
         </div>
+
+        {/* Results */}
+        <CardsSection
+          id="last-properties"
+          title={t('title')}
+          initialData={properties.propertiesData}
+          initialTotalProperties={properties.pages}
+          variant="dark"
+          className={`
+            !pt-0
+          `}
+        />
+
       </div>
+
+
     </div>
   )
 }

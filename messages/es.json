@@ -90,6 +90,9 @@
   },
   "PropertyDevelopment": {
     "contactSeller": "Contactar al vendedor"
+  },
+  "Search": {
+    "title": "Resultados de la búsqueda"
   }
 
 }

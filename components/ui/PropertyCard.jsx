@@ -51,7 +51,6 @@ export default function PropertyCard({
           duration-300
           bg-grey
           overflow-hidden
-          border-2
           border-white hover:border-green
           text-green
           cursor-pointer

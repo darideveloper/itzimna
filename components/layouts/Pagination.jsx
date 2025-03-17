@@ -8,9 +8,11 @@ import Button from "@/components/ui/Button";
  * Pagination component
  *
  * @param {object} props - Props object
- * @param {number} [props.currentPage=1] - Current page
- * @param {number} [props.totalPages=10] - Total pages
- * @param {function} [props.onPageChange=null] - Page change handler
+ * @param {number} props.currentPage - Current page
+ * @param {number} props.totalPages - Total pages
+ * @param {function} props.onPageChange - Page change handler
+ * @param {string} props.className - Additional classes
+ * @param {string} props.variant - Pagination variant. Default is "light" (light or dark)
  * @returns {JSX.Element} Pagination component
  */
 const Pagination = ({
@@ -18,6 +20,7 @@ const Pagination = ({
   totalPages = 10,
   onPageChange = null,
   className = "",
+  variant="light"
 }) => {
   return (
     <nav
@@ -30,29 +33,21 @@ const Pagination = ({
         ${className}
      `}
     >
-      <Button
-        disabled={currentPage === 1}
-        onClick={() => onPageChange(currentPage - 1)}
+      <div
         className={`
-          w-10
-          h-10
           flex
           items-center
           justify-center
+          gap-6
+          py-4
+          px-8
+          rounded-md
+          ${variant === "light" ? "bg-transparent": "bg-white"}
         `}
       >
-        <FaCaretLeft
-          className={`
-            w-5
-            h-5
-        `}
-        />
-      </Button>
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
         <Button
-          key={page}
-          active={page === currentPage}
-          onClick={() => onPageChange(page)}
+          disabled={currentPage === 1}
+          onClick={() => onPageChange(currentPage - 1)}
           className={`
             w-10
             h-10
@@ -61,27 +56,49 @@ const Pagination = ({
             justify-center
           `}
         >
-          {page}
+          <FaCaretLeft
+            className={`
+              w-5
+              h-5
+          `}
+          />
         </Button>
-      ))}
-      <Button
-        disabled={currentPage === totalPages}
-        onClick={() => onPageChange(currentPage + 1)}
-        className={`
-          w-10
-          h-10
-          flex
-          items-center
-          justify-center
-        `}
-      >
-        <FaCaretRight
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <Button
+            key={page}
+            active={page === currentPage}
+            onClick={() => onPageChange(page)}
+            className={`
+              w-10
+              h-10
+              flex
+              items-center
+              justify-center
+            `}
+          >
+            {page}
+          </Button>
+        ))}
+        <Button
+          disabled={currentPage === totalPages}
+          onClick={() => onPageChange(currentPage + 1)}
           className={`
-            w-5
-            h-5
-        `}
-        />
-      </Button>
+            w-10
+            h-10
+            flex
+            items-center
+            justify-center
+          `}
+        >
+          <FaCaretRight
+            className={`
+              w-5
+              h-5
+          `}
+          />
+        </Button>
+      </div>
+
     </nav>
   );
 };

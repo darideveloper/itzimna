@@ -26,6 +26,8 @@ import Spinner from "@/components/ui/Spinner"
  * @param {String} initialData[].meters - Property size in square meters like "99.00"
  * @param {String} initialData[].category - Property category
  * @param {Number} initialTotalProperties - Initial total properties
+ * @param {String} className - Section class name
+ * @param {String} variant - Section variant. Default is "light" (light or dark)
  * @returns {JSX.Element} Cards section component
  */
 export default function CardsSection({
@@ -35,6 +37,7 @@ export default function CardsSection({
   initialData = [],
   initialTotalProperties = 0,
   className = "",
+  variant = "light",
 }) {
   // States
   const [propertiesData, setPropertiesData] = useState(initialData)
@@ -84,10 +87,10 @@ export default function CardsSection({
     <section
       className={`
         cards
-        ${className}
         w-full
         relative
         py-12
+        ${className}
       `}
       id={id}
     >
@@ -96,7 +99,13 @@ export default function CardsSection({
           container
         `}
       >
-        <Title>{title}</Title>
+        <Title
+          className={`
+            ${variant === "dark" && "!text-white"}
+          `}
+        >
+          {title}
+        </Title>
 
         <br />
 
@@ -140,6 +149,7 @@ export default function CardsSection({
             setLastPage(page)
             setPage(newPage)
           }}
+          variant={variant}
         />
       </div>
     </section>

@@ -94,6 +94,8 @@
   },
   "PropertyDevelopment": {
     "contactSeller": "Contact Seller"
+  },
+  "Search": {
+    "title": "Search Results"
   }
-
 }
