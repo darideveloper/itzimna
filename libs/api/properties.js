@@ -4,6 +4,7 @@ const host = process.env.NEXT_PUBLIC_HOST
 /**
  * Fetch last properties from local API
  * 
+ * @param {String} locale - Locale ('es', 'en')
  * @param {Number} page - Page number
  * @param {Boolean} filterFeatured - Filter only featured properties
  * 
@@ -24,12 +25,17 @@ const host = process.env.NEXT_PUBLIC_HOST
  * @returns {String} return.propertiesData[].slug - Property slug from name
  * @returns {Number} return.count - Total count of properties
  */
-export async function getProperties(page = 1, filterFeatured = false) {
+export async function getProperties(locale, page = 1, filterFeatured = false) {
   let endpoint = `${host}/api/properties?page=${page}`
   if (filterFeatured) {
     endpoint += `&featured=true`
   }
-  const propertiesRes = await fetch(endpoint)
+  const propertiesRes = await fetch(endpoint, {
+    // Send locale in headers
+    headers: {
+      'lang': locale
+    }
+  })
   const propertiesJson = await propertiesRes.json()
   const propertiesData = await propertiesJson.results
   const pages = await Math.ceil(propertiesJson.count / 8)
@@ -48,10 +54,14 @@ export async function getProperties(page = 1, filterFeatured = false) {
  * @returns {String} return[].location - Property location (in lang)
  * @returns {String} return[].company - Property company name
  */
-export async function getPropertiesSummary() {
+export async function getPropertiesSummary(locale) {
   
   let endpoint = `${host}/api/properties?page-size=10000&summary=true`
-  const res = await fetch(endpoint)
+  const res = await fetch(endpoint, {
+    headers: {
+      'lang': locale
+    }
+  })
   const jsonData = await res.json()
   const propertiesSummary = await jsonData.results
 

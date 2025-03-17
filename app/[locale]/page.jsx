@@ -8,15 +8,17 @@ import { getProperties } from "@/libs/api/properties"
 import { getTranslations } from "next-intl/server"
 
 
-export default async function HomePage() {
+export default async function HomePage({ params }) {
 
   // Translations
   const t = await getTranslations('Home')
   const tMeta = await getTranslations('Meta')
 
+  const { locale } = await params
+
   // Get initial properties data
-  const lastProperties = await getProperties(1)
-  const featuredProperties = await getProperties(1, true)
+  const lastProperties = await getProperties(locale)
+  const featuredProperties = await getProperties(locale, 1, true)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -52,6 +54,7 @@ export default async function HomePage() {
       />
 
       <Hero />
+
       <CardsSection
         id="last-properties"
         title={t('LastProperties.title')}
@@ -66,6 +69,7 @@ export default async function HomePage() {
         initialData={featuredProperties.propertiesData}
         initialTotalProperties={featuredProperties.pages}
       />
+      
       <Gallery />
     </>
   )

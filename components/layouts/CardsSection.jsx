@@ -3,6 +3,7 @@
 // Libs
 import { useEffect, useState, useRef } from "react"
 import { getProperties } from "@/libs/api/properties"
+import { useLocale } from "next-intl";
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
@@ -49,6 +50,9 @@ export default function CardsSection({
   // Refs
   const isFirstRender = useRef(true)
 
+  // Locale
+  const locale = useLocale()
+
   // Effects
   useEffect(() => {
 
@@ -62,7 +66,7 @@ export default function CardsSection({
     setIsLoading(true)
 
     // Update properties data when change page
-    getProperties(page, filterFeatured).then(({ propertiesData, pages }) => {
+    getProperties(locale, page, filterFeatured).then(({ propertiesData, pages }) => {
       
       setPropertiesData(propertiesData)
 

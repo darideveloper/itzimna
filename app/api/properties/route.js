@@ -13,7 +13,7 @@ export async function GET(request) {
     accessToken = request.headers.get('accessToken') || ''
     refreshToken = request.headers.get('refreshToken') || ''
   }
-
+  
   if (!lang) {
     lang = request.headers.get('lang') || 'es'
   }

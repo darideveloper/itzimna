@@ -10,6 +10,8 @@ import TransitionLink from "@/components/utils/TransitionLink"
 import { useTranslations } from "next-intl"
 import { useState, useEffect } from "react"
 import { getLocations } from "@/libs/api/locations"
+import { useLocale } from "next-intl";
+
 
 // Icons
 import { FaSearch } from "react-icons/fa"
@@ -19,6 +21,8 @@ export default function Filters() {
 
   // Translations
   const t = useTranslations("Filters")
+
+  const locale = useLocale()
 
   // Data
   const [readySubmit, setReadySubmit] = useState(false)
@@ -60,7 +64,7 @@ export default function Filters() {
     const loadLocations = async () => {
 
       // get data from api
-      const locations = await getLocations()
+      const locations = await getLocations(locale)
 
       // Format data
       const locationsData = locations.map((location) => {

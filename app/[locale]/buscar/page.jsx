@@ -10,9 +10,12 @@ import Filters from "@/components/layouts/Filters"
 import CardsSection from "@/components/layouts/CardsSection"
 
 
-const PropertySearch = async () => {
+const PropertySearch = async ({ params }) => {
+
+  const { locale } = await params
+
   // Fetch data on the server
-  const properties = await getProperties()
+  const properties = await getProperties(locale)
   const propertyCards = properties.propertiesData || []
 
   const t = await getTranslations("Search")

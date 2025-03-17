@@ -3,6 +3,7 @@
 //Libs
 import { useState, useEffect, useRef } from "react"
 import { getPropertiesSummary } from "@/libs/api/properties"
+import { useLocale } from "next-intl";
 
 //Components
 import TransitionLink from "@/components/utils/TransitionLink"
@@ -35,12 +36,14 @@ const SearchBar = ({ placeholder, className = "", onChange, isOpen }) => {
   const suggestionsRef = useRef(null)
   const inputRef = useRef(null)
 
+  const lang = useLocale()
+
   useEffect(() => {
     // Load options on initial render
     const fetchSuggestions = async () => {
       setIsLoading(true)
       try {
-        let properties = await getPropertiesSummary()
+        let properties = await getPropertiesSummary(lang)
 
         // Add search text to each property (name, location and company)
         properties = properties.map((property) => {
