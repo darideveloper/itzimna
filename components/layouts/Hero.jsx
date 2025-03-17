@@ -1,15 +1,20 @@
-// Libs
-import { useTranslations } from "next-intl"
-
 // Components
 import Title from "@/components/ui/Title"
 
 // Sections
 import Filters from "@/components/layouts/Filters"
 
-
-const HeroSection = ({ id = "hero", className = "" }) => {
-  const t = useTranslations("Home.HeroSection")
+/**
+ * Hero section component
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.id - Component id
+ * @param {string} props.className - Component classes
+ * @param {string} props.title - Title text
+ * @param {string} props.description - Description text
+ * @param {string} props.bgImage - Background image url
+ */
+const HeroSection = ({ id = "hero", className = "", title, description, bgImage }) => {
 
   return (
     <div
@@ -17,16 +22,18 @@ const HeroSection = ({ id = "hero", className = "" }) => {
       className={`
         hero
         relative
-        h-auto md:h-[120vh]
+        h-[80vh]
         w-full
         md:overflow-hidden
-        bg-[url('/images/hero.webp')]
         bg-cover
         bg-center
         bg-fixed
-        ${className}
         py-24 md:py-0
+        ${className}
       `}
+      style={{
+        backgroundImage: `url(${bgImage})`
+      }}
     >
       <div
         className={`
@@ -65,7 +72,7 @@ const HeroSection = ({ id = "hero", className = "" }) => {
               !mt-0
             `}
           >
-            {t("title")}
+            {title}
           </Title>
           <p
             className={`
@@ -78,7 +85,7 @@ const HeroSection = ({ id = "hero", className = "" }) => {
             data-aos="fade-up"
             data-aos-delay="600"
           >
-            {t("description")}
+            {description}
           </p>
           
           {/* Search filters */}

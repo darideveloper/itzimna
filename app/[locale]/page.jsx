@@ -59,7 +59,14 @@ export default async function HomePage({ params }) {
       {/* Enable aos in page */}
       <AOSInit />
 
-      <Hero />
+      <Hero 
+        title={t('HeroSection.title')}
+        description={t('HeroSection.description')}
+        bgImage="/images/hero.webp"
+        className={`
+          min-h-[1000px]
+        `}
+      />
 
       <CardsSection
         id="last-properties"

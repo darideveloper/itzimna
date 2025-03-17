@@ -8,6 +8,7 @@ import Image from "next/image"
 // Sections
 import Filters from "@/components/layouts/Filters"
 import CardsSection from "@/components/layouts/CardsSection"
+import Hero from "@/components/layouts/Hero"
 
 
 const PropertySearch = async ({ params }) => {
@@ -25,6 +26,14 @@ const PropertySearch = async ({ params }) => {
         pb-12
       `}
     >
+      <Hero 
+        title={t('title')}
+        bgImage="/images/hero.webp"
+        className={`
+          min-h-[700px] lg:min-h-[800px]
+        `}
+      />
+
       <Image
         src="/images/hero.webp"
         width={1220}
@@ -52,22 +61,9 @@ const PropertySearch = async ({ params }) => {
         `}
       />
 
-      {/* Filters */}
-      <div
-        className={`
-          container
-          !max-w-5xl
-          !mt-16
-          md:!mb-40 lg:!mb-56
-        `}
-      >
-        <Filters />
-      </div>
-
       {/* Results */}
       <CardsSection
         id="last-properties"
-        title={t('title')}
         initialData={properties.propertiesData}
         initialTotalProperties={properties.pages}
         variant="dark"
