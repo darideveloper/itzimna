@@ -11,7 +11,6 @@ import { fontBody } from '@/libs/fonts'
 // Global components
 import Header from '@/components/layouts/Header'
 import Footer from '@/components/layouts/Footer'
-import AOSInit from '@/components/utils/AOSInit'
 
 // Css
 import '@/css/globals.sass'
@@ -43,7 +42,6 @@ export default async function LocaleLayout({ children, params }) {
           ${fontBody.className}
         `}
       >
-        <AOSInit />
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main>

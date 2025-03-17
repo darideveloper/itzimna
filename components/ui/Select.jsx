@@ -88,7 +88,7 @@ const Select = ({
       {isOpen && (
         <ul
           className={`
-            absolute
+            relative md:absolute
             left-0
             mt-1
             w-full

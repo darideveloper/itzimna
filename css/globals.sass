@@ -28,9 +28,8 @@ body
   padding: 0 1rem
   margin: 0 auto
   max-width: 1400px
-  
 
-.hidden 
+.hidden
   display: none
 
 // Custom scroll bar
@@ -54,16 +53,14 @@ body
 //   color: $white !important
 //   transition-duration: 0.2s !important
 //   transition-property: all !important
-  
+
 //   &:hover
 //     opacity: 0.7 !important
-
 
 // Transition video
 .transition-video-wrapper
   &.play
     opacity: 1
-
 
 // swipper custom styles
 .swiper-button-next, .swiper-button-prev
@@ -90,6 +87,15 @@ body
   color: $color-white !important
   transition-duration: 0.2s !important
   transition-property: all !important
-  
+
   &:hover
     opacity: 0.7 !important
+
+[data-aos]
+  pointer-events: none
+
+.aos-animate
+  pointer-events: auto
+
+.aos-init[data-aos][data-aos].aos-animate
+  transform: unset

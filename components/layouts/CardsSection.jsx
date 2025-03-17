@@ -7,7 +7,7 @@ import { useLocale } from "next-intl";
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
-import Pagination from "@/components/layouts/Pagination"
+import Pagination from "@/components/ui/Pagination"
 import Title from "@/components/ui/Title"
 import Spinner from "@/components/ui/Spinner"
 

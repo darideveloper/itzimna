@@ -16,12 +16,15 @@ const PropertySearch = async ({ params }) => {
 
   // Fetch data on the server
   const properties = await getProperties(locale)
-  const propertyCards = properties.propertiesData || []
 
   const t = await getTranslations("Search")
 
   return (
-    <div>
+    <div
+      className={`
+        pb-12
+      `}
+    >
       <Image
         src="/images/hero.webp"
         width={1220}
@@ -48,32 +51,31 @@ const PropertySearch = async ({ params }) => {
           opacity-80
         `}
       />
-      <div className="container mx-auto !pt-6 !pb-16">
 
-        {/* Filters */}
-        <div
-          className={`
-            max-w-5xl
-            mx-auto
-          `}
-        >
-          <Filters />
-        </div>
-
-        {/* Results */}
-        <CardsSection
-          id="last-properties"
-          title={t('title')}
-          initialData={properties.propertiesData}
-          initialTotalProperties={properties.pages}
-          variant="dark"
-          className={`
-            !pt-0
-          `}
-        />
-
+      {/* Filters */}
+      <div
+        className={`
+          container
+          !max-w-5xl
+          !mt-16
+          md:!mb-40 lg:!mb-56
+        `}
+      >
+        <Filters />
       </div>
 
+      {/* Results */}
+      <CardsSection
+        id="last-properties"
+        title={t('title')}
+        initialData={properties.propertiesData}
+        initialTotalProperties={properties.pages}
+        variant="dark"
+        className={`
+          !pt-0
+        `}
+        useAos={false}
+      />
 
     </div>
   )

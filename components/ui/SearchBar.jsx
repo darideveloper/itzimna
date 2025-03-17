@@ -212,6 +212,7 @@ const SearchBar = ({ placeholder, className = "", onChange, isOpen }) => {
                 hover:bg-yellow
                 capitalize
                 font-bold
+                text-center
               `}
             >
               {property.searchText}

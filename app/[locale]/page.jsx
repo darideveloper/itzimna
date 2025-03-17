@@ -7,6 +7,9 @@ import Gallery from "@/components/layouts/Gallery"
 import { getProperties } from "@/libs/api/properties"
 import { getTranslations } from "next-intl/server"
 
+// Utils components
+import AOSInit from '@/components/utils/AOSInit'
+
 
 export default async function HomePage({ params }) {
 
@@ -52,6 +55,9 @@ export default async function HomePage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {/* Enable aos in page */}
+      <AOSInit />
 
       <Hero />
 

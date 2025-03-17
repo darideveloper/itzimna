@@ -18,6 +18,9 @@ import Button from '@/components/ui/Button'
 // Style
 import '@/css/markdown.sass'
 
+// Utils components
+import AOSInit from '@/components/utils/AOSInit'
+
 
 export default async function PropertyDevelopment({ params }) {
   
@@ -89,6 +92,9 @@ export default async function PropertyDevelopment({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {/* Enable aos in page */}
+      <AOSInit />
 
       {/* paralax bg */}
       <Image
