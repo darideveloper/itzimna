@@ -32,8 +32,6 @@ export async function fetchJWT(
   let refreshToken = cookieStore.get("refreshToken")?.value || null
   let lang = request.cookies.get("NEXT_LOCALE")?.value || null
 
-  console.debug("jwt 1", { accessToken, refreshToken, lang, endpoint })
-
   // Use default values if not cookies
   if (!accessToken) {
     accessToken = accessTokenDefault
@@ -43,10 +41,7 @@ export async function fetchJWT(
   }
   if (!lang) {
     lang = langDefault
-  }
-
-  console.debug("jwt 2", { accessToken, refreshToken, lang, endpoint })
-  
+  }  
 
   const cookiesOptions = {
     httpOnly: true,
