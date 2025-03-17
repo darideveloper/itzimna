@@ -1,5 +1,3 @@
-"use client"
-
 // Libs
 import { useTranslations } from "next-intl"
 
