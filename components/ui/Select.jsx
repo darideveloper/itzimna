@@ -14,6 +14,10 @@ import { FaChevronDown } from "react-icons/fa"
  * @param {Function} props.onChange - On change event
  * @param {string} props.className - Additional class name
  * @param {string} props.prefix - Prefix text
+ * @param {string} props.postfix - Postfix text
+ * @param {Function} props.onOpen - On open additional event
+ * @param {boolean} props.isOpen - Is open state
+ * @param {Function} props.setIsOpen - Set is open state
  * @returns {JSX.Element} Select component
  */
 const Select = ({
@@ -22,10 +26,11 @@ const Select = ({
   onChange = null,
   className = "",
   prefix = "",
-  postfix = ""
+  postfix = "",
+  isOpen = false,
+  setIsOpen = () => { }
 }) => {
   const [selected, setSelected] = useState({ value: "", label: placeholder })
-  const [isOpen, setIsOpen] = useState(false)
 
   const handleSelect = (value) => {
     setSelected(value)
@@ -66,7 +71,7 @@ const Select = ({
           ?
             `${selected.label}`
           :
-            `${prefix} ${selected.label} ${postfix}`
+            `${selected.label} ${postfix}`
         }
 
         <FaChevronDown

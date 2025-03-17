@@ -18,10 +18,11 @@ import { FaX } from "react-icons/fa6";
  * @param {object} props - Props object
  * @param {string} [props.placeholder="Search..."] - Placeholder text
  * @param {string} [props.className=""] - Additional classes
- *
+ * @param {Function} props.onChange - On change event
+ * @param {boolean} props.isOpen - Is open state
  * @returns {JSX.Element} Search bar component
  */
-const SearchBar = ({ placeholder, className = "" }) => {
+const SearchBar = ({ placeholder, className = "", onChange, isOpen }) => {
 
   // States
   const [searchTerm, setSearchTerm] = useState("")
@@ -75,6 +76,8 @@ const SearchBar = ({ placeholder, className = "" }) => {
       regex.test(property.searchText)
     )
     setSuggestions(filteredSuggestions)
+
+    onChange(searchTerm)
 
   }, [searchTerm])
 
@@ -176,7 +179,7 @@ const SearchBar = ({ placeholder, className = "" }) => {
       </button>
 
       {/* Suggestions Dropdown */}
-      {suggestions && (
+      {suggestions && isOpen && (
         <div
           ref={suggestionsRef}
           className={`

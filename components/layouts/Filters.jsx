@@ -18,13 +18,20 @@ export default function Filters() {
   // Translations
   const t = useTranslations("Filters")
 
-  // States
+  // Data
   const [readySubmit, setReadySubmit] = useState(false)
   const [lcoations, setLocations] = useState([])
   const [selectedLocation, setSelectedLocation] = useState({})
   const [selectedSize, setSelectedSize] = useState({})
   const [selectedPrice, setSelectedPrice] = useState({})
   const [query, setQuery] = useState("")
+
+  // Inputs states
+  const [locationIsOpen, setLocationIsOpen] = useState(false)
+  const [sizeIsOpen, setSizeIsOpen] = useState(false)
+  const [priceIsOpen, setPriceIsOpen] = useState(false)
+  const [searchIsOpen, setSearchIsOpen] = useState(false)
+
 
   // Filters fixed data
   const sizesOptions = [
@@ -108,6 +115,12 @@ export default function Filters() {
     setQuery(fullQuery)
   }, [selectedLocation, selectedSize, selectedPrice])
 
+  // Hanlders
+  function closeAll() {
+    setLocationIsOpen(false)
+    setSizeIsOpen(false)
+    setPriceIsOpen(false)
+  }
 
   return (
     <div
@@ -134,6 +147,11 @@ export default function Filters() {
       >
         <SearchBar
           placeholder={t("searchPlaceholder")}
+          onChange={() => {
+            closeAll()
+            setSearchIsOpen(true)
+          }}
+          isOpen={searchIsOpen}
         />
       </div>
 
@@ -151,6 +169,12 @@ export default function Filters() {
           options={lcoations}
           placeholder={t("locationPlaceholder")}
           onChange={setSelectedLocation}
+          isOpen={locationIsOpen}
+          setIsOpen={(newState) => {
+            closeAll()
+            setSearchIsOpen(false)
+            setLocationIsOpen(newState)
+          }}
         />
         <Select
           options={sizesOptions}
@@ -159,6 +183,13 @@ export default function Filters() {
           // Prefix and postfix for the select
           prefix={t("selectPrefix")}
           postfix="m²"
+          onOpen={() => closeAll()}
+          isOpen={sizeIsOpen}
+          setIsOpen={(newState) => {
+            closeAll()
+            setSearchIsOpen(false)
+            setSizeIsOpen(newState)
+          }}
         />
         <Select
           options={pricesOptions}
@@ -166,6 +197,12 @@ export default function Filters() {
           onChange={setSelectedPrice}
           prefix={t("selectPrefix")}
           postfix="MXN"
+          isOpen={priceIsOpen}
+          setIsOpen={(newState) => {
+            closeAll()
+            setSearchIsOpen(false)
+            setPriceIsOpen(newState)
+          }}
         />
         <TransitionLink
           // Dynamic link with query
