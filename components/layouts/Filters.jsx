@@ -136,7 +136,7 @@ export default function Filters() {
         mx-auto
         px-6 md:px-16
         py-10
-        rounded
+        rounded-xl
         bg-black
         backdrop-filter
         backdrop-blur
