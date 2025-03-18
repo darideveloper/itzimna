@@ -11,6 +11,9 @@ import Pagination from "@/components/ui/Pagination"
 import Title from "@/components/ui/Title"
 import Spinner from "@/components/ui/Spinner"
 
+// Zustand
+import { useSearchStore } from "@/store/search"
+
 /**
  * Cards section component
  *
@@ -29,6 +32,7 @@ import Spinner from "@/components/ui/Spinner"
  * @param {Number} initialTotalProperties - Initial total properties
  * @param {String} className - Section class name
  * @param {String} variant - Section variant. Default is "light" (light or dark)
+ * @param {Boolean} useSearchQuery - Use search query from zustand. Default is false
  * @returns {JSX.Element} Cards section component
  */
 export default function CardsSection({
@@ -39,13 +43,19 @@ export default function CardsSection({
   initialTotalProperties = 0,
   className = "",
   variant = "light",
+  useSearchQuery = false,
 }) {
+
   // States
   const [propertiesData, setPropertiesData] = useState(initialData)
   const [page, setPage] = useState(1)
   const [lastPage, setLastPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const [totalPages, setTotalProperties] = useState(initialTotalProperties)
+
+  // Zustand
+  let searchQuery = useSearchStore(state => state.searchQuery)
+  if (!useSearchQuery) searchQuery = ""
 
   // Refs
   const isFirstRender = useRef(true)
@@ -57,7 +67,7 @@ export default function CardsSection({
   useEffect(() => {
 
     // Update first render
-    if (isFirstRender.current) {
+    if (isFirstRender.current && !useSearchQuery) {
       isFirstRender.current = false
       return
     }
@@ -66,7 +76,7 @@ export default function CardsSection({
     setIsLoading(true)
 
     // Update properties data when change page
-    getProperties(locale, page, filterFeatured).then(({ propertiesData, pages }) => {
+    getProperties(locale, page, filterFeatured, searchQuery).then(({ propertiesData, pages }) => {
       
       setPropertiesData(propertiesData)
 
@@ -83,7 +93,7 @@ export default function CardsSection({
         setIsLoading(false)
       }, 1500)
     })
-  }, [page])
+  }, [page, searchQuery])
 
   // Get translations
   // const t = useTranslations("Home.CardsSection")

@@ -49,14 +49,16 @@ export default function Filters() {
   const selectedLocation = useSearchStore(state => state.selectedLocation)
   const selectedSize = useSearchStore(state => state.selectedSize)
   const selectedPrice = useSearchStore(state => state.selectedPrice)
+  const searchQuery = useSearchStore(state => state.searchQuery)
+
   const setSelectedLocation = useSearchStore(state => state.setSelectedLocation)
   const setSelectedSize = useSearchStore(state => state.setSelectedSize)
   const setSelectedPrice = useSearchStore(state => state.setSelectedPrice)
+  const setSearchQuery = useSearchStore(state => state.setSearchQuery)
 
   // Local state
   const [readySubmit, setReadySubmit] = useState(false)
   const [locations, setLocations] = useState([])
-  const [query, setQuery] = useState("")
 
   // Inputs states
   const [locationIsOpen, setLocationIsOpen] = useState(false)
@@ -100,9 +102,7 @@ export default function Filters() {
      * @param {string} paramName - name of the parameter
      */
     function getRangeQueryParam(selectedOption, options, paramName) {
-      const selectedOptionIndex = options.findIndex(option => option.value === selectedOption.value)
-      const prevOption = options[selectedOptionIndex - 1] || { value: 0 }
-      const queryText = `${paramName}-desde=${prevOption.value}&${paramName}-hasta=${selectedOption.value}`
+      const queryText = `${paramName}-desde=0&${paramName}-hasta=${selectedOption.value}`
       return queryText
     }
 
@@ -130,7 +130,7 @@ export default function Filters() {
       queryParts.push(priceQuery)
     }
     const fullQuery = queryParts.join("&")
-    setQuery(fullQuery)
+    setSearchQuery(fullQuery)
   }, [selectedLocation, selectedSize, selectedPrice])
 
 
@@ -248,7 +248,7 @@ export default function Filters() {
         />
         <TransitionLink
           // Dynamic link with query
-          href={`/buscar?${query}`}
+          href={`/buscar?${searchQuery}`}
           className={`
             md:col-span-3 lg:col-span-1
           `}

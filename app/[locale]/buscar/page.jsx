@@ -1,5 +1,4 @@
 // Libs
-import { getProperties } from "@/libs/api/properties"
 import { getTranslations } from "next-intl/server"
 
 // Components
@@ -10,13 +9,9 @@ import CardsSection from "@/components/layouts/CardsSection"
 import Hero from "@/components/layouts/Hero"
 
 
-const PropertySearch = async ({ params }) => {
+const PropertySearch = async () => {
 
-  const { locale } = await params
-
-  // Fetch data on the server
-  const properties = await getProperties(locale)
-
+  // Translations
   const t = await getTranslations("Search")
 
   return (
@@ -65,13 +60,14 @@ const PropertySearch = async ({ params }) => {
       {/* Results */}
       <CardsSection
         id="last-properties"
-        initialData={properties.propertiesData}
-        initialTotalProperties={properties.pages}
+        initialData={[]}
+        initialTotalProperties={0}
         variant="dark"
         className={`
           !py-8          
         `}
         useAos={false}
+        useSearchQuery={true}
       />
 
     </div>

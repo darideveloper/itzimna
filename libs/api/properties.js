@@ -7,6 +7,7 @@ const host = process.env.NEXT_PUBLIC_HOST
  * @param {String} locale - Locale ('es', 'en')
  * @param {Number} page - Page number
  * @param {Boolean} filterFeatured - Filter only featured properties
+ * @param {String} searchQuery - Search query (additional filters)
  * 
  * @returns {Object} - Properties data and count
  * @returns {Array} return.propertiesData - Properties data
@@ -25,11 +26,16 @@ const host = process.env.NEXT_PUBLIC_HOST
  * @returns {String} return.propertiesData[].slug - Property slug from name
  * @returns {Number} return.count - Total count of properties
  */
-export async function getProperties(locale, page = 1, filterFeatured = false) {
+export async function getProperties(locale, page = 1, filterFeatured = false, searchQuery = "") {
+
   let endpoint = `${host}/api/properties?page=${page}`
+  if (searchQuery) {
+    endpoint += `&${searchQuery}`
+  }
   if (filterFeatured) {
     endpoint += `&featured=true`
   }
+  console.log({endpoint})
   const propertiesRes = await fetch(endpoint, {
     // Send locale in headers
     headers: {
