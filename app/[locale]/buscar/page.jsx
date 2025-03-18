@@ -28,7 +28,7 @@ const PropertySearch = async ({ params }) => {
     >
       <Hero 
         title={t('title')}
-        bgImage="/images/hero.webp"
+        bgImage="/images/hero-buscar.webp"
         className={`
           min-h-[700px] lg:min-h-[800px]
         `}
@@ -46,9 +46,11 @@ const PropertySearch = async ({ params }) => {
           top-0
           left-0
           -z-20
+          object-cover
         `}
         alt="bg image"
       />
+
       <div
         className={`
           overlay-effect
@@ -68,7 +70,7 @@ const PropertySearch = async ({ params }) => {
         initialTotalProperties={properties.pages}
         variant="dark"
         className={`
-          !pt-0
+          !py-8          
         `}
         useAos={false}
       />
