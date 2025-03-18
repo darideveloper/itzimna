@@ -12,7 +12,7 @@ export default async function sitemap() {
   ]
 
   // Fetch dynamic pages
-  const properties = await getPropertiesSummary()
+  const properties = await getPropertiesSummary("es")
 
   // Generate sitemap array
 
