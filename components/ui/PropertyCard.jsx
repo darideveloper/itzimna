@@ -68,7 +68,7 @@ export default function PropertyCard({
         `}
         >
           <Image
-            src={imageSrc || "images/test.svg"}
+            src={imageSrc || "/images/test.svg"}
             alt={name}
             fill
             className={`
