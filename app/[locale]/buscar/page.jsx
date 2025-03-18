@@ -6,7 +6,6 @@ import { getTranslations } from "next-intl/server"
 import Image from "next/image"
 
 // Sections
-import Filters from "@/components/layouts/Filters"
 import CardsSection from "@/components/layouts/CardsSection"
 import Hero from "@/components/layouts/Hero"
 

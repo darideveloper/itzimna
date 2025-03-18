@@ -11,10 +11,13 @@ import { useTranslations } from "next-intl"
 import { useState, useEffect } from "react"
 import { getLocations } from "@/libs/api/locations"
 import { useLocale } from "next-intl";
-
+import { useSearchParams } from "next/navigation";
 
 // Icons
 import { FaSearch } from "react-icons/fa"
+
+// Zustand
+import { useSearchStore } from "@/store/search"
 
 
 export default function Filters() {
@@ -22,22 +25,8 @@ export default function Filters() {
   // Translations
   const t = useTranslations("Filters")
 
+  // Locale
   const locale = useLocale()
-
-  // Data
-  const [readySubmit, setReadySubmit] = useState(false)
-  const [lcoations, setLocations] = useState([])
-  const [selectedLocation, setSelectedLocation] = useState({})
-  const [selectedSize, setSelectedSize] = useState({})
-  const [selectedPrice, setSelectedPrice] = useState({})
-  const [query, setQuery] = useState("")
-
-  // Inputs states
-  const [locationIsOpen, setLocationIsOpen] = useState(false)
-  const [sizeIsOpen, setSizeIsOpen] = useState(false)
-  const [priceIsOpen, setPriceIsOpen] = useState(false)
-  const [searchIsOpen, setSearchIsOpen] = useState(false)
-
 
   // Filters fixed data
   const sizesOptions = [
@@ -55,6 +44,29 @@ export default function Filters() {
     { value: "2000000", label: "2,000,000" },
     { value: "5000000", label: "5,000,000" },
   ]
+
+  // Search store
+  const selectedLocation = useSearchStore(state => state.selectedLocation)
+  const selectedSize = useSearchStore(state => state.selectedSize)
+  const selectedPrice = useSearchStore(state => state.selectedPrice)
+  const setSelectedLocation = useSearchStore(state => state.setSelectedLocation)
+  const setSelectedSize = useSearchStore(state => state.setSelectedSize)
+  const setSelectedPrice = useSearchStore(state => state.setSelectedPrice)
+
+  // Local state
+  const [readySubmit, setReadySubmit] = useState(false)
+  const [locations, setLocations] = useState([])
+  const [query, setQuery] = useState("")
+
+  // Inputs states
+  const [locationIsOpen, setLocationIsOpen] = useState(false)
+  const [sizeIsOpen, setSizeIsOpen] = useState(false)
+  const [priceIsOpen, setPriceIsOpen] = useState(false)
+  const [searchIsOpen, setSearchIsOpen] = useState(false)
+
+  // Get query params
+  const [...searchParams] = useSearchParams()
+
 
   // Effects
 
@@ -77,6 +89,7 @@ export default function Filters() {
     loadLocations()
   }, [locale])
 
+
   useEffect(() => {
 
     /**
@@ -94,7 +107,7 @@ export default function Filters() {
     }
 
     // Enable submit button when fill any filter
-    const ready = selectedLocation.value || selectedSize.value || selectedPrice.value
+    const ready = selectedLocation?.value || selectedSize?.value || selectedPrice?.value
     if (ready) {
       setReadySubmit(true)
     }
@@ -104,21 +117,42 @@ export default function Filters() {
     let locationQuery = ""
     let sizeQuery = ""
     let priceQuery = ""
-    if (selectedLocation.value) {
+    if (selectedLocation?.value) {
       locationQuery = `ubicacion=${selectedLocation.value}&ubicacion-nombre=${selectedLocation.label}`
       queryParts.push(locationQuery)
     }
-    if (selectedSize.value) {
+    if (selectedSize?.value) {
       sizeQuery = getRangeQueryParam(selectedSize, sizesOptions, "metros")
       queryParts.push(sizeQuery)
     }
-    if (selectedPrice.value) {
+    if (selectedPrice?.value) {
       priceQuery = getRangeQueryParam(selectedPrice, pricesOptions, "precio")
       queryParts.push(priceQuery)
     }
     const fullQuery = queryParts.join("&")
     setQuery(fullQuery)
   }, [selectedLocation, selectedSize, selectedPrice])
+
+
+  useEffect(() => {
+    
+    // Update zustand states when page loads (and locations change)
+    for (const param of searchParams) {
+
+      const [key, value] = param
+
+      if (key === "ubicacion" && locations.length > 0) {
+        const selectedLocation = locations.find(location => location.value.toString() === value)
+        setSelectedLocation(selectedLocation)
+      } else if (key === "metros-hasta") {
+        const selectedSize = sizesOptions.find(size => size.value === value)
+        setSelectedSize(selectedSize)
+      } else if (key === "precio-hasta") {
+        const selectedPrice = pricesOptions.find(price => price.value === value)
+        setSelectedPrice(selectedPrice)
+      }
+    }
+  }, [locations])
 
   // Hanlders
   function closeAll() {
@@ -171,9 +205,10 @@ export default function Filters() {
           `}
       >
         <Select
-          options={lcoations}
+          options={locations}
           placeholder={t("locationPlaceholder")}
           onChange={setSelectedLocation}
+          value={selectedLocation}
           isOpen={locationIsOpen}
           setIsOpen={(newState) => {
             closeAll()
@@ -185,6 +220,7 @@ export default function Filters() {
           options={sizesOptions}
           placeholder={t("sizePlaceholder")}
           onChange={setSelectedSize}
+          value={selectedSize}
           // Prefix and postfix for the select
           prefix={t("selectPrefix")}
           postfix="m²"
@@ -200,6 +236,7 @@ export default function Filters() {
           options={pricesOptions}
           placeholder={t("pricePlaceholder")}
           onChange={setSelectedPrice}
+          value={selectedPrice}
           prefix={t("selectPrefix")}
           postfix="MXN"
           isOpen={priceIsOpen}
