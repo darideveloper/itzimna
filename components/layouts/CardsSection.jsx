@@ -33,6 +33,8 @@ import { useSearchStore } from "@/store/search"
  * @param {String} className - Section class name
  * @param {String} variant - Section variant. Default is "light" (light or dark)
  * @param {Boolean} useSearchQuery - Use search query from zustand. Default is false
+ * @param {Boolean} transparentModal - Transparent modal. Default is false
+ * @param {Number} loadingTimeOut - Loading spinner timeout. Default is 1500
  * @returns {JSX.Element} Cards section component
  */
 export default function CardsSection({
@@ -44,6 +46,8 @@ export default function CardsSection({
   className = "",
   variant = "light",
   useSearchQuery = false,
+  transparentModal = false,
+  loadingTimeOut = 1500,
 }) {
 
   // States
@@ -67,7 +71,7 @@ export default function CardsSection({
   useEffect(() => {
 
     // Update first render
-    if (isFirstRender.current && !useSearchQuery) {
+    if (isFirstRender.current) {
       isFirstRender.current = false
       return
     }
@@ -91,7 +95,8 @@ export default function CardsSection({
       // Hide loading spinner
       setTimeout(() => {
         setIsLoading(false)
-      }, 1500)
+      }, loadingTimeOut)
+
     })
   }, [page, searchQuery])
 
@@ -111,6 +116,7 @@ export default function CardsSection({
       <div
         className={`
           container
+          min-h-[250px]
         `}
       >
         <Title
@@ -135,7 +141,7 @@ export default function CardsSection({
           `}
         >
           {/* Loading spinner */}
-          <Spinner isLoading={isLoading} />
+          <Spinner isLoading={isLoading} transparentModal={transparentModal} />
 
           {/* Cards */}
           {propertiesData.map((card) => (
@@ -157,21 +163,25 @@ export default function CardsSection({
         </div>
 
         {
-          propertiesData.length === 0
-          ?
-            <Title className="text-center text-white !mt-0">
-              No se encontraron propiedades
-            </Title>
-          :
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={(newPage) => {
-              setLastPage(page)
-              setPage(newPage)
-            }}
-            variant={variant}
-          />
+          !isLoading
+            &&
+              (
+                propertiesData.length === 0
+                  ?
+                    <Title className="text-center text-white">
+                      No se encontraron propiedades
+                    </Title>
+                  :
+                    <Pagination
+                      currentPage={page}
+                      totalPages={totalPages}
+                      onPageChange={(newPage) => {
+                        setLastPage(page)
+                        setPage(newPage)
+                      }}
+                      variant={variant}
+                    />
+              )
         }
       </div>
     </section>

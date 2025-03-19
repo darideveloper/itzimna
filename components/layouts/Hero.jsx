@@ -13,8 +13,10 @@ import Filters from "@/components/layouts/Filters"
  * @param {string} props.title - Title text
  * @param {string} props.description - Description text
  * @param {string} props.bgImage - Background image url
+ * @param {boolean} props.filtersShowSubmit - Show submit button on filters. Default is true
+ * @returns {JSX.Element} Hero section component
  */
-const HeroSection = ({ id = "hero", className = "", title, description, bgImage }) => {
+const HeroSection = ({ id = "hero", className = "", title, description, bgImage, filtersShowSubmit = true }) => {
 
   return (
     <div
@@ -89,7 +91,9 @@ const HeroSection = ({ id = "hero", className = "", title, description, bgImage 
           </p>
           
           {/* Search filters */}
-          <Filters />
+          <Filters 
+            showSubmit={filtersShowSubmit}
+          />
 
         </div>
       </div>

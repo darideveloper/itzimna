@@ -19,8 +19,14 @@ import { FaSearch } from "react-icons/fa"
 // Zustand
 import { useSearchStore } from "@/store/search"
 
-
-export default function Filters() {
+/**
+ * Filters component
+ * 
+ * @param {Object} props - Component props
+ * @param {boolean} props.showSubmit - Show submit button on filters. Default is true
+ * @returns {JSX.Element} Filters component
+ */
+export default function Filters({ showSubmit = true }) {
 
   // Translations
   const t = useTranslations("Filters")
@@ -59,7 +65,6 @@ export default function Filters() {
   // Local state
   const [readySubmit, setReadySubmit] = useState(false)
   const [locations, setLocations] = useState([])
-  const [nextSearchQuery, setNextSearchQuery] = useState("")
 
   // Inputs states
   const [locationIsOpen, setLocationIsOpen] = useState(false)
@@ -128,7 +133,7 @@ export default function Filters() {
       queryParts.push(priceQuery)
     }
     const fullQuery = queryParts.join("&")
-    setNextSearchQuery(fullQuery)
+    setSearchQuery(fullQuery)
 
     // Enable submit button when fill any filter
     const ready = (
@@ -217,8 +222,7 @@ export default function Filters() {
         className={`
             mt-4
             grid
-            grid-cols-1
-            md:grid-cols-3 lg:grid-cols-4
+            grid-cols-1 md:grid-cols-3 ${showSubmit && 'lg:grid-cols-4'}
             gap-4
           `}
       >
@@ -264,35 +268,40 @@ export default function Filters() {
             setPriceIsOpen(newState)
           }}
         />
-        <TransitionLink
-          // Dynamic link with query
-          href={`/buscar?${nextSearchQuery}`}
-          className={`
-            md:col-span-3 lg:col-span-1
-            self-center
-          `}
-          // Disable click when no filters are selected
-          disabled={!readySubmit}
-        >
-          {/* Use button only for style */}
-          <Button
-            disabled={!readySubmit}
-            className={`
-              w-full
-              flex
-              items-center
-              justify-center
-              flex-row
-              gap-3
-            `}
-            // No onclick (used TransitionLink)
-          >
-            <FaSearch />
-            <p>
-              {t("searchButton")}
-            </p>
-          </Button>
-        </TransitionLink>
+
+        {
+          showSubmit 
+          &&
+            <TransitionLink
+              // Dynamic link with query
+              href={`/buscar?${searchQuery}`}
+              className={`
+                md:col-span-3 lg:col-span-1
+                self-center
+              `}
+              // Disable click when no filters are selected
+              disabled={!readySubmit}
+            >
+              {/* Use button only for style */}
+              <Button
+                disabled={!readySubmit}
+                className={`
+                  w-full
+                  flex
+                  items-center
+                  justify-center
+                  flex-row
+                  gap-3
+                `}
+                // No onclick (used TransitionLink)
+              >
+                <FaSearch />
+                <p>
+                  {t("searchButton")}
+                </p>
+              </Button>
+            </TransitionLink>
+        }
       </div>
     </div>
   )

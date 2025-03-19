@@ -7,8 +7,10 @@ import { useState, useEffect } from 'react'
  * @param {Object} props - Component props
  * @param {Boolean} props.isLoading - Loading state
  * @param {String} props.className - Component classes
+ * @param {Boolean} props.transparentModal - Transparent model. Default is false
+ * @returns {JSX.Element} Spinner component
  */
-export default function Spinner({ isLoading, className }) {
+export default function Spinner({ isLoading, className, transparentModal = false }) {
 
   // States
   const [display, setDisplay] = useState('hidden')
@@ -38,7 +40,7 @@ export default function Spinner({ isLoading, className }) {
         spinner
         w-full
         h-full
-        bg-white
+        ${transparentModal ? 'bg-transparent' : 'bg-white'}
         items-start
         justify-center
         absolute

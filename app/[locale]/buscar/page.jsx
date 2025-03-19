@@ -26,6 +26,7 @@ const PropertySearch = async () => {
         className={`
           min-h-[700px] lg:min-h-[800px]
         `}
+        filtersShowSubmit={false}
       />
 
       <Image
@@ -68,6 +69,8 @@ const PropertySearch = async () => {
         `}
         useAos={false}
         useSearchQuery={true}
+        transparentModal={true}
+        loadingTimeOut={0}
       />
 
     </div>
