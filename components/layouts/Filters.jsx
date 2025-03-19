@@ -269,6 +269,7 @@ export default function Filters() {
           href={`/buscar?${nextSearchQuery}`}
           className={`
             md:col-span-3 lg:col-span-1
+            self-center
           `}
           // Disable click when no filters are selected
           disabled={!readySubmit}

@@ -42,16 +42,17 @@ const Select = ({
     <div
       className={`
         relative
+        h-full
         ${className}
       `}
     >
       {/* Selected Item */}
       <div
         className={`
+          h-full
           w-full
           py-3
           px-4
-          pl-10
           rounded
           border-2
           ${isOpen ? 'border-white/80' : 'border-white/20'}
