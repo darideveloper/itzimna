@@ -3,10 +3,14 @@ import { getTranslations } from "next-intl/server"
 
 // Components
 import Image from "next/image"
+import Button from "@/components/ui/Button"
 
 // Sections
 import CardsSection from "@/components/layouts/CardsSection"
 import Hero from "@/components/layouts/Hero"
+
+// Icons
+import { FaArrowUp } from "react-icons/fa";
 
 
 const PropertySearch = async () => {
@@ -72,7 +76,30 @@ const PropertySearch = async () => {
         transparentModal={true}
         loadingTimeOut={0}
       />
-
+      
+      {/* Go top button */}
+      <Button
+        className={`
+          fixed
+          bottom-4
+          right-4
+          z-30
+          !rounded-full
+          !p-2
+          group
+        `}
+        variant="ghost"
+        href="#hero"
+      >
+        <FaArrowUp 
+          className={`
+            text-white
+            text-2xl
+            group-hover:text-green-dark
+          `}          
+        />
+      </Button>
+    
     </div>
   )
 }
