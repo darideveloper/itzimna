@@ -156,15 +156,23 @@ export default function CardsSection({
           ))}
         </div>
 
-        <Pagination
-          currentPage={page}
-          totalPages={totalPages}
-          onPageChange={(newPage) => {
-            setLastPage(page)
-            setPage(newPage)
-          }}
-          variant={variant}
-        />
+        {
+          propertiesData.length === 0
+          ?
+            <Title className="text-center text-white !mt-0">
+              No se encontraron propiedades
+            </Title>
+          :
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={(newPage) => {
+              setLastPage(page)
+              setPage(newPage)
+            }}
+            variant={variant}
+          />
+        }
       </div>
     </section>
   )
