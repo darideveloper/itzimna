@@ -49,7 +49,6 @@ export default function Filters() {
   const selectedLocation = useSearchStore(state => state.selectedLocation)
   const selectedSize = useSearchStore(state => state.selectedSize)
   const selectedPrice = useSearchStore(state => state.selectedPrice)
-  const searchQuery = useSearchStore(state => state.searchQuery)
 
   const setSelectedLocation = useSearchStore(state => state.setSelectedLocation)
   const setSelectedSize = useSearchStore(state => state.setSelectedSize)
@@ -59,6 +58,7 @@ export default function Filters() {
   // Local state
   const [readySubmit, setReadySubmit] = useState(false)
   const [locations, setLocations] = useState([])
+  const [nextSearchQuery, setNextSearchQuery] = useState("")
 
   // Inputs states
   const [locationIsOpen, setLocationIsOpen] = useState(false)
@@ -130,13 +130,14 @@ export default function Filters() {
       queryParts.push(priceQuery)
     }
     const fullQuery = queryParts.join("&")
-    setSearchQuery(fullQuery)
+    setNextSearchQuery(fullQuery)
   }, [selectedLocation, selectedSize, selectedPrice])
 
 
   useEffect(() => {
     
     // Update zustand states when page loads (and locations change)
+    let query = ""
     for (const param of searchParams) {
 
       const [key, value] = param
@@ -151,7 +152,10 @@ export default function Filters() {
         const selectedPrice = pricesOptions.find(price => price.value === value)
         setSelectedPrice(selectedPrice)
       }
+      query += `${key}=${value}&`
+
     }
+    setSearchQuery(query)
   }, [locations])
 
   // Hanlders
@@ -248,7 +252,7 @@ export default function Filters() {
         />
         <TransitionLink
           // Dynamic link with query
-          href={`/buscar?${searchQuery}`}
+          href={`/buscar?${nextSearchQuery}`}
           className={`
             md:col-span-3 lg:col-span-1
           `}
