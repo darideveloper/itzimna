@@ -2,6 +2,7 @@
 
 import { Link } from '@/i18n/routing'
 import { useRouter } from '@/i18n/routing'
+import { useLocale } from "next-intl";
 
 
 /**
@@ -16,7 +17,12 @@ import { useRouter } from '@/i18n/routing'
  */
 export default function TransitionLink({ href, onClick, disable, ...props }) {
 
+  // Routing
   const router = useRouter()
+  const locale = useLocale()
+
+  // Pages that need a full reload
+  const full_reload_pages = ["/buscar"]
 
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
@@ -27,11 +33,9 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
     // Skip if disabled
     if (disable === 'true') return
 
-    // Validate id links
-
     // Target page from href
     let hrefNoId = href.split('#')[0].trim()
-  
+
     // Original page
     const domain = window.location.origin
     let currentPage = window.location.href.split('#')[0]
@@ -61,6 +65,17 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
     video.currentTime = 0
     video.play()
 
+    // Check if the page needs a full reload
+    const is_full_reload = full_reload_pages.map((page) =>
+      href.startsWith(page)
+    ).includes(true)
+
+    if (is_full_reload) {
+      await sleep(3000) // Wait for animation to play
+      window.location.href = `/${locale}${href}`
+      return
+    }
+
     // Redirect
     const old_url = window.location.href
     if (href == "/es" || href == "/en") {
@@ -77,13 +92,13 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
     while (true) {
       if (window.location.href !== old_url) {
         await sleep(transitionDuration)
-        
+
         // Hide video
         transitionVideoWrapper.classList.remove("play")
         await sleep(2000)
         transitionVideoWrapper.classList.add("hidden")
         transitionVideoWrapper.classList.remove("flex")
-        
+
         break
       } else {
         await sleep(500)
