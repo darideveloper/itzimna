@@ -41,14 +41,14 @@ const Select = ({
     <div
       className={`
         relative
-        h-full
+        md:h-full
         ${className}
       `}
     >
       {/* Selected Item */}
       <div
         className={`
-          h-full
+          md:h-full
           w-full
           py-3
           px-4
