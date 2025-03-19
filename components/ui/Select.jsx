@@ -1,7 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { FaChevronDown } from "react-icons/fa"
+import { FaChevronDown, FaCircleNotch } from "react-icons/fa"
 
 /**
  * Select / dropdown component
@@ -69,11 +68,22 @@ const Select = ({
       >
         {/* Display label or selected value */}
         {
-          value?.value === ""
+          options.length === 0
           ?
-            `${placeholder}`
+            <FaCircleNotch 
+              className={`
+                animate-spin
+                text-gray-500 
+              `}
+            />
           :
-            `${value.label} ${postfix}`
+            (
+              value?.value === ""
+              ?
+                `${placeholder}`
+              :
+                `${value.label} ${postfix}`
+            )
         }
 
         <FaChevronDown
