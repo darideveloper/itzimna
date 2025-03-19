@@ -35,7 +35,6 @@ export async function getProperties(locale, page = 1, filterFeatured = false, se
   if (filterFeatured) {
     endpoint += `&featured=true`
   }
-  console.log({endpoint})
   const propertiesRes = await fetch(endpoint, {
     // Send locale in headers
     headers: {

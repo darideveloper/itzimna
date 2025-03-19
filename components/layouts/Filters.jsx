@@ -49,6 +49,7 @@ export default function Filters() {
   const selectedLocation = useSearchStore(state => state.selectedLocation)
   const selectedSize = useSearchStore(state => state.selectedSize)
   const selectedPrice = useSearchStore(state => state.selectedPrice)
+  const searchQuery = useSearchStore(state => state.searchQuery)
 
   const setSelectedLocation = useSearchStore(state => state.setSelectedLocation)
   const setSelectedSize = useSearchStore(state => state.setSelectedSize)
@@ -106,11 +107,8 @@ export default function Filters() {
       return queryText
     }
 
-    // Enable submit button when fill any filter
-    const ready = selectedLocation?.value || selectedSize?.value || selectedPrice?.value
-    if (ready) {
-      setReadySubmit(true)
-    }
+    // Skip validations if not locations
+    if (locations.length === 0) return
 
     // Update query when any filter is changed
     const queryParts = []
@@ -131,6 +129,17 @@ export default function Filters() {
     }
     const fullQuery = queryParts.join("&")
     setNextSearchQuery(fullQuery)
+
+    // Enable submit button when fill any filter
+    const ready = (
+      selectedLocation?.value || selectedSize?.value || selectedPrice?.value
+    ) && fullQuery != searchQuery
+    
+    if (ready) {
+      setReadySubmit(true)
+    } else {
+      setReadySubmit(false)
+    }
   }, [selectedLocation, selectedSize, selectedPrice])
 
 
@@ -152,11 +161,16 @@ export default function Filters() {
         const selectedPrice = pricesOptions.find(price => price.value === value)
         setSelectedPrice(selectedPrice)
       }
-      query += `${key}=${value}&`
 
+      // Compose query
+      query += `${key}=${value}&`
     }
+
+    // Remove last "&" from query sand save in zustand
+    query = query.slice(0, -1)
     setSearchQuery(query)
   }, [locations])
+
 
   // Hanlders
   function closeAll() {
