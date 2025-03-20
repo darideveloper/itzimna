@@ -26,7 +26,7 @@ import { useSearchStore } from "@/store/search"
  * @param {boolean} props.showSubmit - Show submit button on filters. Default is true
  * @returns {JSX.Element} Filters component
  */
-export default function Filters({ showSubmit = true }) {
+export default function Filters({ showSubmit = true, updateUrlRealTime = true }) {
 
   // Translations
   const t = useTranslations("Filters")
@@ -139,12 +139,23 @@ export default function Filters({ showSubmit = true }) {
     const ready = (
       selectedLocation?.value || selectedSize?.value || selectedPrice?.value
     ) && fullQuery != searchQuery
-    
+
     if (ready) {
+      
+      // Update ready state
       setReadySubmit(true)
+
+      // Update url without redirect
+      if (updateUrlRealTime) {
+        const currentPage = window.location.href.split('?')[0]
+        console.log({currentPage, newPage: `${currentPage}?${fullQuery}`})
+        history.pushState(null, "", `${currentPage}?${fullQuery}`)
+      }
     } else {
       setReadySubmit(false)
     }
+    
+    
   }, [selectedLocation, selectedSize, selectedPrice])
 
 
