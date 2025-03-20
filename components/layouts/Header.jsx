@@ -170,6 +170,7 @@ const Header = () => {
             z-10
           `}
         >
+          {/* Background shape */}
           <div
             className={`
               w-[820px] 
@@ -182,25 +183,32 @@ const Header = () => {
               z-10
               overflow-hidden
             `}
-          ></div>
-          {links.map((item) => (
-            <a
-              key={item.name}
-              href={item.url}
-              className={`
-                text-white 
-                hover:text-white/80
-                transition-all
-                duration-200
-                px-4 
-                py-2
-                hover:scale-105
-              `}
-              style={{ zIndex: "101" }}
-            >
-              {item.name}
-            </a>
-          ))}
+          />
+
+          <div
+            className={`
+              link-wrapper
+              z-20
+            `}
+          >
+            {links.map((item) => (
+              <TransitionLink
+                key={item.name}
+                href={item.url}
+                className={`
+                  text-white 
+                  hover:text-white/80
+                  transition-all
+                  duration-200
+                  px-4 
+                  py-2
+                  hover:scale-105
+                `}
+              >
+                {item.name}
+              </TransitionLink>
+            ))}
+          </div>
         </div>
 
         {/* Right Section */}

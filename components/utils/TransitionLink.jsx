@@ -46,6 +46,7 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
 
     // If the link is the same page, but with an anchor
     // Do not animate
+    console.log({hrefNoId, currentPage})
     if (hrefNoId == "" || (href.includes('#') && hrefNoId === currentPage)) {
       return
     }
