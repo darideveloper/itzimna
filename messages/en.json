@@ -97,5 +97,8 @@
   },
   "Search": {
     "title": "Search Results"
+  },
+  "CardsSection": {
+    "noPropertiesFound": "No properties found"
   }
 }

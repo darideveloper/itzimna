@@ -93,6 +93,8 @@
   },
   "Search": {
     "title": "Resultados de la búsqueda"
+  },
+  "CardsSection": {
+    "noPropertiesFound": "No se encontraron propiedades"
   }
-
 }

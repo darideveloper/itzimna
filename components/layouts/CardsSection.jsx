@@ -3,7 +3,8 @@
 // Libs
 import { useEffect, useState, useRef } from "react"
 import { getProperties } from "@/libs/api/properties"
-import { useLocale } from "next-intl";
+import { useLocale } from "next-intl"
+import { useTranslations } from "next-intl"
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
@@ -67,6 +68,9 @@ export default function CardsSection({
   // Locale
   const locale = useLocale()
 
+  // Translations
+  const t = useTranslations("CardsSection")
+
   // Effects
   useEffect(() => {
 
@@ -81,7 +85,7 @@ export default function CardsSection({
 
     // Update properties data when change page
     getProperties(locale, page, filterFeatured, searchQuery).then(({ propertiesData, pages }) => {
-      
+
       setPropertiesData(propertiesData)
 
       // Move to top of the section
@@ -100,8 +104,7 @@ export default function CardsSection({
     })
   }, [page, searchQuery])
 
-  // Get translations
-  // const t = useTranslations("Home.CardsSection")
+
   return (
     <section
       className={`
@@ -164,24 +167,24 @@ export default function CardsSection({
 
         {
           !isLoading
-            &&
-              (
-                propertiesData.length === 0
-                  ?
-                    <Title className="text-center text-white">
-                      No se encontraron propiedades
-                    </Title>
-                  :
-                    <Pagination
-                      currentPage={page}
-                      totalPages={totalPages}
-                      onPageChange={(newPage) => {
-                        setLastPage(page)
-                        setPage(newPage)
-                      }}
-                      variant={variant}
-                    />
-              )
+          &&
+          (
+            propertiesData.length === 0
+              ?
+              <Title className="text-center text-white">
+                {t("noPropertiesFound")}
+              </Title>
+              :
+              <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={(newPage) => {
+                  setLastPage(page)
+                  setPage(newPage)
+                }}
+                variant={variant}
+              />
+          )
         }
       </div>
     </section>
