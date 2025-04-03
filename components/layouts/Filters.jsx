@@ -79,6 +79,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
   // Effects
 
   useEffect(() => {
+
     // Load locations data when component is mounted
     const loadLocations = async () => {
 
@@ -148,7 +149,6 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
       // Update url without redirect
       if (updateUrlRealTime) {
         const currentPage = window.location.href.split('?')[0]
-        console.log({currentPage, newPage: `${currentPage}?${fullQuery}`})
         history.pushState(null, "", `${currentPage}?${fullQuery}`)
       }
     } else {

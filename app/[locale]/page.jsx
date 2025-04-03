@@ -4,7 +4,6 @@ import Hero from "@/components/layouts/Hero"
 import Gallery from "@/components/layouts/Gallery"
 
 // LIbs
-import { getProperties } from "@/libs/api/properties"
 import { getTranslations } from "next-intl/server"
 
 // Utils components
@@ -18,10 +17,6 @@ export default async function HomePage({ params }) {
   const tMeta = await getTranslations('Meta')
 
   const { locale } = await params
-
-  // Get initial properties data
-  const lastProperties = await getProperties(locale)
-  const featuredProperties = await getProperties(locale, 1, true)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -46,7 +41,6 @@ export default async function HomePage({ params }) {
       "url": "/images/home-banner.jpg"
     }
   }
-  
 
   return (
     <>
@@ -71,16 +65,14 @@ export default async function HomePage({ params }) {
       <CardsSection
         id="last-properties"
         title={t('LastProperties.title')}
-        initialData={lastProperties.propertiesData}
-        initialTotalProperties={lastProperties.pages}
+        locale={locale}
       />
 
       <CardsSection
         id="featured-properties"
         title={t('FeaturedProperties.title')}
         filterFeatured={true}
-        initialData={featuredProperties.propertiesData}
-        initialTotalProperties={featuredProperties.pages}
+        locale={locale}
       />
       
       <Gallery />

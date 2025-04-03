@@ -9,7 +9,7 @@ export async function getLocations(locale) {
   let endpoint = `${host}/api/locations/`
   const res = await fetch(endpoint, {
     headers: {
-      'locale': locale
+      'lang': locale
     }
   })
   const jsonData = await res.json()
