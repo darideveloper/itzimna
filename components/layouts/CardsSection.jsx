@@ -27,6 +27,7 @@ import { useSearchStore } from "@/store/search"
  * @param {Boolean} transparentModal - Transparent modal. Default is false
  * @param {Number} loadingTimeOut - Loading spinner timeout. Default is 1500
  * @param {String} locale - Locale. Default is "es"
+ * @param {Boolean} queryRequired - Query required. Default is false
  * @returns {JSX.Element} Cards section component
  */
 export default function CardsSection({
@@ -39,6 +40,7 @@ export default function CardsSection({
   transparentModal = false,
   loadingTimeOut = 1500,
   locale="es",
+  queryRequired=false,
 }) {
 
   // States
@@ -57,6 +59,10 @@ export default function CardsSection({
 
   // Effects
   useEffect(() => {
+
+    if (queryRequired && searchQuery.length < 3) {
+      return
+    }
 
     // Enable loading
     setIsLoading(true)

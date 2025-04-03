@@ -75,6 +75,7 @@ const PropertySearch = async () => {
         useSearchQuery={true}
         transparentModal={true}
         loadingTimeOut={0}
+        queryRequired={true}
       />
       
       {/* Go top button */}
