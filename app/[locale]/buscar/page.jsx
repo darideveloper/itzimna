@@ -28,7 +28,6 @@ const PropertySearch = async () => {
         title={t('title')}
         bgImage="/images/hero-buscar.webp"
         className={`
-          min-h-[800px] lg:min-h-[800px]
         `}
         filtersShowSubmit={false}
       />

@@ -24,13 +24,12 @@ const HeroSection = ({ id = "hero", className = "", title, description, bgImage,
       className={`
         hero
         relative
-        h-[80vh]
         w-full
         md:overflow-hidden
         bg-cover
         bg-center
         bg-fixed
-        py-24 md:py-0
+        py-24 md:pb-52 md:pt-24
         ${className}
       `}
       style={{

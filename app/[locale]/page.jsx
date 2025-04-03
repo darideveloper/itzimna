@@ -58,7 +58,6 @@ export default async function HomePage({ params }) {
         description={t('HeroSection.description')}
         bgImage="/images/hero.webp"
         className={`
-          min-h-[1000px]
         `}
       />
 
