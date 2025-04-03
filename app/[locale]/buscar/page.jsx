@@ -13,7 +13,6 @@ import Hero from "@/components/layouts/Hero"
 // Icons
 import { FaArrowUp } from "react-icons/fa"
 
-
 const PropertySearch = async (props) => {
   
   // Translations
@@ -158,3 +157,56 @@ const PropertySearch = async (props) => {
 }
 
 export default PropertySearch
+
+
+export async function generateMetadata({ searchParams }) {
+  // Translations
+  const t = await getTranslations("Search");
+  const tMeta = await getTranslations("Meta");
+
+  // Extract search parameters
+  const locationName = searchParams["ubicacion-nombre"];
+  const metersTo = searchParams["metros-hasta"];
+  const priceTo = searchParams["precio-hasta"];
+
+  // Create description
+  let description = t("title");
+  description += locationName ? ` ${t("summary.location")} '${locationName}'` : "";
+  description += metersTo ? ` ${t("summary.size")} ${metersTo} m²` : "";
+  description += priceTo ? ` ${t("summary.price")} ${priceTo} MXN` : "";
+
+  // Metadata
+  const image = {
+    url: `${process.env.NEXT_PUBLIC_HOST}/images/home-banner.jpg`,
+    width: 1200,
+    height: 720,
+    alt: t("title"),
+  };
+
+  return {
+    title: `${t("title")} | ${tMeta("title")}`,
+    description,
+    lang: "es",
+    keywords: tMeta("keywords"),
+
+    // Open Graph metadata
+    openGraph: {
+      title: `${t("title")} | ${tMeta("title")}`,
+      description,
+      url: `${process.env.NEXT_PUBLIC_HOST}/es/buscar`,
+      siteName: tMeta("title"),
+      images: [image],
+      locale: "es",
+      type: "website",
+    },
+
+    // Twitter metadata
+    twitter: {
+      card: "summary_large_image",
+      title: `${t("title")} | ${tMeta("title")}`,
+      description,
+      images: [image],
+      creator: "@DeveloperDari",
+    },
+  };
+}

@@ -95,8 +95,14 @@
   "PropertyDevelopment": {
     "contactSeller": "Contact Seller"
   },
-  "Search": {
-    "title": "Search Results"
+ "Search": {
+    "title": "Search Results",
+    "summary": {
+      "location": "in location",
+      "size": "with a maximum size of",
+      "price": "with a maximum price of"
+    },
+    "keywords": "development, filter, properties, yucatan, luxury, beach, sea, house, apartment, land"
   },
   "CardsSection": {
     "noPropertiesFound": "No properties found"
