@@ -1,5 +1,6 @@
 // Libs
 import { getTranslations } from "next-intl/server"
+import { getBreadcrumb } from "@/libs/jsonLd"
 
 // Components
 import Image from "next/image"
@@ -10,13 +11,59 @@ import CardsSection from "@/components/layouts/CardsSection"
 import Hero from "@/components/layouts/Hero"
 
 // Icons
-import { FaArrowUp } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa"
 
 
-const PropertySearch = async () => {
-
+const PropertySearch = async (props) => {
+  
   // Translations
   const t = await getTranslations("Search")
+  const tMeta = await getTranslations("Meta")
+
+  const searchParams = await props.searchParams
+
+  // Get search params when page loads
+  const locationName = searchParams["ubicacion-nombre"]
+  const metersTo = searchParams["metros-hasta"]
+  const priceTo = searchParams["precio-hasta"]
+  let description = t('title')
+  description += locationName ? ` ${t('summary.location')} '${locationName}'` : ""
+  description += metersTo ? ` ${t('summary.size')} ${metersTo} m²`: ""
+  description += priceTo ? ` ${t('summary.price')} ${priceTo} MXN` : ""
+
+  // Metadata
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': t("title") + " | " + tMeta('title'),
+    'description': description,
+    'datePublished': new Date().toISOString(),
+    'author': {
+      '@type': 'Person',
+      'name': tMeta('author'),
+    },
+    'keywords': tMeta('keywords'),
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'Itzamna',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': `${process.env.NEXT_PUBLIC_HOST}/images/logo.webp`,
+      },
+    },
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `${process.env.NEXT_PUBLIC_HOST}/es/buscar`,
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "/images/home-banner.jpg"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": getBreadcrumb(`${process.env.NEXT_PUBLIC_HOST}/es/buscar`)
+    }
+  }
 
   return (
     <div
@@ -24,7 +71,13 @@ const PropertySearch = async () => {
         pb-12
       `}
     >
-      <Hero 
+      {/* Render json ld */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <Hero
         title={t('title')}
         bgImage="/images/hero-buscar.webp"
         className={`
@@ -76,7 +129,7 @@ const PropertySearch = async () => {
         loadingTimeOut={0}
         queryRequired={true}
       />
-      
+
       {/* Go top button */}
       <Button
         className={`
@@ -91,15 +144,15 @@ const PropertySearch = async () => {
         variant="ghost"
         href="#hero"
       >
-        <FaArrowUp 
+        <FaArrowUp
           className={`
             text-white
             text-2xl
             group-hover:text-green-dark
-          `}          
+          `}
         />
       </Button>
-    
+
     </div>
   )
 }

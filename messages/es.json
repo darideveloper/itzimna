@@ -92,7 +92,13 @@
     "contactSeller": "Contactar al vendedor"
   },
   "Search": {
-    "title": "Resultados de la búsqueda"
+    "title": "Resultados de la búsqueda",
+    "summary": {
+      "location": "en ubicación",
+      "size": "de tamaño máximo de",
+      "price": "a precio máximo de"
+    },
+    "keywords": "desarrollo, filtro, propiedades, yucatán, lujo, playa, mar, casa, departamento, terreno"
   },
   "CardsSection": {
     "noPropertiesFound": "No se encontraron propiedades"
