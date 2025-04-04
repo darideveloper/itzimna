@@ -11,6 +11,7 @@ import { fontBody } from '@/libs/fonts'
 // Global components
 import Header from '@/components/layouts/Header'
 import Footer from '@/components/layouts/Footer'
+import Script from 'next/script'
 
 // Css
 import '@/css/globals.sass'
@@ -42,10 +43,28 @@ export default async function LocaleLayout({ children, params }) {
           ${fontBody.className}
         `}
       >
+        {/* Google Tag Manager Script */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-J33X5K048Q"
+        />
+        <Script
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-J33X5K048Q');
+            console.log('Google Tag Manager is loaded');
+          `,
+          }}
+        />
+
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main>
-            <div 
+            <div
               className={`
                 transition-video-wrapper
                 opacity-0
@@ -136,5 +155,5 @@ export async function generateMetadata({ params }) {
       images: [image],
       creator: "@DeveloperDari",
     },
-  }  
+  }
 }
