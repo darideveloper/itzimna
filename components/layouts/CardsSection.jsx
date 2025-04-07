@@ -142,7 +142,7 @@ export default function CardsSection({
               price={card.price}
               meters={card.meters}
               created_at={card.created_at}
-              category={card.category}
+              tags={[card.category, ...card.tags]}
               href={`/desarrollos/${card.id}-${card.slug}`}
               className={""}
             />

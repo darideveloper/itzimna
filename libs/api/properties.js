@@ -28,6 +28,7 @@ const host = process.env.NEXT_PUBLIC_HOST
  */
 export async function getProperties(locale, page = 1, filterFeatured = false, searchQuery = "") {
 
+  // Get data
   let endpoint = `${host}/api/properties?page=${page}`
   if (searchQuery) {
     endpoint += `&${searchQuery}`
@@ -43,7 +44,16 @@ export async function getProperties(locale, page = 1, filterFeatured = false, se
   })
   const propertiesJson = await propertiesRes.json()
   const propertiesData = await propertiesJson.results
+
+  // Count number of pages
   const pages = await Math.ceil(propertiesJson.count / 8)
+
+  // Format tags in each property
+  propertiesData.forEach((property) => {
+    property.tags = property.tags.map((tag) => {
+      return tag.name
+    })
+  })
 
   return { propertiesData, pages }
 }

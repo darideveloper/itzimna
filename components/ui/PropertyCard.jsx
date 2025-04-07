@@ -20,7 +20,7 @@ import TransitionLink from "@/components/utils/TransitionLink"
  * @param {string} props.location - Property location
  * @param {string} props.price - Property price like "1,000.00"
  * @param {string} props.meters - Property size in square meters like "99.00"
- * @param {string} props.category - Property category
+ * @param {Array} props.tags - Property tags (array of strings)
  * @param {string} props.href - URL to route to
  * @param {string} props.className - Additional classes
  * @returns {JSX.Element} Property card component
@@ -33,10 +33,11 @@ export default function PropertyCard({
   location,
   price,
   meters,
-  category,
+  tags=[],
   href,
   className,
 }) {
+
   const t = useTranslations("PropertyCard")
 
   return (
@@ -79,30 +80,50 @@ export default function PropertyCard({
             priority
             sizes="100%"
           />
-          {/* Category badge */}
-          <div
+
+          {/* Tags badges */}
+          <div 
             className={`
+              tags
               absolute
               top-4
               right-4
-              bg-green/80
-              px-3
-              py-1
-              rounded-full
               flex
-              items-center
-              z-10
+              flex-wrap
+              items-end
+              justify-end
+              w-11/12
+              gap-1
             `}
           >
-            <span
-              className={`
-                text-sm
-                font-medium
-                text-white
-            `}
-            >
-              {category}
-            </span>
+            {
+              tags.map((tag, index) => (
+                <div
+                  key={index}
+                  className={`
+                    bg-green/70 first:bg-green
+                    px-3
+                    py-1
+                    rounded-full
+                    flex
+                    items-center
+                    z-10
+                    capitalize
+                    
+                  `}
+                >
+                  <span
+                    className={`
+                      text-sm
+                      font-medium
+                      text-white
+                  `}
+                  >
+                    {tag}
+                  </span>
+                </div>
+              ))
+            }
           </div>
           {/* Description overlay */}
           <div
