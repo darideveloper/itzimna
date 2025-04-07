@@ -33,7 +33,7 @@ export default function PropertyCard({
   location,
   price,
   meters,
-  tags=[],
+  tags = [],
   href,
   className,
 }) {
@@ -82,7 +82,7 @@ export default function PropertyCard({
           />
 
           {/* Tags badges */}
-          <div 
+          <div
             className={`
               tags
               absolute
@@ -239,15 +239,18 @@ export default function PropertyCard({
         <div
           className={`
             flex
+            flex-wrap-reverse
             items-center
-            justify-between
+            justify-center md:justify-between lg:justify-center
             p-5
             pt-0
         `}
         >
           <Button
             className={`
-          `}
+              w-full md:w-32 lg:w-full
+              mt-2
+            `}
           >
             {t("cta")}
           </Button>

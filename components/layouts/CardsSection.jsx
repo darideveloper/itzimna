@@ -125,6 +125,7 @@ export default function CardsSection({
             lg:grid-cols-4
             gap-6
             relative
+            items-center
           `}
         >
           {/* Loading spinner */}
