@@ -51,6 +51,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
   // Local state
   const [readySubmit, setReadySubmit] = useState(false)
   const [locations, setLocations] = useState([])
+  const [initialLoad, setInitialLoad] = useState(true)
 
   // Inputs states
   const [locationIsOpen, setLocationIsOpen] = useState(false)
@@ -65,10 +66,8 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
   // Effects
 
   useEffect(() => {
-
     // Load locations data when component is mounted
     const loadLocations = async () => {
-
       // get data from api
       const locations = await getLocations(locale)
 
@@ -84,9 +83,54 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
     loadLocations()
   }, [locale])
 
+  // Initialize filters from URL params and set initial readySubmit state
+  useEffect(() => {
+    if (locations.length === 0) return;
+    
+    // Update zustand states when page loads (and locations change)
+    let query = ""
+    let hasFilters = false;
+    
+    for (const param of searchParams) {
+      const [key, value] = param
+
+      if (key === "ubicacion" && locations.length > 0) {
+        const selectedLocation = locations.find(location => location.value.toString() === value)
+        if (selectedLocation) {
+          setSelectedLocation(selectedLocation)
+          hasFilters = true
+        }
+      } else if (key === "metros-hasta") {
+        const selectedSize = sizesOptions.find(size => size.value === value)
+        if (selectedSize) {
+          setSelectedSize(selectedSize)
+          hasFilters = true
+        }
+      } else if (key === "precio-hasta") {
+        const selectedPrice = pricesOptions.find(price => price.value === value)
+        if (selectedPrice) {
+          setSelectedPrice(selectedPrice)
+          hasFilters = true
+        }
+      }
+
+      // Compose query
+      query += `${key}=${value}&`
+    }
+
+    // Remove last "&" from query and save in zustand
+    query = query.slice(0, -1)
+    setSearchQuery(query)
+    
+    // Set initial readySubmit state based on whether filters are applied
+    setReadySubmit(hasFilters)
+    setInitialLoad(false)
+  }, [locations])
 
   useEffect(() => {
-
+    // Skip initial render to avoid duplicate processing
+    if (initialLoad) return;
+    
     /**
      * get query params for range filters
      * 
@@ -104,77 +148,34 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
 
     // Update query when any filter is changed
     const queryParts = []
-    let locationQuery = ""
-    let sizeQuery = ""
-    let priceQuery = ""
     if (selectedLocation?.value) {
-      locationQuery = `ubicacion=${selectedLocation.value}&ubicacion-nombre=${selectedLocation.label}`
+      const locationQuery = `ubicacion=${selectedLocation.value}&ubicacion-nombre=${selectedLocation.label}`
       queryParts.push(locationQuery)
     }
     if (selectedSize?.value) {
-      sizeQuery = getRangeQueryParam(selectedSize, sizesOptions, "metros")
+      const sizeQuery = getRangeQueryParam(selectedSize, sizesOptions, "metros")
       queryParts.push(sizeQuery)
     }
     if (selectedPrice?.value) {
-      priceQuery = getRangeQueryParam(selectedPrice, pricesOptions, "precio")
+      const priceQuery = getRangeQueryParam(selectedPrice, pricesOptions, "precio")
       queryParts.push(priceQuery)
     }
     const fullQuery = queryParts.join("&")
     setSearchQuery(fullQuery)
 
-    // Enable submit button when fill any filter
-    const ready = (
-      selectedLocation?.value || selectedSize?.value || selectedPrice?.value
-    ) && fullQuery != searchQuery
+    // Enable submit button when any filter is filled
+    const ready = !!(selectedLocation?.value || selectedSize?.value || selectedPrice?.value)
+    setReadySubmit(ready)
 
-    if (ready) {
-      
-      // Update ready state
-      setReadySubmit(true)
-
-      // Update url without redirect
-      if (updateUrlRealTime) {
-        const currentPage = window.location.href.split('?')[0]
-        history.pushState(null, "", `${currentPage}?${fullQuery}`)
-      }
-    } else {
-      setReadySubmit(false)
+    // Update URL without redirect if option is enabled
+    if (updateUrlRealTime && ready) {
+      const currentPage = window.location.href.split('?')[0]
+      history.pushState(null, "", `${currentPage}?${fullQuery}`)
     }
     
-    
-  }, [selectedLocation, selectedSize, selectedPrice])
+  }, [selectedLocation, selectedSize, selectedPrice, initialLoad])
 
-
-  useEffect(() => {
-    
-    // Update zustand states when page loads (and locations change)
-    let query = ""
-    for (const param of searchParams) {
-
-      const [key, value] = param
-
-      if (key === "ubicacion" && locations.length > 0) {
-        const selectedLocation = locations.find(location => location.value.toString() === value)
-        setSelectedLocation(selectedLocation)
-      } else if (key === "metros-hasta") {
-        const selectedSize = sizesOptions.find(size => size.value === value)
-        setSelectedSize(selectedSize)
-      } else if (key === "precio-hasta") {
-        const selectedPrice = pricesOptions.find(price => price.value === value)
-        setSelectedPrice(selectedPrice)
-      }
-
-      // Compose query
-      query += `${key}=${value}&`
-    }
-
-    // Remove last "&" from query sand save in zustand
-    query = query.slice(0, -1)
-    setSearchQuery(query)
-  }, [locations])
-
-
-  // Hanlders
+  // Handlers
   function closeAll() {
     setLocationIsOpen(false)
     setSizeIsOpen(false)
@@ -196,7 +197,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
         backdrop-blur
       `}
     >
-      {/* Serach bar */}
+      {/* Search bar */}
       <div
         className={`
           relative
