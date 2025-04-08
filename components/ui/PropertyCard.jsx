@@ -41,6 +41,7 @@ export default function PropertyCard({
   const t = useTranslations("PropertyCard")
 
   return (
+    <div data-aos="zoom-in">
     <TransitionLink href={href}>
       <div
         className={`
@@ -57,7 +58,6 @@ export default function PropertyCard({
           cursor-pointer
           ${className}
         `}
-        data-aos="zoom-in"
       >
         <div
           className={`
@@ -269,5 +269,6 @@ export default function PropertyCard({
         </div>
       </div>
     </TransitionLink>
+    </div>
   )
 }
