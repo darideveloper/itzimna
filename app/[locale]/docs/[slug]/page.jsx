@@ -25,7 +25,7 @@ export default async function PrivacyNotice({ params }) {
     <section
       className={`
         container
-        max-w-6xl
+        max-w-[1200px]
         mx-auto
       `}
     >
