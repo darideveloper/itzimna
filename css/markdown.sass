@@ -7,6 +7,11 @@
     h3
         font-size: 1.25rem
 
+    h4
+        font-size: 1.125rem
+        font-weight: 600
+        margin: 1.5rem 0 0.5rem 0
+
     h2, h3
         margin: 2.5rem 0 1rem 0
         font-family: 'Passion One', 'Passion One Fallback'
@@ -19,15 +24,25 @@
         margin-left: 0
 
     ol li
-      list-style-type: none
-      margin-left: 1rem
-    p 
+        list-style-type: none
+        margin-left: 1rem
+        margin-bottom: 0.25rem
+
+    p
         margin: 1rem 0
+
     table
-        display: block
         max-width: 80%
-        margin: 1rem auto
+        margin: 2rem auto
         overflow-x: auto
+
+        thead, tbody
+            width: 100%
+
+        thead
+            th
+                padding: 0.5rem 1.5rem
+
         td
             text-align: center
 
@@ -74,7 +89,7 @@
 
     @media screen and (min-width: 767px)
         table
-            max-width: 95%
+            max-width: 70%
 
         ul:not(.contains-task-list) li
             list-style-type: disc
@@ -82,4 +97,4 @@
 
         ol li
             list-style-type: decimal
-            margin-left: 1rem
+            margin-left: 2rem
