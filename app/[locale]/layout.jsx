@@ -11,6 +11,7 @@ import { fontBody } from '@/libs/fonts'
 // Global components
 import Header from '@/components/layouts/Header'
 import Footer from '@/components/layouts/Footer'
+import VideoModal from '@/components/ui/VideoModal'
 import Script from 'next/script'
 
 // Css
@@ -64,39 +65,7 @@ export default async function LocaleLayout({ children, params }) {
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main>
-            <div
-              className={`
-                transition-video-wrapper
-                opacity-0
-                z-50
-                hidden
-                bg-green-dark
-                w-screen
-                h-screen
-                fixed
-                top-1/2
-                left-1/2
-                -translate-x-1/2
-                -translate-y-1/2
-                duration-300
-                items-center
-                justify-center
-              `}
-            >
-              <video
-                className={`
-                  transition-video
-                  h-full md:h-auto
-                  w-auto md:w-full
-                `}
-              >
-                <source
-                  src="/videos/transition.mp4"
-                  type="video/mp4"
-                />
-                Your browser does not support the video tag.
-              </video>
-            </div>
+            <VideoModal />
             {children}
           </main>
           <Footer />
