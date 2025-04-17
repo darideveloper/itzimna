@@ -136,8 +136,8 @@ const Contact = () => {
               flex
               flex-col
               lg:flex-row
-              justify-between
-              gap-8
+              justify-start
+              gap-12
               text-center lg:text-left
             `}
           >
@@ -183,7 +183,7 @@ const Contact = () => {
             </div>
 
             {/* Customer service agent */}
-            <div 
+            {/* <div 
               className="customer-service"
               data-aos="fade-up"
               data-aos-delay="800"
@@ -207,7 +207,7 @@ const Contact = () => {
               >
                 {phone}
               </a>
-            </div>
+            </div> */}
 
             {/* Email */}
             <div 
