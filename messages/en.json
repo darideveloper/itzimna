@@ -106,5 +106,10 @@
   },
   "CardsSection": {
     "noPropertiesFound": "No properties found"
+  },
+  "Blog": {
+    "Post" : {
+      "readMore" : "Read more"
+    }
   }
 }
