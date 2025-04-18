@@ -1,13 +1,17 @@
+"use client"
+
 // Icons
 import { FaMapMarkerAlt, FaArrowsAlt, FaBuilding } from "react-icons/fa"
 
 //libs
 import Image from "next/image"
 import { useTranslations } from "next-intl"
+import { useState } from "react"
 
 // UI Components
 import Button from "@/components/ui/Button"
 import TransitionLink from "@/components/utils/TransitionLink"
+import Spinner from "@/components/ui/Spinner"
 
 /**
  * Property card component
@@ -38,13 +42,15 @@ export default function PropertyCard({
   className,
 }) {
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const t = useTranslations("PropertyCard")
 
   return (
     <div data-aos="zoom-in">
-    <TransitionLink href={href}>
-      <div
-        className={`
+      <TransitionLink href={href} onClick={() => setIsLoading(true)} disable={isLoading}>
+        <div
+          className={`
           property-card
           rounded-2xl
           shadow-sm hover:shadow-lg
@@ -56,34 +62,41 @@ export default function PropertyCard({
           border-white hover:border-green
           text-green
           cursor-pointer
+          relative
           ${className}
         `}
-      >
-        <div
-          className={`
-          relative
-          w-full
-          h-64
-          overflow-hidden
-          group
-        `}
         >
-          <Image
-            src={imageSrc || "/images/test.svg"}
-            alt={name}
-            fill
+          {/* Loading spinner */}
+          {
+            isLoading &&
+            <Spinner isLoading={isLoading} className={`absolute !bg-green-dark !items-center`} />
+          }
+
+          <div
             className={`
+              relative
+              w-full
+              h-64
+              overflow-hidden
+              group
+            `}
+          >
+            <Image
+              src={imageSrc || "/images/test.svg"}
+              alt={name}
+              fill
+              className={`
               object-cover
               transition-transform duration-500
               group-hover:scale-110
             `}
-            priority
-            sizes="100%"
-          />
+              priority
+              sizes="100%"
+            />
 
-          {/* Tags badges */}
-          <div
-            className={`
+            {/* Tags badges */}
+            <div
+              className={`
               tags
               absolute
               top-4
@@ -95,12 +108,12 @@ export default function PropertyCard({
               w-11/12
               gap-1
             `}
-          >
-            {
-              tags.map((tag, index) => (
-                <div
-                  key={index}
-                  className={`
+            >
+              {
+                tags.map((tag, index) => (
+                  <div
+                    key={index}
+                    className={`
                     bg-green/70 first:bg-green
                     px-3
                     py-1
@@ -111,23 +124,23 @@ export default function PropertyCard({
                     capitalize
                     
                   `}
-                >
-                  <span
-                    className={`
+                  >
+                    <span
+                      className={`
                       text-sm
                       font-medium
                       text-white
                   `}
-                  >
-                    {tag}
-                  </span>
-                </div>
-              ))
-            }
-          </div>
-          {/* Description overlay */}
-          <div
-            className={`
+                    >
+                      {tag}
+                    </span>
+                  </div>
+                ))
+              }
+            </div>
+            {/* Description overlay */}
+            <div
+              className={`
             absolute
             inset-0
             bg-green/70
@@ -140,9 +153,9 @@ export default function PropertyCard({
             justify-center
             p-4
         `}
-          >
-            <p
-              className={`
+            >
+              <p
+                className={`
                 text-white
                 text-sm
                 opacity-0
@@ -151,14 +164,14 @@ export default function PropertyCard({
                 duration-300
                 delay-100
               `}
-            >
-              {shortDescription}
-            </p>
+              >
+                {shortDescription}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className={`p-5`}>
-          <h2
-            className={`
+          <div className={`p-5`}>
+            <h2
+              className={`
               text-xl
               font-semibold
               text-green
@@ -168,76 +181,76 @@ export default function PropertyCard({
               hover:text-yellow
               capitalize
           `}
-          >
-            {name}
-          </h2>
-          <div
-            className={`
+            >
+              {name}
+            </h2>
+            <div
+              className={`
               flex
               items-center
               text-gray-800
               mb-4
             `}
-          >
-            <FaMapMarkerAlt
-              className={`
+            >
+              <FaMapMarkerAlt
+                className={`
                 w-4
                 h-4
                 mr-1
                 text-green
             `}
-            />
-            <span className={`text-sm`}>{location}</span>
-          </div>
-          <div
-            className={`
+              />
+              <span className={`text-sm`}>{location}</span>
+            </div>
+            <div
+              className={`
               flex
               items-center
               justify-between
               text-gray-800
               mb-4
           `}
-          >
-            <div className="flex items-center">
-              <FaBuilding
-                className={`
+            >
+              <div className="flex items-center">
+                <FaBuilding
+                  className={`
                   w-4
                   h-4
                   mr-1
                   text-green
               `}
-              />
-              <span
-                className={`
+                />
+                <span
+                  className={`
                   text-sm
                   text-green
               `}
-              >
-                {company}
-              </span>
-            </div>
-            <div
-              className={`
+                >
+                  {company}
+                </span>
+              </div>
+              <div
+                className={`
             flex
             items-center
           `}
-            >
-              <FaArrowsAlt
-                className={`
+              >
+                <FaArrowsAlt
+                  className={`
                 w-4
                 h-4
                 mr-2
                 text-green
               `}
-              />
-              <span className={`text-sm`}>
-                {meters} m<sup>2</sup>
-              </span>
+                />
+                <span className={`text-sm`}>
+                  {meters} m<sup>2</sup>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          className={`
+          <div
+            className={`
             flex
             flex-wrap-reverse
             items-center
@@ -245,17 +258,17 @@ export default function PropertyCard({
             p-5
             pt-0
         `}
-        >
-          <Button
-            className={`
+          >
+            <Button
+              className={`
               w-full md:w-32 lg:w-full
               mt-2
             `}
-          >
-            {t("cta")}
-          </Button>
-          <span
-            className={`
+            >
+              {t("cta")}
+            </Button>
+            <span
+              className={`
               text-2xl
               font-bold
               text-green
@@ -263,12 +276,12 @@ export default function PropertyCard({
               transition-colors
               duration-200
             `}
-          >
-            ${price}
-          </span>
+            >
+              ${price}
+            </span>
+          </div>
         </div>
-      </div>
-    </TransitionLink>
+      </TransitionLink>
     </div>
   )
 }

@@ -50,20 +50,8 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
       return
     }
 
-    // Show video
+    // Desable default behavior
     e.preventDefault()
-    const transitionVideoWrapper = document.querySelector('.transition-video-wrapper')
-    const transitionDuration = 1000
-    transitionVideoWrapper.classList.remove("hidden")
-    transitionVideoWrapper.classList.add("flex")
-    await sleep(300)
-    transitionVideoWrapper.classList.add("play")
-
-    // Play video from start
-    const video = transitionVideoWrapper.querySelector("video")
-    video.volume = 0.05
-    video.currentTime = 0
-    video.play()
 
     // Check if the page needs a full reload
     const is_full_reload = full_reload_pages.map((page) =>
@@ -71,39 +59,20 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
     ).includes(true)
 
     if (is_full_reload) {
-      await sleep(3000) // Wait for animation to play
       window.location.href = `/${locale}${href}`
       return
     }
 
     // Redirect
-    const old_url = window.location.href
     if (href == "/es" || href == "/en") {
       // Change lang if /es or /en
       const lang = href.replace("/", "")
-      await sleep(3000)
       router.replace(`/${currentPage}`, { locale: lang })
     } else {
       // Regular link (change page)
       router.push(href)
     }
 
-    // End animation
-    while (true) {
-      if (window.location.href !== old_url) {
-        await sleep(transitionDuration)
-
-        // Hide video
-        transitionVideoWrapper.classList.remove("play")
-        await sleep(2000)
-        transitionVideoWrapper.classList.add("hidden")
-        transitionVideoWrapper.classList.remove("flex")
-
-        break
-      } else {
-        await sleep(500)
-      }
-    }
   }
 
   return (
