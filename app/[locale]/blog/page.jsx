@@ -1,9 +1,20 @@
+//libs
 import { fontTitle } from "@/libs/fonts"
-import Title from "@/components/ui/Title"
 import { getSortedPostData } from "@/libs/posts"
+
+//ui elements
+import Title from "@/components/ui/Title"
 import Post from "@/components/ui/Post"
+import { useTranslations } from "use-intl"
+
+
+
 export default function BlogPage() {
+
   const allPostsData = getSortedPostData()
+  //const t = useTranslations('Blog')
+
+  //const tMeta = useTranslations('Meta')
 
   return (
     <section
@@ -64,3 +75,4 @@ export default function BlogPage() {
     </section>
   )
 }
+
