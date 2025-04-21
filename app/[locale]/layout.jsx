@@ -81,7 +81,7 @@ export async function generateMetadata({ params }) {
   const t = await getTranslations({ locale, namespace: 'Meta' })
 
   const image = {
-    url: `${process.env.NEXT_PUBLIC_HOST}/images/home-banner.jpg`,
+    url: `${process.env.NEXT_PUBLIC_HOST}/images/home-banner.webp`,
     width: 800,
     height: 600,
     alt: t('title'),

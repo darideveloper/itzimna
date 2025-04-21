@@ -109,6 +109,8 @@
     "noPropertiesFound": "No properties found"
   },
   "Blog": {
+    "title" : "Blog",
+    "subtitle" : "The latest news about real estate",
     "Post" : {
       "readMore" : "Read more"
     }

@@ -105,6 +105,8 @@
     "noPropertiesFound": "No se encontraron propiedades"
   },
   "Blog" : {
+    "title" : "Blog",
+    "subtitle" : "Las últimas noticias sobre bienes raíces",
     "Post" : {
       "readMore" : "Leer mas"
     }
