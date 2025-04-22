@@ -12,7 +12,8 @@
       "last": "Best Properties",
       "featured": "Featured Properties",
       "contact": "Contact",
-      "cta": "Contact Us"
+      "cta": "Contact Us",
+      "blog" : "Blog"
     }
   },
   "Form": {
@@ -108,6 +109,8 @@
     "noPropertiesFound": "No properties found"
   },
   "Blog": {
+    "title" : "Blog",
+    "subtitle" : "The latest news about real estate",
     "Post" : {
       "readMore" : "Read more"
     }

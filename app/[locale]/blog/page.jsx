@@ -1,12 +1,44 @@
+//libs
 import { fontTitle } from "@/libs/fonts"
-import Title from "@/components/ui/Title"
 import { getSortedPostData } from "@/libs/posts"
+
+//ui elements
+import Title from "@/components/ui/Title"
 import Post from "@/components/ui/Post"
-export default function BlogPage() {
+import { getTranslations } from "next-intl/server"
+
+
+export default async function BlogPage() {
+
   const allPostsData = getSortedPostData()
 
+  // Translations
+  const t = await getTranslations('Blog')
+  const tMeta = await getTranslations('Meta')
+
+  const breadcrumb = []
+
+  for (const postData of allPostsData) {
+    breadcrumb.push({
+      '@type': 'ListItem',
+      "position": breadcrumb.length + 1,
+      "name": postData.title,
+      "item": `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${postData.slug}`,
+    })
+  }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name" : tMeta('title'),
+    "url": `${process.env.NEXT_PUBLIC_SITE_URL}/blog/`,
+    "description": tMeta('description.blog'),
+
+  }
+
+
   return (
-    <section
+  <section
       className={`
         container
         mx-auto
@@ -28,7 +60,7 @@ export default function BlogPage() {
           `}
           isH1={true}
         >
-          Blog
+          {t('title')}
         </Title>
         <p
           className={`
@@ -37,7 +69,7 @@ export default function BlogPage() {
             w-full
           `}
         >
-          Our latest blog
+          {t('subtitle')}
         </p>
       </div>
 
@@ -64,3 +96,7 @@ export default function BlogPage() {
     </section>
   )
 }
+
+
+
+
