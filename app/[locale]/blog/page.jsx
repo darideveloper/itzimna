@@ -96,7 +96,3 @@ export default async function BlogPage() {
     </section>
   )
 }
-
-
-
-
