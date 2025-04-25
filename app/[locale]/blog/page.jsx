@@ -6,11 +6,15 @@ import { getSortedPostData } from "@/libs/posts"
 import Title from "@/components/ui/Title"
 import Post from "@/components/ui/Post"
 import { getTranslations } from "next-intl/server"
+import { getPosts } from "@/libs/api/posts"
+import { slugify } from "@/libs/utils"
 
 
 export default async function BlogPage() {
+ //get locale 
+  const locale = "es"
 
-  const allPostsData = getSortedPostData()
+  const allPostsData =await getPosts()
 
   // Translations
   const t = await getTranslations('Blog')
@@ -23,7 +27,7 @@ export default async function BlogPage() {
       '@type': 'ListItem',
       "position": breadcrumb.length + 1,
       "name": postData.title,
-      "item": `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${postData.slug}`,
+      "item": `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/${postData.slug}`,
     })
   }
 
@@ -31,7 +35,7 @@ export default async function BlogPage() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name" : tMeta('title'),
-    "url": `${process.env.NEXT_PUBLIC_SITE_URL}/blog/`,
+    "url": `${process.env.NEXT_PUBLIC_HOST}/blog/`,
     "description": tMeta('description.blog'),
 
   }
@@ -82,12 +86,13 @@ export default async function BlogPage() {
           mb-16
         `}
       >
-        {allPostsData.map(({ slug, date, title, description, author }) => (
+        {allPostsData.map(({ id, created_at, title, description, author, banner_image_url }) => (
           <Post
-            key={slug}
-            slug={slug}
-            date={date}
+            key={id}
+            slug={`${id}-${slugify(title)}`}
+            date={created_at}
             title={title}
+            coverImage={banner_image_url}
             description={description}
             author={author}
           />
