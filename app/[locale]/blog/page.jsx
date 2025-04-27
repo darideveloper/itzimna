@@ -1,6 +1,5 @@
 //libs
 import { fontTitle } from "@/libs/fonts"
-import { getSortedPostData } from "@/libs/posts"
 
 //ui elements
 import Title from "@/components/ui/Title"
@@ -108,6 +107,39 @@ export default async function BlogPage() {
   )
 }
 
+export async function generateMetadata({ params }) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'Meta' })
+
+  const image = {
+    url: `${process.env.NEXT_PUBLIC_HOST}/images/home-banner.webp`,
+    width: 800,
+    height: 600,
+    alt: t('title'),
+  }
 
 
+  return {
+    title: t('title'),
+    description: t('description.blog'),
+
+    openGraph:{
+      title: t('title'),
+      description: t('description.blog'),
+      images: [image],
+      url: `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/`,
+      siteName: t('title'),
+      locale,
+      type: 'website',
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description.blog'),
+      images: [image],
+      creator: '@DeveloperDari',
+    }
+  }
+}
 
