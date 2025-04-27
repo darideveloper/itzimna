@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl"
 // UI Components
 import Button from "@/components/ui/Button"
 import TransitionLink from "@/components/utils/TransitionLink"
+import { formatDate } from "@/libs/utils"
 
 /**
  * Blog card component
@@ -163,7 +164,7 @@ export default function Post({
                   text-green
               `}
               />
-              <span className={`text-sm`}>{date}</span>
+              <span className={`text-sm`}>{formatDate(date)}</span>
             </div>
             <div
               className={`
