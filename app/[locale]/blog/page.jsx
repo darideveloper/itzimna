@@ -11,9 +11,9 @@ import { slugify } from "@/libs/utils"
 
 
 export default async function BlogPage() {
- //get locale 
-  const locale = "es"
-
+ //get locale from url
+  const locale = 'es'
+  console.log(locale)
   const allPostsData =await getPosts()
 
   // Translations
@@ -27,19 +27,24 @@ export default async function BlogPage() {
       '@type': 'ListItem',
       "position": breadcrumb.length + 1,
       "name": postData.title,
-      "item": `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/${postData.slug}`,
+      "item": `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/${postData.id}-${slugify(postData.title)}`,
     })
   }
+  
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name" : tMeta('title'),
-    "url": `${process.env.NEXT_PUBLIC_HOST}/blog/`,
+    "url": `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/`,
     "description": tMeta('description.blog'),
+    "publisher": {
+      "@type": "Organization",
+      "name": tMeta('title'),
+    },
 
+    "breadcrumb": [...breadcrumb],
   }
-
 
   return (
   <section
@@ -49,6 +54,7 @@ export default async function BlogPage() {
         py-40
       `}
     >
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div
         className={`
           title
