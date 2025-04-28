@@ -1,6 +1,8 @@
 import { getPropertiesSummary } from '@/libs/api/properties'
 import { pricesOptions, sizesOptions } from "@/data/filters"
 import { getLocations } from "@/libs/api/locations"
+import { getPosts } from '@/libs/api/posts';
+import { slugify } from '@/libs/utils';
 
 const siteUrl = process.env.NEXT_PUBLIC_HOST
 
@@ -121,7 +123,20 @@ export default async function sitemap() {
         priority: 0.5,
       })
     }
+
+
+    const posts = await getPosts()
+    for (const post of posts) {
+      sitemap.push({
+        url: escapeXml(`${siteUrl}/${lang}/blog/${post.id}-${slugify(post.title)}`),
+        lastModified: new Date(post.updated_at).toISOString(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      })
+    }
+
   }
 
   return sitemap
 }
+

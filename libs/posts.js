@@ -62,6 +62,7 @@ export async function getPostData(slug) {
     keywords: res.keywords,
     description : res.description,
     lang: res.lang,
+    updated_at: res.updated_at,
     contentHtml
   }
 }
