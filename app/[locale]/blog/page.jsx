@@ -12,7 +12,7 @@ import { slugify } from "@/libs/utils"
 export default async function BlogPage() {
  //get locale from url
   const locale = 'es'
-  console.log(locale)
+
   const allPostsData =await getPosts()
 
   // Translations

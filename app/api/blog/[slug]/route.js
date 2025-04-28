@@ -39,8 +39,6 @@ export async function GET(request, {params}) {
   //
   const data = await apiResponse.json()
 
-  console.log(data)
-
   return new Response(JSON.stringify(data), {
     status: apiResponse.status,
     headers: {

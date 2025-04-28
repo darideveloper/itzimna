@@ -53,22 +53,15 @@ export async function getPostData(slug) {
 
   const contentHtml = processedConent.toString()
   
-  const title = res.title;
-  const date = res.created_at;
-  const author = res.author;
-  const banner_image = res.banner_image_url;
-  const keywords = res.keywords;
-  const description = res.description;
-  const lang = res.lang;
 
   return {
-    title,
-    date,
-    author,
-    banner_image,
-    keywords,
-    description,
-    lang,
+    title : res.title,
+    date : res.created_at,
+    author : res.author,
+    banner_image: res.banner_image_url,
+    keywords: res.keywords,
+    description : res.description,
+    lang: res.lang,
     contentHtml
   }
 }

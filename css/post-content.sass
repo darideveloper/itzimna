@@ -1,3 +1,4 @@
+@import 'globals.sass'
 $white: theme('colors.white')
 $grey: theme('colors.grey')
 $grey-light: theme('colors.grey')
@@ -43,11 +44,13 @@ $blue: theme('colors.blue.800')
         text-decoration: none
 
         &:hover
-            text-decoration: underline
+          text-decoration: underline
+    img
+      width: 95%
+      margin: 20px auto
 
     table
-        width: 100%
-        max-width: 800px
+        width: 95%
         margin: 20px auto
         overflow: scroll
         display: block
@@ -57,6 +60,6 @@ $blue: theme('colors.blue.800')
             padding: 15px
         
         th
-            background-color: $grey
+            background-color: $color-green
             color: $white
             text-align: center
