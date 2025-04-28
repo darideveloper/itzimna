@@ -4,6 +4,7 @@ import matter from "gray-matter"
 import { remark } from "remark"
 import html from "remark-html"
 import gfm from "remark-gfm"
+import { getPost } from "./api/posts"
 
 const postsDirectory = path.join(process.cwd(), "content", "posts")
 
@@ -40,24 +41,35 @@ export function getAllPostSlugs() {
 }
 
 export async function getPostData(slug) {
-  const fullPath = path.join(postsDirectory, `${slug}.md`)
-  if (!fs.existsSync(fullPath)) {
-    return null
-  }
 
-  const fileContents = fs.readFileSync(fullPath, "utf8")
-  const matterResult = matter(fileContents)
+  const res = await getPost(slug)
+  const fileContent = res.content
 
+  const matterResult = matter(fileContent)
+  
   const processedConent = await remark()
     .use(gfm)
     .use(html).process(matterResult.content)
 
   const contentHtml = processedConent.toString()
+  
+  const title = res.title;
+  const date = res.created_at;
+  const author = res.author;
+  const banner_image = res.banner_image_url;
+  const keywords = res.keywords;
+  const description = res.description;
+  const lang = res.lang;
 
   return {
-    slug,
-    contentHtml,
-    ...matterResult.data,
+    title,
+    date,
+    author,
+    banner_image,
+    keywords,
+    description,
+    lang,
+    contentHtml
   }
 }
 

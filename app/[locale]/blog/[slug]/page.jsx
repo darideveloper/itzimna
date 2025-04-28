@@ -8,23 +8,25 @@ import Title from "@/components/ui/Title"
 import Subtitle from "@/components/ui/Subtitle"
 // styles
 import "@/css/post-content.sass"
+import { getPost } from "@/libs/api/posts"
+import { formatDate } from "@/libs/utils"
 
 export default async function BlogPost({ params }) {
   const { slug } = await params
-  const post = await getPostData(slug)
-  if (!post) {
-    notFound()
-  }
+  const content  = await getPostData(slug);
+  
+  if(!content) notFound()
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: post.title,
-    datePublished: post.date,
+    headline: content.title,
+    datePublished: content.date,
     author: {
       "@type": "Person",
-      name: post.author,
+      name: content.author,
     },
-    keywords: post.keywords,
+    keywords: content.keywords,
     publisher: {
       "@type": "Organization",
       name: "NextJS Blog",
@@ -35,11 +37,11 @@ export default async function BlogPost({ params }) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `/blog/${post.slug}`,
+      "@id": `/blog/${slug}`,
     },
     image: {
       "@type": "ImageObject",
-      url: post.coverImage || "/images/test.svg",
+      url: content.banner_image || "/images/test.svg",
       width: 1500,
       height: 1500,
     },
@@ -69,22 +71,27 @@ export default async function BlogPost({ params }) {
             parallax-bg
           `}
           style={{
-            backgroundImage: `url(${post.coverImage || "/images/test.svg"})`,
+            backgroundImage: `url(${content.banner_image || "/images/test.svg"})`,
           }}
         />
       </div>
       <div className={`container py-40`}>
 
       <div>
-        <Title isH1={false}>{post.title}</Title>
+        <Title isH1={false}>{content.title}</Title>
         <Subtitle className="text-center text-xl">
-          {post.date} by {post.author}
+          {formatDate(content.date)} by {content.author}
         </Subtitle>
+
+        <div
+          className={`
+            post-content
+            mt-16
+          `}
+          dangerouslySetInnerHTML={{ __html: content.contentHtml }}
+        />
+
       </div>
-      <div
-        className={`post-content`}
-        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-      ></div>
       </div>
     </section>
   )
@@ -106,7 +113,7 @@ export async  function generateMetadata({ params }) {
     }
   }
   const image = {
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/posts/banners/${slug}.webp`, // this image should be from api
+    url: `${postData.banner_image}`, // this image should be from api
     width: 1200,
     height: 720,
     alt: postData.title,

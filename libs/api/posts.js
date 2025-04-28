@@ -7,3 +7,10 @@ export async function getPosts(params) {
   return posts
 }
 
+
+export async function getPost(id){
+  const res = await fetch(`${host}/api/blog/${id}`)
+  const jsonData = await res.json()
+  return jsonData
+}
+
