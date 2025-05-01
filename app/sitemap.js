@@ -124,7 +124,7 @@ export default async function sitemap() {
     }
 
 
-    const posts = await getPosts()
+    const posts = await getPosts(lang)
     for (const post of posts) {
       sitemap.push({
         url: escapeXml(`${siteUrl}/${lang}/blog/${post.id}-${slugify(post.title)}`),
