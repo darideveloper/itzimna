@@ -12,7 +12,9 @@ import Subtitle from "@/components/ui/Subtitle"
 import ReactMarkdown from 'react-markdown'
 
 // styles
-import "@/css/post-content.sass"
+import "@/css/markdown.sass"
+
+// Data
 import { formatDate } from "@/libs/utils"
 import { getPost } from "@/libs/api/posts"
 
