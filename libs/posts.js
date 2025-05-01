@@ -40,9 +40,10 @@ export function getAllPostSlugs() {
   }))
 }
 
-export async function getPostData(slug) {
+export async function getPostData(slug, locale) {
 
-  const res = await getPost(slug)
+  const res = await getPost(slug, locale)
+
   const fileContent = res.content
 
   const matterResult = matter(fileContent)

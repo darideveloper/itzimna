@@ -7,13 +7,14 @@ import Post from "@/components/ui/Post"
 import { getTranslations } from "next-intl/server"
 import { getPosts } from "@/libs/api/posts"
 import { slugify } from "@/libs/utils"
-
+import { cookies } from "next/headers"
 
 export default async function BlogPage() {
- //get locale from url
-  const locale = 'es'
 
-  const allPostsData =await getPosts()
+ //get locale from url
+  const locale = await cookies().get('NEXT_LOCALE')?.value || 'es'
+
+  const allPostsData =await getPosts(locale)
 
   // Translations
   const t = await getTranslations('Blog')

@@ -13,7 +13,8 @@ import { formatDate } from "@/libs/utils"
 
 export default async function BlogPost({ params }) {
   const { slug } = await params
-  const content  = await getPostData(slug);
+  const {locale} = await params
+  const content  = await getPostData(slug, locale);
   
   if(!content) notFound()
 
@@ -49,6 +50,8 @@ export default async function BlogPost({ params }) {
   return (
     <section
       className={`
+          max-w-6xl
+          mx-auto
       `}
     >
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
@@ -57,23 +60,14 @@ export default async function BlogPost({ params }) {
           h-[50vh]
           relative
           overflow-hidden
+          bg-fixed
+          bg-center
+          bg-cover
         `}
+        style={{
+          backgroundImage: `url(${content.banner_image || "/images/test.svg"})`,
+        }}
       >
-        <div
-          className={`
-            w-[100vw]
-            absolute
-            inset-0
-            bg-cover
-            bg-center
-            bg-fixed
-            bg-no-repeat
-            parallax-bg
-          `}
-          style={{
-            backgroundImage: `url(${content.banner_image || "/images/test.svg"})`,
-          }}
-        />
       </div>
       <div className={`container py-40`}>
 

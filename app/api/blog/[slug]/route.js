@@ -23,7 +23,7 @@ export async function GET(request, {params}) {
   const id = slug.split('-')[0]
 
   let endpoint = `posts/${id}?summary=true&details=true`
-
+  console.log(endpoint)
 
   const apiResponse = await fetchJWT(
     request,
