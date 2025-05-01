@@ -18,14 +18,17 @@ export async function GET(request) {
   }
 
   // read all params
-  const params = request.url.split("?")[1]
+  const getParams = new URLSearchParams(request.url.split('?')[1])
 
-  let endpoint = `posts/?page=1&page-size=10000&summary=true&details=true`
+  // Get id from params and remove it from the params
+  const id = getParams.get('id', null)
+  getParams.delete('id')
 
-  if (params) {
-    endpoint = `posts/?${params}`
+  let endpoint
+  if (id) {
+    endpoint = `posts/${id}?${getParams}`
   } else {
-    endpoint = `posts/`
+    endpoint = `posts?${getParams}`
   }
 
   const apiResponse = await fetchJWT(
@@ -38,10 +41,10 @@ export async function GET(request) {
     lang,
   )
 
-  // Return formatted response
-  //
-  const data = await apiResponse.json()
+  console.log({ apiResponse })
 
+  // Return formatted response
+  const data = await apiResponse.json()
   return new Response(JSON.stringify(data), {
     status: apiResponse.status,
     headers: {

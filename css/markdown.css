@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: theme("colors.green-dark");
+  background: theme("colors.white");
+  overflow-x: hidden;
+  padding-top: 0px;
+  opacity: 1;
+}
+
+.debug {
+  border: 1px solid red;
+}
+
+.container {
+  padding: 0 1rem;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+.hidden {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme("colors.yellow");
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme("colors.green-light");
+}
+
+.transition-video-wrapper.play {
+  opacity: 1;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: theme("colors.white") !important;
+  background-color: theme("colors.yellow") !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  transition-duration: 0.2s !important;
+}
+.swiper-button-next:hover, .swiper-button-prev:hover {
+  background-color: theme("colors.green-dark") !important;
+  color: theme("colors.white") !important;
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+  font-size: 15px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: theme("colors.yellow") !important;
+}
+
+.swal2-actions button {
+  background-color: theme("colors.green-dark") !important;
+  color: theme("colors.white") !important;
+  transition-duration: 0.2s !important;
+  transition-property: all !important;
+}
+.swal2-actions button:hover {
+  opacity: 0.7 !important;
+}
+
+.markdown h2 {
+  font-size: 2rem;
+}
+.markdown h3 {
+  font-size: 1.25rem;
+}
+.markdown h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem 0;
+}
+.markdown h2, .markdown h3 {
+  margin: 2.5rem 0 1rem 0;
+  font-family: "Passion One", "Passion One Fallback";
+}
+.markdown h2:first-child, .markdown h3:first-child {
+  margin-top: 0;
+}
+.markdown ul:not(.contains-task-list) li {
+  list-style-type: none;
+  margin-left: 0;
+}
+.markdown ol li {
+  list-style-type: none;
+  margin-left: 1rem;
+  margin-bottom: 0.25rem;
+}
+.markdown p {
+  margin: 1rem 0;
+}
+.markdown table {
+  max-width: 80%;
+  margin: 2rem auto;
+  overflow-x: auto;
+}
+.markdown table thead, .markdown table tbody {
+  width: 100%;
+}
+.markdown table thead th {
+  padding: 0.5rem 1.5rem;
+}
+.markdown table td {
+  text-align: center;
+}
+.markdown table th {
+  background-color: theme("colors.green-dark");
+  color: theme("colors.white");
+}
+.markdown table th:first-child {
+  border-radius: 10px 0 0 0;
+}
+.markdown table th:last-child {
+  border-radius: 0 10px 0 0;
+}
+.markdown table tr:nth-child(even) {
+  background-color: theme("colors.green-dark-10");
+}
+.markdown table tr:last-child td:first-child {
+  border-radius: 0 0 0 10px;
+}
+.markdown table tr:last-child td:last-child {
+  border-radius: 0 0 10px 0;
+}
+.markdown pre {
+  background-color: theme("colors.green-dark-10");
+  padding: 1rem;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+.markdown code {
+  background-color: theme("colors.green-dark-10");
+  padding: 0.25rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-family: monospace;
+}
+.markdown a {
+  color: theme("colors.green-dark");
+  transition: color 0.2s;
+}
+.markdown a:hover {
+  color: theme("colors.green");
+}
+@media screen and (min-width: 767px) {
+  .markdown table {
+    max-width: 70%;
+  }
+  .markdown ul:not(.contains-task-list) li {
+    list-style-type: disc;
+    margin-left: 1rem;
+  }
+  .markdown ol li {
+    list-style-type: decimal;
+    margin-left: 2rem;
+  }
+}/*# sourceMappingURL=markdown.css.map */

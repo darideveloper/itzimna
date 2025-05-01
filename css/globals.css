@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: theme("colors.green-dark");
+  background: theme("colors.white");
+  overflow-x: hidden;
+  padding-top: 0px;
+  opacity: 1;
+}
+
+.debug {
+  border: 1px solid red;
+}
+
+.container {
+  padding: 0 1rem;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+.hidden {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme("colors.yellow");
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme("colors.green-light");
+}
+
+.transition-video-wrapper.play {
+  opacity: 1;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: theme("colors.white") !important;
+  background-color: theme("colors.yellow") !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  transition-duration: 0.2s !important;
+}
+.swiper-button-next:hover, .swiper-button-prev:hover {
+  background-color: theme("colors.green-dark") !important;
+  color: theme("colors.white") !important;
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+  font-size: 15px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: theme("colors.yellow") !important;
+}
+
+.swal2-actions button {
+  background-color: theme("colors.green-dark") !important;
+  color: theme("colors.white") !important;
+  transition-duration: 0.2s !important;
+  transition-property: all !important;
+}
+.swal2-actions button:hover {
+  opacity: 0.7 !important;
+}/*# sourceMappingURL=globals.css.map */

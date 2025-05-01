@@ -16,13 +16,22 @@ export async function getPosts(lang) {
   return posts
 }
 
-export async function getPost(slug, locale) {
-  if(!locale) locale = "es"
-  const res = await fetch(`${host}/api/blog/${slug}`, {
+export async function getPost(id, accessToken, refreshToken, lang) {
+
+  // Get data from API
+  const res = await fetch(`${host}/api/blog/?id=${id}`, {
     headers: {
-      'lang': locale
+      'accessToken': accessToken,
+      'refreshToken': refreshToken,
+      'lang': lang
     }
   })
+
+  // Validate if property exists
+  if (res.status === 404) {
+    return null
+  }
+
   const jsonData = await res.json()
   return jsonData
 }
