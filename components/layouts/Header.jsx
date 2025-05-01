@@ -173,7 +173,7 @@ const Header = () => {
           {/* Background shape */}
           <div
             className={`
-              w-[820px] 
+              w-[940px] 
               h-[600px] 
               bg-green-light/10 
               absolute 
