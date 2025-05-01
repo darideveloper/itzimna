@@ -114,56 +114,59 @@ export default async function BlogPost({ params }) {
   )
 }
 
-// export async  function generateMetadata({ params }) {
-//   const { locale, slug } = await params
-//   const t = await getTranslations({ locale, namespace: 'Meta' })
-//   // Get post data
-//   let postData = await getPostData(slug)
-//   // Default post data
-//   if (!postData) {
-//     postData = {
-//       title: 'Post',
-//       description: 'Post',
-//       lang: 'es',
-//       keywords: 'Post',
-//       author: t('title'),
-//     }
-//   }
-//   const image = {
-//     url: `${postData.banner_image_url}`, // this image should be from api
-//     width: 1200,
-//     height: 720,
-//     alt: postData.title,
-//   }
-//   return {
-//     title: postData.title,
-//     description: postData.description,
-//     locale: postData.lang,
-//     keywords: postData.keywords,
-//     authors: [
-//       { "name": postData.author }
-//     ],
-//     alternates: {
-//       canonical: `/${locale}/blog/${slug}`,
-//     },
+export async  function generateMetadata({ params }) {
+  const { locale, idSlug } = await params
+  const t = await getTranslations({ locale, namespace: 'Meta' })
 
-//     // Open Graph metadata
-//     openGraph: {
-//       title: postData.title,
-//       description: postData.description,
-//       url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/blog/${slug}`,
-//       siteName: t('title'),
-//       images: [image],
-//       locale,
-//       type: "article",
-//     },
-//     // Twitter metadata
-//     twitter: {
-//       card: "summary_large_image",
-//       title: postData.title,
-//       description: postData.description,
-//       images: [image],
-//       creator: "@DeveloperDari",
-//     },
-//   }
-// }
+  // Get post data
+  const id = idSlug.split('-')[0]
+  let postData = await getPost(id, "", "", locale)
+  
+  // Default post data
+  if (!postData) {
+    postData = {
+      title: 'Post',
+      description: 'Post',
+      lang: 'es',
+      keywords: 'Post',
+      author: t('title'),
+    }
+  }
+  const image = {
+    url: `${postData.banner_image_url}`,
+    width: 1200,
+    height: 720,
+    alt: postData.title,
+  }
+  return {
+    title: postData.title,
+    description: postData.description,
+    locale: postData.lang,
+    keywords: postData.keywords,
+    authors: [
+      { "name": postData.author }
+    ],
+    alternates: {
+      canonical: `/${locale}/blog/${idSlug}`,
+    },
+
+    // Open Graph metadata
+    openGraph: {
+      title: postData.title,
+      description: postData.description,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/blog/${idSlug}`,
+      siteName: t('title'),
+      images: [image],
+      locale,
+      type: "article",
+    },
+    // Twitter metadata
+    twitter: {
+      card: "summary_large_image",
+      title: postData.title,
+      description: postData.description,
+      images: [image],
+      creator: "@DeveloperDari",
+    },
+  }
+}
