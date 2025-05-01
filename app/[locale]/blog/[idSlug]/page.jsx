@@ -1,5 +1,4 @@
 //libs
-import { getPostData } from "@/libs/posts"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
@@ -26,8 +25,6 @@ export default async function BlogPost({ params }) {
   const { idSlug } = await params
   const id = idSlug.split('-')[0]
   const postData  = await getPost(id, accessToken, refreshToken, lang)
-
-  console.log({postData})
 
   // Redirect to /blog if post not found
   if(!postData) {
