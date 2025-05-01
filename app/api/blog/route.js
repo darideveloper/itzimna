@@ -41,8 +41,6 @@ export async function GET(request) {
     lang,
   )
 
-  console.log({ apiResponse })
-
   // Return formatted response
   const data = await apiResponse.json()
   return new Response(JSON.stringify(data), {

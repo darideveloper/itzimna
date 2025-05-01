@@ -23,9 +23,11 @@ export default async function BlogPost({ params }) {
   const lang = cookieStore.get("NEXT_LOCALE")?.value || 'es'
   
   // Get post data
-  const { slug } = await params
-  const id = slug.split('-')[0]
+  const { idSlug } = await params
+  const id = idSlug.split('-')[0]
   const postData  = await getPost(id, accessToken, refreshToken, lang)
+
+  console.log({postData})
 
   // Redirect to /blog if post not found
   if(!postData) {
@@ -52,11 +54,11 @@ export default async function BlogPost({ params }) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `/blog/${slug}`,
+      "@id": `/blog/${idSlug}`,
     },
     image: {
       "@type": "ImageObject",
-      url: postData.banner_image || "/images/test.svg",
+      url: postData.banner_image_url || "/images/test.svg",
       width: 1500,
       height: 1500,
     },
@@ -79,7 +81,7 @@ export default async function BlogPost({ params }) {
           bg-cover
         `}
         style={{
-          backgroundImage: `url(${postData.banner_image || "/images/test.svg"})`,
+          backgroundImage: `url(${postData.banner_image_url || "/images/test.svg"})`,
         }}
       >
       </div>
@@ -121,7 +123,7 @@ export default async function BlogPost({ params }) {
 //     }
 //   }
 //   const image = {
-//     url: `${postData.banner_image}`, // this image should be from api
+//     url: `${postData.banner_image_url}`, // this image should be from api
 //     width: 1200,
 //     height: 720,
 //     alt: postData.title,
