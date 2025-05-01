@@ -4,10 +4,13 @@ import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
+import remarkGfm from 'remark-gfm'
 
 // ui elements
 import Title from "@/components/ui/Title"
 import Subtitle from "@/components/ui/Subtitle"
+import ReactMarkdown from 'react-markdown'
+
 // styles
 import "@/css/post-content.sass"
 import { formatDate } from "@/libs/utils"
@@ -20,14 +23,16 @@ export default async function BlogPost({ params }) {
   const accessToken = cookieStore.get('accessToken')?.value || ''
   const refreshToken = cookieStore.get('refreshToken')?.value || ''
   const lang = cookieStore.get("NEXT_LOCALE")?.value || 'es'
-  
+
   // Get post data
   const { idSlug } = await params
   const id = idSlug.split('-')[0]
-  const postData  = await getPost(id, accessToken, refreshToken, lang)
+  const postData = await getPost(id, accessToken, refreshToken, lang)
+
+  console.log({ postData })
 
   // Redirect to /blog if post not found
-  if(!postData) {
+  if (!postData) {
     redirect(`/${lang}/blog`)
   }
 
@@ -84,21 +89,24 @@ export default async function BlogPost({ params }) {
       </div>
       <div className={`container py-40`}>
 
-      <div>
-        <Title isH1={false}>{postData.title}</Title>
-        <Subtitle className="text-center text-xl">
-          {formatDate(postData.date)} by {postData.author}
-        </Subtitle>
+        <div>
+          <Title isH1={false}>{postData.title}</Title>
 
-        <div
-          className={`
-            post-postData
-            my-16
+          <Subtitle className="text-center text-xl">
+            {formatDate(postData.date)} by {postData.author}
+          </Subtitle>
+
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            children={postData.content}
+            className={`
+            markdown
+            text-center md:text-left
+            my-12
           `}
-          dangerouslySetInnerHTML={{ __html: postData.description }}
-        />
+          />
 
-      </div>
+        </div>
       </div>
     </section>
   )

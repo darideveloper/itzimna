@@ -19,7 +19,7 @@ export async function getPosts(lang) {
 export async function getPost(id, accessToken, refreshToken, lang) {
 
   // Get data from API
-  const res = await fetch(`${host}/api/blog/?id=${id}`, {
+  const res = await fetch(`${host}/api/blog/?id=${id}&details=true`, {
     headers: {
       'accessToken': accessToken,
       'refreshToken': refreshToken,
