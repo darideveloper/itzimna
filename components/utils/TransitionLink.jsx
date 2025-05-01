@@ -22,7 +22,7 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
   const locale = useLocale()
 
   // Pages that need a full reload
-  const full_reload_pages = ["/buscar"]
+  const full_reload_pages = []
 
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
