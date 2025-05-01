@@ -57,7 +57,6 @@ export default async function LocaleLayout({ children, params }) {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-J33X5K048Q');
-            console.log('Google Tag Manager is loaded');
           `,
           }}
         />

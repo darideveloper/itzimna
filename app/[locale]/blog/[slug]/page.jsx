@@ -27,8 +27,6 @@ export default async function BlogPost({ params }) {
   const id = slug.split('-')[0]
   const postData  = await getPost(id, accessToken, refreshToken, lang)
 
-  console.log({postData})
-
   // Redirect to /blog if post not found
   if(!postData) {
     redirect(`/${lang}/blog`)

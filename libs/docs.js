@@ -15,7 +15,6 @@ export async function getDocData(locale, name) {
   try {
     fileContent = fs.readFileSync(fullPath, "utf8")
   } catch (err) {
-    console.log(err)
     return null
   }
 

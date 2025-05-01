@@ -114,7 +114,6 @@ export default async function sitemap() {
         }
       }
     }
-    console.log("searchQueriesMerged", searchQueriesMerged)
     for (const query of searchQueriesMerged) {
       sitemap.push({
         url: escapeXml(`${siteUrl}/${lang}/buscar?${query}`),
