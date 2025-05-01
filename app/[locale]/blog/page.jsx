@@ -35,7 +35,7 @@ export default async function BlogPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name" : tMeta('title'),
+    "name" : "Blog |" + tMeta('title'),
     "url": `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/`,
     "description": tMeta('description.blog'),
     "publisher": {
@@ -121,7 +121,7 @@ export async function generateMetadata({ params }) {
 
 
   return {
-    title: t('title'),
+    title: "Blog | " + t('title'),
     description: t('description.blog'),
 
     openGraph:{
