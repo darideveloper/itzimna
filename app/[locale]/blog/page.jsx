@@ -65,7 +65,7 @@ export default async function BlogPage() {
         <Title
           className={`
             ${fontTitle.className}
-            font-bold
+            !font-normal
             mb-2
           `}
           isH1={true}
