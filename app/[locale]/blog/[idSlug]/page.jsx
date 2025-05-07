@@ -10,6 +10,7 @@ import remarkGfm from 'remark-gfm'
 import Title from "@/components/ui/Title"
 import Subtitle from "@/components/ui/Subtitle"
 import ReactMarkdown from 'react-markdown'
+import ShareButtons from "@/components/ui/ShareButtons"
 
 // styles
 import "@/css/markdown.sass"
@@ -18,6 +19,7 @@ import "@/css/markdown.sass"
 import { formatDate } from "@/libs/utils"
 import { getPost } from "@/libs/api/posts"
 
+// Share buttons
 export default async function BlogPost({ params }) {
 
   // Get cookies
@@ -97,6 +99,8 @@ export default async function BlogPost({ params }) {
           <Subtitle className="text-center text-xl">
             {formatDate(postData.created_at)} by {postData.author}
           </Subtitle>
+
+          <ShareButtons />
 
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
