@@ -42,7 +42,7 @@ export default async function BlogPost({ params }) {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: postData.title,
-    datePublished: postData.date,
+    datePublished: postData.created_at,
     author: {
       "@type": "Person",
       name: postData.author,
@@ -95,7 +95,7 @@ export default async function BlogPost({ params }) {
           <Title isH1={false}>{postData.title}</Title>
 
           <Subtitle className="text-center text-xl">
-            {formatDate(postData.date)} by {postData.author}
+            {formatDate(postData.created_at)} by {postData.author}
           </Subtitle>
 
           <ReactMarkdown
