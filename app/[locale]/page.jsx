@@ -23,7 +23,7 @@ export default async function HomePage({ params }) {
     "@type": "WebPage",
     "headline": tMeta('title'),
     'description': tMeta('description.home'),
-    'keywords': tMeta('keywords'),
+    'keywords': tMeta('keywords').split(','),
     "publisher": {
       "@type": "Organization",
       "name": tMeta('title'),

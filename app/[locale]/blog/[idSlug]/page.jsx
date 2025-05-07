@@ -47,7 +47,7 @@ export default async function BlogPost({ params }) {
       "@type": "Person",
       name: postData.author,
     },
-    keywords: postData.keywords,
+    keywords: postData.keywords.split(','),
     publisher: {
       "@type": "Organization",
       name: "NextJS Blog",

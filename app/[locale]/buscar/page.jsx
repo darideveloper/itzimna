@@ -41,7 +41,7 @@ const PropertySearch = async (props) => {
       '@type': 'Person',
       'name': tMeta('author'),
     },
-    'keywords': tMeta('keywords'),
+    'keywords': tMeta('keywords').split(','),
     'publisher': {
       '@type': 'Organization',
       'name': 'Itzamna',
