@@ -223,7 +223,7 @@ const Header = () => {
           {/* Phone Number with Icons */}
           <div
             className={`
-              flex 
+              hidden 
               items-center 
               gap-2
               text-white
