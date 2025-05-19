@@ -8,8 +8,9 @@ import { fontTitle } from "@/libs/fonts"
  * @param {string} props.children - Text to display
  * @param {string} props.className - Additional classes
  * @param {boolean} props.isH1 - Render as h1
+ * @param {boolean} props.useAos - Use AOS animation
  */
-export default function Title ({ children, className, isH1=false }) {
+export default function Title ({ children, className, isH1=false, useAos=true }) {
   
   // Base style
   let style = `
@@ -34,7 +35,7 @@ export default function Title ({ children, className, isH1=false }) {
         title-wrapper
         w-full
       `}
-      data-aos="fade-down"
+      data-aos={useAos ? "fade-up" : ""}
     >
       {
         isH1

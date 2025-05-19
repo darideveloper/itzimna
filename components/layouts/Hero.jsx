@@ -72,6 +72,7 @@ const HeroSection = ({ id = "hero", className = "", title, description, bgImage,
               text-white
               !mt-0
             `}
+            useAos={false}
           >
             {title}
           </Title>
