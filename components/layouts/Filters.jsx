@@ -50,7 +50,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
 
   // Local state
   const [readySubmit, setReadySubmit] = useState(false)
-  const [locations, setLocations] = useState([])
+  const [locations, setLocations] = useState(["Loading..."])
   const [initialLoad, setInitialLoad] = useState(true)
 
   // Inputs states
