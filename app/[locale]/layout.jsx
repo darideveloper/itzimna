@@ -64,7 +64,7 @@ export default async function LocaleLayout({ children, params }) {
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main>
-            <VideoModal />
+            {/* <VideoModal /> */}
             {children}
           </main>
           <Footer />
