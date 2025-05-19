@@ -83,8 +83,8 @@ const HeroSection = ({ id = "hero", className = "", title, description, bgImage,
               max-w-2xl
               mx-auto
             `}
-            data-aos="fade-up"
-            data-aos-delay="600"
+            // data-aos="fade-up"s
+            // data-aos-delay="600"
           >
             {description}
           </p>
