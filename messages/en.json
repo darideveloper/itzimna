@@ -60,10 +60,10 @@
   },
   "Home": {
     "LastProperties": {
-      "title": "New Developments in Yucatan"
+      "title": "New Developments in yucatán"
     },
     "FeaturedProperties": {
-      "title": "Featured Properties in Yucatan"
+      "title": "Featured Properties in yucatán"
     },
     "HeroSection": {
       "title": "Discover Your Perfect Luxury Property",
@@ -104,7 +104,7 @@
       "size": "with a maximum size of",
       "price": "with a maximum price of"
     },
-    "keywords": "development, filter, properties, yucatan, luxury, beach, sea, house, apartment, land"
+    "keywords": "development, filter, properties, yucatán, luxury, beach, sea, house, apartment, land"
   },
   "CardsSection": {
     "noPropertiesFound": "No properties found"
