@@ -118,47 +118,57 @@ export default async function BlogPost({ params }) {
   )
 }
 
-export async  function generateMetadata({ params }) {
-  const { locale, idSlug } = await params
+export async function generateMetadata({ params }) {
+  const { locale, idSlug } = params
   const t = await getTranslations({ locale, namespace: 'Meta' })
 
   // Get post data
   const id = idSlug.split('-')[0]
   let postData = await getPost(id, "", "", locale)
-  
+
   // Default post data
   if (!postData) {
     postData = {
       title: 'Post',
       description: 'Post',
-      lang: 'es',
+      lang: locale,
       keywords: 'Post',
       author: t('title'),
+      banner_image_url: '/images/home-banner.webp',
     }
   }
+
+  const domain = process.env.NEXT_PUBLIC_HOST
+  const canonicalPath = `/${locale}/blog/${idSlug}`
+  const canonicalUrl = `${domain}${canonicalPath}`
   const image = {
-    url: `${postData.banner_image_url}`,
+    url: postData.banner_image_url || `${domain}/images/home-banner.webp`,
     width: 1200,
     height: 720,
     alt: postData.title,
   }
+
   return {
     title: postData.title,
     description: postData.description,
     locale: postData.lang,
     keywords: postData.keywords,
     authors: [
-      { "name": postData.author }
+      { name: postData.author }
     ],
     alternates: {
-      canonical: `/${locale}/blog/${idSlug}`,
+      canonical: canonicalUrl,
+      languages: {
+        locale: `${domain}/${locale}/blog/${idSlug}`,
+        'x-default': canonicalUrl,
+      },
     },
 
     // Open Graph metadata
     openGraph: {
       title: postData.title,
       description: postData.description,
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/blog/${idSlug}`,
+      url: canonicalUrl,
       siteName: t('title'),
       images: [image],
       locale,

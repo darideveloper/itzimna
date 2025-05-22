@@ -109,26 +109,39 @@ export default async function BlogPage() {
 }
 
 export async function generateMetadata({ params }) {
-  const { locale } = await params
+  const { locale } = params
   const t = await getTranslations({ locale, namespace: 'Meta' })
 
+  const domain = process.env.NEXT_PUBLIC_HOST
+  const canonicalPath = `/${locale}/blog`
+  const canonicalUrl = `${domain}${canonicalPath}`
+
   const image = {
-    url: `${process.env.NEXT_PUBLIC_HOST}/images/home-banner.webp`,
+    url: `${domain}/images/home-banner.webp`,
     width: 800,
     height: 600,
     alt: t('title'),
   }
 
-
   return {
     title: "Blog | " + t('title'),
     description: t('description.blog'),
 
-    openGraph:{
+    // Canonical and alternate links
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${domain}/en/blog`,
+        es: `${domain}/es/blog`,
+        'x-default': canonicalUrl,
+      },
+    },
+
+    openGraph: {
       title: t('title'),
       description: t('description.blog'),
       images: [image],
-      url: `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/`,
+      url: canonicalUrl,
       siteName: t('title'),
       locale,
       type: 'website',

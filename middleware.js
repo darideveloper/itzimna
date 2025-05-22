@@ -18,19 +18,25 @@ export default async function middleware(request) {
   if (!hasLocale && !langCookie) {
     console.debug('Locale missing and no lang cookie found, redirecting to default...')
     url.pathname = `/${routing.defaultLocale}${pathname}`
-    return NextResponse.redirect(url)
+    const response = NextResponse.redirect(url)
+    response.headers.set('x-current-path', url.pathname)
+    return response
   }
 
   // If the `lang` cookie exists but no locale is in the URL, redirect to the cookie's locale
   if (!hasLocale && langCookie && routing.locales.includes(langCookie)) {
     console.debug(`Locale missing, but lang cookie found: ${langCookie}. Redirecting...`)
     url.pathname = `/${langCookie}${pathname}`
-    return NextResponse.redirect(url)
+    const response = NextResponse.redirect(url)
+    response.headers.set('x-current-path', url.pathname)
+    return response
   }
 
   // Add internationalization middleware for other routes
   console.debug('Proceeding with internationalization...')
-  return createMiddleware(routing)(request)
+  const response = await createMiddleware(routing)(request)
+  response.headers.set('x-current-path', pathname)
+  return response
 }
 
 export const config = {

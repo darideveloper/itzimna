@@ -159,44 +159,57 @@ const PropertySearch = async (props) => {
 export default PropertySearch
 
 
-export async function generateMetadata({ searchParams }) {
-  // Translations
-  const t = await getTranslations("Search");
-  const tMeta = await getTranslations("Meta");
+export async function generateMetadata({ params, searchParams }) {
+  const { locale } = params
+  const t = await getTranslations("Search")
+  const tMeta = await getTranslations("Meta")
 
   // Extract search parameters
-  const locationName = searchParams["ubicacion-nombre"];
-  const metersTo = searchParams["metros-hasta"];
-  const priceTo = searchParams["precio-hasta"];
+  const locationName = searchParams?.["ubicacion-nombre"]
+  const metersTo = searchParams?.["metros-hasta"]
+  const priceTo = searchParams?.["precio-hasta"]
 
   // Create description
-  let description = t("title");
-  description += locationName ? ` ${t("summary.location")} '${locationName}'` : "";
-  description += metersTo ? ` ${t("summary.size")} ${metersTo} m²` : "";
-  description += priceTo ? ` ${t("summary.price")} ${priceTo} MXN` : "";
+  let description = t("title")
+  description += locationName ? ` ${t("summary.location")} '${locationName}'` : ""
+  description += metersTo ? ` ${t("summary.size")} ${metersTo} m²` : ""
+  description += priceTo ? ` ${t("summary.price")} ${priceTo} MXN` : ""
 
   // Metadata
+  const domain = process.env.NEXT_PUBLIC_HOST
+  const canonicalPath = `/${locale}/buscar`
+  const canonicalUrl = `${domain}${canonicalPath}`
   const image = {
-    url: `${process.env.NEXT_PUBLIC_HOST}/images/home-banner.jpg`,
+    url: `${domain}/images/home-banner.jpg`,
     width: 1200,
     height: 720,
     alt: t("title"),
-  };
+  }
 
   return {
     title: `${t("title")} | ${tMeta("title")}`,
     description,
-    lang: "es",
+    lang: locale,
     keywords: tMeta("keywords"),
+
+    // Canonical and alternate links
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${domain}/en/buscar`,
+        es: `${domain}/es/buscar`,
+        'x-default': canonicalUrl,
+      },
+    },
 
     // Open Graph metadata
     openGraph: {
       title: `${t("title")} | ${tMeta("title")}`,
       description,
-      url: `${process.env.NEXT_PUBLIC_HOST}/es/buscar`,
+      url: canonicalUrl,
       siteName: tMeta("title"),
       images: [image],
-      locale: "es",
+      locale,
       type: "website",
     },
 
@@ -208,5 +221,5 @@ export async function generateMetadata({ searchParams }) {
       images: [image],
       creator: "@DeveloperDari",
     },
-  };
+  }
 }

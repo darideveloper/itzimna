@@ -4,6 +4,7 @@ import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
+import { headers } from 'next/headers'
 
 // Fonts
 import { fontBody } from '@/libs/fonts'
@@ -74,13 +75,29 @@ export default async function LocaleLayout({ children, params }) {
   )
 }
 
-export async function generateMetadata({ params }) {
-
-  const { locale } = await params
+export async function generateMetadata({ params }, parent) {
+  const { locale } = params
   const t = await getTranslations({ locale, namespace: 'Meta' })
 
+  // Try to get the current path from the parent metadata context (Next.js 14+)
+  let currentPath = ''
+  if (parent?.pathname) {
+    currentPath = parent.pathname
+  } else if (typeof headers === 'function') {
+    // Fallback: get from headers (set by middleware)
+    const headersList = headers()
+    currentPath = headersList.get('x-current-path') || `/${locale}`
+  } else {
+    currentPath = `/${locale}`
+  }
+
+  const domain = process.env.NEXT_PUBLIC_HOST
+  // Remove locale from URL to get the base path for canonical
+  const canonicalPath = currentPath.replace(/^\/(en|es)/, '')
+  const canonicalUrl = `${domain}/${locale}${canonicalPath}`
+
   const image = {
-    url: `${process.env.NEXT_PUBLIC_HOST}/images/home-banner.webp`,
+    url: `${domain}/images/home-banner.webp`,
     width: 800,
     height: 600,
     alt: t('title'),
@@ -98,6 +115,16 @@ export async function generateMetadata({ params }) {
     ],
     icons: "/favicon.ico",
 
+    // Canonical and alternate links
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${domain}/en${canonicalPath}`,
+        es: `${domain}/es${canonicalPath}`,
+        'x-default': `${domain}${canonicalPath}`,
+      },
+    },
+
     // Open Graph metadata
     openGraph: {
       title: {
@@ -105,7 +132,7 @@ export async function generateMetadata({ params }) {
         template: `%s | ${t('title')}`,
       },
       description: t('description.home'),
-      url: `${process.env.NEXT_PUBLIC_HOST}/${locale}`,
+      url: canonicalUrl,
       siteName: t('title'),
       images: [image],
       locale,

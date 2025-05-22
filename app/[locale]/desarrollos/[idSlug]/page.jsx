@@ -232,23 +232,22 @@ export default async function PropertyDevelopment({ params }) {
 
 
 export async function generateMetadata({ params }) {
-
-  const { locale, idSlug } = await params
+  const { locale, idSlug } = params
   const t = await getTranslations({ locale: locale, namespace: 'Meta' })
-
 
   // Get property data
   const id = idSlug.split('-')[0]
-  const propertyData = await getProperty(id, "", "", locale)
+  let propertyData = await getProperty(id, "", "", locale)
 
   // Default post data
   if (!propertyData) {
     propertyData = {
-      title: 'Dessarrollo',
-      description: 'Dessarrollo',
-      lang: locale,
-      keywords: 'Dessarrollo',
-      author: "Itzamna",
+      name: 'Desarrollo',
+      short_description: 'Desarrollo',
+      category: '',
+      location: '',
+      seller: { first_name: '', last_name: '' },
+      banner: { url: '' },
     }
   }
 
@@ -257,8 +256,12 @@ export async function generateMetadata({ params }) {
     url: propertyData.banner.url,
     width: 1200,
     height: 720,
-    alt: propertyData.title,
+    alt: propertyData.name,
   }
+
+  const domain = process.env.NEXT_PUBLIC_HOST
+  const canonicalPath = `/${locale}/desarrollos/${idSlug}`
+  const canonicalUrl = `${domain}${canonicalPath}`
 
   return {
     title: propertyData.name,
@@ -269,11 +272,21 @@ export async function generateMetadata({ params }) {
       { "name": propertyData.seller.first_name + ' ' + propertyData.seller.last_name },
     ],
 
+    // Canonical and alternate links
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${domain}/en/desarrollos/${idSlug}`,
+        es: `${domain}/es/desarrollos/${idSlug}`,
+        'x-default': canonicalUrl,
+      },
+    },
+
     // Open Graph metadata
     openGraph: {
       title: propertyData.name,
       description: propertyData.short_description,
-      url: `${process.env.NEXT_PUBLIC_HOST}/${locale}/desarrollos/${idSlug}`,
+      url: canonicalUrl,
       siteName: t('title'),
       images: [image],
       locale,
