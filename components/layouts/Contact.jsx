@@ -21,7 +21,7 @@ const Contact = () => {
 
   // COntactd ata
   const listOffice = [
-    "Yocatán, México",
+    "Yucatán, México",
   ]
   const phone = "(+52) 9999 07 48 76"
   const email = "admin@itzimna.com"
