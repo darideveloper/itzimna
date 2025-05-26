@@ -1,4 +1,4 @@
-export default function Badge({ children }) {
+export default function Badge({ children, className }) {
   return (
     <div
       className={`
@@ -9,7 +9,7 @@ export default function Badge({ children }) {
         px-3
         py-1
         text-white
-        text-sm
+        ${className}
       `}
     >
       {children}
