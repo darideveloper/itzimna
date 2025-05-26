@@ -23,18 +23,18 @@ import AOSInit from '@/components/utils/AOSInit'
 
 
 export default async function PropertyDevelopment({ params }) {
-  
+
   // Get cookies
   const cookieStore = await cookies()
   const accessToken = cookieStore.get('accessToken')?.value || ''
   const refreshToken = cookieStore.get('refreshToken')?.value || ''
   const lang = cookieStore.get("NEXT_LOCALE")?.value || 'es'
-  
+
   // Get property data
   const { idSlug } = await params
   const id = idSlug.split('-')[0]
   const propertyData = await getProperty(id, accessToken, refreshToken, lang)
-  
+
   // Redirect to 404 if property not found
   if (!propertyData) {
     redirect(`../../404`)
@@ -54,37 +54,44 @@ export default async function PropertyDevelopment({ params }) {
 
   // Metadata
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    'headline': propertyData.name + " | " +  tMeta('title'),
-    'description': propertyData.short_description,
-    'datePublished': propertyData.updated_at,
-    'author': {
-      '@type': 'Person',
-      'name': `${propertyData.seller.first_name} ${propertyData.seller.last_name}`,
+    "@context": "https://schema.org",
+    "@type": "House",
+    "name": propertyData.name,
+    "description": propertyData.short_description,
+    "image": {
+      "@type": "ImageObject",
+      "url": propertyData.banner.url
     },
-    'keywords': keywords,
-    'publisher': {
-      '@type': 'Organization',
-      'name': 'Itzamna',
-      'logo': {
-        '@type': 'ImageObject',
-        'url': `${process.env.NEXT_PUBLIC_HOST}/images/logo.webp`,
-      },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": propertyData.location,
+      "addressCountry": "MX"
     },
-    'mainEntityOfPage': {
-      '@type': 'WebPage',
-      '@id': `${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`,
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "MXN",
+      "price": propertyData.price,
+      "availability": "https://schema.org/InStock",
+      "url": `${process.env.NEXT_PUBLIC_HOST}/${lang}/desarrollos/${idSlug}`
     },
-    'image': {
-      '@type': 'ImageObject',
-      'url': propertyData.banner.url,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Itzamna",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${process.env.NEXT_PUBLIC_HOST}/images/logo.webp`
+      }
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": getBreadcrumb(`${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`)
     }
   }
+
 
   return (
     <div
@@ -211,7 +218,7 @@ export default async function PropertyDevelopment({ params }) {
 
         </div>
 
-        {/* Seller */}  
+        {/* Seller */}
         <InfoCard
           className={`
             mx-auto
