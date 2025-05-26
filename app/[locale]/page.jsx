@@ -61,6 +61,9 @@ export default async function HomePage({ params }) {
         `}
       />
 
+      <Gallery />
+
+
       <CardsSection
         id="last-properties"
         title={t('LastProperties.title')}
@@ -74,7 +77,6 @@ export default async function HomePage({ params }) {
         locale={locale}
       />
       
-      <Gallery />
     </>
   )
 }
