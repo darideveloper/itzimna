@@ -44,6 +44,14 @@ export default async function PropertyDevelopment({ params }) {
   const tMeta = await getTranslations({ locale: lang, namespace: 'Meta' })
   const t = await getTranslations({ locale: lang, namespace: 'PropertyDevelopment' })
 
+  // Get tags from property data
+  const tags = propertyData.tags.map(tag => tag.name)
+
+  // Generate keywords from property data
+  let keywords = propertyData.name.split(' ')
+  keywords = keywords.concat(propertyData.category.split(' '))
+  keywords = keywords.concat(tags)
+
   // Metadata
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -55,7 +63,7 @@ export default async function PropertyDevelopment({ params }) {
       '@type': 'Person',
       'name': `${propertyData.seller.first_name} ${propertyData.seller.last_name}`,
     },
-    'keywords': propertyData.name.split(' ') + "," + propertyData.category + ',' + propertyData.location.split(' '),
+    'keywords': keywords,
     'publisher': {
       '@type': 'Organization',
       'name': 'Itzamna',
@@ -239,6 +247,14 @@ export async function generateMetadata({ params }) {
   const id = idSlug.split('-')[0]
   let propertyData = await getProperty(id, "", "", locale)
 
+  // get tags
+  const tags = propertyData.tags.map(tag => tag.name)
+
+  // Generate keywords from property data
+  let keywords = propertyData.name.split(' ')
+  keywords = keywords.concat(propertyData.category.split(' '))
+  keywords = keywords.concat(tags)
+
   // Default post data
   if (!propertyData) {
     propertyData = {
@@ -267,7 +283,7 @@ export async function generateMetadata({ params }) {
     title: propertyData.name,
     description: propertyData.short_description,
     lang: locale,
-    keywords: propertyData.name.split(' ') + "," + propertyData.category + ',' + propertyData.location.split(' '),
+    keywords: keywords.join(', '),
     authors: [
       { "name": propertyData.seller.first_name + ' ' + propertyData.seller.last_name },
     ],
