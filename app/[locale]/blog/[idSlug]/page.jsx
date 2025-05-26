@@ -77,6 +77,8 @@ export default async function BlogPost({ params }) {
       `}
     >
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+
+      {/* Bg parallax for dexktop */}
       <div
         className={`
           h-[50vh]
@@ -85,12 +87,24 @@ export default async function BlogPost({ params }) {
           bg-fixed
           bg-center
           bg-cover
+          hidden md:block
         `}
         style={{
           backgroundImage: `url(${postData.banner_image_url || "/images/test.svg"})`,
         }}
-      >
+      />
+
+      {/* regular image for mobile */}
+      <div className="md:hidden">
+        <Image
+          src={postData.banner_image_url || "/images/test.svg"}
+          width={1500}
+          height={1500}
+          alt={postData.title}
+          className="w-full h-auto"
+        />
       </div>
+
       <div className={`container py-40`}>
 
         <div>
