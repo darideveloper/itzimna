@@ -94,7 +94,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
     for (const param of searchParams) {
       const [key, value] = param
 
-      if (key === "ubicacion" && locations.length > 0) {
+      if (key === "ubicacion" && locations.length > 0 && locations[0] !== "Loading...") {
         const selectedLocation = locations.find(location => location.value.toString() === value)
         if (selectedLocation) {
           setSelectedLocation(selectedLocation)
