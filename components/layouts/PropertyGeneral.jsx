@@ -32,7 +32,7 @@ export default function PropertyGeneral({
   return (
     <div>
 
-      <div 
+      <div
         className={`
           content
           flex
@@ -103,7 +103,7 @@ export default function PropertyGeneral({
                 my-2
               `}
               >
-                $ {price}
+                {new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(price)}
               </p>
 
               {/* Tags and Info Section */}

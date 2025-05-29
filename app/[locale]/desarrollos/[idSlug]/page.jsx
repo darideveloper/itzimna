@@ -52,6 +52,9 @@ export default async function PropertyDevelopment({ params }) {
   keywords = keywords.concat(propertyData.category.split(' '))
   keywords = keywords.concat(tags)
 
+  // Convert data
+  const priceFloat = parseFloat(propertyData.price.replace(/,/g, ''))
+
   // Metadata
   const jsonLd = {
     "@context": "https://schema.org",
@@ -70,7 +73,7 @@ export default async function PropertyDevelopment({ params }) {
     "offers": {
       "@type": "Offer",
       "priceCurrency": "MXN",
-      "price": propertyData.price,
+      "price": priceFloat.toFixed(2),
       "availability": "https://schema.org/InStock",
       "url": `${process.env.NEXT_PUBLIC_HOST}/${lang}/desarrollos/${idSlug}`
     },
@@ -171,7 +174,7 @@ export default async function PropertyDevelopment({ params }) {
           <InfoCard>
             <PropertyGeneral
               name={propertyData.name}
-              price={propertyData.price}
+              price={priceFloat}
               category={propertyData.category}
               location={propertyData.location}
               company={propertyData.company}
