@@ -173,7 +173,7 @@ export async function generateMetadata({ params }) {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        locale: `${domain}/${locale}/blog/${idSlug}`,
+        [`${locale}`]: `${domain}/${locale}/blog/${idSlug}`,
         'x-default': canonicalUrl,
       },
     },
