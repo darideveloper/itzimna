@@ -108,7 +108,7 @@ export default async function BlogPost({ params }) {
       <div className={`container py-40`}>
 
         <div>
-          <Title isH1={false}>{postData.title}</Title>
+          <Title isH1={true}>{postData.title}</Title>
 
           <Subtitle className="text-center text-xl">
             {formatDate(postData.created_at)} by {postData.author}

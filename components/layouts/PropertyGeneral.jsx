@@ -76,6 +76,8 @@ export default function PropertyGeneral({
                 !mt-0
                 !mb-2
               `}
+              isH1={true}
+              useH1Styles={false}
             >
               {name}
             </Title>

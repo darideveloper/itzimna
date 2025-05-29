@@ -9,8 +9,9 @@ import { fontTitle } from "@/libs/fonts"
  * @param {string} props.className - Additional classes
  * @param {boolean} props.isH1 - Render as h1
  * @param {boolean} props.useAos - Use AOS animation
+ * @param {boolean} props.useH1Styles - Use h1 styles
  */
-export default function Title ({ children, className, isH1=false, useAos=true }) {
+export default function Title ({ children, className, isH1=false, useAos=true, useH1Styles=true }) {
   
   // Base style
   let style = `
@@ -23,7 +24,7 @@ export default function Title ({ children, className, isH1=false, useAos=true })
   `
 
   // Change size if h1 or h2
-  if (isH1) {
+  if (isH1 && useH1Styles) {
     style += 'text-4xl sm:text-5xl md:text-6xl'
   } else {
     style += 'text-3xl sm:text-4xl'
