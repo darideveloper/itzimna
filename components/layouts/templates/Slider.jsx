@@ -1,23 +1,24 @@
 "use client"
 
 // Libs
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 
 // Component:
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, A11y, Autoplay, Pagination } from 'swiper/modules'
-import ModalImage from '@/components/ui/ModalImage'
-import SlideImage from '@/components/ui/Slides/SlideImage'
-import Title from '@/components/ui/Title'
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, A11y, Autoplay, Pagination } from "swiper/modules"
+import ModalImage from "@/components/ui/ModalImage"
+import SlideImage from "@/components/ui/Slides/SlideImage"
+import Title from "@/components/ui/Title"
 
 // Styles
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+
 
 /**
  * Swiper slider component
- * 
+ *
  * @param {Object} props - Component props
  * @param {String} props.id - Component id
  * @param {Array} props.imagesData - Array with images data
@@ -25,13 +26,18 @@ import 'swiper/css/pagination'
  * @param {String} props.imagesData[].alt - Image alt
  * @param {String} props.imagesData[].name - Image alt
  * @param {String} props.title - Component title
- * @param {String} props.description - Component description
+ * @param {String} props.descriptionMd - Component descriptionMd
  * @param {Number} props.maxSlides - Maximum number of slides. Default is 3
- * 
+ *
  * @returns {JSX.Element} Swiper slider component
  */
-export default function Slider({ id, imagesData, title, description, maxSlides = 3 }) {
-
+export default function Slider({
+  id,
+  imagesData,
+  title,
+  descriptionMd,
+  maxSlides = 3,
+}) {
   // States
   const [slidesPerView, setSlidesPerView] = useState(3)
   const [activeSlideIndex, setActiveSlideIndex] = useState(1)
@@ -39,21 +45,20 @@ export default function Slider({ id, imagesData, title, description, maxSlides =
   const [modalLoading, setModalLoading] = useState(false)
   const [images, setImages] = useState(imagesData)
 
-
   // Effects
   useEffect(() => {
     // Get slides per view when resizing and when component mounts
     const handleResize = () => {
       if (window.innerWidth < 768 || maxSlides == 1) {
         setSlidesPerView(1)
-        const imagesNoWhite = images.filter(image => image.name != "white")
+        const imagesNoWhite = images.filter((image) => image.name != "white")
         setImages(imagesNoWhite)
       } else {
         setSlidesPerView(3)
         setImages(imagesData)
       }
     }
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize)
     handleResize()
   }, [])
 
@@ -65,7 +70,6 @@ export default function Slider({ id, imagesData, title, description, maxSlides =
       `}
       id={id}
     >
-
       {/* Modal for zoom images */}
       <ModalImage
         image={modalImage}
@@ -80,27 +84,21 @@ export default function Slider({ id, imagesData, title, description, maxSlides =
           text-center
         `}
       >
-        {
-          title &&
-            <Title
-              className={`
+        {title && (
+          <Title
+            className={`
                 !mb-2
               `}
-            >
-              {title}
-            </Title>
-        }
-        {
-          description &&
-          <div
-            data-aos="fade-up"
-            data-aos-delay="600"
           >
-            <p>
-              {description}
-            </p>
-          </div>
-        }
+            {title}
+          </Title>
+        )}
+        {descriptionMd && (
+          <div
+            className="markdown container"
+            dangerouslySetInnerHTML={{ __html: descriptionMd ? descriptionMd : '' }}
+          />
+        )}
       </div>
 
       {/* Slider */}
@@ -132,26 +130,22 @@ export default function Slider({ id, imagesData, title, description, maxSlides =
         }}
       >
         {/* Render slides */}
-        {
-          images.map((image, index) => (
-            <SwiperSlide
-              key={index}
-              className={`
+        {images.map((image, index) => (
+          <SwiperSlide
+            key={index}
+            className={`
               `}
-            >
-              <SlideImage
-                isActive={slidesPerView != 3 || activeSlideIndex == index}
-                imageSrc={image.url}
-                imageAlt={image.alt}
-                modalLoading={modalLoading}
-                setModalImage={setModalImage}
-              />
-            </SwiperSlide>
-          )
-          )
-        }
+          >
+            <SlideImage
+              isActive={slidesPerView != 3 || activeSlideIndex == index}
+              imageSrc={image.url}
+              imageAlt={image.alt}
+              modalLoading={modalLoading}
+              setModalImage={setModalImage}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </section>
-
   )
 }

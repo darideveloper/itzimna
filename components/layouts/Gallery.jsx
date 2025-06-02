@@ -5,6 +5,12 @@ import { useTranslations } from 'next-intl'
 // Components
 import Slider from '@/components/layouts/templates/Slider'
 
+// Libs
+import { marked } from 'marked';
+
+// Styles
+import "@/css/markdown.sass"
+
 
 export default function Gallery() {
 
@@ -38,7 +44,7 @@ export default function Gallery() {
       id="gallery"
       imagesData={imagesData}
       title={t('title')}
-      description={t('description')}
+      descriptionMd={marked(t('description'))}
     />
   )
 }
