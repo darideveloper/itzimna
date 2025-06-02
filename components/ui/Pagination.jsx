@@ -25,11 +25,13 @@ const Pagination = ({
   return (
     <nav
       className={`
+        container
         pagination
         flex
         items-center
         justify-center
-        space-x-4 mt-8
+        space-x-4 
+        !mt-8
         ${className}
      `}
     >
@@ -38,10 +40,12 @@ const Pagination = ({
           flex
           items-center
           justify-center
-          gap-6
+          gap-4
           py-4
           px-8
           rounded-md
+          flex-wrap
+          w-full          
           ${variant === "light" ? "bg-transparent": "bg-white"}
         `}
       >
