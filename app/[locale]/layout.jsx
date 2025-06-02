@@ -76,7 +76,7 @@ export default async function LocaleLayout({ children, params }) {
 }
 
 export async function generateMetadata({ params }, parent) {
-  const { locale } = params
+  const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'Meta' })
 
   // Try to get the current path from the parent metadata context (Next.js 14+)
@@ -85,7 +85,7 @@ export async function generateMetadata({ params }, parent) {
     currentPath = parent.pathname
   } else if (typeof headers === 'function') {
     // Fallback: get from headers (set by middleware)
-    const headersList = headers()
+    const headersList = await headers()
     currentPath = headersList.get('x-current-path') || `/${locale}`
   } else {
     currentPath = `/${locale}`
