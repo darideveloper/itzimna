@@ -4,6 +4,12 @@ import Title from "@/components/ui/Title"
 // Sections
 import Filters from "@/components/layouts/Filters"
 
+// Libs
+import { marked } from 'marked';
+
+// Styles
+import "@/css/markdown.sass"
+
 /**
  * Hero section component
  * 
@@ -76,22 +82,14 @@ const HeroSection = ({ id = "hero", className = "", title, description, bgImage,
           >
             {title}
           </Title>
-          <p
-            className={`
-              text-xl
-              sm:text-2xl
-              text-gray-200
-              max-w-2xl
-              mx-auto
-            `}
-            // data-aos="fade-up"s
-            // data-aos-delay="600"
-          >
-            {description}
-          </p>
-          
+
+          <div
+            className="text-white markdown"
+            dangerouslySetInnerHTML={{ __html: description ? marked(description) : '' }}
+          />
+
           {/* Search filters */}
-          <Filters 
+          <Filters
             showSubmit={filtersShowSubmit}
           />
 
