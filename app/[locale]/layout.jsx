@@ -40,6 +40,12 @@ export default async function LocaleLayout({ children, params }) {
 
   return (
     <html lang={locale}>
+      {/* Global SEO meta tags */}
+      <head>
+        <meta name="robots" content="index,follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+      </head>
       <body
         className={`
           ${fontBody.className}
