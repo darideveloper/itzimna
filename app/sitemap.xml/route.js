@@ -58,47 +58,47 @@ export async function GET() {
       });
     }
 
-    // Individual search queries Search filters
-    const searchQueries = [];
-    const searchQueriesLocations = locations.map(
-      location => `ubicacion=${location.id}&ubicacion-nombre=${location.name}`
-    );
-    const searchQueriesSizes = sizesOptions.map(
-      size => `metros-desde=0&metros-hasta=${size.value}`
-    );
-    const searchQueriesPrices = pricesOptions.map(
-      price => `precio-desde=0&precio-hasta=${price.value}`
-    );
-    searchQueries.push(...searchQueriesLocations);
-    searchQueries.push(...searchQueriesSizes);
-    searchQueries.push(...searchQueriesPrices);
-    for (const query of searchQueries) {
-      sitemapEntries.push({
-        loc: escapeXml(`${siteUrl}/${lang}/buscar?${query}`),
-        lastmod: new Date().toISOString(),
-        changefreq: 'weekly',
-        priority: 0.5,
-      });
-    }
+    // // Individual search queries Search filters
+    // const searchQueries = [];
+    // const searchQueriesLocations = locations.map(
+    //   location => `ubicacion=${location.id}&ubicacion-nombre=${location.name}`
+    // );
+    // const searchQueriesSizes = sizesOptions.map(
+    //   size => `metros-desde=0&metros-hasta=${size.value}`
+    // );
+    // const searchQueriesPrices = pricesOptions.map(
+    //   price => `precio-desde=0&precio-hasta=${price.value}`
+    // );
+    // searchQueries.push(...searchQueriesLocations);
+    // searchQueries.push(...searchQueriesSizes);
+    // searchQueries.push(...searchQueriesPrices);
+    // for (const query of searchQueries) {
+    //   sitemapEntries.push({
+    //     loc: escapeXml(`${siteUrl}/${lang}/buscar?${query}`),
+    //     lastmod: new Date().toISOString(),
+    //     changefreq: 'weekly',
+    //     priority: 0.5,
+    //   });
+    // }
 
-    // Merge all search queries
-    const searchQueriesMerged = [];
-    for (const searchQueriesLocation of searchQueriesLocations) {
-      for (const searchQueriesSize of searchQueriesSizes) {
-        for (const searchQueriesPrice of searchQueriesPrices) {
-          const query = `${searchQueriesLocation}&${searchQueriesSize}&${searchQueriesPrice}`;
-          searchQueriesMerged.push(query);
-        }
-      }
-    }
-    for (const query of searchQueriesMerged) {
-      sitemapEntries.push({
-        loc: escapeXml(`${siteUrl}/${lang}/buscar?${query}`),
-        lastmod: new Date().toISOString(),
-        changefreq: 'weekly',
-        priority: 0.5,
-      });
-    }
+    // // Merge all search queries
+    // const searchQueriesMerged = [];
+    // for (const searchQueriesLocation of searchQueriesLocations) {
+    //   for (const searchQueriesSize of searchQueriesSizes) {
+    //     for (const searchQueriesPrice of searchQueriesPrices) {
+    //       const query = `${searchQueriesLocation}&${searchQueriesSize}&${searchQueriesPrice}`;
+    //       searchQueriesMerged.push(query);
+    //     }
+    //   }
+    // }
+    // for (const query of searchQueriesMerged) {
+    //   sitemapEntries.push({
+    //     loc: escapeXml(`${siteUrl}/${lang}/buscar?${query}`),
+    //     lastmod: new Date().toISOString(),
+    //     changefreq: 'weekly',
+    //     priority: 0.5,
+    //   });
+    // }
 
     // Blog posts
     for (const post of posts) {
