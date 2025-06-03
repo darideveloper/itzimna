@@ -173,7 +173,7 @@ export default function PropertySeller({
                 text-center
                 w-full sm:w-1/2
               `}
-              onClick={() => window.open(`https://wa.me/${phone}`, "_blank")}
+              onClick={() => window.open(`https://wa.me/${phone.replaceAll(' ', '')}`, "_blank")}
             >
               WhatsApp
             </Button>
