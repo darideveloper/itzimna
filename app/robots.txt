@@ -1,5 +1,0 @@
-# Allow all pages
-User-agent: *
-Disallow: /
-Allow: /en/
-Allow: /es/

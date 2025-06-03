@@ -1,0 +1,4 @@
+# robots.txt ─ allow everything
+User-agent: *
+Allow: /
+Sitemap: https://www.itzimnarealestate.com/sitemap.xml
