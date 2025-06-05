@@ -61,7 +61,7 @@ export default async function HomePage({ params }) {
         `}
       />
 
-      <Gallery />
+      <Gallery locale={locale} />
 
 
       <CardsSection

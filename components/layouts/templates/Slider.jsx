@@ -47,11 +47,13 @@ export default function Slider({
 
   // Effects
   useEffect(() => {
+
     // Get slides per view when resizing and when component mounts
     const handleResize = () => {
+
       if (window.innerWidth < 768 || maxSlides == 1) {
         setSlidesPerView(1)
-        const imagesNoWhite = images.filter((image) => image.name != "white")
+        const imagesNoWhite = imagesData.filter((image) => image.name != "white")
         setImages(imagesNoWhite)
       } else {
         setSlidesPerView(3)
@@ -60,7 +62,7 @@ export default function Slider({
     }
     window.addEventListener("resize", handleResize)
     handleResize()
-  }, [])
+  }, [imagesData])
 
   return (
     <section
