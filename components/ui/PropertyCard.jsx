@@ -277,7 +277,7 @@ export default function PropertyCard({
               duration-200
             `}
             >
-              ${price}
+              ${price} MXN
             </span>
           </div>
         </div>

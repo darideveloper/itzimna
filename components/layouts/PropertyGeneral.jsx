@@ -103,7 +103,7 @@ export default function PropertyGeneral({
                 my-2
               `}
               >
-                {new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(price)}
+                {new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(price)} MXN
               </p>
 
               {/* Tags and Info Section */}
