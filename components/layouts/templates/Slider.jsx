@@ -69,9 +69,11 @@ export default function Slider({
       className={`
         ${id}
         gallery
+        relative
       `}
       id={id}
     >
+
       {/* Modal for zoom images */}
       <ModalImage
         image={modalImage}

@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react'
 
 // Components
 import Slider from '@/components/layouts/templates/Slider'
+import Spinner from '@/components/ui/Spinner'
 
 // Styles
 import "@/css/markdown.sass"
@@ -24,29 +25,6 @@ export default function Gallery({ locale }) {
   // Get translations
   const t = useTranslations('Home.GallerySection')
   const [images, setImages] = useState([])
-
-
-  // Gallery data
-  // const imagesNames = [
-  //   "white",
-  //   "airepuro",
-  //   "aloma",
-  //   "copaura",
-  //   "lumara",
-  //   "najau",
-  //   "puerta xaibe",
-  //   "punta cometas",
-  //   "zendera",
-  //   "white"
-  // ]
-
-  // const imagesData = imagesNames.map((name) => {
-  //   return {
-  //     url: `/images/gallery/${name.replace(" ", "_")}.webp`,
-  //     alt: t(`imagesPre.development`) + " " + name,
-  //     name: name
-  //   }
-  // })
 
   // Load images from api when mounted or locale changes
   useEffect(() => {
@@ -77,11 +55,16 @@ export default function Gallery({ locale }) {
   }, [locale])
 
   return (
-    <Slider
-      id="gallery"
-      imagesData={images}
-      title={t('title')}
-      descriptionMd={marked(t('description'))}
-    />
+    <section
+      className={`gallery-wrapper relative`}
+    >
+      <Spinner isLoading={images.length === 0} transparentModal={true} className='mt-20' />
+      <Slider
+        id="gallery"
+        imagesData={images}
+        title={t('title')}
+        descriptionMd={marked(t('description'))}
+      />
+    </section>
   )
 }
