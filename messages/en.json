@@ -14,21 +14,21 @@
       "featured": "Featured Properties",
       "contact": "Contact",
       "cta": "Contact Us",
-      "blog" : "Blog"
+      "blog": "Blog"
     }
   },
   "Form": {
-    "name" : "Full Name",
-    "name_error" : "The name is required",
-    "email" : "Email",
-    "email_invalid" : "The email is invalid",
-    "email_error" : "The email is required",
-    "phone" : "Phone",
-    "phone_error" : "The phone is required",
-    "phone_invalid" : "The phone length must be 10 and only numbers",
-    "message" : "Message",
-    "message_error" : "The message is required",
-    "send" : "Send Message"
+    "name": "Full Name",
+    "name_error": "The name is required",
+    "email": "Email",
+    "email_invalid": "The email is invalid",
+    "email_error": "The email is required",
+    "phone": "Phone",
+    "phone_error": "The phone is required",
+    "phone_invalid": "The phone length must be 10 and only numbers",
+    "message": "Message",
+    "message_error": "The message is required",
+    "send": "Send Message"
   },
   "Contact": {
     "title": "Do you want us to contact you?",
@@ -66,12 +66,12 @@
       "title": "Featured Properties in yucatán"
     },
     "HeroSection": {
-      "title": "Discover Your Perfect Luxury Property",
-      "description": "Explore an exclusive collection of premium properties in the most desirable locations. From modern penthouses to waterfront estates."
+      "title": "Welcome to Itzimná Real Estate: Your Secure Connection to Properties in Southeastern Mexico!",
+      "description": "At **Itzimná Real Estate**, we turn the search for **properties in southeastern Mexico** into a simple, safe, and rewarding experience. We specialize in **connecting buyers with real estate developments in Yucatán and throughout southeastern Mexico** that meet the highest standards of **ethics and legal certainty**, ensuring your peace of mind and satisfaction with your investment in the region.\n\n\n\nWe understand that **buying property in southeastern Mexico** is an important decision. That's why at Itzimná Real Estate we are committed to offering you a curated portfolio of **properties for sale in Yucatán and the southeast region**, where quality of life, safety, and growth are unmatched. From **houses in Mérida, Yucatán** to **investment lots**, **luxury apartments on the Yucatecan coast and other southeastern areas**, and even **industrial warehouses for sale**, our team will accompany you every step of the way. We will provide the guidance you need to make your **real estate purchase in the southeast** transparent and successful. Discover the **best real estate investments and developments in Yucatán and southeastern Mexico** with us!"
     },
     "GallerySection": {
-      "title": "Best Developments",
-      "description": "Discover the most exclusive developments in the most desirable locations",
+      "title": "Boost Your Development: Advertise with Confidence on Itzimná Real Estate",
+      "description": "Are you a **real estate developer in southeastern Mexico** who prioritizes **ethics and legal certainty** in your projects? At Itzimná Real Estate, we offer you a platform with wide reach so your **properties for sale** can reach qualified buyers seeking security and reliability throughout the region.\n\nWe offer **advertising space rental packages** on our website, specifically designed for **real estate developments with legal certainty and ethical standards in southeastern Mexico**. Promote your **residential projects in Yucatán and the southeast**, as well as your **industrial warehouses**, with the confidence that they will be presented to an audience looking for **secure and professional real estate investments**. If your development offers **legally sound houses**, **apartments with transparent processes**, **lots with legal security**, or **industrial warehouses**, Itzimná Real Estate is your strategic ally. Maximize the visibility of your **real estate developments in the southeast** with us!",
       "imagesPre": {
         "development": "Development photo"
       }
@@ -97,7 +97,7 @@
   "PropertyDevelopment": {
     "contactSeller": "Contact Seller"
   },
- "Search": {
+  "Search": {
     "title": "Search Results",
     "summary": {
       "location": "in location",
@@ -110,10 +110,10 @@
     "noPropertiesFound": "No properties found"
   },
   "Blog": {
-    "title" : "Blog",
-    "subtitle" : "The latest news about real estate",
-    "Post" : {
-      "readMore" : "Read more"
+    "title": "Blog",
+    "subtitle": "The latest news about real estate",
+    "Post": {
+      "readMore": "Read more"
     }
   }
 }
