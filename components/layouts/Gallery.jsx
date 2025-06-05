@@ -58,7 +58,7 @@ export default function Gallery({ locale }) {
     <section
       className={`gallery-wrapper relative`}
     >
-      <Spinner isLoading={images.length === 0} transparentModal={true} className='mt-20' />
+      <Spinner isLoading={images.length === 0} transparentModal={true} className='mt-20 !items-end' />
       <Slider
         id="gallery"
         imagesData={images}
