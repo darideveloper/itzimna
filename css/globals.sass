@@ -36,26 +36,15 @@ body
 ::-webkit-scrollbar
   width: 12px
 
-::-webkit-scrollbar-track
-  background: rgba(0,0,0,0)
+  &-track
+    background: rgba(0,0,0,0)
 
-::-webkit-scrollbar-thumb
-  background: $color-yellow
-  border-radius: 10px
+  &-thumb
+    background: $color-yellow
+    border-radius: 10px
 
-  &:hover
-    background: $color-green-light
-
-// TODO: update if sweetalert2 is used
-// // Overwrite sweetalert2 styles
-// .swal2-actions button
-//   background-color: $blue !important
-//   color: $white !important
-//   transition-duration: 0.2s !important
-//   transition-property: all !important
-
-//   &:hover
-//     opacity: 0.7 !important
+    &:hover
+      background: $color-green-light
 
 // Transition video
 .transition-video-wrapper
@@ -90,3 +79,16 @@ body
 
   &:hover
     opacity: 0.7 !important
+
+.select-options::-webkit-scrollbar
+  width: 12px
+
+  &-track
+    background: rgba(0,0,0,0)
+
+  &-thumb
+    background: $color-yellow
+    border-radius: 10px
+
+    &:hover
+      background: $color-green-light

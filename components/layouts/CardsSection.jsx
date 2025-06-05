@@ -28,6 +28,7 @@ import { useSearchStore } from "@/store/search"
  * @param {Number} loadingTimeOut - Loading spinner timeout. Default is 1500
  * @param {String} locale - Locale. Default is "es"
  * @param {Boolean} queryRequired - Query required. Default is false
+ * @param {Boolean} useAos - Use AOS (Animate On Scroll). Default is true
  * @returns {JSX.Element} Cards section component
  */
 export default function CardsSection({
@@ -41,6 +42,7 @@ export default function CardsSection({
   loadingTimeOut = 1500,
   locale="es",
   queryRequired=false,
+  useAos = true
 }) {
 
   // States
@@ -94,8 +96,8 @@ export default function CardsSection({
       className={`
         cards
         w-full
-        relative
         py-12
+        ${useAos && 'relative'}
         ${className}
       `}
       id={id}
@@ -146,6 +148,7 @@ export default function CardsSection({
               tags={[card.category, ...card.tags]}
               href={`/desarrollos/${card.id}-${card.slug}`}
               className={""}
+              useAos={useAos}
             />
           ))}
         </div>

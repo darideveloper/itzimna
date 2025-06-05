@@ -80,6 +80,8 @@ const PropertySearch = async (props) => {
         title={t('title')}
         bgImage="/images/hero-buscar.webp"
         className={`
+          !pb-16
+          !pt-16
         `}
         filtersShowSubmit={false}
       />

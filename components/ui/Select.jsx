@@ -100,14 +100,17 @@ const Select = ({
       {isOpen && (
         <ul
           className={`
+            select-options
             relative md:absolute
             left-0
             mt-1
             w-full
             bg-green-dark
             shadow-lg
-            overflow-hidden
+            overflow-y-scroll
+            overflow-x-hidden
             z-50
+            h-48
           `}
         >
           {options.map((option) => (

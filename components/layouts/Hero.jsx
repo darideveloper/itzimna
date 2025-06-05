@@ -31,7 +31,6 @@ const HeroSection = ({ id = "hero", className = "", title, description, bgImage,
         hero
         relative
         w-full
-        md:overflow-hidden
         bg-cover
         bg-center
         bg-fixed

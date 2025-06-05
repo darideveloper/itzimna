@@ -27,6 +27,7 @@ import Spinner from "@/components/ui/Spinner"
  * @param {Array} props.tags - Property tags (array of strings)
  * @param {string} props.href - URL to route to
  * @param {string} props.className - Additional classes
+ * @param {boolean} props.useAos - Whether to use AOS animations
  * @returns {JSX.Element} Property card component
  */
 export default function PropertyCard({
@@ -40,6 +41,7 @@ export default function PropertyCard({
   tags = [],
   href,
   className,
+  useAos = true
 }) {
 
   const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +49,7 @@ export default function PropertyCard({
   const t = useTranslations("PropertyCard")
 
   return (
-    <div data-aos="zoom-in">
+    <div data-aos={useAos ? "fade-up" : undefined}>
       <TransitionLink href={href} onClick={() => setIsLoading(true)} disable={isLoading}>
         <div
           className={`
