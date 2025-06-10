@@ -1,10 +1,10 @@
 "use client"
 
 // Libs
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { getProperties } from "@/libs/api/properties"
-import { useLocale } from "next-intl"
 import { useTranslations } from "next-intl"
+import { usePaginationStore } from "@/store/pagination"
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
@@ -40,20 +40,37 @@ export default function CardsSection({
   useSearchQuery = false,
   transparentModal = false,
   loadingTimeOut = 1500,
-  locale="es",
-  queryRequired=false,
-  useAos = true
+  locale = "es",
+  queryRequired = false,
+  useAos = true,
 }) {
+  // Zustand states
+  const pageNew = usePaginationStore((state) => state.pageNew)
+  const pageFeatured = usePaginationStore((state) => state.pageFeatured)
+
+  // Zustand actions
+  const setPageNew = usePaginationStore((state) => state.setPageNew)
+  const setPageFeatured = usePaginationStore((state) => state.setPageFeatured)
+
+  // Set page based on filterFeatured
+  let page, setPage
+  if (filterFeatured) {
+    // Featured properties
+    page = pageFeatured
+    setPage = setPageFeatured
+  } else {
+    // New properties
+    page = pageNew
+    setPage = setPageNew
+  }
 
   // States
   const [propertiesData, setPropertiesData] = useState([])
-  const [page, setPage] = useState(1)
-  const [lastPage, setLastPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const [totalPages, setTotalProperties] = useState(0)
 
   // Zustand
-  let searchQuery = useSearchStore(state => state.searchQuery)
+  let searchQuery = useSearchStore((state) => state.searchQuery)
   if (!useSearchQuery) searchQuery = ""
 
   // Translations
@@ -61,7 +78,6 @@ export default function CardsSection({
 
   // Effects
   useEffect(() => {
-
     if (queryRequired && searchQuery.length < 3) {
       return
     }
@@ -70,26 +86,20 @@ export default function CardsSection({
     setIsLoading(true)
 
     // Update properties data when change page
-    getProperties(locale, page, filterFeatured, searchQuery).then(({ propertiesData, pages }) => {
+    getProperties(locale, page, filterFeatured, searchQuery).then(
+      ({ propertiesData, pages }) => {
+        setPropertiesData(propertiesData)
 
-      setPropertiesData(propertiesData)
+        // Update total properties
+        setTotalProperties(pages)
 
-      // Move to top of the section
-      if (lastPage !== page) {
-        document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth" })
+        // Hide loading spinner
+        setTimeout(() => {
+          setIsLoading(false)
+        }, loadingTimeOut)
       }
-
-      // Update total properties
-      setTotalProperties(pages)
-
-      // Hide loading spinner
-      setTimeout(() => {
-        setIsLoading(false)
-      }, loadingTimeOut)
-
-    })
+    )
   }, [page, searchQuery])
-
 
   return (
     <section
@@ -97,7 +107,7 @@ export default function CardsSection({
         cards
         w-full
         py-12
-        ${useAos && 'relative'}
+        ${useAos && "relative"}
         ${className}
       `}
       id={id}
@@ -153,27 +163,30 @@ export default function CardsSection({
           ))}
         </div>
 
-        {
-          !isLoading
-          &&
-          (
-            propertiesData.length === 0
-              ?
-              <Title className="text-center text-white">
-                {t("noPropertiesFound")}
-              </Title>
-              :
-              <Pagination
-                currentPage={page}
-                totalPages={totalPages}
-                onPageChange={(newPage) => {
-                  setLastPage(page)
-                  setPage(newPage)
-                }}
-                variant={variant}
-              />
-          )
-        }
+        {!isLoading &&
+          (propertiesData.length === 0 ? (
+            <Title className="text-center text-white">
+              {t("noPropertiesFound")}
+            </Title>
+          ) : (
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              onPageChange={(newPage) => {
+                // Update states
+                setPage(newPage)
+
+                // Move to top of the section
+                setTimeout(() => {
+                  document
+                    .querySelector(`#${id}`)
+                    .scrollIntoView({ behavior: "smooth" })
+                }, 500)
+              }}
+              className="mt-6"
+              variant={variant}
+            />
+          ))}
       </div>
     </section>
   )

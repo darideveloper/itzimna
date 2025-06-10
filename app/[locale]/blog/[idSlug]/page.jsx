@@ -131,7 +131,7 @@ export default async function BlogPost({ params }) {
 }
 
 export async function generateMetadata({ params }) {
-  const { locale, idSlug } = params
+  const { locale, idSlug } = await params
   const t = await getTranslations({ locale, namespace: 'Meta' })
 
   // Get post data

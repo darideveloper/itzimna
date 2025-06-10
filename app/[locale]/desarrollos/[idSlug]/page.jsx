@@ -114,6 +114,7 @@ export default async function PropertyDevelopment({ params }) {
       {/* Enable aos in page */}
       <AOSInit />
 
+
       {/* paralax bg */}
       <Image
         src="/images/hero.webp"
@@ -250,7 +251,7 @@ export default async function PropertyDevelopment({ params }) {
 
 
 export async function generateMetadata({ params }) {
-  const { locale, idSlug } = params
+  const { locale, idSlug } = await params
   const t = await getTranslations({ locale: locale, namespace: 'Meta' })
 
   // Get property data
