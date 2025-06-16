@@ -63,7 +63,7 @@ export default function Footer() {
           flex-col md:flex-row
           items-center
           justify-between
-          py-4
+          !py-12 xl:!py-0
           container
           gap-8
           w-full

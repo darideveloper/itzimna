@@ -12,8 +12,8 @@ import { fontBody } from '@/libs/fonts'
 // Global components
 import Header from '@/components/layouts/Header'
 import Footer from '@/components/layouts/Footer'
-import VideoModal from '@/components/ui/VideoModal'
 import Script from 'next/script'
+import WhatsappButton from '@/components/ui/WhatsappButton'
 
 // Css
 import '@/css/globals.sass'
@@ -75,6 +75,7 @@ export default async function LocaleLayout({ children, params }) {
             {children}
           </main>
           <Footer />
+          <WhatsappButton />
         </NextIntlClientProvider>
       </body>
     </html>
