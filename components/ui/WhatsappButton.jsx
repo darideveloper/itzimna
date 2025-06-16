@@ -1,10 +1,26 @@
+// Icons
 import { FaWhatsapp } from "react-icons/fa6"
+
+// Components
 import Link from "next/link"
 
+// Libs
+import { useTranslations } from "next-intl"
+
+
 export default function WhatsappButton() {
+
+  // Fixed data
+  const phone = '5219993019999'
+
+  // Translate
+  const t = useTranslations("General.contact")
+  const whatsappMessage = t("whatsappMessage")
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(whatsappMessage)}`
+
   return (
     <Link
-      href="https://api.whatsapp.com/send?phone=5219981234567&text=Hola%20Itzamna,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20propiedades."
+      href={whatsappUrl}
       target="_blank"
       className={`
         whatsapp-button

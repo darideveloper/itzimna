@@ -15,6 +15,9 @@
       "contact": "Contact",
       "cta": "Contact Us",
       "blog": "Blog"
+    },
+    "contact": {
+      "whatsappMessage": "Hello, I am interested in the properties you offer."
     }
   },
   "Form": {
