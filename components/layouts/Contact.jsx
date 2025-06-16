@@ -73,15 +73,6 @@ const Contact = () => {
       id="contact"
     >
 
-      <div
-        className={`
-          overlay-effect
-          absolute
-          inset-0
-          bg-green-dark/95
-        `}
-      />
-
       {/* Content container */}
       <div
         className={`
