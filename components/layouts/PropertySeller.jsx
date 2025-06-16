@@ -7,6 +7,8 @@ import Title from '@/components/ui/Title'
 import Button from '@/components/ui/Button'
 import ContactForm from "@/components/ui/ContactForm"
 
+// Icons
+import { FaWhatsapp } from "react-icons/fa6"
 
 // Libs
 import { useTranslations } from 'next-intl'
@@ -173,8 +175,9 @@ export default function PropertySeller({
                 text-center
                 w-full sm:w-1/2
               `}
-              onClick={() => window.open(`https://wa.me/${phone.replaceAll(' ', '')}`, "_blank")}
+              onClick={() => window.open(whatsapp, "_blank")}
             >
+              <FaWhatsapp className="inline-block mr-2 text-xl" />
               WhatsApp
             </Button>
           </div>
