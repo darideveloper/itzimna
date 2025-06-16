@@ -117,7 +117,7 @@ const PropertySearch = async (props) => {
 
       {/* Results */}
       <CardsSection
-        id="last-properties"
+        id="search-properties"
         initialData={[]}
         initialTotalProperties={0}
         variant="dark"

@@ -47,21 +47,33 @@ export default function CardsSection({
   // Zustand states
   const pageNew = usePaginationStore((state) => state.pageNew)
   const pageFeatured = usePaginationStore((state) => state.pageFeatured)
+  const pageResults = usePaginationStore((state) => state.pageResults)
 
   // Zustand actions
   const setPageNew = usePaginationStore((state) => state.setPageNew)
   const setPageFeatured = usePaginationStore((state) => state.setPageFeatured)
+  const setPageResults = usePaginationStore((state) => state.setPageResults)
 
-  // Set page based on filterFeatured
-  let page, setPage
-  if (filterFeatured) {
-    // Featured properties
-    page = pageFeatured
-    setPage = setPageFeatured
-  } else {
-    // New properties
-    page = pageNew
-    setPage = setPageNew
+  // Set page based on id
+  const paginationZustand = {
+    "search-properties": {
+      page: pageResults,
+      setPage: setPageResults
+    },
+    "last-properties": {
+      page: pageNew,
+      setPage: setPageNew
+    },
+    "featured-properties": {
+      page: pageFeatured,
+      setPage: setPageFeatured
+    }
+  }
+  const { page, setPage } = paginationZustand[id] || {
+    page: 1,
+    setPage: (newPage) => {
+      console.warn(`No pagination found for section with id: ${id}. Setting page to ${newPage}.`)
+    }
   }
 
   // States
