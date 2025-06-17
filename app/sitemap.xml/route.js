@@ -74,7 +74,7 @@ export async function GET() {
     // searchQueries.push(...searchQueriesPrices);
     // for (const query of searchQueries) {
     //   sitemapEntries.push({
-    //     loc: escapeXml(`${siteUrl}/${lang}/buscar?${query}`),
+    //     loc: escapeXml(`${siteUrl}/${lang}/buscar-propiedades?${query}`),
     //     lastmod: new Date().toISOString(),
     //     changefreq: 'weekly',
     //     priority: 0.5,
@@ -93,7 +93,7 @@ export async function GET() {
     // }
     // for (const query of searchQueriesMerged) {
     //   sitemapEntries.push({
-    //     loc: escapeXml(`${siteUrl}/${lang}/buscar?${query}`),
+    //     loc: escapeXml(`${siteUrl}/${lang}/buscar-propiedades?${query}`),
     //     lastmod: new Date().toISOString(),
     //     changefreq: 'weekly',
     //     priority: 0.5,

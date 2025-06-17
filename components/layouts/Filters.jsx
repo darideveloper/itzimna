@@ -272,7 +272,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
           &&
             <TransitionLink
               // Dynamic link with query
-              href={`/buscar?${searchQuery}`}
+              href={`/buscar-propiedades?${searchQuery}`}
               className={`
                 md:col-span-3 lg:col-span-1
                 self-center

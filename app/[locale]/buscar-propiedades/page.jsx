@@ -52,7 +52,7 @@ const PropertySearch = async (props) => {
     },
     'mainEntityOfPage': {
       '@type': 'WebPage',
-      '@id': `${process.env.NEXT_PUBLIC_HOST}/es/buscar`,
+      '@id': `${process.env.NEXT_PUBLIC_HOST}/es/buscar-propiedades`,
     },
     "image": {
       "@type": "ImageObject",
@@ -60,7 +60,7 @@ const PropertySearch = async (props) => {
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
-      "itemListElement": getBreadcrumb(`${process.env.NEXT_PUBLIC_HOST}/es/buscar`)
+      "itemListElement": getBreadcrumb(`${process.env.NEXT_PUBLIC_HOST}/es/buscar-propiedades`)
     }
   }
 
@@ -179,7 +179,7 @@ export async function generateMetadata({ params, searchParams }) {
 
   // Metadata
   const domain = process.env.NEXT_PUBLIC_HOST
-  const canonicalPath = `/${locale}/buscar`
+  const canonicalPath = `/${locale}/buscar-propiedades`
   const canonicalUrl = `${domain}${canonicalPath}`
   const image = {
     url: `${domain}/images/home-banner.jpg`,
@@ -198,8 +198,8 @@ export async function generateMetadata({ params, searchParams }) {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        en: `${domain}/en/buscar`,
-        es: `${domain}/es/buscar`,
+        en: `${domain}/en/buscar-propiedades`,
+        es: `${domain}/es/buscar-propiedades`,
         'x-default': canonicalUrl,
       },
     },
