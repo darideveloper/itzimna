@@ -41,16 +41,19 @@ export default function PropertyCard({
   tags = [],
   href,
   className,
-  useAos = true
+  useAos = true,
 }) {
-
   const [isLoading, setIsLoading] = useState(false)
 
   const t = useTranslations("PropertyCard")
 
   return (
     <div data-aos={useAos ? "fade-up" : undefined}>
-      <TransitionLink href={href} onClick={() => setIsLoading(true)} disable={isLoading}>
+      <TransitionLink
+        href={href}
+        onClick={() => setIsLoading(true)}
+        disable={isLoading}
+      >
         <div
           className={`
           property-card
@@ -69,10 +72,12 @@ export default function PropertyCard({
         `}
         >
           {/* Loading spinner */}
-          {
-            isLoading &&
-            <Spinner isLoading={isLoading} className={`absolute !bg-green-dark !items-center`} />
-          }
+          {isLoading && (
+            <Spinner
+              isLoading={isLoading}
+              className={`absolute !bg-green-dark !items-center`}
+            />
+          )}
 
           <div
             className={`
@@ -111,11 +116,10 @@ export default function PropertyCard({
               gap-1
             `}
             >
-              {
-                tags.map((tag, index) => (
-                  <div
-                    key={index}
-                    className={`
+              {tags.map((tag, index) => (
+                <div
+                  key={index}
+                  className={`
                     bg-green/70 first:bg-green
                     px-3
                     py-1
@@ -126,19 +130,18 @@ export default function PropertyCard({
                     capitalize
                     
                   `}
-                  >
-                    <span
-                      className={`
+                >
+                  <span
+                    className={`
                       text-sm
                       font-medium
                       text-white
                   `}
-                    >
-                      {tag}
-                    </span>
-                  </div>
-                ))
-              }
+                  >
+                    {tag}
+                  </span>
+                </div>
+              ))}
             </div>
             {/* Description overlay */}
             <div
@@ -183,8 +186,9 @@ export default function PropertyCard({
               hover:text-yellow
               capitalize
           `}
+            title={name}
             >
-              {name}
+              {name.length > 33 ? `${name.slice(0, 30)}...` : name}
             </h2>
             <div
               className={`
@@ -213,7 +217,7 @@ export default function PropertyCard({
               mb-4
           `}
             >
-              <div className="flex items-center">
+              <div className="flex items-center w-7/12">
                 <FaBuilding
                   className={`
                   w-4
@@ -227,8 +231,9 @@ export default function PropertyCard({
                   text-sm
                   text-green
               `}
+                  title={company}
                 >
-                  {company}
+                  {company.length > 15 ? `${company.slice(0, 15)}...` : company}
                 </span>
               </div>
               <div
