@@ -2,37 +2,37 @@
 import { redirect } from "next/navigation"
 import { getProperty } from "@/libs/api/properties"
 import { cookies } from "next/headers"
-import { getTranslations } from 'next-intl/server'
-import remarkGfm from 'remark-gfm'
+import { getTranslations } from "next-intl/server"
+import remarkGfm from "remark-gfm"
 import { getBreadcrumb } from "@/libs/jsonLd"
 
 // Components
-import Image from 'next/image'
-import ReactMarkdown from 'react-markdown'
-import PropertyGeneral from '@/components/layouts/PropertyGeneral'
-import PropertySeller from '@/components/layouts/PropertySeller'
-import InfoCard from '@/components/layouts/templates/InfoSection'
-import PropertyMap from '@/components/layouts/PropertyMap'
-import Button from '@/components/ui/Button'
+import Image from "next/image"
+import ReactMarkdown from "react-markdown"
+import PropertyGeneral from "@/components/layouts/PropertyGeneral"
+import PropertySeller from "@/components/layouts/PropertySeller"
+import PropertyRelated from "@/components/layouts/PropertyRelated"
+import InfoCard from "@/components/layouts/templates/InfoSection"
+import PropertyMap from "@/components/layouts/PropertyMap"
+import Button from "@/components/ui/Button"
 
 // Style
-import '@/css/markdown.sass'
+import "@/css/markdown.sass"
 
 // Utils components
-import AOSInit from '@/components/utils/AOSInit'
-
+import AOSInit from "@/components/utils/AOSInit"
+import Title from "@/components/ui/Title"
 
 export default async function PropertyDevelopment({ params }) {
-
   // Get cookies
   const cookieStore = await cookies()
-  const accessToken = cookieStore.get('accessToken')?.value || ''
-  const refreshToken = cookieStore.get('refreshToken')?.value || ''
-  const lang = cookieStore.get("NEXT_LOCALE")?.value || 'es'
+  const accessToken = cookieStore.get("accessToken")?.value || ""
+  const refreshToken = cookieStore.get("refreshToken")?.value || ""
+  const lang = cookieStore.get("NEXT_LOCALE")?.value || "es"
 
   // Get property data
   const { idSlug } = await params
-  const id = idSlug.split('-')[0]
+  const id = idSlug.split("-")[0]
   const propertyData = await getProperty(id, accessToken, refreshToken, lang)
 
   // Redirect to 404 if property not found
@@ -41,60 +41,64 @@ export default async function PropertyDevelopment({ params }) {
   }
 
   // Translate from server side
-  const tMeta = await getTranslations({ locale: lang, namespace: 'Meta' })
-  const t = await getTranslations({ locale: lang, namespace: 'PropertyDevelopment' })
+  const tMeta = await getTranslations({ locale: lang, namespace: "Meta" })
+  const t = await getTranslations({
+    locale: lang,
+    namespace: "PropertyDevelopment",
+  })
 
   // Get tags from property data
-  const tags = propertyData.tags.map(tag => tag.name)
+  const tags = propertyData.tags.map((tag) => tag.name)
 
   // Generate keywords from property data
-  let keywords = propertyData.name.split(' ')
-  keywords = keywords.concat(propertyData.category.split(' '))
+  let keywords = propertyData.name.split(" ")
+  keywords = keywords.concat(propertyData.category.split(" "))
   keywords = keywords.concat(tags)
 
   // Convert data
-  const priceFloat = parseFloat(propertyData.price.replace(/,/g, ''))
+  const priceFloat = parseFloat(propertyData.price.replace(/,/g, ""))
 
   // Metadata
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "House",
-    "name": propertyData.name,
-    "description": propertyData.short_description,
-    "image": {
+    name: propertyData.name,
+    description: propertyData.short_description,
+    image: {
       "@type": "ImageObject",
-      "url": propertyData.banner.url
+      url: propertyData.banner.url,
     },
-    "address": {
+    address: {
       "@type": "PostalAddress",
-      "addressLocality": propertyData.location,
-      "addressCountry": "MX"
+      addressLocality: propertyData.location,
+      addressCountry: "MX",
     },
-    "offers": {
+    offers: {
       "@type": "Offer",
-      "priceCurrency": "MXN",
-      "price": priceFloat.toFixed(2),
-      "availability": "https://schema.org/InStock",
-      "url": `${process.env.NEXT_PUBLIC_HOST}/${lang}/desarrollos/${idSlug}`
+      priceCurrency: "MXN",
+      price: priceFloat.toFixed(2),
+      availability: "https://schema.org/InStock",
+      url: `${process.env.NEXT_PUBLIC_HOST}/${lang}/desarrollos/${idSlug}`,
     },
-    "mainEntityOfPage": {
+    mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`
+      "@id": `${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`,
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "Itzamna",
-      "logo": {
+      name: "Itzamna",
+      logo: {
         "@type": "ImageObject",
-        "url": `${process.env.NEXT_PUBLIC_HOST}/images/logo.webp`
-      }
+        url: `${process.env.NEXT_PUBLIC_HOST}/images/logo.webp`,
+      },
     },
-    "breadcrumb": {
+    breadcrumb: {
       "@type": "BreadcrumbList",
-      "itemListElement": getBreadcrumb(`${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`)
-    }
+      itemListElement: getBreadcrumb(
+        `${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`
+      ),
+    },
   }
-
 
   return (
     <div
@@ -102,9 +106,10 @@ export default async function PropertyDevelopment({ params }) {
         details-page
         w-full
         relative
+        pb-64
+        pt-12
       `}
     >
-
       {/* Render json ld */}
       <script
         type="application/ld+json"
@@ -113,7 +118,6 @@ export default async function PropertyDevelopment({ params }) {
 
       {/* Enable aos in page */}
       <AOSInit />
-
 
       {/* paralax bg */}
       <Image
@@ -131,7 +135,6 @@ export default async function PropertyDevelopment({ params }) {
           -z-20
         `}
         alt="bg image"
-
       />
 
       {/* overlay */}
@@ -155,11 +158,9 @@ export default async function PropertyDevelopment({ params }) {
           justify-between
           items-start
           gap-8
-          !py-16
-          !pb-64
+          !py-8
         `}
       >
-
         <div
           className={`
             left
@@ -170,7 +171,6 @@ export default async function PropertyDevelopment({ params }) {
             gap-6
           `}
         >
-
           {/* General */}
           <InfoCard>
             <PropertyGeneral
@@ -194,7 +194,7 @@ export default async function PropertyDevelopment({ params }) {
                 mt-4
               `}
             >
-              {t('contactSeller')}
+              {t("contactSeller")}
             </Button>
           </InfoCard>
 
@@ -210,16 +210,11 @@ export default async function PropertyDevelopment({ params }) {
             />
           </InfoCard>
 
-          {
-            propertyData.google_maps_src
-            &&
+          {propertyData.google_maps_src && (
             <InfoCard>
-              <PropertyMap
-                googleMapsSrc={propertyData.google_maps_src}
-              />
+              <PropertyMap googleMapsSrc={propertyData.google_maps_src} />
             </InfoCard>
-          }
-
+          )}
         </div>
 
         {/* Seller */}
@@ -232,7 +227,11 @@ export default async function PropertyDevelopment({ params }) {
           `}
         >
           <PropertySeller
-            name={propertyData.seller.first_name + ' ' + propertyData.seller.last_name}
+            name={
+              propertyData.seller.first_name +
+              " " +
+              propertyData.seller.last_name
+            }
             profileImage="/images/logo.webp"
             has_whatsapp={propertyData.seller.has_whatsapp}
             phone={propertyData.seller.phone}
@@ -242,39 +241,45 @@ export default async function PropertyDevelopment({ params }) {
             propertyId={propertyData.id}
           />
         </InfoCard>
+      </div>
 
+      {/* Related Properties */}
+      <div className={`container`}>
+        <InfoCard>
+          <PropertyRelated
+            relatedProperties={propertyData.related_properties.sort(() => Math.random() - 0.5)}
+          />
+        </InfoCard>
       </div>
     </div>
-
   )
 }
 
-
 export async function generateMetadata({ params }) {
   const { locale, idSlug } = await params
-  const t = await getTranslations({ locale: locale, namespace: 'Meta' })
+  const t = await getTranslations({ locale: locale, namespace: "Meta" })
 
   // Get property data
-  const id = idSlug.split('-')[0]
+  const id = idSlug.split("-")[0]
   let propertyData = await getProperty(id, "", "", locale)
 
   // get tags
-  const tags = propertyData.tags.map(tag => tag.name)
+  const tags = propertyData.tags.map((tag) => tag.name)
 
   // Generate keywords from property data
-  let keywords = propertyData.name.split(' ')
-  keywords = keywords.concat(propertyData.category.split(' '))
+  let keywords = propertyData.name.split(" ")
+  keywords = keywords.concat(propertyData.category.split(" "))
   keywords = keywords.concat(tags)
 
   // Default post data
   if (!propertyData) {
     propertyData = {
-      name: 'Desarrollo',
-      short_description: 'Desarrollo',
-      category: '',
-      location: '',
-      seller: { first_name: '', last_name: '' },
-      banner: { url: '' },
+      name: "Desarrollo",
+      short_description: "Desarrollo",
+      category: "",
+      location: "",
+      seller: { first_name: "", last_name: "" },
+      banner: { url: "" },
     }
   }
 
@@ -294,9 +299,12 @@ export async function generateMetadata({ params }) {
     title: propertyData.name,
     description: propertyData.short_description,
     lang: locale,
-    keywords: keywords.join(', '),
+    keywords: keywords.join(", "),
     authors: [
-      { "name": propertyData.seller.first_name + ' ' + propertyData.seller.last_name },
+      {
+        name:
+          propertyData.seller.first_name + " " + propertyData.seller.last_name,
+      },
     ],
 
     // Canonical and alternate links
@@ -305,7 +313,7 @@ export async function generateMetadata({ params }) {
       languages: {
         en: `${domain}/en/desarrollos/${idSlug}`,
         es: `${domain}/es/desarrollos/${idSlug}`,
-        'x-default': canonicalUrl,
+        "x-default": canonicalUrl,
       },
     },
 
@@ -314,7 +322,7 @@ export async function generateMetadata({ params }) {
       title: propertyData.name,
       description: propertyData.short_description,
       url: canonicalUrl,
-      siteName: t('title'),
+      siteName: t("title"),
       images: [image],
       locale,
       type: "website",
@@ -323,7 +331,7 @@ export async function generateMetadata({ params }) {
     // Twitter metadata
     twitter: {
       card: "summary_large_image",
-      title: t('title'),
+      title: t("title"),
       description: propertyData.short_description,
       images: [image],
       creator: "@DeveloperDari",

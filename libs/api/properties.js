@@ -109,6 +109,11 @@ export async function getPropertiesSummary(locale) {
  * @returns {String} return.propertiesData[].slug - Property slug from name
  * @returns {String} return.propertiesData[].google_maps_src - Google maps iframe src
  * @returns {String} return.propertiesData[].updated_at - Updated at date (timestamp)
+ * @returns {Array} return.propertiesData[].tags - Property tags
+ * @returns {String} return.propertiesData[].tags[].name - Property tag name
+ * @returns {String} return.propertiesData[].tags[].id - Property tag id
+ * @returns {String} return.propertiesData[].tags[].slug - Property tag slug
+ * @returns {Object} return.propertiesData[].related_properties[] - Related properties data
  */
 export async function getProperty(id, accessToken, refreshToken, lang) {
   

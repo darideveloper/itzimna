@@ -118,5 +118,8 @@
     "Post": {
       "readMore": "Read more"
     }
+  },
+  "PropertyRelated": {
+    "title": "Related Properties"
   }
 }
