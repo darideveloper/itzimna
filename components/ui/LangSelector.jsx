@@ -63,7 +63,7 @@ export default function LangSelector({ className }) {
                 className={`
                 hidden
                 sm:block
-                text-green-dark
+                ${currentlang === lang ? 'text-green-dark' : 'text-white'}
                 text-sm
                 font-medium
               `}
@@ -73,7 +73,7 @@ export default function LangSelector({ className }) {
               <span
                 className={`
                 sm:hidden
-                text-green-dark
+                ${currentlang === lang ? 'text-green-dark' : 'text-white'}
                 text-xs
                 uppercase
                 font-medium

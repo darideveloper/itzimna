@@ -16,16 +16,14 @@ export default function LangBtn({ className, lang, children, active }) {
     <TransitionLink
       className={`
         lang-btn
-        ${active && 'opacity-50 pointer-events-none'}
+        ${active ? 'bg-transparent pointer-events-none' : 'bg-green-dark hover:bg-green-dark/80'}
         ${fontTitle.className}
         px-2
         py-1.5 
         rounded-lg
         transition-all
         duration-200
-        bg-white
-        hover:bg-white/80
-        disabled:bg-white/80
+        disabled:bg-green-dark/80
         ${className}
       `}
       disabled={active}
