@@ -27,9 +27,10 @@ import { pricesOptions, sizesOptions } from "@/data/filters"
  * 
  * @param {Object} props - Component props
  * @param {boolean} props.showSubmit - Show submit button on filters. Default is true
+ * @param {string} props.className - Class name for the filters container
  * @returns {JSX.Element} Filters component
  */
-export default function Filters({ showSubmit = true, updateUrlRealTime = true }) {
+export default function Filters({ showSubmit = true, updateUrlRealTime = true, className = "" }) {
 
   // Translations
   const t = useTranslations("Filters")
@@ -195,6 +196,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true })
         bg-black
         backdrop-filter
         backdrop-blur
+        ${className}
       `}
     >
       {/* Search bar */}

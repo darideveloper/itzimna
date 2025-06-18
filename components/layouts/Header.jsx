@@ -2,7 +2,7 @@
 
 // Icons
 import { FaWhatsapp, FaPhone } from "react-icons/fa"
-import { FaX, FaBars } from "react-icons/fa6"
+import { FaX, FaBars, FaMagnifyingGlass } from "react-icons/fa6"
 
 // Components
 import Button from "@/components/ui/Button"
@@ -37,10 +37,10 @@ const Header = () => {
       {isDrawerOpen && (
         <div
           className={`
-            fixed 
-            inset-0 
-            bg-black 
-            bg-opacity-50 
+            fixed
+            inset-0
+            bg-black
+            bg-opacity-50
             z-40
           `}
           onClick={() => setIsDrawerOpen(false)}
@@ -50,16 +50,16 @@ const Header = () => {
       {/* Left Drawer */}
       <div
         className={`
-          fixed 
-          top-0 
-          left-0 
-          h-full 
-          w-64 
+          fixed
+          top-0
+          left-0
+          h-full
+          w-64
           bg-green-dark/60
           backdrop-blur-md
-          z-50 
-          transform 
-          transition-transform 
+          z-50
+          transform
+          transition-transform
           duration-700
           ease-in-out
           flex
@@ -72,10 +72,10 @@ const Header = () => {
           <button
             onClick={() => setIsDrawerOpen(false)}
             className={`
-              absolute 
-              top-4 
-              right-4 
-              p-1 
+              absolute
+              top-4
+              right-4
+              p-1
               hover:bg-white/20
               rounded-full
               transition-colors
@@ -84,8 +84,8 @@ const Header = () => {
           >
             <FaX
               className={`
-                h-6 
-                w-6 
+                h-6
+                w-6
                 text-white
                 hover:scale-110
                 transition-transform
@@ -95,10 +95,10 @@ const Header = () => {
           </button>
           <div
             className={`
-              flex 
-              flex-col 
+              flex
+              flex-col
               items-center
-              space-y-12 
+              space-y-12
               mt-12
             `}
           >
@@ -110,8 +110,8 @@ const Header = () => {
                   text-white
                   hover:text-white/80
                   hover:translate-x-2
-                  text-lg 
-                  px-2 
+                  text-lg
+                  px-2
                   py-1
                   transition-all
                   duration-200
@@ -128,18 +128,13 @@ const Header = () => {
       {/* Main Navbar */}
       <nav
         className={`
-          flex 
-          items-center 
-          justify-between 
-          px-4 
-          xl:px-8 
-          py-4 
-          bg-green-dark 
+          bg-white
           z-[-1]
         `}
       >
+        <div className="container mx-auto flex items-center justify-between px-4 xl:px-8 py-6">
         {/* Logo */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 p-2">
           <TransitionLink
             href="/"
             disable={`${homePages.includes(currentPage)}`}
@@ -151,6 +146,7 @@ const Header = () => {
               height={60}
               className={`
                 logo
+                rounded-full
                 hover:opacity-90
                 transition-opacity
                 duration-200`}
@@ -161,30 +157,15 @@ const Header = () => {
         {/* Desktop Navigation */}
         <div
           className={`
-            hidden 
-            xl:flex 
-            items-center 
-            justify-center 
-            flex-1 
-            mx-8 
+            hidden
+            xl:flex
+            items-center
+            justify-center
+            flex-1
+            mx-8
             z-10
           `}
         >
-          {/* Background shape */}
-          <div
-            className={`
-              w-[940px] 
-              h-[600px] 
-              bg-green-light/10 
-              absolute 
-              top-[-510px] 
-              mx-auto 
-              rounded-full
-              z-10
-              overflow-hidden
-            `}
-          />
-
           <div
             className={`
               link-wrapper
@@ -196,11 +177,11 @@ const Header = () => {
                 key={item.name}
                 href={item.url}
                 className={`
-                  text-white 
-                  hover:text-white/80
+                  text-green-dark
+                  hover:text-green-dark/80
                   transition-all
                   duration-200
-                  px-4 
+                  px-4
                   py-2
                   hover:scale-105
                 `}
@@ -214,21 +195,21 @@ const Header = () => {
         {/* Right Section */}
         <div
           className={`
-            flex 
-            items-center 
-            gap-2 
+            flex
+            items-center
+            gap-2
             lg:gap-4
           `}
         >
           {/* Phone Number with Icons */}
           <div
             className={`
-              hidden 
-              items-center 
+              hidden
+              items-center
               gap-2
-              text-white
-              text-sm 
-              lg:text-base 
+              text-green-dark
+              text-sm
+              lg:text-base
             `}
           >
             <a
@@ -236,7 +217,7 @@ const Header = () => {
               className={`
                 hidden
                 sm:inline-block
-                hover:text-white/80
+                hover:text-green-dark/80
                 transition-colors
                 duration-200
               `}
@@ -248,7 +229,7 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={`
-                hover:text-white/80
+                hover:text-green-dark/80
                 transition-colors
                 duration-200
               `}
@@ -258,7 +239,7 @@ const Header = () => {
             <a
               href={`tel:${phoneNumber.replace(/\D/g, "")}`}
               className={`
-                hover:text-white/80
+                hover:text-green-dark/80
                 transition-colors
                 duration-200
               `}
@@ -267,34 +248,36 @@ const Header = () => {
             </a>
           </div>
 
+          {/* Search Icon */}
+          <TransitionLink
+            className={`
+              hover:text-green-dark/80
+              transition-colors
+              duration-200
+            `}
+            href="/buscar"
+          >
+            <FaMagnifyingGlass className="w-5 h-5 text-green-dark" />
+          </TransitionLink>
+
           {/* Language Selectors */}
           <div
             className={`
-              flex 
-              gap-2 
-              flex-col 
+              flex
+              gap-2
+              flex-col
               items-center
             `}
           >
             <LangSelector />
           </div>
 
-          {/* Contact Us Button*/}
-          <div className="hidden sm:block">
-            <Button
-              variant="ghost"
-              href="#contact"
-            >
-              {tNav("cta")}
-            </Button>
-          </div>
-
           {/* Hamburger Menu */}
           <button
             className={`
-              xl:hidden 
-              p-1 
-              hover:bg-white/20
+              xl:hidden
+              p-1
+              hover:bg-green-dark/20
               rounded-full
               transition-colors
               duration-200
@@ -303,9 +286,9 @@ const Header = () => {
           >
             <FaBars
               className={`
-                h-6 
-                w-6 
-                text-white
+                h-6
+                w-6
+                text-green-dark
                 hover:scale-110
                 transition-transform
                 duration-200
@@ -313,10 +296,10 @@ const Header = () => {
             />
           </button>
         </div>
+        </div>
       </nav>
     </div>
   )
 }
 
 export default Header
-
