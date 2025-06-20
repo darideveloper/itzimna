@@ -89,13 +89,23 @@ const HeroSection = ({ id = "hero", className = "", title, description, bgImage,
                 title
                 mb-8
                 text-center
-                text-green-dark
+                // black text in home and white in search
+                ${filtersShowSubmit ? 'text-green-dark' : 'text-white'}
                 !mt-0
                 ${fontTitle.className}
               `}
             >
-              <span className="block text-2xl sm:text-3xl md:text-4xl">{titleTop}</span>
-              {titleBottom && <span className="block text-4xl sm:text-5xl md:text-6xl mt-4">{titleBottom}</span>}
+              {/* Split text only in home */}
+              {
+                filtersShowSubmit ? (
+                  <>
+                    <span className="block text-2xl sm:text-3xl md:text-4xl">{titleTop}</span>
+                    {titleBottom && <span className="block text-4xl sm:text-5xl md:text-6xl mt-4">{titleBottom}</span>}
+                  </>
+                ) : (
+                  <span className="block text-4xl sm:text-5xl md:text-6xl mt-4">{title}</span>
+                )
+              }
             </h1>
           </div>
 
