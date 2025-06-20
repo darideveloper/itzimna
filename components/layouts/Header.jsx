@@ -32,15 +32,18 @@ const Header = () => {
   }))
 
   return (
-    <div className="relative">
+    <div
+      className={`
+        relative
+      `}
+    >
       {/* Overlay */}
       {isDrawerOpen && (
         <div
           className={`
             fixed
             inset-0
-            bg-black
-            bg-opacity-50
+            bg-transparent
             z-40
           `}
           onClick={() => setIsDrawerOpen(false)}
@@ -55,8 +58,8 @@ const Header = () => {
           left-0
           h-full
           w-64
-          bg-green-dark/60
-          backdrop-blur-md
+          bg-white
+          shadow-2xl
           z-50
           transform
           transition-transform
@@ -68,7 +71,11 @@ const Header = () => {
           ${isDrawerOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
-        <div className="p-4">
+        <div
+          className={`
+            p-4
+          `}
+        >
           <button
             onClick={() => setIsDrawerOpen(false)}
             className={`
@@ -86,7 +93,7 @@ const Header = () => {
               className={`
                 h-6
                 w-6
-                text-white
+                text-green-dark
                 hover:scale-110
                 transition-transform
                 duration-200
@@ -107,8 +114,8 @@ const Header = () => {
                 key={item.name}
                 href={item.url}
                 className={`
-                  text-white
-                  hover:text-white/80
+                  text-green-dark
+                  hover:text-green-dark/80
                   hover:translate-x-2
                   text-lg
                   px-2
@@ -132,9 +139,25 @@ const Header = () => {
           z-[-1]
         `}
       >
-        <div className="container mx-auto flex items-center justify-between px-4 xl:px-8 py-6">
+        <div
+          className={`
+            container
+            mx-auto
+            flex
+            items-center
+            justify-between
+            px-4
+            xl:px-8
+            py-6
+          `}
+        >
         {/* Logo */}
-        <div className="flex-shrink-0 p-2">
+        <div
+          className={`
+            flex-shrink-0
+            p-2
+          `}
+        >
           <TransitionLink
             href="/"
             disable={`${homePages.includes(currentPage)}`}
@@ -158,7 +181,7 @@ const Header = () => {
         <div
           className={`
             hidden
-            xl:flex
+            nav:flex
             items-center
             justify-center
             flex-1
@@ -234,7 +257,12 @@ const Header = () => {
                 duration-200
               `}
             >
-              <FaWhatsapp className="w-5 h-5" />
+              <FaWhatsapp
+                className={`
+                  w-5
+                  h-5
+                `}
+              />
             </a>
             <a
               href={`tel:${phoneNumber.replace(/\D/g, "")}`}
@@ -244,7 +272,12 @@ const Header = () => {
                 duration-200
               `}
             >
-              <FaPhone className="w-4 h-4" />
+              <FaPhone
+                className={`
+                  w-4
+                  h-4
+                `}
+              />
             </a>
           </div>
 
@@ -257,7 +290,13 @@ const Header = () => {
             `}
             href="/buscar"
           >
-            <FaMagnifyingGlass className="w-5 h-5 text-green-dark" />
+            <FaMagnifyingGlass
+              className={`
+                w-5
+                h-5
+                text-green-dark
+              `}
+            />
           </TransitionLink>
 
           {/* Language Selectors */}
@@ -275,7 +314,7 @@ const Header = () => {
           {/* Hamburger Menu */}
           <button
             className={`
-              xl:hidden
+              nav:hidden
               p-1
               hover:bg-green-dark/20
               rounded-full

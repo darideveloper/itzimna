@@ -95,18 +95,18 @@ const HeroSection = ({ id = "hero", className = "", title, description, bgImage,
                 ${fontTitle.className}
               `}
             >
-              <div className="text-2xl sm:text-3xl md:text-4xl">{titleTop}</div>
-              {titleBottom && <div className="text-4xl sm:text-5xl md:text-6xl my-8">{titleBottom}</div>}
+              <span className="block text-2xl sm:text-3xl md:text-4xl">{titleTop}</span>
+              {titleBottom && <span className="block text-4xl sm:text-5xl md:text-6xl mt-4">{titleBottom}</span>}
             </h1>
           </div>
 
           <div
-            className="text-green-dark markdown my-16"
+            className="text-green-dark markdown"
             dangerouslySetInnerHTML={{ __html: description ? marked(description) : '' }}
           />
 
           {/* Search filters */}
-          <div className="relative z-50 mb-96">
+          <div className="relative z-50 mb-16">
             <Filters
               showSubmit={filtersShowSubmit}
             />
