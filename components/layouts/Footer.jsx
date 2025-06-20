@@ -15,9 +15,7 @@ import Contact from "@/components/layouts/Contact"
 // Data
 import { navLinks } from "@/data/links"
 
-
 export default function Footer() {
-
   // Translate
   const tMeta = useTranslations("Meta")
   const tNav = useTranslations("General.nav")
@@ -43,7 +41,7 @@ export default function Footer() {
       name: "TikTok",
       url: "https://youtube.com",
       icon: <FaTiktok />,
-    }
+    },
   ]
 
   return (
@@ -69,8 +67,7 @@ export default function Footer() {
           w-full
         `}
       >
-
-        <div 
+        <div
           className={`
             logo-socials
             left
@@ -101,7 +98,7 @@ export default function Footer() {
               `}
             />
           </TransitionLink>
-            
+
           {/* Socials */}
           <div
             className={`
@@ -111,29 +108,25 @@ export default function Footer() {
               my-4
             `}
           >
-            {
-              socials.map((social, index) => (
-                <Link
-                  key={index}
-                  href={social.url}
-                  aria-label={social.name}
-                  className={`
+            {socials.map((social, index) => (
+              <Link
+                key={index}
+                href={social.url}
+                aria-label={social.name}
+                className={`
                     text-white
                     duration-300
                     hover:text-green-light
                     hover:scale-110
                     text-3xl
                   `}
-                  target="_blank"
-                >
-                  {social.icon}
-                </Link>
-              ))
-            }
+                target="_blank"
+              >
+                {social.icon}
+              </Link>
+            ))}
           </div>
         </div>
-
-
 
         <div
           className={`
@@ -141,9 +134,9 @@ export default function Footer() {
             right
             flex
             flex-col
-            items-center
-            justify-center
-          `}  
+            !items-center
+            !justify-center
+          `}
         >
           {/* Nav */}
           <nav
@@ -175,9 +168,10 @@ export default function Footer() {
           {/* Copy */}
           <div
             className={`
-            bottom-bar
+            copy-bar
             w-full
             py-3
+            border-none
           `}
           >
             <p
@@ -187,7 +181,8 @@ export default function Footer() {
               text-center
             `}
             >
-              {tMeta("title")}&nbsp; © {new Date().getFullYear()} - {tFooter("copy")}
+              {tMeta("title")}&nbsp; © {new Date().getFullYear()} -{" "}
+              {tFooter("copy")}
               &nbsp; | Powered by&nbsp;
               <Link
                 href="https://api.whatsapp.com/send?phone=5214493402622"
@@ -202,7 +197,6 @@ export default function Footer() {
               </Link>
             </p>
           </div>
-
         </div>
       </div>
     </footer>
