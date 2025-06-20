@@ -37,7 +37,7 @@ export default function Spinner({ isLoading, className, transparentModal = false
   return (
     <div
       className={`
-        spinner
+        spinner-loading
         w-full
         h-full
         ${transparentModal ? 'bg-transparent' : 'bg-white'}

@@ -87,7 +87,6 @@ const HeroSection = ({ id = "hero", className = "", title, description, bgImage,
             <h1
               className={`
                 title
-                mt-16
                 mb-8
                 text-center
                 text-green-dark
