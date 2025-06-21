@@ -58,7 +58,7 @@ export default function PropertyRelated({ relatedProperties }) {
             <PropertyCard
               name={property.name}
               shortDescription={property.short_description}
-              imageSrc={property.banner?.url || property.images[0]?.url}
+              imageSrc={property.banner?.url || property.images?.[0]?.url}
               company={property.company}
               location={property.location}
               price={property.price}
