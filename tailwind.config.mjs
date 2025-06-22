@@ -17,6 +17,7 @@ export default {
         'black': '#010d04',
         'blue-light': '#7adcad',
         'grey': '#f5f5f5',
+        'whatsapp': '#25D366',
       },
     },
     screens: {

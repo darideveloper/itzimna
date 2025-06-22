@@ -111,6 +111,7 @@ export default function Slider({
         modules={[Navigation, A11y, Autoplay, Pagination]}
         navigation
         pagination={{ clickable: true }}
+        loop={true}
         autoplay={{
           delay: 3000,
           disableOnInteraction: true,

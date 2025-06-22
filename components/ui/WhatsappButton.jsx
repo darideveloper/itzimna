@@ -28,7 +28,7 @@ export default function WhatsappButton() {
         bottom-4
         right-4
         z-50
-        bg-green-dark hover:bg-green
+        bg-whatsapp
         text-white
         p-3
         rounded-full
@@ -38,7 +38,7 @@ export default function WhatsappButton() {
         hover:scale-110
       `}
     >
-      <FaWhatsapp className="text-3xl" />
+      <FaWhatsapp className="text-3xl lg:text-4xl" />
     </Link>
   )
 }
