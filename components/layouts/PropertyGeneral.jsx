@@ -7,6 +7,9 @@ import Title from "@/components/ui/Title"
 import Badge from "@/components/ui/Badge"
 import IconText from "@/components/ui/IconText"
 
+// Libs
+import { useTranslations } from "next-intl"
+
 /**
  * Property details layout for desarrollos page (property details page)
  *
@@ -29,6 +32,9 @@ export default function PropertyGeneral({
   short_description,
   images,
 }) {
+  // Translations
+  const t = useTranslations("PropertyGeneral")
+
   return (
     <div>
 
@@ -103,7 +109,7 @@ export default function PropertyGeneral({
                 my-2
               `}
               >
-                {new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(price)} MXN
+                {t("from")} {new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(price)} MXN
               </p>
 
               {/* Tags and Info Section */}
@@ -148,7 +154,7 @@ export default function PropertyGeneral({
                 `}
               >
                 <IconText icon={<FaMapMarkerAlt />} text={location} />
-                <IconText text={`${meters} m²`} icon={<FaArrowsAlt />} />
+                <IconText text={`${t("from")} ${meters} m²`} icon={<FaArrowsAlt />} />
                 <IconText
                   icon={<FaBuilding />}
                   text={company}
