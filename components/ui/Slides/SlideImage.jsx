@@ -28,29 +28,15 @@ export default function SlideImage({
         relative
         w-full
         h-full
-        ${isActive ? "cursor-pointer" : "cursor-default"}
+        cursor-pointer
       `}
       onClick={() => {
         // Zoom active image
-        if (!modalLoading && isActive) {
+        if (!modalLoading) {
           setModalImage(imageSrc)
         }
       }}
     >
-      <div
-        className={`
-        overlay
-        absolute
-        w-full
-        h-full
-        bg-white
-        duration-300
-        z-10
-        ${isActive ? "opacity-0" : "opacity-50"}
-      `}
-      >
-
-      </div>
       <Image
         src={imageSrc}
         alt={imageAlt}
