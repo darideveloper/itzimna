@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react"
 import { getProperties } from "@/libs/api/properties"
 import { useTranslations } from "next-intl"
-import { usePaginationStore } from "@/store/pagination"
 
 // Components
 import PropertyCard from "@/components/ui/PropertyCard"
@@ -44,42 +43,11 @@ export default function CardsSection({
   queryRequired = false,
   useAos = true,
 }) {
-  // Zustand states
-  const pageNew = usePaginationStore((state) => state.pageNew)
-  const pageFeatured = usePaginationStore((state) => state.pageFeatured)
-  const pageResults = usePaginationStore((state) => state.pageResults)
-
-  // Zustand actions
-  const setPageNew = usePaginationStore((state) => state.setPageNew)
-  const setPageFeatured = usePaginationStore((state) => state.setPageFeatured)
-  const setPageResults = usePaginationStore((state) => state.setPageResults)
-
-  // Set page based on id
-  const paginationZustand = {
-    "search-properties": {
-      page: pageResults,
-      setPage: setPageResults
-    },
-    "last-properties": {
-      page: pageNew,
-      setPage: setPageNew
-    },
-    "featured-properties": {
-      page: pageFeatured,
-      setPage: setPageFeatured
-    }
-  }
-  const { page, setPage } = paginationZustand[id] || {
-    page: 1,
-    setPage: (newPage) => {
-      console.warn(`No pagination found for section with id: ${id}. Setting page to ${newPage}.`)
-    }
-  }
-
   // States
   const [propertiesData, setPropertiesData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [totalPages, setTotalProperties] = useState(0)
+  const [page, setPage] = useState(1)
 
   // Zustand
   let searchQuery = useSearchStore((state) => state.searchQuery)
