@@ -188,7 +188,7 @@ export default function PropertyCard({
           `}
             title={name}
             >
-              {name.length > 33 ? `${name.slice(0, 30)}...` : name}
+              {name.length > 25 ? `${name.slice(0, 25)}...` : name}
             </h2>
             <div
               className={`
@@ -206,7 +206,9 @@ export default function PropertyCard({
                 text-green
             `}
               />
-              <span className={`text-sm`}>{location}</span>
+              <span className={`text-sm`}>
+              {location.length > 33 ? `${location.slice(0, 33)}...` : location}
+              </span>
             </div>
             <div
               className={`
