@@ -68,11 +68,6 @@ export default async function PropertyDevelopment({ params }) {
       "@type": "ImageObject",
       url: propertyData.banner.url,
     },
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: propertyData.location,
-      addressCountry: "MX",
-    },
     offers: {
       "@type": "Offer",
       priceCurrency: "MXN",
