@@ -29,17 +29,17 @@ export default function Footer() {
   const socials = [
     {
       name: "Facebook",
-      url: "https://facebook.com",
+      url: "https://www.facebook.com/itzimnarealestate",
       icon: <FaFacebookF />,
     },
     {
       name: "Instagram",
-      url: "https://instagram.com",
+      url: "https://www.instagram.com/itzimnarealestatemid",
       icon: <FaInstagram />,
     },
     {
       name: "TikTok",
-      url: "https://youtube.com",
+      url: "https://www.tiktok.com/@itzimnarealestate",
       icon: <FaTiktok />,
     },
   ]
