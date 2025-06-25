@@ -61,7 +61,7 @@ export default async function PropertyDevelopment({ params }) {
   // Metadata
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "House",
+    "@type": "Product",
     name: propertyData.name,
     description: propertyData.short_description,
     image: {
@@ -83,20 +83,25 @@ export default async function PropertyDevelopment({ params }) {
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Itzamna",
-      logo: {
-        "@type": "ImageObject",
-        url: `${process.env.NEXT_PUBLIC_HOST}/images/logo.webp`,
-      },
-    },
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: getBreadcrumb(
-        `${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`
-      ),
+    }
+  }
+
+  const jsonLdBreadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: getBreadcrumb(
+      `${process.env.NEXT_PUBLIC_HOST}/es/desarrollos/${idSlug}`
+    ),
+  }
+
+  const jsonLdPlace = {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    name: propertyData.name,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: propertyData.location,
+      addressCountry: "MX",
     },
   }
 
@@ -114,6 +119,16 @@ export default async function PropertyDevelopment({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPlace) }}
       />
 
       {/* Enable aos in page */}
@@ -247,7 +262,9 @@ export default async function PropertyDevelopment({ params }) {
       <div className={`container`}>
         <InfoCard>
           <PropertyRelated
-            relatedProperties={propertyData.related_properties.sort(() => Math.random() - 0.5)}
+            relatedProperties={propertyData.related_properties.sort(
+              () => Math.random() - 0.5
+            )}
           />
         </InfoCard>
       </div>
