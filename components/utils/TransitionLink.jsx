@@ -13,9 +13,10 @@ import { useLocale } from "next-intl";
  * @param {function} props.onClick - Function to call on click
  * @param {string} props.disable - Disable
  * @param {object} props.props - Other
+ * @param {string} props.target - Target
  * @returns 
  */
-export default function TransitionLink({ href, onClick, disable, ...props }) {
+export default function TransitionLink({ href, onClick, disable, target="_self", ...props }) {
 
   // Routing
   const router = useRouter()
@@ -59,7 +60,11 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
     ).includes(true)
 
     if (is_full_reload) {
-      window.location.href = `/${locale}${href}`
+      if (target === "_blank") {
+        window.open(`/${locale}${href}`, '_blank')
+      } else {
+        window.location.href = `/${locale}${href}`
+      }
       return
     }
 
@@ -70,7 +75,11 @@ export default function TransitionLink({ href, onClick, disable, ...props }) {
       router.replace(`/${currentPage}`, { locale: lang })
     } else {
       // Regular link (change page)
-      router.push(href)
+      if (target === "_blank") {
+        window.open(`/${locale}${href}`, '_blank')
+      } else {
+        router.push(href)
+      }
     }
 
   }

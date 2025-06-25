@@ -43,7 +43,6 @@ export default function PropertyCard({
   className,
   useAos = true,
 }) {
-  const [isLoading, setIsLoading] = useState(false)
 
   const t = useTranslations("PropertyCard")
 
@@ -51,8 +50,7 @@ export default function PropertyCard({
     <div data-aos={useAos ? "fade-up" : undefined}>
       <TransitionLink
         href={href}
-        onClick={() => setIsLoading(true)}
-        disable={isLoading}
+        target="_blank"
       >
         <div
           className={`
@@ -71,14 +69,6 @@ export default function PropertyCard({
           ${className}
         `}
         >
-          {/* Loading spinner */}
-          {isLoading && (
-            <Spinner
-              isLoading={isLoading}
-              className={`absolute !bg-green-dark !items-center`}
-            />
-          )}
-
           <div
             className={`
               relative
