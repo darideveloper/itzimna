@@ -282,7 +282,7 @@ const Header = () => {
           </div>
 
           {/* Search Icon */}
-          <TransitionLink
+          {/* <TransitionLink
             className={`
               hover:text-green-dark/80
               transition-colors
@@ -297,7 +297,7 @@ const Header = () => {
                 text-green-dark
               `}
             />
-          </TransitionLink>
+          </TransitionLink> */}
 
           {/* Language Selectors */}
           <div
