@@ -124,5 +124,14 @@
   },
   "PropertyRelated": {
     "title": "Related Properties"
+  },
+  "Buscar": {
+    "title": "Search in Itzimna Real Estate",
+    "placeholder": "What are you looking for?",
+    "description": "General search page to find what you need",
+    "content": {
+      "heading": "Find what you're looking for",
+      "text": "Use this page to perform searches and find the information you need."
+    }
   }
 }
