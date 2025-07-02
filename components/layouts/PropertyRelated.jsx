@@ -49,9 +49,9 @@ export default function PropertyRelated({ relatedProperties }) {
           1280: {
             slidesPerView: 4,
           },
-
         }}
         className={``}
+        loop={relatedProperties.length > 4}
       >
         {relatedProperties.map((property) => (
           <SwiperSlide key={property.id} className={``}>
