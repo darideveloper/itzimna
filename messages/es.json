@@ -122,7 +122,7 @@
       "readMore": "Leer mas"
     }
   },
-    "PropertyRelated": {
+  "PropertyRelated": {
     "title": "Propiedades Relacionadas"
   },
   "Buscar": {
@@ -133,5 +133,8 @@
       "heading": "Encuentra lo que buscas",
       "text": "Utiliza esta página para realizar búsquedas y encontrar la información que necesitas."
     }
+  },
+  "SearchProperties": {
+    "title": "Buscar Desarrollos en Yucatán"
   }
 }
