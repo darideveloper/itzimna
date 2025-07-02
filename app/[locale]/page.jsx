@@ -1,6 +1,6 @@
 // Sections
 import CardsSection from "@/components/layouts/CardsSection"
-import Hero from "@/components/layouts/HeroOld"
+import HeroHome from "@/components/layouts/HeroHome"
 import Gallery from "@/components/layouts/Gallery"
 
 // LIbs
@@ -53,13 +53,7 @@ export default async function HomePage({ params }) {
       {/* Enable aos in page */}
       <AOSInit />
 
-      <Hero 
-        title={t('HeroSection.title')}
-        description={t('HeroSection.description')}
-        bgImage="/images/hero.webp"
-        className={`
-        `}
-      />
+      <HeroHome />
 
       <Gallery locale={locale} />
 
