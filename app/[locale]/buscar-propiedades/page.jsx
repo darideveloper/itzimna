@@ -8,7 +8,7 @@ import Button from "@/components/ui/Button"
 
 // Sections
 import CardsSection from "@/components/layouts/CardsSection"
-import Hero from "@/components/layouts/Hero"
+import Hero from "@/components/layouts/HeroOld"
 
 // Icons
 import { FaArrowUp } from "react-icons/fa"

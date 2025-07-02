@@ -1,6 +1,6 @@
 // Sections
 import CardsSection from "@/components/layouts/CardsSection"
-import Hero from "@/components/layouts/Hero"
+import Hero from "@/components/layouts/HeroOld"
 import Gallery from "@/components/layouts/Gallery"
 
 // LIbs

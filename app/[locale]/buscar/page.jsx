@@ -2,11 +2,8 @@
 import { getTranslations } from "next-intl/server"
 import { getBreadcrumb } from "@/libs/jsonLd"
 
-// Components
-import Image from "next/image"
-
 // Sections
-import SearchHero from "@/components/layouts/SearchHero"
+import HeroSearch from "@/components/layouts/HeroSearch"
 
 // Components
 import SearchResults from "@/components/ui/SearchResults"
@@ -69,7 +66,7 @@ const BuscarPage = async (props) => {
       {/* Enable aos in page */}
       <AOSInit />
 
-      <SearchHero
+      <HeroSearch
         title={t('title')}
         description={t('description')}
         bgImage="/images/hero.webp"

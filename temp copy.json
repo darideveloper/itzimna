@@ -1,0 +1,67 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "AIRA RESIDENCIAL",
+    "description": "Aria es un desarrollo de 99 lotes residenciales con servicios urbanos, ubicado estratégicamente en una zona de alto crecimiento residencial y comercial en Cholul, al norte de Mérida. El desarrollo se encuentra a pie de la carretera federal.",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://itzimna.s3.amazonaws.com/media/property-images/47.webp"
+    },
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cholul",
+        "addressCountry": "MX"
+    },
+    "offers": {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "price": "1033890.00",
+        "availability": "https://schema.org/InStock",
+        "url": "http://localhost:3000/es/desarrollos/103-aira-residencial"
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:3000/es/desarrollos/103-aira-residencial"
+    },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "http://localhost:3000"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "http:",
+                "item": "http://localhost:3000/http:"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "localhost:3000",
+                "item": "http://localhost:3000/http:/localhost:3000"
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "es",
+                "item": "http://localhost:3000/http:/localhost:3000/es"
+            },
+            {
+                "@type": "ListItem",
+                "position": 5,
+                "name": "desarrollos",
+                "item": "http://localhost:3000/http:/localhost:3000/es/desarrollos"
+            },
+            {
+                "@type": "ListItem",
+                "position": 6,
+                "name": "103 aira residencial",
+                "item": "http://localhost:3000/http:/localhost:3000/es/desarrollos/103-aira-residencial"
+            }
+        ]
+    }
+}
