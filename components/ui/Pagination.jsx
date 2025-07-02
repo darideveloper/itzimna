@@ -22,6 +22,9 @@ const Pagination = ({
   className = "",
   variant="light"
 }) => {
+
+  console.log(currentPage, totalPages)
+
   return (
     <nav
       className={`

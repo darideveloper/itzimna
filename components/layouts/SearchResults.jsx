@@ -42,10 +42,11 @@ const SearchResults = ({
     await changePage(page)
   }
 
-  // Show results
+  // Show results and total results
   useEffect(() => {
     console.log(results)
-  }, [results])
+    console.log(totalResults)
+  }, [results, totalResults])
 
   if (loading) {
     return (

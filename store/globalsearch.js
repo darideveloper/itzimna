@@ -35,7 +35,7 @@ export const useGlobalSearchStore = create((set, get) => ({
       
       // Calculate pagination info from response
       const totalResults = response.count
-      const totalPages = Math.ceil(totalResults / 6) // 6 results per page
+      const totalPages = Math.ceil(totalResults / 8) // 8 results per page
       const hasNextPage = response.next !== null
       const hasPrevPage = response.previous !== null
       
