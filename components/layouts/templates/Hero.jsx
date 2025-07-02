@@ -30,14 +30,18 @@ export default function HeroBase({
         "py-24",
         "md:pb-52",
         "md:pt-24",
+        "z-10",
+        "bg-fixed",
+        "bg-center",
+        "bg-no-repeat",
+        "bg-cover",
+        "bg-white",
         className,
-        "z-10"
       )}
       style={{
         backgroundImage: `url(${bgImage})`,
       }}
     >
-      <div className={clsx("overlay-effect", "absolute", "inset-0", "z-10")} />
       <div
         className={clsx(
           "container",
