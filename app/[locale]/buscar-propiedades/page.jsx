@@ -8,7 +8,7 @@ import Button from "@/components/ui/Button"
 
 // Sections
 import CardsSection from "@/components/layouts/CardsSection"
-import Hero from "@/components/layouts/HeroOld"
+import HeroSearchProperties from "@/components/layouts/HeroSearchProperties"
 
 // Icons
 import { FaArrowUp } from "react-icons/fa"
@@ -76,15 +76,7 @@ const PropertySearch = async (props) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Hero
-        title={t('title')}
-        bgImage="/images/hero-buscar.webp"
-        className={`
-          !pb-16
-          !pt-16
-        `}
-        filtersShowSubmit={false}
-      />
+      <HeroSearchProperties />
 
       <Image
         src="/images/hero.webp"
@@ -130,30 +122,6 @@ const PropertySearch = async (props) => {
         loadingTimeOut={0}
         queryRequired={true}
       />
-
-      {/* Go top button */}
-      <Button
-        className={`
-          fixed
-          bottom-4
-          right-4
-          z-30
-          !rounded-full
-          !p-2
-          group
-        `}
-        variant="ghost"
-        href="#hero"
-      >
-        <FaArrowUp
-          className={`
-            text-white
-            text-2xl
-            group-hover:text-green-dark
-          `}
-        />
-      </Button>
-
     </div>
   )
 }
