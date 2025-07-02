@@ -307,6 +307,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true, c
               className={`
                 md:col-span-3 lg:col-span-1
                 self-center
+                row-start-1
               `}
               forceReload={true}
             >
