@@ -1,3 +1,5 @@
+import { clsx } from "clsx"
+
 /**
  * IconText component for displaying an icon alongside text
  *
@@ -15,29 +17,29 @@ export default function IconText({
 }) {
   return (
     <p
-      className={`
-        flex
-        items-center
-        justify-start
-        ${className}
-        text-green
-      `}
+      className={clsx(
+        "flex",
+        "items-center",
+        "justify-start",
+        "text-green",
+        className
+      )}
     >
       <span
-        className={`
-          flex
-          items-center
-          ${iconStyle}
-          mr-2
-          text-inherit
-        `}
+        className={clsx(
+          "flex",
+          "items-center",
+          "mr-2",
+          "text-inherit",
+          iconStyle
+        )}
       >
         {icon}
       </span>
       <span
-        className={`
-          capitalize
-        `}
+        className={clsx(
+          "capitalize"
+        )}
       >
         {text}
       </span>

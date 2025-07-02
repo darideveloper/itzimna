@@ -42,6 +42,11 @@ const SearchResults = ({
     await changePage(page)
   }
 
+  // Show results
+  useEffect(() => {
+    console.log(results)
+  }, [results])
+
   if (loading) {
     return (
       <div className={`search-results-container py-8 ${className}`}>
@@ -151,6 +156,7 @@ const SearchResults = ({
             image={result.image}
             title={result.title}
             description={result.description}
+            type={result.type}
           />
         ))}
       </div>
