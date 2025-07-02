@@ -14,9 +14,10 @@ import { useLocale } from "next-intl";
  * @param {string} props.disable - Disable
  * @param {object} props.props - Other
  * @param {string} props.target - Target
+ * @param {boolean} props.forceReload - Force reload
  * @returns 
  */
-export default function TransitionLink({ href, onClick, disable, target="_self", ...props }) {
+export default function TransitionLink({ href, onClick, disable, target="_self", forceReload=false, ...props }) {
 
   // Routing
   const router = useRouter()
@@ -55,9 +56,14 @@ export default function TransitionLink({ href, onClick, disable, target="_self",
     e.preventDefault()
 
     // Check if the page needs a full reload
-    const is_full_reload = full_reload_pages.map((page) =>
+    let is_full_reload = full_reload_pages.map((page) =>
       href.startsWith(page)
     ).includes(true)
+
+    // Force reload
+    if (forceReload) {
+      is_full_reload = true
+    }
 
     if (is_full_reload) {
       if (target === "_blank") {

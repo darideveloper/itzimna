@@ -26,7 +26,7 @@ import { pricesOptions, sizesOptions } from "@/data/filters"
  * Filters component
  * 
  * @param {Object} props - Component props
- * @param {boolean} props.showSubmit - Show submit button on filters. Default is true
+ * @param {boolean} props.showSubmit - Show submit button on filters (else show Reset button). Default is true
  * @param {string} props.className - Class name for the filters container
  * @returns {JSX.Element} Filters component
  */
@@ -222,7 +222,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true, c
         className={`
             mt-4
             grid
-            grid-cols-1 md:grid-cols-3 ${showSubmit && 'lg:grid-cols-4'}
+            grid-cols-1 md:grid-cols-3 lg:grid-cols-4
             gap-4
           `}
       >
@@ -271,7 +271,7 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true, c
 
         {
           showSubmit 
-          &&
+          ?
             <TransitionLink
               // Dynamic link with query
               href={`/buscar-propiedades?${searchQuery}`}
@@ -299,6 +299,21 @@ export default function Filters({ showSubmit = true, updateUrlRealTime = true, c
                 <p>
                   {t("searchButton")}
                 </p>
+              </Button>
+            </TransitionLink>
+          :
+            <TransitionLink
+              href={`/buscar-propiedades`}
+              className={`
+                md:col-span-3 lg:col-span-1
+                self-center
+              `}
+              forceReload={true}
+            >
+              <Button
+                className={`w-full`}
+              >
+                {t("resetButton")}
               </Button>
             </TransitionLink>
         }

@@ -98,6 +98,7 @@
     "sizePlaceholder": "Size",
     "pricePlaceholder": "Price",
     "searchButton": "Search",
+    "resetButton": "Reset",
     "selectPrefix": "MAX"
   },
   "PropertyDevelopment": {
