@@ -1,8 +1,8 @@
 "use client"
 
 // Components
-import SearchResult from "./SearchResult"
-import Pagination from "./Pagination"
+import SearchResult from "../ui/SearchResult"
+import Pagination from "../ui/Pagination"
 import { useState, useEffect } from "react"
 import { useGlobalSearchStore } from "@/store/globalsearch"
 

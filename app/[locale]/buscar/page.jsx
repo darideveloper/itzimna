@@ -6,7 +6,7 @@ import { getBreadcrumb } from "@/libs/jsonLd"
 import HeroSearch from "@/components/layouts/HeroSearch"
 
 // Components
-import SearchResults from "@/components/ui/SearchResults"
+import SearchResults from "@/components/layouts/SearchResults"
 
 // Utils components
 import AOSInit from '@/components/utils/AOSInit'
