@@ -7,13 +7,11 @@ import Hero from "./templates/Hero"
 import { useState, useRef, useCallback } from "react"
 import { useGlobalSearchStore } from "@/store/globalsearch"
 import { clsx } from "clsx"
+import { useTranslations } from "next-intl"
 
 // Icons
 import { FaSearch } from "react-icons/fa"
 import { FaX } from "react-icons/fa6"
-
-// Styles
-import "@/css/markdown.sass"
 
 // Utility function for debouncing
 const debounce = (func, delay) => {
@@ -25,19 +23,20 @@ const debounce = (func, delay) => {
 }
 
 /**
- * SearchHero section component with search input
+ * HeroSearch section component with search input
  *
  * @param {Object} props - Component props
- * @param {string} props.id - Component id
  * @param {string} props.className - Component classes
- * @param {string} props.title - Title text
- * @param {string} props.description - Description text
- * @param {string} props.bgImage - Background image url
- * @param {string} props.placeholder - Search input placeholder
- * @param {Function} props.onSearch - Search callback function
- * @returns {JSX.Element} SearchHero section component
+ * @returns {JSX.Element} HeroSearch section component
  */
 const HeroSearch = ({ className = "" }) => {
+  
+  // Translations and data
+  const t = useTranslations("Buscar")
+  const title = t("title")
+  const placeholder = t("placeholder")
+  const bgImage = "/images/hero-buscar.webp"
+
   // Global search store
   const { searchProperties } = useGlobalSearchStore()
 
@@ -77,8 +76,8 @@ const HeroSearch = ({ className = "" }) => {
   return (
     <Hero
       id={"search-hero"}
-      title={"Buscar propiedades"}
-      bgImage={"/images/hero-buscar.webp"}
+      title={title}
+      bgImage={bgImage}
       className={className}
     >
       <div
@@ -103,7 +102,7 @@ const HeroSearch = ({ className = "" }) => {
             <input
               ref={inputRef}
               type="text"
-              placeholder={"Buscar..."}
+              placeholder={placeholder}
               value={localSearchTerm}
               onChange={handleInputChange}
               onKeyUp={handleKeyUp}

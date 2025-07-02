@@ -19,8 +19,6 @@ const BuscarPage = async (props) => {
 
   const { locale } = await props.params
 
-
-
   // Metadata
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -67,10 +65,6 @@ const BuscarPage = async (props) => {
       <AOSInit />
 
       <HeroSearch
-        title={t('title')}
-        description={t('description')}
-        bgImage="/images/hero.webp"
-        placeholder={t('placeholder')}
         className={`
           !pb-16
           !pt-16
