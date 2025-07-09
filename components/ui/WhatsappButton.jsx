@@ -35,6 +35,7 @@ export default function WhatsappButton() {
         shadow-sm
         shadow-white/50
         duration-300
+        scale-[130%]
         hover:scale-110
       `}
     >
