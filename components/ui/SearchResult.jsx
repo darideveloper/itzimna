@@ -27,11 +27,28 @@ const SearchResult = ({
   className = "" 
 }) => {
 
+  // Defensive checks for required props
+  if (!id || !title || !type) {
+    console.warn('SearchResult: Missing required props', { id, title, type })
+    return null
+  }
+
   const typesUrls = {
     post: 'blog',
     property: 'desarrollos',
   }
-  const href = `./${typesUrls[type]}/${id}-${title.toLowerCase().replace(/ /g, "-")}`
+
+  // Fallback for unknown types
+  const urlType = typesUrls[type] || 'desarrollos'
+  
+  // Safe URL generation
+  const safeTitleForUrl = (title || '').toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-')
+  const href = `./${urlType}/${id}-${safeTitleForUrl}`
+
+  // Safe fallback values
+  const safeImage = image || "/images/home-banner.jpg"
+  const safeTitle = title || "Sin título"
+  const safeDescription = description || "Sin descripción disponible"
 
   return (
     <Link
@@ -66,7 +83,7 @@ const SearchResult = ({
             "rounded-lg"
           )}
           style={{
-            backgroundImage: `url(${image || "/images/home-banner.jpg"})`
+            backgroundImage: `url(${safeImage})`
           }}
         />
       </div>
@@ -84,7 +101,7 @@ const SearchResult = ({
               fontTitle.className
             )}
           >
-            {title}
+            {safeTitle}
           </h3>
 
           {/* Description */}
@@ -97,7 +114,7 @@ const SearchResult = ({
               "mb-4"
             )}
           >
-            {description}
+            {safeDescription}
           </p>
         </div>
 
