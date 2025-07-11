@@ -6,6 +6,8 @@ import Button from "./Button"
 import { fontTitle } from "@/libs/fonts"
 import { clsx } from "clsx"
 import { marked } from "marked"
+import { useTranslations } from "next-intl"
+
 
 /**
  * SearchResult component that mimics YouTube search result layout
@@ -27,6 +29,11 @@ const SearchResult = ({
   type,
   className = "",
 }) => {
+
+  // Translations
+  const t = useTranslations('Buscar')  
+
+  // Process data
   const typesUrls = {
     post: "blog",
     property: "desarrollos",
@@ -34,7 +41,6 @@ const SearchResult = ({
   const href = `./${typesUrls[type]}/${id}-${title
     .toLowerCase()
     .replace(/ /g, "-")}`
-  console.log(href)
 
   return (
     <Link
@@ -124,7 +130,7 @@ const SearchResult = ({
             )}
             scaleHover={false}
           >
-            View Details
+            {t('cardDetails')}
           </Button>
         </div>
       </div>
