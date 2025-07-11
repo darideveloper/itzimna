@@ -42,6 +42,13 @@ const SearchResults = ({ className = "" }) => {
 
   // Handle page change
   const handlePageChange = async (page) => {
+
+    // Scroll to top of the page
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+
     await changePage(page)
   }
 
