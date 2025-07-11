@@ -53,7 +53,7 @@ const SearchResults = ({ className = "" }) => {
 
   if (loading) {
     return (
-      <div className={clsx("search-results-container", "py-8", className)}>
+      <div className={clsx("search-results-container", "py-8", "container", className)}>
         <div className={clsx("flex", "flex-col", "gap-4")}>
           {/* Loading skeletons - this looks good than the loading spinner */}
           {[...Array(5)].map((_, index) => (
@@ -124,7 +124,7 @@ const SearchResults = ({ className = "" }) => {
 
   if (!results || results.length === 0 && !loading) {
     return (
-      <div className={clsx("search-results-container", "py-8", className)}>
+      <div className={clsx("search-results-container", "py-8", "container", className)}>
         <div className={clsx("text-center", "py-12")}>
           <div className={clsx("mb-4")}>
             <span
@@ -158,7 +158,8 @@ const SearchResults = ({ className = "" }) => {
   }
 
   return (
-    <div className={clsx("search-results-container", "py-8", className)}>
+    <>
+    <div className={clsx("search-results-container", "py-8", "container", className)}>
       {/* Results header */}
       {query && (
         <div className={clsx("mb-6")}>
@@ -202,17 +203,18 @@ const SearchResults = ({ className = "" }) => {
         })}
       </div>
 
-      {/* Pagination */}
-      {results.length > 0 && totalPages > 1 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-          variant="light"
-          className="mt-4"
-        />
-      )}
     </div>
+    {/* Pagination */}
+    {results.length > 0 && totalPages > 1 && (
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+        variant="light"
+        className={clsx("mt-4", "!px-0", "!py-0")}
+      />
+    )}
+    </>
   )
 }
 

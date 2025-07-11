@@ -77,7 +77,6 @@ const Pagination = ({
   return (
     <nav
       className={`
-        container
         pagination
         flex
         items-center
@@ -94,7 +93,7 @@ const Pagination = ({
           justify-center
           gap-2
           py-4
-          px-8
+          px-2
           rounded-md
           flex-wrap
           w-full          
