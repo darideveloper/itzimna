@@ -18,7 +18,7 @@ import { fontTitle } from "@/libs/fonts"
  * @param {string} props.variant - Button variant ('default' or 'ghost')
  * @param {object} props.children - Child components
  * @param {object} props.props - Additional props
- *
+ * @param {boolean} props.scaleHover - Scale hover effect
  */
 export default function Button({
   href = "",
@@ -27,6 +27,7 @@ export default function Button({
   disabled = false,
   active = false,
   variant = "default",
+  scaleHover = true,
   children,
   ...props
 }) {
@@ -59,7 +60,7 @@ export default function Button({
     font-thin
     rounded-md
     duration-300
-    ${(!disabled && !active) ? "hover:scale-105" : ""}
+    ${(!disabled && !active && scaleHover) ? "hover:scale-105" : ""}
     disabled:opacity-70
     disabled:shadow-none
     disabled:bg-green-dark

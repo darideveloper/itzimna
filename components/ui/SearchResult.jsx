@@ -1,5 +1,6 @@
 // Components
 import Link from "next/link"
+import Button from "./Button"
 
 // Libs
 import { fontTitle } from "@/libs/fonts"
@@ -8,7 +9,7 @@ import { marked } from "marked"
 
 /**
  * SearchResult component that mimics YouTube search result layout
- * 
+ *
  * @param {Object} props - Component props
  * @param {number} props.id - Result ID
  * @param {string} props.image - Result image URL
@@ -18,20 +19,22 @@ import { marked } from "marked"
  * @param {string} props.type - Result type ("post" or "property")
  * @returns {JSX.Element} SearchResult component
  */
-const SearchResult = ({ 
+const SearchResult = ({
   id,
   image,
-  title, 
-  description, 
+  title,
+  description,
   type,
-  className = "" 
+  className = "",
 }) => {
-
   const typesUrls = {
-    post: 'blog',
-    property: 'desarrollos',
+    post: "blog",
+    property: "desarrollos",
   }
-  const href = `./${typesUrls[type]}/${id}-${title.toLowerCase().replace(/ /g, "-")}`
+  const href = `./${typesUrls[type]}/${id}-${title
+    .toLowerCase()
+    .replace(/ /g, "-")}`
+  console.log(href)
 
   return (
     <Link
@@ -59,20 +62,28 @@ const SearchResult = ({
           className={clsx(
             "w-full",
             "md:w-72",
-            "h-40",
-            "md:h-32",
+            "h-40 md:h-36",
             "bg-cover",
             "bg-center",
             "rounded-lg"
           )}
           style={{
-            backgroundImage: `url(${image || "/images/home-banner.jpg"})`
+            backgroundImage: `url(${image || "/images/home-banner.jpg"})`,
           }}
         />
       </div>
 
       {/* Right side - Content */}
-      <div className={clsx("flex-1", "ml-0", "md:ml-4", "mt-4", "md:mt-0", "flex", "flex-col", "justify-between")}>
+      <div
+        className={clsx(
+          "flex-1",
+          "ml-0 md:ml-4",
+          "mt-4 md:mt-0",
+          "flex",
+          "flex-col",
+          "justify-between"
+        )}
+      >
         <div>
           {/* Title */}
           <h3
@@ -81,6 +92,7 @@ const SearchResult = ({
               "text-green-dark",
               "line-clamp-2",
               "mb-3",
+              "text-center md:text-left",
               fontTitle.className
             )}
           >
@@ -94,34 +106,30 @@ const SearchResult = ({
               "text-sm",
               "line-clamp-2",
               "leading-relaxed",
-              "mb-4"
+              "mb-4",
+              "text-justify md:text-left",
             )}
             dangerouslySetInnerHTML={{ __html: marked.parse(description) }}
           />
         </div>
 
-        {/* View Details Button */}
-        <div>
-          <span
+        <div className={clsx("flex", "justify-start", "w-full")}>
+          <Button
             className={clsx(
-              "bg-green",
-              "hover:bg-green-dark",
-              "text-white",
-              "px-6",
-              "py-2",
-              "rounded-lg",
-              "text-sm",
-              "font-medium",
-              "transition-colors",
-              "duration-200"
+              "w-full",
+              "md:w-auto",
+              "md:px-12",
+              "!text-sm",
+              "text-center md:text-left"
             )}
+            scaleHover={false}
           >
             View Details
-          </span>
+          </Button>
         </div>
       </div>
     </Link>
   )
 }
 
-export default SearchResult 
+export default SearchResult
