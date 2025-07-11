@@ -192,7 +192,7 @@ const SearchResults = ({ className = "" }) => {
 
           return (
             <SearchResult
-              key={result.id || index}
+              key={index}
               id={result.id}
               image={result.image}
               title={result.title}
