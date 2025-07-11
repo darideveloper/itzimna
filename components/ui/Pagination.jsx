@@ -25,7 +25,7 @@ const Pagination = ({
 
   // Helper function to get visible page numbers
   const getVisiblePages = () => {
-    const delta = 2; // Show 2 pages on each side of current page
+    const delta = 2; // Show X pages on each side of current page
     const range = [];
     const rangeWithDots = [];
 
@@ -46,28 +46,8 @@ const Pagination = ({
       range.push(i);
     }
 
-    // Add first page
-    if (start > 2) {
-      rangeWithDots.push(1);
-      if (start > 3) {
-        rangeWithDots.push('...');
-      }
-    } else if (totalPages > 1) {
-      rangeWithDots.push(1);
-    }
-
     // Add the range
     rangeWithDots.push(...range);
-
-    // Add last page
-    if (end < totalPages - 1) {
-      if (end < totalPages - 2) {
-        rangeWithDots.push('...');
-      }
-      rangeWithDots.push(totalPages);
-    } else if (totalPages > 1 && !rangeWithDots.includes(totalPages)) {
-      rangeWithDots.push(totalPages);
-    }
 
     return rangeWithDots;
   };
@@ -105,19 +85,20 @@ const Pagination = ({
           <Button
             onClick={() => onPageChange(1)}
             className={`
-              w-10
-              h-10
+              w-8 sm:w-10
+              h-8 sm:h-10
               flex
               items-center
               justify-center
-              text-xs
+              text-md
+              !p-2.5 md:!p-3
             `}
             title="First page"
           >
             <FaAnglesLeft
               className={`
-                w-4
-                h-4
+                w-6
+                h-6
               `}
             />
           </Button>
@@ -128,18 +109,19 @@ const Pagination = ({
           disabled={currentPage === 1}
           onClick={() => onPageChange(currentPage - 1)}
           className={`
-            w-10
-            h-10
+            w-8 sm:w-10
+            h-8 sm:h-10
             flex
             items-center
             justify-center
+            !p-2.5
           `}
           title="Previous page"
         >
           <FaCaretLeft
             className={`
-              w-5
-              h-5
+              w-4
+              h-4
           `}
           />
         </Button>
@@ -171,11 +153,12 @@ const Pagination = ({
               active={page === currentPage}
               onClick={() => onPageChange(page)}
               className={`
-                w-10
-                h-10
+                w-8 sm:w-10
+                h-8 sm:h-10
                 flex
                 items-center
                 justify-center
+                text-sm sm:text-md
               `}
             >
               {page}
@@ -188,18 +171,19 @@ const Pagination = ({
           disabled={currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
           className={`
-            w-10
-            h-10
+            w-8 sm:w-10
+            h-8 sm:h-10
             flex
             items-center
             justify-center
+            !p-2.5
           `}
           title="Next page"
         >
           <FaCaretRight
             className={`
-              w-5
-              h-5
+              w-4
+              h-4
           `}
           />
         </Button>
@@ -209,21 +193,17 @@ const Pagination = ({
           <Button
             onClick={() => onPageChange(totalPages)}
             className={`
-              w-10
-              h-10
+              w-8 sm:w-10
+              h-8 sm:h-10
               flex
               items-center
               justify-center
-              text-xs
+              text-md
+              !p-2.5 md:!p-3
             `}
             title="Last page"
           >
-            <FaAnglesRight
-              className={`
-                w-4
-                h-4
-              `}
-            />
+            <FaAnglesRight className={`w-6 h-6`}/>
           </Button>
         )}
       </div>
