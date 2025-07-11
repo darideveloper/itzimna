@@ -18,6 +18,7 @@ import "@/css/markdown.sass"
 // Data
 import { formatDate } from "@/libs/utils"
 import { getPost } from "@/libs/api/posts"
+import BlogLangModifier from "@/components/utils/BlogLangModifier"
 
 // Share buttons
 export default async function BlogPost({ params }) {
@@ -32,6 +33,13 @@ export default async function BlogPost({ params }) {
   const { idSlug } = await params
   const id = idSlug.split('-')[0]
   const postData = await getPost(id, accessToken, refreshToken, lang)
+
+  // get related post if exists
+  const related_post  = postData?.related_post || null;
+  let new_link = ''
+  if (related_post) {
+    new_link = `${process.env.NEXT_PUBLIC_HOST}/${'es' === lang ? 'en' : 'es'}/blog/${related_post.id}-${related_post.title}` 
+  }
 
   // Redirect to /blog if post not found
   if (!postData) {
@@ -126,6 +134,7 @@ export default async function BlogPost({ params }) {
 
         </div>
       </div>
+      <BlogLangModifier related_post={new_link} />
     </section>
   )
 }
