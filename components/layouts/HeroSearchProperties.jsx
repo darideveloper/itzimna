@@ -28,7 +28,7 @@ export default function HeroSearchProperties({ className = "" }) {
       id={"search-hero"}
       title={title}
       bgImage={bgImage}
-      className={className}
+      className={clsx(className, "!pb-16", "!pt-8")}
     >
       {/* Search filters */}
       <div className={clsx("relative", "z-50")}>

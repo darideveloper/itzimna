@@ -30,7 +30,6 @@ const debounce = (func, delay) => {
  * @returns {JSX.Element} HeroSearch section component
  */
 const HeroSearch = ({ className = "" }) => {
-  
   // Translations and data
   const t = useTranslations("Buscar")
   const title = t("title")
@@ -78,7 +77,7 @@ const HeroSearch = ({ className = "" }) => {
       id={"search-hero"}
       title={title}
       bgImage={bgImage}
-      className={className}
+      className={clsx(className)}
     >
       <div
         className={clsx("relative", "z-50", "mb-16", "max-w-4xl", "mx-auto")}
