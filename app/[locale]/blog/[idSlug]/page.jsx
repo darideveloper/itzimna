@@ -1,6 +1,5 @@
 //libs
 import Image from "next/image"
-import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
@@ -25,14 +24,12 @@ export default async function BlogPost({ params }) {
 
   // Get cookies
   const cookieStore = await cookies()
-  const accessToken = cookieStore.get('accessToken')?.value || ''
-  const refreshToken = cookieStore.get('refreshToken')?.value || ''
   const lang = cookieStore.get("NEXT_LOCALE")?.value || 'es'
 
   // Get post data
   const { idSlug } = await params
   const id = idSlug.split('-')[0]
-  const postData = await getPost(id, accessToken, refreshToken, lang)
+  const postData = await getPost(id, lang)
 
   // get related post if exists
   const related_post  = postData?.related_post || null;

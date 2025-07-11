@@ -1,17 +1,7 @@
-import { fetchJWT } from "@/libs/jwt"
-import { cookies } from "next/headers"
+import { fetchAuth } from "@/libs/jwt"
 
 export async function GET(request) {
-  const cookieStore = await cookies()
-  let accessToken = cookieStore.get("accessToken")?.value || ""
-  let refreshToken = cookieStore.get("refreshToken")?.value || ""
-  let lang = request.cookies.get("NEXT_LOCALE")?.value || ""
-
-  // Get data from headers if not exist
-  if (!accessToken || !refreshToken) {
-    accessToken = request.headers.get("accessToken") || ""
-    refreshToken = request.headers.get("refreshToken") || ""
-  }
+  let lang = request.headers.get("lang") || "es"
 
   if (!lang) {
     lang = request.headers.get("lang") || "es"
@@ -31,13 +21,11 @@ export async function GET(request) {
     endpoint = `posts?${getParams}`
   }
 
-  const apiResponse = await fetchJWT(
+  const apiResponse = await fetchAuth(
     request,
     endpoint,
     "GET",
     null,
-    accessToken,
-    refreshToken,
     lang,
   )
 

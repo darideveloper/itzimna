@@ -26,14 +26,12 @@ import AOSInit from "@/components/utils/AOSInit"
 export default async function PropertyDevelopment({ params }) {
   // Get cookies
   const cookieStore = await cookies()
-  const accessToken = cookieStore.get("accessToken")?.value || ""
-  const refreshToken = cookieStore.get("refreshToken")?.value || ""
   const lang = cookieStore.get("NEXT_LOCALE")?.value || "es"
 
   // Get property data
   const { idSlug } = await params
   const id = idSlug.split("-")[0]
-  const propertyData = await getProperty(id, accessToken, refreshToken, lang)
+  const propertyData = await getProperty(id, lang)
 
   // Redirect to 404 if property not found
   if (!propertyData) {

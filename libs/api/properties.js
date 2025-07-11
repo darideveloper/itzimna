@@ -115,13 +115,11 @@ export async function getPropertiesSummary(locale) {
  * @returns {String} return.propertiesData[].tags[].slug - Property tag slug
  * @returns {Object} return.propertiesData[].related_properties[] - Related properties data
  */
-export async function getProperty(id, accessToken, refreshToken, lang) {
+export async function getProperty(id, lang) {
   
   let endpoint = `${host}/api/properties/?details=true&id=${id}`
   const res = await fetch(endpoint, {
     headers: {
-      'accessToken': accessToken,
-      'refreshToken': refreshToken,
       'lang': lang
     }
   })
