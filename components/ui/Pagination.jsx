@@ -62,7 +62,7 @@ const Pagination = ({
         items-center
         justify-center
         space-x-2
-        !mt-8
+        mt-8
         ${className}
      `}
     >

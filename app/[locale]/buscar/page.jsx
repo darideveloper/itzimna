@@ -75,7 +75,7 @@ const BuscarPage = async (props) => {
       <div
         className={`
           mx-auto
-          py-12
+          pb-12
         `}
       >
         <SearchResults />

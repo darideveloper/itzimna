@@ -42,11 +42,10 @@ const SearchResults = ({ className = "" }) => {
 
   // Handle page change
   const handlePageChange = async (page) => {
-
     // Scroll to top of the page
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     })
 
     await changePage(page)
@@ -60,7 +59,14 @@ const SearchResults = ({ className = "" }) => {
 
   if (loading) {
     return (
-      <div className={clsx("search-results-container", "py-8", "container", className)}>
+      <div
+        className={clsx(
+          "search-results-container",
+          "py-8",
+          "container",
+          className
+        )}
+      >
         <div className={clsx("flex", "flex-col", "gap-4")}>
           {/* Loading skeletons - this looks good than the loading spinner */}
           {[...Array(5)].map((_, index) => (
@@ -129,9 +135,16 @@ const SearchResults = ({ className = "" }) => {
     )
   }
 
-  if (!results || results.length === 0 && !loading) {
+  if (!results || (results.length === 0 && !loading)) {
     return (
-      <div className={clsx("search-results-container", "py-8", "container", className)}>
+      <div
+        className={clsx(
+          "search-results-container",
+          "py-8",
+          "container",
+          className
+        )}
+      >
         <div className={clsx("text-center", "py-12")}>
           <div className={clsx("mb-4")}>
             <span
@@ -166,61 +179,80 @@ const SearchResults = ({ className = "" }) => {
 
   return (
     <>
-    <div className={clsx("search-results-container", "py-8", "container", className)}>
-      {/* Results header */}
-      {query && (
-        <div className={clsx("mb-6")}>
-          <h2
-            className={clsx(
-              "text-xl",
-              "font-semibold",
-              "text-green-dark",
-              "mb-2"
-            )}
-          >
-            Resultados para "{query}"
-          </h2>
-          {totalResults > 0 && (
-            <p className={clsx("text-gray-600", "text-sm")}>
-              Aproximadamente {totalResults.toLocaleString()} resultados
-            </p>
-          )}
-        </div>
+
+      {/* Pagination */}
+      {results.length > 0 && totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          variant="light"
+          className={clsx("!px-0", "!py-0", "!mt-8")}
+        />
       )}
 
-      {/* Results list */}
-      <div className="flex flex-col gap-6">
-        {Array.isArray(results) && results.map((result, index) => {
-          // Skip invalid results
-          if (!result || typeof result !== 'object') {
-            console.warn('Invalid result at index', index, result)
-            return null
-          }
+      <div
+        className={clsx(
+          "search-results-container",
+          "!py-8",
+          "container",
+          className
+        )}
+      >
+        {/* Results header */}
+        {query && (
+          <div className={clsx("mb-6")}>
+            <h2
+              className={clsx(
+                "text-xl",
+                "font-semibold",
+                "text-green-dark",
+                "mb-2"
+              )}
+            >
+              Resultados para "{query}"
+            </h2>
+            {totalResults > 0 && (
+              <p className={clsx("text-gray-600", "text-sm")}>
+                Aproximadamente {totalResults.toLocaleString()} resultados
+              </p>
+            )}
+          </div>
+        )}
 
-          return (
-            <SearchResult
-              key={index}
-              id={result.id}
-              image={result.image}
-              title={result.title}
-              description={result.description}
-              type={result.type}
-            />
-          )
-        })}
+        {/* Results list */}
+        <div className="flex flex-col gap-6">
+          {Array.isArray(results) &&
+            results.map((result, index) => {
+              // Skip invalid results
+              if (!result || typeof result !== "object") {
+                console.warn("Invalid result at index", index, result)
+                return null
+              }
+
+              return (
+                <SearchResult
+                  key={index}
+                  id={result.id}
+                  image={result.image}
+                  title={result.title}
+                  description={result.description}
+                  type={result.type}
+                />
+              )
+            })}
+        </div>
       </div>
-
-    </div>
-    {/* Pagination */}
-    {results.length > 0 && totalPages > 1 && (
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-        variant="light"
-        className={clsx("mt-4", "!px-0", "!py-0")}
-      />
-    )}
+      {/* Pagination */}
+      {results.length > 0 && totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          variant="light"
+          className={clsx("!px-0", "!py-0", "!mt-0")}
+        />
+      )}
     </>
   )
 }
