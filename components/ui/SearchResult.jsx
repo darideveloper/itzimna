@@ -1,10 +1,10 @@
 // Components
-import Image from "next/image"
 import Link from "next/link"
 
 // Libs
 import { fontTitle } from "@/libs/fonts"
 import { clsx } from "clsx"
+import { marked } from "marked"
 
 /**
  * SearchResult component that mimics YouTube search result layout
@@ -88,7 +88,7 @@ const SearchResult = ({
           </h3>
 
           {/* Description */}
-          <p
+          <div
             className={clsx(
               "text-green-dark",
               "text-sm",
@@ -96,9 +96,8 @@ const SearchResult = ({
               "leading-relaxed",
               "mb-4"
             )}
-          >
-            {description}
-          </p>
+            dangerouslySetInnerHTML={{ __html: marked.parse(description) }}
+          />
         </div>
 
         {/* View Details Button */}

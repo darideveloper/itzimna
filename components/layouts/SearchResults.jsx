@@ -3,7 +3,7 @@
 // Components
 import SearchResult from "../ui/SearchResult"
 import Pagination from "../ui/Pagination"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useGlobalSearchStore } from "@/store/globalsearch"
 
 // Icons
