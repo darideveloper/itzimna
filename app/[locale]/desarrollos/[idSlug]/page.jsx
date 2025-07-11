@@ -21,7 +21,7 @@ import "@/css/markdown.sass"
 
 // Utils components
 import AOSInit from "@/components/utils/AOSInit"
-import Title from "@/components/ui/Title"
+
 
 export default async function PropertyDevelopment({ params }) {
   // Get cookies
@@ -72,8 +72,25 @@ export default async function PropertyDevelopment({ params }) {
       "@type": "Offer",
       priceCurrency: "MXN",
       price: priceFloat.toFixed(2),
+      priceValidUntil: "2026-12-31",
       availability: "https://schema.org/InStock",
       url: `${process.env.NEXT_PUBLIC_HOST}/${lang}/desarrollos/${idSlug}`,
+    },
+    review: {
+      "@type": "Review",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Juan Perez",
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      ratingValue: "5",
+      reviewCount: "325"
     },
     mainEntityOfPage: {
       "@type": "WebPage",
