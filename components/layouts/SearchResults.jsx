@@ -122,7 +122,7 @@ const SearchResults = ({ className = "" }) => {
     )
   }
 
-  if (results.length === 0 && !loading) {
+  if (!results || results.length === 0 && !loading) {
     return (
       <div className={clsx("search-results-container", "py-8", className)}>
         <div className={clsx("text-center", "py-12")}>
@@ -181,17 +181,25 @@ const SearchResults = ({ className = "" }) => {
       )}
 
       {/* Results list */}
-      <div className={clsx("flex", "flex-col", "gap-6")}>
-        {results.map((result, index) => (
-          <SearchResult
-            key={result.id || index}
-            id={result.id}
-            image={result.image}
-            title={result.title}
-            description={result.description}
-            type={result.type}
-          />
-        ))}
+      <div className="flex flex-col gap-6">
+        {Array.isArray(results) && results.map((result, index) => {
+          // Skip invalid results
+          if (!result || typeof result !== 'object') {
+            console.warn('Invalid result at index', index, result)
+            return null
+          }
+
+          return (
+            <SearchResult
+              key={result.id || index}
+              id={result.id}
+              image={result.image}
+              title={result.title}
+              description={result.description}
+              type={result.type}
+            />
+          )
+        })}
       </div>
 
       {/* Pagination */}
