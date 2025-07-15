@@ -59,14 +59,7 @@ const SearchResults = ({ className = "" }) => {
 
   if (loading) {
     return (
-      <div
-        className={clsx(
-          "search-results-container",
-          "py-8",
-          "container",
-          className
-        )}
-      >
+      <div className={clsx("py-8", "container")}>
         <div className={clsx("flex", "flex-col", "gap-4")}>
           {/* Loading skeletons - this looks good than the loading spinner */}
           {[...Array(5)].map((_, index) => (
@@ -82,7 +75,7 @@ const SearchResults = ({ className = "" }) => {
                 "rounded-lg",
                 "border",
                 "border-grey",
-                "animate-pulse"
+                "animate-pulse",
               )}
             >
               {/* Thumbnail skeleton */}
@@ -94,7 +87,7 @@ const SearchResults = ({ className = "" }) => {
                     "h-48",
                     "md:h-45",
                     "bg-grey",
-                    "rounded-lg"
+                    "rounded-lg",
                   )}
                 />
               </div>
@@ -137,14 +130,7 @@ const SearchResults = ({ className = "" }) => {
 
   if (!results || (results.length === 0 && !loading)) {
     return (
-      <div
-        className={clsx(
-          "search-results-container",
-          "py-8",
-          "container",
-          className
-        )}
-      >
+      <div>
         <div className={clsx("text-center", "py-12")}>
           <div className={clsx("mb-4")}>
             <span
@@ -154,7 +140,7 @@ const SearchResults = ({ className = "" }) => {
                 "h-full",
                 "flex",
                 "items-center",
-                "justify-center"
+                "justify-center",
               )}
             >
               <FaSearch className={clsx("text-green", "text-6xl")} />
@@ -169,8 +155,8 @@ const SearchResults = ({ className = "" }) => {
             {error
               ? error
               : query
-              ? `No hay resultados para "${query}"`
-              : "Realiza una búsqueda para ver resultados"}
+                ? `No hay resultados para "${query}"`
+                : "Realiza una búsqueda para ver resultados"}
           </p>
         </div>
       </div>
@@ -178,8 +164,14 @@ const SearchResults = ({ className = "" }) => {
   }
 
   return (
-    <>
-
+    <section
+      className={clsx(
+        "search-results-container",
+        "py-8",
+        "container",
+        className,
+      )}
+    >
       {/* Pagination */}
       {results.length > 0 && totalPages > 1 && (
         <Pagination
@@ -191,14 +183,7 @@ const SearchResults = ({ className = "" }) => {
         />
       )}
 
-      <div
-        className={clsx(
-          "search-results-container",
-          "!py-8",
-          "container",
-          className
-        )}
-      >
+      <div>
         {/* Results header */}
         {query && (
           <div className={clsx("mb-6")}>
@@ -207,7 +192,7 @@ const SearchResults = ({ className = "" }) => {
                 "text-xl",
                 "font-semibold",
                 "text-green-dark",
-                "mb-2"
+                "mb-2",
               )}
             >
               Resultados para "{query}"
@@ -221,7 +206,7 @@ const SearchResults = ({ className = "" }) => {
         )}
 
         {/* Results list */}
-        <div className="flex flex-col gap-6">
+        <div className={clsx("flex", "flex-col", "gap-6")}>
           {Array.isArray(results) &&
             results.map((result, index) => {
               // Skip invalid results
@@ -253,7 +238,7 @@ const SearchResults = ({ className = "" }) => {
           className={clsx("!px-0", "!py-0", "!mt-0")}
         />
       )}
-    </>
+    </section>
   )
 }
 
