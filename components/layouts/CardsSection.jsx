@@ -143,30 +143,31 @@ export default function CardsSection({
           ))}
         </div>
 
-        {!isLoading &&
-          (propertiesData.length === 0 ? (
-            <Title className="text-center text-white">
-              {t("noPropertiesFound")}
-            </Title>
-          ) : (
-            <Pagination
-              currentPage={page}
-              totalPages={totalPages}
-              onPageChange={(newPage) => {
-                // Update states
-                setPage(newPage)
+        {!isLoading && propertiesData.length === 0 && (
+          <Title className="text-center text-white">
+            {t("noPropertiesFound")}
+          </Title>
+        )}
 
-                // Move to top of the section
-                setTimeout(() => {
-                  document
-                    .querySelector(`#${id}`)
-                    .scrollIntoView({ behavior: "smooth" })
-                }, 500)
-              }}
-              className="mt-6"
-              variant={variant}
-            />
-          ))}
+        {!isLoading && propertiesData.length > 0 && totalPages > 1 && (
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={(newPage) => {
+              // Update states
+              setPage(newPage)
+
+              // Move to top of the section
+              setTimeout(() => {
+                document
+                  .querySelector(`#${id}`)
+                  .scrollIntoView({ behavior: "smooth" })
+              }, 500)
+            }}
+            className="mt-6"
+            variant={variant}
+          />
+        )}
       </div>
     </section>
   )
