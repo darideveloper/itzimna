@@ -34,12 +34,12 @@ export default function Footer() {
     },
     {
       name: "Instagram",
-      url: "https://www.instagram.com/itzimnarealestatemid",
+      url: "https://www.instagram.com/itzimnarealestatemid/",
       icon: <FaInstagram />,
     },
     {
       name: "TikTok",
-      url: "https://www.tiktok.com/@itzimnarealestate",
+      url: "https://www.instagram.com/itzimnarealestatemid/",
       icon: <FaTiktok />,
     },
   ]
