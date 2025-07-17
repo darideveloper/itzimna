@@ -131,7 +131,7 @@ const SearchResults = ({ className = "" }) => {
   if (!results || (results.length === 0 && !loading)) {
     return (
       <div>
-        <div className={clsx("text-center", "py-12")}>
+        <div className={clsx("text-center", "pt-12")}>
           <div className={clsx("mb-4")}>
             <span
               className={clsx(
