@@ -190,7 +190,7 @@ const SearchResults = ({ className = "" }) => {
       <div>
         {/* Results header */}
         {query && (
-          <div className={clsx("mb-6")}>
+          <div className={clsx("my-6")}>
             <h2
               className={clsx(
                 "text-xl",

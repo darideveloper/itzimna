@@ -4,7 +4,7 @@
 import Hero from "./templates/Hero"
 
 // Libs
-import { useState, useRef, useCallback } from "react"
+import { useState, useRef, useCallback, useEffect } from "react"
 import { useGlobalSearchStore } from "@/store/globalsearch"
 import { clsx } from "clsx"
 import { useTranslations } from "next-intl"
@@ -29,7 +29,7 @@ const debounce = (func, delay) => {
  * @param {string} props.className - Component classes
  * @returns {JSX.Element} HeroSearch section component
  */
-const HeroSearch = ({ className = "" }) => {
+const HeroSearch = ({ className = "", locale = "es" }) => {
   // Translations and data
   const t = useTranslations("Buscar")
   const title = t("title")
@@ -37,7 +37,7 @@ const HeroSearch = ({ className = "" }) => {
   const bgImage = "/images/hero-buscar.webp"
 
   // Global search store
-  const { searchProperties } = useGlobalSearchStore()
+  const { searchProperties, setLocale } = useGlobalSearchStore()
 
   // Local states
   const [localSearchTerm, setLocalSearchTerm] = useState("")
@@ -71,6 +71,11 @@ const HeroSearch = ({ className = "" }) => {
     setLocalSearchTerm("")
     inputRef.current.focus()
   }
+
+  // Set locale to zustand when load
+  useEffect(() => {
+    setLocale(locale)
+  }, [locale])
 
   return (
     <Hero

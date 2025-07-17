@@ -21,6 +21,8 @@ export const useGlobalSearchStore = create((set, get) => ({
   setLoading: (loading) => set({ loading }),
   
   setError: (error) => set({ error }),
+
+  setLocale: (locale) => set({ locale }),
   
   // Main search function
   searchProperties: async (searchQuery, page = 1) => {
@@ -31,7 +33,7 @@ export const useGlobalSearchStore = create((set, get) => ({
     
     try {
       // Call global search API
-      const response = await globalSearchAPI(searchQuery, page, 6)
+      const response = await globalSearchAPI(searchQuery, page, state.locale)
       
       // Calculate pagination info from response
       const totalResults = response.count

@@ -69,6 +69,7 @@ const BuscarPage = async (props) => {
           !pb-16
           !pt-16
         `}
+        locale={locale}
       />
 
       {/* Search Results Section */}

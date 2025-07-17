@@ -39,3 +39,34 @@ export const globalSearchAPI = async (query = "", page = 1, locale = "es") => {
     throw error
   }
 }
+
+export async function getSearchResults(locale, page = 1, query = "") {
+  try {
+    const baseUrl = '/api/search'
+    const params = new URLSearchParams()
+    
+    if (query.trim()) {
+      params.append('q', query.trim())
+    }
+
+    const url = `${baseUrl}?page=${page}&${params.toString()}`
+    console.log(url)
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'lang': locale
+      }, 
+    })
+
+    const resultsData = await response.json()
+
+    const pages = await Math.ceil(resultsData.count / 8)
+
+    return {resultsData, pages}
+  } catch (error) {
+    console.error('Search API error:', error)
+    throw error
+  }
+}
