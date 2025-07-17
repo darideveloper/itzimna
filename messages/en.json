@@ -138,5 +138,13 @@
   },
   "SearchProperties": {
     "title": "Search Developments in Yucatán"
+  },
+  "SearchResults": {
+    "errorTitle": "Search Error",
+    "noResultsTitle": "No results found",
+    "noResultsForQuery": "No results for \"{query}\"",
+    "performSearch": "Perform a search to see results",
+    "resultsForQuery": "Results for \"{query}\"",
+    "approximatelyResults": "Approximately {count} results"
   }
 }

@@ -138,5 +138,13 @@
   },
   "SearchProperties": {
     "title": "Buscar Desarrollos en Yucatán"
+  },
+  "SearchResults": {
+    "errorTitle": "Error de búsqueda",
+    "noResultsTitle": "No se encontraron resultados",
+    "noResultsForQuery": "No hay resultados para \"{query}\"",
+    "performSearch": "Realiza una búsqueda para ver resultados",
+    "resultsForQuery": "Resultados para \"{query}\"",
+    "approximatelyResults": "Aproximadamente {count} resultados"
   }
 }

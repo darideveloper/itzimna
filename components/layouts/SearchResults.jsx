@@ -11,6 +11,7 @@ import { FaSearch } from "react-icons/fa"
 
 // Libs
 import { clsx } from "clsx"
+import { useTranslations } from "next-intl"
 
 /**
  * SearchResults container component that displays multiple search results
@@ -20,6 +21,9 @@ import { clsx } from "clsx"
  * @returns {JSX.Element} SearchResults component
  */
 const SearchResults = ({ className = "" }) => {
+  // Translations
+  const t = useTranslations("SearchResults")
+  
   // Global search store
   const {
     results,
@@ -149,14 +153,14 @@ const SearchResults = ({ className = "" }) => {
           <h3
             className={clsx("text-lg", "font-medium", "text-gray-900", "mb-2")}
           >
-            {error ? "Error de búsqueda" : "No se encontraron resultados"}
+            {error ? t("errorTitle") : t("noResultsTitle")}
           </h3>
           <p className={clsx("text-gray-500")}>
             {error
               ? error
               : query
-                ? `No hay resultados para "${query}"`
-                : "Realiza una búsqueda para ver resultados"}
+                ? t("noResultsForQuery", { query })
+                : t("performSearch")}
           </p>
         </div>
       </div>
@@ -195,11 +199,11 @@ const SearchResults = ({ className = "" }) => {
                 "mb-2",
               )}
             >
-              Resultados para "{query}"
+              {t("resultsForQuery", { query })}
             </h2>
             {totalResults > 0 && (
               <p className={clsx("text-gray-600", "text-sm")}>
-                Aproximadamente {totalResults.toLocaleString()} resultados
+                {t("approximatelyResults", { count: totalResults.toLocaleString() })}
               </p>
             )}
           </div>
