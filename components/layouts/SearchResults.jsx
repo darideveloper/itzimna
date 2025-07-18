@@ -11,7 +11,7 @@ import { FaSearch } from "react-icons/fa"
 
 // Libs
 import { clsx } from "clsx"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 
 /**
  * SearchResults container component that displays multiple search results
@@ -24,6 +24,9 @@ const SearchResults = ({ className = "" }) => {
   // Translations
   const t = useTranslations("SearchResults")
   
+  // Get current locale
+  const locale = useLocale()
+  
   // Global search store
   const {
     results,
@@ -34,7 +37,9 @@ const SearchResults = ({ className = "" }) => {
     totalPages,
     changePage,
     loadDefaultResults,
+    searchProperties,
     error,
+    setLocale,
   } = useGlobalSearchStore()
 
   // Load default results on component mount
@@ -43,6 +48,19 @@ const SearchResults = ({ className = "" }) => {
       loadDefaultResults()
     }
   }, [])
+
+  // Update locale in store and reload results when locale changes
+  useEffect(() => {
+    setLocale(locale)
+    // Reload results with new locale
+    if (query) {
+      // If there's an active search query, reload with that query
+      searchProperties(query, currentPage)
+    } else {
+      // If no query, load default results
+      loadDefaultResults()
+    }
+  }, [locale, setLocale, query, searchProperties, loadDefaultResults, currentPage])
 
   // Handle page change
   const handlePageChange = async (page) => {
