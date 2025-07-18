@@ -39,7 +39,7 @@ export default function Footer() {
     },
     {
       name: "TikTok",
-      url: "https://www.instagram.com/itzimnarealestatemid/",
+      url: "https://www.tiktok.com/@itzimnarealestate",
       icon: <FaTiktok />,
     },
   ]
