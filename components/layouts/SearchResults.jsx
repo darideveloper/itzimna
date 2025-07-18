@@ -60,7 +60,7 @@ const SearchResults = ({ className = "" }) => {
       // If no query, load default results
       loadDefaultResults()
     }
-  }, [locale, setLocale, query, searchProperties, loadDefaultResults, currentPage])
+  }, [locale, setLocale, query, searchProperties, loadDefaultResults])
 
   // Handle page change
   const handlePageChange = async (page) => {

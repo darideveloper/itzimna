@@ -28,6 +28,8 @@ export const useGlobalSearchStore = create((set, get) => ({
   searchProperties: async (searchQuery, page = 1) => {
     const state = get()
     
+    console.log('searchProperties called with:', { searchQuery, page, locale: state.locale })
+    
     // Set loading state
     set({ loading: true, error: null })
     
@@ -35,11 +37,16 @@ export const useGlobalSearchStore = create((set, get) => ({
       // Call global search API
       const response = await globalSearchAPI(searchQuery, page, state.locale)
       
+      console.log('API response:', response)
+      
       // Calculate pagination info from response
-      const totalResults = response.count
-      const totalPages = Math.ceil(totalResults / 8) // 8 results per page
+      const totalResults = response.count || 0
+      // Use API pagination info if available, otherwise calculate
+      const totalPages = response.total_pages || Math.ceil(totalResults / 8) // 8 results per page
       const hasNextPage = response.next !== null
       const hasPrevPage = response.previous !== null
+      
+      console.log('Calculated pagination:', { totalResults, totalPages, hasNextPage, hasPrevPage })
       
       // Update state with results
       set({
@@ -70,8 +77,25 @@ export const useGlobalSearchStore = create((set, get) => ({
   changePage: async (page) => {
     const state = get()
     
-    if (page < 1 || page > state.totalPages) return
+    console.log('changePage called with:', page)
+    console.log('Current state:', { 
+      query: state.query, 
+      currentPage: state.currentPage, 
+      totalPages: state.totalPages 
+    })
     
+    // Validate page number
+    if (page < 1) {
+      console.log('Page number too low:', page)
+      return
+    }
+    if (state.totalPages > 0 && page > state.totalPages) {
+      console.log('Page number too high:', page, 'max:', state.totalPages)
+      return
+    }
+    
+    // Call searchProperties with current query and new page
+    console.log('Calling searchProperties with:', state.query, page)
     await state.searchProperties(state.query, page)
   },
   
