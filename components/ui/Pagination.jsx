@@ -30,15 +30,15 @@ const Pagination = ({
     const rangeWithDots = [];
 
     // Calculate start and end of the visible range
-    let start = Math.max(2, currentPage - delta);
-    let end = Math.min(totalPages - 1, currentPage + delta);
+    let start = Math.max(1, currentPage - delta);
+    let end = Math.min(totalPages, currentPage + delta);
 
     // Adjust range if we're near the beginning or end
-    if (currentPage - delta <= 2) {
-      end = Math.min(totalPages - 1, 5);
+    if (currentPage - delta <= 1) {
+      end = Math.min(totalPages, 5);
     }
-    if (currentPage + delta >= totalPages - 1) {
-      start = Math.max(2, totalPages - 4);
+    if (currentPage + delta >= totalPages) {
+      start = Math.max(1, totalPages - 4);
     }
 
     // Build the range
