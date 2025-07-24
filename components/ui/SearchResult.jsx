@@ -17,6 +17,7 @@ import { useTranslations } from "next-intl"
  * @param {string} props.image - Result image URL
  * @param {string} props.title - Result title
  * @param {string} props.description - Result description (2 lines max)
+ * @param {string} props.extra - Result extra
  * @param {string} props.className - Additional CSS classes
  * @param {string} props.type - Result type ("post" or "property")
  * @returns {JSX.Element} SearchResult component
@@ -27,6 +28,7 @@ const SearchResult = ({
   title,
   description,
   type,
+  extra,
   className = "",
 }) => {
 

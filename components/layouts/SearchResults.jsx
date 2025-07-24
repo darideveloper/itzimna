@@ -245,6 +245,7 @@ const SearchResults = ({ className = "" }) => {
                   title={result.title}
                   description={result.description}
                   type={result.type}
+                  extra={result.extra}
                 />
               )
             })}
