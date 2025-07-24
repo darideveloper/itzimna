@@ -160,6 +160,7 @@ export default async function PropertyDevelopment({ params }) {
           -z-20
         `}
         alt="bg image"
+        title="bg image"
       />
 
       {/* overlay */}

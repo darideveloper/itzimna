@@ -47,7 +47,8 @@ export default function NotFound() {
             >
               <img
                 src="/images/logo.webp"
-                alt="c4 logo"
+                alt="itzimna logo"
+                title="itzimna logo"
                 className={`
                   w-10/12
                   duration-300

@@ -68,6 +68,7 @@ export default function Post({
           <Image
             src={coverImage || "/images/test.svg"}
             alt={title}
+            title={title}
             fill
             className={`
               object-cover

@@ -81,6 +81,7 @@ export default function PropertyCard({
             <Image
               src={imageSrc || "/images/test.svg"}
               alt={name}
+              title={name}
               fill
               className={`
               object-cover

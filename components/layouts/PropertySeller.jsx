@@ -72,6 +72,7 @@ export default function PropertySeller({
         <Image
           src={profileImage}
           alt={t('phofileImageAlt') + " " + name}
+          title={t('phofileImageAlt') + " " + name}
           width="100"
           height="100"
           className={`

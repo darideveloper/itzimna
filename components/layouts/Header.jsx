@@ -165,6 +165,7 @@ const Header = () => {
             <Image
               src="/images/logo.webp"
               alt={"Logo " + tMeta("title")}
+              title={"Logo " + tMeta("title")}
               width={60}
               height={60}
               className={`

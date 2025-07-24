@@ -56,6 +56,7 @@ export default function Spinner({ isLoading, className, transparentModal = false
       <Image
         src="/favicon.ico"
         alt="Spinner"
+        title="Spinner"
         width={100}
         height={100}
         className={`

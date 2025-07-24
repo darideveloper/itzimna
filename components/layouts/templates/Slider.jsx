@@ -77,7 +77,7 @@ export default function Slider({
       {/* Modal for zoom images */}
       <ModalImage
         image={modalImage}
-        alt={"test alt"}
+        alt={"Modal image"}
         hide={() => setModalImage(null)}
         setLoading={setModalLoading}
       />

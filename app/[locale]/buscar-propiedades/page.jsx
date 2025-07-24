@@ -93,6 +93,7 @@ const PropertySearch = async (props) => {
           object-cover
         `}
         alt="bg image"
+        title="bg image"
       />
 
       <div

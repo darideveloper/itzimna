@@ -88,6 +88,7 @@ export default function Footer() {
             <Image
               src="/images/logo.webp"
               alt={tMeta("title")}
+              title={tMeta("title")}
               width={280}
               height={90}
               className={`

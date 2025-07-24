@@ -95,6 +95,7 @@ export default function LangSelector({ className }) {
               <Image
                 src={`/images/flags/${lang}.webp`}
                 alt={t(lang)}
+                title={t(lang)}
                 fill
                 className={`
                   object-cover

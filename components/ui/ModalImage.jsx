@@ -125,6 +125,7 @@ export default function ModalImage({ image, alt, hide, setLoading }) {
           <Image
             src={currentImage}
             alt={alt}
+            title={alt}
             width={1200}
             height={800}
             loading="lazy"

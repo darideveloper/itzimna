@@ -105,6 +105,7 @@ export default async function BlogPost({ params }) {
           width={1500}
           height={1500}
           alt={postData.title}
+          title={postData.title}
           className="w-full h-auto"
         />
       </div>
