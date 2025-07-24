@@ -35,7 +35,12 @@ export default async function BlogPost({ params }) {
   const related_post = postData?.related_post || null
   let new_link = ""
   if (related_post) {
-    new_link = `${process.env.NEXT_PUBLIC_HOST}/${"es" === lang ? "en" : "es"}/blog/${related_post.id}-${related_post.title?.split(" ")?.join("-")?.toLowerCase()}`
+    new_link = `${process.env.NEXT_PUBLIC_HOST}/${
+      "es" === lang ? "en" : "es"
+    }/blog/${related_post.id}-${related_post.title
+      ?.split(" ")
+      ?.join("-")
+      ?.toLowerCase()}`
     console.log(new_link)
   }
 
@@ -94,7 +99,9 @@ export default async function BlogPost({ params }) {
           hidden md:block
         `}
         style={{
-          backgroundImage: `url(${postData.banner_image_url || "/images/test.svg"})`,
+          backgroundImage: `url(${
+            postData.banner_image_url || "/images/test.svg"
+          })`,
         }}
       />
 
@@ -105,7 +112,6 @@ export default async function BlogPost({ params }) {
           width={1500}
           height={1500}
           alt={postData.title}
-          title={postData.title}
           className="w-full h-auto"
         />
       </div>
@@ -167,7 +173,9 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: postData.title,
+    title: {
+      absolute: postData.title,
+    },
     description: postData.description,
     locale: postData.lang,
     keywords: postData.keywords,
