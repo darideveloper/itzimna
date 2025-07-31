@@ -1,9 +1,7 @@
 // app/sitemap.xml/route.js
 import { getPropertiesSummary } from '@/libs/api/properties'
-import { pricesOptions, sizesOptions } from "@/data/filters"
 import { getLocations } from "@/libs/api/locations"
 import { getPosts } from '@/libs/api/posts'
-import { slugify } from '@/libs/utils'
 import { getServerSideSitemap } from 'next-sitemap'
 
 const siteUrl = process.env.NEXT_PUBLIC_HOST
@@ -111,7 +109,7 @@ export async function GET() {
     // Blog posts
     for (const post of posts) {
       sitemapEntries.push({
-        loc: escapeXml(`${siteUrl}/${lang}/blog/${post.id}-${slugify(post.title)}`),
+        loc: escapeXml(`${siteUrl}/${lang}/blog/${post.id}-${post.slug}`),
         lastmod: new Date(post.updated_at).toISOString(),
         changefreq: 'weekly',
         priority: 0.7,
