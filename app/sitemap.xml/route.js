@@ -106,6 +106,14 @@ export async function GET() {
     //   });
     // }
 
+    // Blog home page
+    sitemapEntries.push({
+      loc: escapeXml(`${siteUrl}/${lang}/blog`),
+      lastmod: new Date().toISOString(),
+      changefreq: 'weekly',
+      priority: 0.7,
+    })
+
     // Blog posts
     for (const post of posts) {
       sitemapEntries.push({
