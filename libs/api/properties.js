@@ -114,6 +114,8 @@ export async function getPropertiesSummary(locale) {
  * @returns {String} return.propertiesData[].tags[].id - Property tag id
  * @returns {String} return.propertiesData[].tags[].slug - Property tag slug
  * @returns {Object} return.propertiesData[].related_properties[] - Related properties data
+ * @returns {String} return.propertiesData[].review_name - Review name
+ * @returns {Number} return.propertiesData[].review_rating - Review rating
  */
 export async function getProperty(id, lang) {
   

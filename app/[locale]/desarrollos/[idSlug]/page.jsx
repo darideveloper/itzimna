@@ -77,17 +77,17 @@ export default async function PropertyDevelopment({ params }) {
       "@type": "Review",
       reviewRating: {
         "@type": "Rating",
-        ratingValue: "5",
+        ratingValue: propertyData.review_rating || 5,
       },
       "author": {
         "@type": "Person",
-        "name": "Juan Perez",
+        "name": propertyData.review_name || "Juan Perez",
       }
     },
     "aggregateRating": {
       "@type": "AggregateRating",
-      ratingValue: "5",
-      reviewCount: "325"
+      ratingValue: propertyData.review_rating || 5,
+      reviewCount: propertyData.review_count || 325,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
