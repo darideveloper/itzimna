@@ -30,18 +30,13 @@ export default async function BlogPost({ params }) {
   const id = idSlug.split("-")[0]
   const postData = await getPost(id, lang)
 
-  console.log(postData)
   // get related post if exists
   const related_post = postData?.related_post || null
   let new_link = ""
   if (related_post) {
     new_link = `${process.env.NEXT_PUBLIC_HOST}/${
       "es" === lang ? "en" : "es"
-    }/blog/${related_post.id}-${related_post.title
-      ?.split(" ")
-      ?.join("-")
-      ?.toLowerCase()}`
-    console.log(new_link)
+    }/blog/${related_post.id}-${related_post.slug}`
   }
 
   // Redirect to /blog if post not found
