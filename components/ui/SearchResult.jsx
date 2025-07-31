@@ -29,6 +29,7 @@ const SearchResult = ({
   description,
   type,
   extra,
+  slug,
   className = "",
 }) => {
 
@@ -44,14 +45,17 @@ const SearchResult = ({
   const typesUrls = {
     post: "blog",
     property: "desarrollos",
+    link: "link",
   }
 
   // Fallback for unknown types
   const urlType = typesUrls[type] || 'desarrollos'
   
   // Safe URL generation
-  const safeTitleForUrl = (title || '').toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-')
-  const href = `./${urlType}/${id}-${safeTitleForUrl}`
+  let href = `./${urlType}/${id}-${slug}`
+  if (urlType === "link") {
+    href = slug
+  }
 
   // Safe fallback values
   const safeImage = image || "/images/home-banner.jpg"
