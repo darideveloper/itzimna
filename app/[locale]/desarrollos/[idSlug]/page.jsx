@@ -39,7 +39,6 @@ export default async function PropertyDevelopment({ params }) {
   }
 
   // Translate from server side
-  const tMeta = await getTranslations({ locale: lang, namespace: "Meta" })
   const t = await getTranslations({
     locale: lang,
     namespace: "PropertyDevelopment",
