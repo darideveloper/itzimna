@@ -8,16 +8,16 @@ import Link from "next/link"
 import { useTranslations } from "next-intl"
 import clsx from "clsx"
 
+// Data
+import { whatsappBaseLink } from "@/data/contact"
+
 
 export default function WhatsappButton() {
-
-  // Fixed data
-  const phone = '5219993019999'
 
   // Translate
   const t = useTranslations("General.contact")
   const whatsappMessage = t("whatsappMessage")
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(whatsappMessage)}`
+  const whatsappUrl = `${whatsappBaseLink}&text=${encodeURIComponent(whatsappMessage)}`
 
   return (
     <Link

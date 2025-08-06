@@ -14,6 +14,8 @@ import Contact from "@/components/layouts/Contact"
 
 // Data
 import { navLinks } from "@/data/links"
+import { whatsappBaseLinkDariDev } from "@/data/contact"
+
 
 export default function Footer() {
   // Translate
@@ -186,7 +188,7 @@ export default function Footer() {
               {tFooter("copy")}
               &nbsp; | Powered by&nbsp;
               <Link
-                href="https://api.whatsapp.com/send?phone=5214493402622"
+                href={whatsappBaseLinkDariDev}
                 target="_blank"
                 className={`
                   creator-link
