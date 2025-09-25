@@ -7,7 +7,6 @@ import remarkGfm from "remark-gfm"
 
 // ui elements
 import Title from "@/components/ui/Title"
-import Subtitle from "@/components/ui/Subtitle"
 import ReactMarkdown from "react-markdown"
 import ShareButtons from "@/components/ui/ShareButtons"
 
@@ -27,8 +26,8 @@ export default async function BlogPost({ params }) {
 
   // Get post data
   const { idSlug } = await params
-  const id = idSlug.split("-")[0]
-  const postData = await getPost(id, lang)
+  const slug = idSlug // use only slug instead of id
+  const postData = await getPost(slug, lang)
 
   // get related post if exists
   const related_post = postData?.related_post || null
@@ -36,7 +35,7 @@ export default async function BlogPost({ params }) {
   if (related_post) {
     new_link = `${process.env.NEXT_PUBLIC_HOST}/${
       "es" === lang ? "en" : "es"
-    }/blog/${related_post.id}-${related_post.slug}`
+    }/blog/${related_post.slug}`
   }
 
   // Redirect to /blog if post not found
@@ -142,8 +141,8 @@ export async function generateMetadata({ params }) {
   const t = await getTranslations({ locale, namespace: "Meta" })
 
   // Get post data
-  const id = idSlug.split("-")[0]
-  let postData = await getPost(id, "", "", locale)
+  const slug = idSlug // use only slug instead of id
+  let postData = await getPost(slug, "", "", locale)
 
   // Default post data
   if (!postData) {

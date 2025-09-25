@@ -16,10 +16,10 @@ export async function getPosts(lang) {
   return posts
 }
 
-export async function getPost(id, lang) {
+export async function getPost(slug, lang) {
 
   // Get data from API
-  const res = await fetch(`${host}/api/blog/?id=${id}&details=true`, {
+  const res = await fetch(`${host}/api/blog/?slug=${slug}&details=true`, {
     headers: {
       'lang': lang
     }

@@ -117,7 +117,7 @@ export async function GET() {
     // Blog posts
     for (const post of posts) {
       sitemapEntries.push({
-        loc: escapeXml(`${siteUrl}/${lang}/blog/${post.id}-${post.slug}`),
+        loc: escapeXml(`${siteUrl}/${lang}/blog/${post.slug}`),
         lastmod: new Date(post.updated_at).toISOString(),
         changefreq: 'weekly',
         priority: 0.7,

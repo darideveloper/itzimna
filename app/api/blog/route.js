@@ -11,14 +11,14 @@ export async function GET(request) {
   const getParams = new URLSearchParams(request.url.split('?')[1])
 
   // Get id from params and remove it from the params
-  const id = getParams.get('id', null)
-  getParams.delete('id')
+  const slug = getParams.get('slug', null)
+  getParams.delete('slug')
 
   let endpoint
-  if (id) {
-    endpoint = `posts/${id}?${getParams}`
+  if (slug) {
+    endpoint = `posts/${slug}?${getParams}`
   } else {
-    endpoint = `posts?${getParams}`
+    endpoint = `posts/?${getParams}`
   }
 
   const apiResponse = await fetchAuth(

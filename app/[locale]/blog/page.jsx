@@ -26,7 +26,7 @@ export default async function BlogPage() {
       "@type": "ListItem",
       position: breadcrumb.length + 1,
       name: postData.title,
-      item: `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/${postData.id}-${postData.slug}`,
+      item: `${process.env.NEXT_PUBLIC_HOST}/${locale}/blog/${postData.slug}`,
     })
   }
 
@@ -105,7 +105,7 @@ export default async function BlogPage() {
           }) => (
             <Post
               key={id}
-              slug={`${id}-${slug}`}
+              slug={`${slug}`}
               date={created_at}
               title={title}
               coverImage={banner_image_url}

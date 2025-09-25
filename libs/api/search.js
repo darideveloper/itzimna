@@ -50,7 +50,6 @@ export async function getSearchResults(locale, page = 1, query = "") {
     }
 
     const url = `${baseUrl}?page=${page}&${params.toString()}`
-    console.log(url)
 
     const response = await fetch(url, {
       method: 'GET',
