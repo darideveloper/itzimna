@@ -115,9 +115,9 @@ export default async function BlogPost({ params }) {
         <div>
           <Title isH1={true}>{postData.title}</Title>
 
-          <Subtitle className="text-center text-xl">
+          <p className="text-center text-xl font-bold font-title">
             {formatDate(postData.created_at)} by {postData.author}
-          </Subtitle>
+          </p>
 
           <ShareButtons />
 
