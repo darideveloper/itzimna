@@ -11,47 +11,44 @@ import ContactForm from "@/components/ui/ContactForm"
 // Libs
 import { useTranslations } from "next-intl"
 import { saveLead } from "@/libs/api/leads"
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2"
 
+// Data
+import { phone, phoneFormatted } from "@/data/contact"
 
 const Contact = () => {
-
   // Translations
   const t = useTranslations("Contact")
 
-  // COntactd ata
-  const listOffice = [
-    "Yucatán, México",
-  ]
-  const phone = "(+52) 9999 07 48 76"
+  // Contact data
+  const listOffice = ["Yucatán, México"]
   const email = "admin@itzimna.com"
 
   // Handlers
 
   // Handle form submit (create a new lead with info
   const onSubmit = async (data) => {
-
     const leadSaved = await saveLead(
       data.fullName,
       data.email,
       data.phone,
-      data.message
+      data.message,
     )
 
     // Show alert based in the result
     if (leadSaved) {
       Swal.fire({
-        title: t('alerts.success.title'),
-        text: t('alerts.success.text'),
-        icon: 'success',
-        confirmButtonText: t('alerts.confirm'),
+        title: t("alerts.success.title"),
+        text: t("alerts.success.text"),
+        icon: "success",
+        confirmButtonText: t("alerts.confirm"),
       })
     } else {
       Swal.fire({
-        title: t('alerts.error.title'),
-        text: t('alerts.error.text'),
-        icon: 'error',
-        confirmButtonText: t('alerts.confirm'),
+        title: t("alerts.error.title"),
+        text: t("alerts.error.text"),
+        icon: "error",
+        confirmButtonText: t("alerts.confirm"),
       })
     }
   }
@@ -72,7 +69,6 @@ const Contact = () => {
     `}
       id="contact"
     >
-
       {/* Content container */}
       <div
         className={`
@@ -133,9 +129,7 @@ const Contact = () => {
             `}
           >
             {/* Office section */}
-            <div 
-              className="office"
-            >
+            <div className="office">
               <h3
                 className={`
                 text-xl
@@ -172,9 +166,7 @@ const Contact = () => {
             </div>
 
             {/* Customer service agent */}
-            {/* <div 
-              className="customer-service"
-            >
+            <div className="customer-service">
               <h3
                 className={`
                 text-xl
@@ -185,21 +177,18 @@ const Contact = () => {
                 {t("customer_service")}
               </h3>
               <a
-                href={`tel:${phone.replace(/\D/g, "")}`}
+                href={`tel:+${phone}`}
                 className={`
-                  text-xl
                   text-green-light
                   hover:opacity-80
                 `}
               >
-                {phone}
+                {phoneFormatted}
               </a>
-            </div> */}
+            </div>
 
             {/* Email */}
-            <div 
-              className="email"
-            >
+            <div className="email">
               <h3
                 className={`
                   text-xl
@@ -220,8 +209,6 @@ const Contact = () => {
               </a>
             </div>
           </div>
-
-
         </div>
 
         {/* Right column - Contact Form */}
@@ -231,9 +218,7 @@ const Contact = () => {
             lg:mt-6
           `}
         >
-          <ContactForm
-            onSubmit={onSubmit}
-          />          
+          <ContactForm onSubmit={onSubmit} />
         </div>
       </div>
     </section>
