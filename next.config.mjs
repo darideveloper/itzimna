@@ -19,7 +19,15 @@ const nextConfig = {
         port: '',
         pathname: '/media/**',
         search: '',
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'daridev-django.sfo3.cdn.digitaloceanspaces.com',
+        port: '',
+        pathname: '/itzimna/**',
+        search: '',
+      },
+      
     ],
   },
   output: 'standalone',
