@@ -29,6 +29,8 @@
     "phone": "Teléfono",
     "phone_invalid": "El teléfono debe tener 10 digitos",
     "phone_error": "El teléfono es requerido",
+    "property": "Propiedad de interés",
+    "property_placeholder": "Propiedad de interés (opcional)",
     "message": "Mensaje",
     "message_error": "El mensaje es requerido",
     "send": "Enviar Mensaje"

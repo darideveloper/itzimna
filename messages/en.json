@@ -29,6 +29,8 @@
     "phone": "Phone",
     "phone_error": "The phone is required",
     "phone_invalid": "The phone length must be 10 and only numbers",
+    "property": "Property of interest",
+    "property_placeholder": "Property of interest (optional)",
     "message": "Message",
     "message_error": "The message is required",
     "send": "Send Message"
