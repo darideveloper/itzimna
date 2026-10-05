@@ -4,7 +4,7 @@ const host = process.env.NEXT_PUBLIC_HOST
 /**
  * Save a lead using lecal API
  */
-export async function saveLead(name, email, phone, message, property = null) {
+export async function saveLead(name, email, phone, message, property = "") {
 
   // Send data to endpoint
   const endpoint = `${host}/api/leads/`
@@ -13,7 +13,7 @@ export async function saveLead(name, email, phone, message, property = null) {
     email,
     phone,
     message,
-    property,
+    property: typeof property === 'string' ? property : (property?.name || ""),
   }
   const dataJson = JSON.stringify(data)
   const headers = {

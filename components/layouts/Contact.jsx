@@ -33,6 +33,7 @@ const Contact = () => {
       data.email,
       data.phone,
       data.message,
+      data.property || "",
     )
 
     // Show alert based in the result
@@ -218,7 +219,7 @@ const Contact = () => {
             lg:mt-6
           `}
         >
-          <ContactForm onSubmit={onSubmit} />
+          <ContactForm onSubmit={onSubmit} showPropertyInput={true} />
         </div>
       </div>
     </section>

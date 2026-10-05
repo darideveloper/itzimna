@@ -12,11 +12,12 @@ import { useTranslations } from "next-intl"
  * @param {Object} props  - Component props
  * @param {Function} props.onSubmit - Function to handle form submit
  * @param {Boolean} props.showSubmitBtn - Show submit button
+ * @param {Boolean} props.showPropertyInput - Show property of interest input
  * @param {String} props.className - Additional classes
  * @param {String} props.variant - Color theme (light, dark)
  * @returns {JSX.Element} - Contact form
  */
-export default function ContactForm ({ onSubmit, showSubmitBtn = true, className, variant = "light" }) {
+export default function ContactForm ({ onSubmit, showSubmitBtn = true, showPropertyInput = false, className, variant = "light" }) {
 
   // Translations
   const tForm = useTranslations("Form")
@@ -94,6 +95,18 @@ export default function ContactForm ({ onSubmit, showSubmitBtn = true, className
         }}
         variant={variant}
       />
+
+      {showPropertyInput && (
+        <Input
+          name="property"
+          type="text"
+          register={register}
+          required={false}
+          errors={errors}
+          placeholder={tForm("property_placeholder")}
+          variant={variant}
+        />
+      )}
 
       <Input
         name="message"
