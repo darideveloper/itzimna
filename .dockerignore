@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+build
+.git
+.github
+.env*
+redesigns
+openspec
+.agent
+temp copy.json
+*.temp

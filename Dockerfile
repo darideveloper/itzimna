@@ -1,42 +1,31 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM node:18-alpine AS base
+FROM node:22.23.4-alpine AS base
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable pnpm && pnpm install --frozen-lockfile
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Define build-time arguments
+# Define build-time arguments (must match Coolify vars)
 ARG API_BASE_URL
-ARG API_PASS
-ARG API_USER
+ARG API_TOKEN
 ARG NEXT_PUBLIC_HOST
 
 # Expose them to Next.js build as environment variables
 ENV API_BASE_URL=$API_BASE_URL
-ENV API_PASS=$API_PASS
-ENV API_USER=$API_USER
+ENV API_TOKEN=$API_TOKEN
 ENV NEXT_PUBLIC_HOST=$NEXT_PUBLIC_HOST
 
-RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+RUN corepack enable pnpm && pnpm run build
 
 FROM base AS runner
 WORKDIR /app
