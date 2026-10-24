@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Itzimná Real Estate — Your Secure Connection to Properties in Southeastern Mexico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Passion+One&family=Spline+Sans:wght@400&family=Spline+Sans+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+/* ============ ITZIMNÁ · ESTUARIO — dark editorial luxe ============ */
+:root{
+  --green:#2e4f34;
+  --green-light:#8bb138;
+  --green-dark:#0c2110;
+  --white:#fefefe;
+  --yellow:#a27c3b;
+  --black:#010d04;
+  --blue-light:#7adcad;
+  --gold:#c9a244;
+  --ink:#e9e6dc;
+  --muted:#9aa48d;
+  --line:#3a4a38;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Spline Sans',Georgia,serif;
+  background:var(--black);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--gold);color:var(--black)}
+img{display:block;max-width:100%}
+
+.container{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+.kicker{
+  font-family:'Spline Sans Mono',monospace;
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+}
+.display{
+  font-family:'Passion One',Georgia,serif;
+  font-weight:400;font-size:clamp(2.6rem,6.5vw,5.4rem);line-height:1.02;
+}
+.rules{color:var(--yellow)}
+.whatsapp{
+  position:fixed;right:1.5rem;bottom:1.5rem;z-index:60;width:3.4rem;height:3.4rem;
+  border-radius:50%;background:var(--black);border:1px solid var(--gold);
+  display:grid;place-items:center;color:var(--ink);text-decoration:none;box-shadow:0 0 0 6px rgba(201,162,68,.15);
+}
+.whatsapp svg{fill:var(--ink);width:1.5rem;height:1.5rem}
+
+/* ---------- header ---------- */
+.site-head{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:linear-gradient(180deg,rgba(1,13,4,.5),rgba(1,13,4,.25));
+  transition:background .3s;
+}
+.site-head::after{content:'';position:absolute;left:0;right:0;bottom:0;border-top:1px solid var(--line)}
+.head-inner{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem}
+.wordmark{display:flex;align-items:center;gap:.9rem;color:var(--ink);text-decoration:none;font-family:'Passion One',Georgia,serif;font-size:1.35rem;letter-spacing:.02em}
+.wordmark img{width:2.2rem;height:2.2rem;border-radius:50%;border:1px solid var(--gold)}
+.wordmark small{display:block;font-family:'Spline Sans Mono',monospace;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;align-items:center;gap:1.6rem}
+.nav a{color:var(--ink);text-decoration:none;font-family:'Spline Sans Mono',monospace;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;padding:.35rem 0;border-bottom:1px solid transparent}
+.nav a:hover{border-bottom:1px solid var(--gold);color:var(--gold)}
+.nav .cta{
+  font-family:'Spline Sans Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--gold);color:var(--black);padding:.55rem 1.1rem;border:none;cursor:pointer;text-decoration:none;
+}
+.burger{display:none;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--ink);font-family:monospace;padding:.3rem .6rem}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;overflow:hidden}
+.hero-media{position:absolute;inset:0}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-scrim{position:absolute;inset:0;background:linear-gradient(160deg,rgba(1,13,4,.82),rgba(1,13,4,.55) 55%,rgba(12,33,16,.7))}
+.hero-frame{position:absolute;inset:2rem;border:1px solid var(--line);pointer-events:none}
+.hero-tag{
+  position:absolute;top:6.5rem;left:1.5rem;z-index:5;
+  font-family:'Spline Sans Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+}
+.hero-tag-r{position:absolute;top:6.5rem;right:1.5rem;z-index:5;font-family:'Spline Sans Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.hero-content{position:relative;z-index:4;display:grid;grid-template-columns:1fr auto;align-items:center;min-height:82vh;padding-top:8rem}
+.hero-left .kicker{margin-bottom:1.6rem}
+.hero-left h1{max-width:16ch}
+.hero-left .sub{margin-top:2rem;max-width:52ch;color:var(--ink);font-size:1.02rem}
+.hero-left .sub em{color:var(--gold);font-style:normal}
+.hero-left .read{
+  margin-top:2.2rem;
+  display:inline-flex;align-items:center;gap:.8rem;
+  color:var(--gold);font-family:'Spline Sans Mono',monospace;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+  border-bottom:1px solid var(--gold);padding-bottom:.4rem;
+}
+.hero-index{font-family:'Spline Sans Mono',monospace;color:var(--muted);font-size:.72rem;line-height:2;text-align:right}
+.hero-index b{color:var(--gold)}
+.hero-verge{
+  position:absolute;left:1.5rem;bottom:1.2rem;transform:rotate(90deg);transform-origin:left top;
+  font-family:'Spline Sans Mono',monospace;color:var(--muted);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+}
+.hero-scroll{position:absolute;right:1.5rem;bottom:1.2rem;font-family:'Spline Sans Mono',monospace;color:var(--muted);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-scroll::after{content:'↓';color:var(--gold);margin-left:.5rem}
+
+/* ---------- search bar ---------- */
+.searchbar{
+  position:absolute;left:50%;bottom:4.6rem;transform:translateX(-50%);z-index:5;
+  display:flex;gap:0;align-items:stretch;background:rgba(12,33,16,.72);border:1px solid var(--gold);border-radius:2px;
+}
+.searchbar .f{border-right:1px solid var(--line);padding:.85rem 1.3rem}
+.searchbar .f select{background:transparent;border:none;color:var(--ink);font-family:'Spline Sans Mono',monospace;font-size:.74rem;letter-spacing:.05em;text-transform:uppercase}
+.searchbar .go{background:var(--gold);color:var(--black);border:none;font-family:'Spline Sans Mono',monospace;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;padding:0 1.4rem;cursor:pointer}
+.searchbar .go:hover{background:var(--green-light)}
+
+/* ---------- who / intro ---------- */
+.who{position:relative;padding:9rem 0 7rem;background:var(--black)}
+.who .kicker{margin-bottom:1.2rem}
+.who-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2.5rem}
+.who-grid .p1{grid-column:span 7}
+.who-grid .p2{grid-column:span 5}
+.who h2{font-family:'Passion One',Georgia,serif;font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.15;color:var(--ink)}
+.who p{color:var(--muted);font-size:1rem;line-height:1.75;margin-top:1.3rem}
+.who p b{color:var(--gold)}
+.stats{grid-column:span 12;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);gap:0;margin-top:3.5rem}
+.stat{padding:2.2rem 1.5rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat .n{font-family:'Passion One',Georgia,serif;font-size:2.4rem;color:var(--gold)}
+.stat .l{font-family:'Spline Sans Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.5rem}
+
+/* ---------- gallery / developments ---------- */
+.edit{position:relative;padding:9rem 0;background:var(--green-dark)}
+.edit-head{display:flex;align-items:baseline;justify-content:space-between;gap:2rem;border-bottom:1px solid var(--line);padding-bottom:1.4rem}
+.edit-head .kicker{color:var(--green-light)}
+.edit-head h2{font-family:'Passion One',Georgia,serif;color:var(--ink);font-size:clamp(1.8rem,3.4vw,2.9rem)}
+.edit-head .folio{font-family:'Spline Sans Mono',monospace;color:var(--muted);font-size:.74rem;letter-spacing:.08em}
+.edit-strip{display:grid;grid-template-columns:repeat(12,1fr);gap:2rem;margin-top:3rem}
+.strip-a{grid-column:span 4;padding-top:6rem}
+.strip-b{grid-column:span 5}
+.strip-c{grid-column:span 3;padding-top:2rem;align-self:start}
+.feature-card{position:relative;overflow:hidden;border:1px solid var(--line)}
+.feature-card img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.feature-card figcaption{position:absolute;left:0;right:0;bottom:0;padding:2rem 1.2rem;background:linear-gradient(180deg,transparent,rgba(1,13,4,.75));color:var(--ink);font-family:'Spline Sans Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+.edit p{color:var(--muted);font-size:.98rem;line-height:1.8}
+.edit p b{color:var(--green-light)}
+.edit ul{margin-top:2rem;list-style:none}
+.edit li{display:flex;gap:.8rem;align-items:baseline;color:var(--ink);padding:.7rem 0;border-bottom:1px solid var(--line);font-family:'Spline Sans Mono',monospace;font-size:.74rem;letter-spacing:.04em}
+.edit li::before{content:'—';color:var(--green-light)}
+.edit .link{display:inline-flex;align-items:center;gap:.7rem;margin-top:2.4rem;color:var(--green-light);text-decoration:none;font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--green-light);padding-bottom:.3rem}
+
+/* ---------- properties sections ---------- */
+.props{position:relative;padding:9rem 0;background:var(--black)}
+.props .kicker{margin-bottom:1.2rem}
+.props-head{display:flex;align-items:baseline;justify-content:space-between;gap:2rem;border-bottom:1px solid var(--line);padding-bottom:1.5rem}
+.props-head h2{font-family:'Passion One',Georgia,serif;font-size:clamp(1.9rem,3.6vw,3rem);color:var(--ink)}
+.props-head .folio{font-family:'Spline Sans Mono',monospace;color:var(--muted);font-size:.74rem;letter-spacing:.08em}
+.grid-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3.5rem}
+.card{position:relative;border:1px solid var(--line);background:transparent;overflow:hidden}
+.card .no{position:absolute;top:.7rem;left:.7rem;z-index:3;font-family:'Spline Sans Mono',monospace;color:var(--gold);font-size:.68rem;letter-spacing:.08em}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.card .txt{padding:1.4rem 1.1rem;background:var(--black)}
+.card h3{font-family:'Passion One',Georgia,serif;color:var(--ink);font-size:1.25rem;margin:0}
+.card .loc{font-family:'Spline Sans Mono',monospace;color:var(--muted);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.4rem}
+.card .meta{display:flex;justify-content:space-between;color:var(--green-light);font-family:'Spline Sans Mono',monospace;font-size:.7rem;margin-top:.9rem}
+.card a{display:inline-flex;align-items:center;gap:.5rem;color:var(--gold);text-decoration:none;font-family:'Spline Sans Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;margin-top:1rem}
+.card:hover{border-color:var(--gold)}
+.card:hover .no{color:var(--gold)}
+
+/* ---------- contact ---------- */
+.contact{position:relative;padding:10rem 0;background:linear-gradient(180deg,var(--green-dark),var(--black));overflow:hidden}
+.contact::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:3rem 3rem;opacity:.14}
+.contact-inner{position:relative;z-index:2;max-width:900px;margin:0 auto;text-align:center}
+.contact .kicker{margin-bottom:1.4rem;color:var(--gold)}
+.contact h2{font-family:'Passion One',Georgia,serif;font-size:clamp(2rem,4.4vw,3.6rem);color:var(--ink);line-height:1.1;text-align:center}
+.contact p{color:var(--muted);max-width:54ch;margin:1.6rem auto 0;font-size:1rem}
+.contact .btn{display:inline-block;margin:2.4rem auto;background:var(--gold);color:var(--black);padding:1rem 2.2rem;border:none;font-family:'Spline Sans Mono',monospace;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.contact .btn.ghost{background:transparent;color:var(--green-light);border:1px solid var(--green-light);margin-left:1rem}
+.contact-spectrum{display:flex;justify-content:space-between;margin-top:3.5rem;font-family:'Spline Sans Mono',monospace;color:var(--muted);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase}
+.contact-spectrum span b{color:var(--gold)}
+
+/* ---------- footer ---------- */
+.foot{background:var(--black);color:var(--muted);padding:4rem 0 3rem;border-top:1px solid var(--line)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
+.foot .brand{font-family:'Passion One',Georgia,serif;color:var(--ink);font-size:1.3rem;display:flex;align-items:center;gap:.8rem}
+.foot .brand img{width:1.9rem;height:1.9rem;border-radius:50%;border:1px solid var(--gold)}
+.foot p{font-size:.9rem;line-height:1.7}
+.foot h5{font-family:'Spline Sans Mono',monospace;color:var(--gold);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1rem}
+.foot a{color:var(--muted);text-decoration:none;font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;display:block;padding:.3rem 0}
+.foot a:hover{color:var(--ink)}
+.foot .copy{margin-top:3rem;border-top:1px solid var(--line);padding:1.6rem 0;font-family:'Spline Sans Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;text-align:center}
+
+@media (max-width:820px){
+  .nav{display:none}
+  .burger{display:block}
+  .who-grid,.edit-strip{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid-cards{grid-template-columns:repeat(2,1fr)}
+  .hero-content{grid-template-columns:1fr}
+  .hero-left h1{max-width:none}
+  .searchbar{display:none}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-index{display:none}
+}
+@media (max-width:520px){
+  .grid-cards{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+}
+html{overflow-x:hidden}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="head-inner">
+    <a class="wordmark" href="#top">
+      <img src="../public/images/logo.webp" alt="Itzimná Real Estate logo" />
+      <span>Itzimná<small>Real Estate · MX</small></span>
+    </a>
+    <nav class="nav">
+      <a href="#last-properties">New Dev</a>
+      <a href="#featured-properties">Featured</a>
+      <a href="#developments">Developers</a>
+      <a href="#contact">Contact</a>
+      <a href=".hero" class="cta" data-jump="#contact">Enquire →</a>
+    </nav>
+    <button class="burger" aria-label="menu">≡</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media">
+      <img src="../public/images/hero.webp" alt="Luxury development landscape in Yucatán, Mexico" />
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-frame" aria-hidden="true"></div>
+    <div class="hero-tag">Southeastern Mexico</div>
+    <div class="hero-tag-r">N. 21.17° · W. 89.46°</div>
+
+    <div class="container hero-content" style="min-height:78vh">
+      <div class="hero-left">
+        <p class="kicker">Welcome to Itzimná</p>
+        <h1 class="display">Your <em class="rules">secure</em> connection to <em class="rules">property</em> in the southeast.</h1>
+        <p class="sub">We turn the search for <em>properties in southeastern Mexico</em> into a simple, safe and rewarding experience — curating developments in Yucatán built on <em>ethics and legal certainty</em>.</p>
+        <a class="read" href="#last-properties">Explore the portfolio</a>
+      </div>
+      <div class="hero-index">
+        <b>01</b> Merida<br>
+        <b>02</b> Costa · Rentals<br>
+        <b>03</b> Inversion<br>
+        <b>04</b> Industrial<br>
+        <span style="display:block;height:1px;background:var(--gold);width:1.2rem;margin:.4rem"></span>
+        <b>I–XXIX</b> MMXXV
+      </div>
+    </div>
+
+    <form class="searchbar" action="#" method="get" onsubmit="return false">
+      <label class="f"><select><option>All Developments</option><option>Houses</option><option>Lots</option><option>Apartments</option><option>Industrial</option></select></label>
+      <label class="f"><select><option>All Yucatán</option><option>Mérida</option><option>Coast</option></select></label>
+      <label class="f"><select><option>Any Budget</option><option>Invest</option><option>Luxury</option></select></label>
+      <button class="go" type="submit">Search</button>
+    </form>
+
+    <div class="hero-verge">Everything begins with trust</div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- WHO -->
+  <section class="who" id="about">
+    <div class="container">
+      <p class="kicker">The House · Est. Yucatán</p>
+      <div class="who-grid">
+        <div class="p1">
+          <h2>Buying in the southeast is a decision. We make it <em class="rules">transparent</em>.</h2>
+        </div>
+        <div class="p2">
+          <p>At <b>Itzimná Real Estate</b> we commit to a curated portfolio of <b>properties for sale in Yucatán and the southeast</b> — where quality of life, safety and growth are unmatched.</p>
+          <p>From <b>houses in Mérida</b> to <b>investment lots</b>, <b>luxury apartments on the coast</b> and <b>industrial warehouses</b>, our team accompanies you at every step with the guidance you need for a transparent, successful purchase.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="n">01</div><div class="l">Single Point of Trust</div></div>
+          <div class="stat"><div class="n">02</div><div class="l">Curated Portfolio</div></div>
+          <div class="stat"><div class="n">03</div><div class="l">Legal Certainty</div></div>
+          <div class="stat"><div class="n">04</div><div class="l">Full Transparency</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEVELOPMENTS / GALLERY -->
+  <section class="edit" id="developments">
+    <div class="container">
+      <div class="edit-head">
+        <div>
+          <p class="kicker">For Developers · Elevate</p>
+          <h2>Boost your development. Advertise with confidence on Itzimná.</h2>
+        </div>
+        <div class="folio">Fol. A–09 / Exposure</div>
+      </div>
+      <div class="edit-strip">
+        <div class="strip-a">
+          <p>Are you a <b>real estate developer in southeastern Mexico</b> who prioritizes <b>ethics and legal certainty</b>? We offer a platform of wide reach so your <b>properties for sale</b> reach qualified buyers seeking security and reliability.</p>
+          <ul>
+            <li>Residential projects in Yucatán & the southeast</li>
+            <li>Industrial warehouses</li>
+            <li>Lots with legal security</li>
+            <li>Developments with transparent processes</li>
+          </ul>
+        </div>
+        <figure class="strip-b feature-card">
+          <img src="../public/images/home-banner.webp" alt="Development showcase" />
+          <figcaption>01 · Featured Development</figcaption>
+        </figure>
+        <div class="strip-c">
+          <figure class="feature-card">
+            <img src="../public/images/gallery/white.webp" alt="Coastal development" />
+            <figcaption>02 · Coastal</figcaption>
+          </figure>
+        </div>
+      </div>
+      <a class="link" href="#contact">Advertise your project</a>
+    </div>
+  </section>
+
+  <!-- LAST PROPERTIES -->
+  <section class="props" id="last-properties">
+    <div class="container">
+      <p class="kicker">New in the Catalogue</p>
+      <div class="props-head">
+        <h2>New Developments in Yucatán</h2>
+        <div class="folio">Ser. B — 04</div>
+      </div>
+      <div class="grid-cards">
+        <article class="card">
+          <span class="no">B.01</span>
+          <img src="../public/images/hero.webp" alt="Residential development in Mérida" style="object-position:center 20%" />
+          <div class="txt">
+            <h3>Estancia Mérida</h3>
+            <div class="loc">Mérida · Yucatán</div>
+            <div class="meta"><span>gated</span><span>from €94k</span></div>
+            <a href="#">View details</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="no">B.02</span>
+          <img src="../public/images/home-banner.webp" alt="Coastal lot development" style="object-position:center 30%" />
+          <div class="txt">
+            <h3>Costa Serena Lots</h3>
+            <div class="loc">Costa · Yucatán</div>
+            <div class="meta"><span>lots</span><span>from €58k</span></div>
+            <a href="#">View details</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="no">B.03</span>
+          <img src="../public/images/gallery/white.webp" alt="Luxury apartment development" style="object-position:center 40%" />
+          <div class="txt">
+            <h3>Puerto Escondido 2</h3>
+            <div class="loc">Coast · Yucatán</div>
+            <div class="meta"><span>apartments</span><span>from €210k</span></div>
+            <a href="#">View details</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="no">B.04</span>
+          <img src="../public/images/hero.webp" alt="Industrial warehouse" style="object-position:center 70%" />
+          <div class="txt">
+            <h3>Parque Industrial</h3>
+            <div class="loc">Mérida · Yucatán</div>
+            <div class="meta"><span>warehouse</span><span>from €150k</span></div>
+            <a href="#">View details</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="props" id="featured-properties" style="background:var(--green-dark);padding-top:5.5rem">
+    <div class="container">
+      <p class="kicker" style="color:var(--green-light)">Curated</p>
+      <div class="props-head" style="border-top:1px solid var(--line)">
+        <h2>Featured Properties in Yucatán</h2>
+        <div class="folio">Ser. C — 04</div>
+      </div>
+      <div class="grid-cards">
+        <article class="card">
+          <span class="no">C.01</span>
+          <img src="../public/images/home-banner.webp" alt="Featured house in Mérida" style="object-position:center 25%" />
+          <div class="txt">
+            <h3>Hacienda Norte</h3>
+            <div class="loc">Mérida · Yucatán</div>
+            <div class="meta"><span>house</span><span>from €320k</span></div>
+            <a href="#">View details</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="no">C.02</span>
+          <img src="../public/images/hero.webp" alt="Luxury coastal property" style="object-position:center 50%" />
+          <div class="txt">
+            <h3>Mar Azul Penthouse</h3>
+            <div class="loc">Coast · Yucatán</div>
+            <div class="meta"><span>luxury</span><span>from €480k</span></div>
+            <a href="#">View details</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="no">C.03</span>
+          <img src="../public/images/gallery/white.webp" alt="Investment lot" style="object-position:center 35%" />
+          <div class="txt">
+            <h3>Rinconcito Inversión</h3>
+            <div class="loc">Yucatán</div>
+            <div class="meta"><span>invest</span><span>from €72k</span></div>
+            <a href="#">View details</a>
+          </div>
+        </article>
+        <article class="card">
+          <span class="no">C.04</span>
+          <img src="../public/images/home-banner.webp" alt="Modern gated residence" style="object-position:center 60%" />
+          <div class="txt">
+            <h3>Camino Real</h3>
+            <div class="loc">Mérida · Yucatán</div>
+            <div class="meta"><span>gated</span><span>from €260k</span></div>
+            <a href="#">View details</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner container">
+      <p class="kicker">Begin the Conversation</p>
+      <h2>Do you want us to contact you?</h2>
+      <p>Fill out the form and one of our consultants will contact you. Or write to us directly — we respond swiftly, in your language.</p>
+      <div style="text-align:center">
+        <a class="btn" href="#contact-form">Send a message</a>
+        <a class="btn ghost" href="mailto:hello@itzimna.mx">hello@itzimna.mx</a>
+      </div>
+      <div class="contact-spectrum">
+        <span><b>Trust</b> · our standard</span>
+        <span><b>Clarity</b> · at every step</span>
+        <span><b>Conviction</b> · your investment</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand"><img src="../public/images/logo.webp" alt="Itzimná logo" />Itzimná</div>
+        <p style="margin-top:1rem">Real estate in southeastern Mexico — where ethics, legal certainty and lifestyle meet.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <a href="#last-properties">New Developments</a>
+        <a href="#featured-properties">Featured Properties</a>
+        <a href="#developments">For Developers</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+      <div>
+        <h5>Find us</h5>
+        <a href="#">Mérida, Yucatán</a>
+        <a href="mailto:hello@itzimna.mx">Email</a>
+        <a href="https://wa.me/" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+    <p class="copy">© MMXXV Itzimná Real Estate · All rights reserved · Designed by Dari Dev</p>
+  </div>
+</footer>
+
+<div class="whatsapp" title="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 2c0 0 12 0 0 12 12 12 8.53 3.4 12 8.53 8.53 3.4 8.53 8.53 3.4 0 8.53 0 12 3.4 12 0 8.53 0 8.53 3.4 8.53 8.53 3.4 12 8.53 8.53 3.4 12 0 8.53 0 8.53 3.4 0 3.4 0 0 8.53 3.4 8.53 3.4 0 0 8.53 3.4 3.4 3.4 0 0 3.4 0 8.53 8.53 0 8.53 0 0 0 3.4 0 0 0 8.53 0 8.53 0 0 8.53 0 3.4 8.53 3.4 0 8.53 8.53 3.4 8.53 0 3.4 0 8.53 3.4 8.53 3.4 0 0 8.53 0 0 8.53 0 3.4 0 8.53 0 0 8.53 0 8.53 8.53 0 3.4 8.53 3.4 0 0 0 3.4 0 0 0 8.53 3.4 8.53 0 0 3.4 0 8.53 0 0 3.4 0 8.53 3.4 8.53 0 3.4 8.53 3.4 8.53 0 0 3.4 0 0 0 3.4 0 8.53 8.53 0 0 3.4 0 8.53 3.4 0 8.53 8.53 0 3.4 8.53 3.4 0 0 0 3.4 0 0 3.4 0 0 0 3.4 0 8.53 8.53 0 0 3.4 3.4 3.4 0 0 8.53 3.4 8.53 0 0 3.4 8.53 8.53 0 0 3.4 8.53 3.4 0 0 3.4 3.4 0 8.53 0 0 8.53 0 3.4 0 8.53 0 8.53 3.4 8.53 0 0 3.4 8.53 8.53 0 0 3.4 8.53 3.4 0 0 3.4 3.4 8.53 8.53 0 0 3.4 0 0 0 3.4 0 8.53 3.4 8.53 0 0 3.4 8.53 3.4 0 8.53 8.53 0 0 3.4 0 8.53 3.4 0 0 0 3.4 0 0 0 3.4 0 8.53 3.4 8.53 0 3.4 8.53 3.4 8.53 0 0 3.4 0 8.53 3.4 0 8.53 8.53 0 0 3.4 0 8.53 3.4 0 0 0 3.4 0 8.53 3.4 0 0 0 3.4 0 0 0 3.4 0 8.53 0 3.4 0 0 3.4 0 0 3.4 0 8.53 3.4 3.4 0 0 3.4 8.53 0 0 3.4 0 8.53 3.4 0 0 0 3.4 0 0 0 3.4 0 8.53 3.4 8.53 0 0 3.4 8.53 3.4 3.4 0 0 3.4 0 8.53 3.4 0 8.53 3.4 8.53 0 0 3.4 8.53 3.4 7.5 1 12 8.53 8.53 3.4 8.53 3.4 0 0 8.53 0 0 0 3.4 0 8.53 0 3.4 0 0 3.4 0 8.53 3.4 8.53 0 0 8.53 0 8.53 0 3.4 0 3.4 0 0 3.4 0 3.4 0 8.53 8.53 0 0 3.4 0 8.53 3.4 0 0 8.53 0 3.4 8.53 3.4 0 3.4 0 0 8.53 3.4 8.53 8.53 0 3.4 8.53 3.4 0 0 3.4 8.53 3.4 0 3.4 0 3.4 3.4 0 0 8.53 8.53 0 0 3.4 8.53 3.4 0 0 3.4 0 3.4 8.53 3.4 0 0 3.4 0 3.4 3.4 0 8.53 0 3.4 8.53 3.4 0 0 3.4 0 3.4 8.53 3.4 0 8.53 0 3.4 8.53 3.4 0 8.53 0 3.4 0 0 0 3.4 0 3.4 3.4 0 0 8.53 0 8.53 0 3.4 0 0 8.53 0 0 0 3.4 0 8.53 0 3.4 0 0 3.4 3.4 3.4 0 0 0 3.4 0 3.4 3.4 0 0 8.53 0 0 3.4 3.4 0 0 3.4 0 0 3.4 8.53 0 3.4 8.53 0 0 3.4 0 3.4 8.53 3.4 0 0 0 3.4 0 3.4 8.53 0 0 3.4 3.4 3.4 0 8.53 0 3.4 0 0 3.4 8.53 0 0 3.4 0 3.4 3.4 0 3.4 0 3.4 8.53 3.4 3.4 0 0 3.4 0 0 3.4 0 8.53 3.4 8.53 0 0 0 3.4 0 3.4 8.53 3.4 0 0 0 3.4 0 3.4 8.53 0 0 3.4 3.4 3.4 0 0 3.4 0 3.4 0 0 8.53 0 8.53 0 3.4 0 3.4 3.4 0 3.4 0 0 8.53 0 3.4 0 0 3.4 0 0 3.4 3.4 3.4 0 0 3.4 0 3.4 8.53 0 0 3.4 3.4 0 3.4 0 0 0 3.4 0 3.4 8.53 0 0 3.4 3.4 8.53 0 0 0 3.4 3.4 3.4 0 0 3.4 3.4 8.53 0 0 3.4 0 3.4 0 0 8.53 0 8.53 0 0 3.4 0 3.4 3.4 3.4 0 0 3.4 0 3.4 0 3.4 0 0 0 3.4 3.4 0 3.4 0 8.53 0 3.4 8.53 0 0 3.4 0 3.4 3.4 0 3.4 0 8.53 0 0 3.4 0 3.4 0 0 0 3.4 0 3.4 3.4 0 3.4 0 0 0 3.4 0 3.4 0 0 0 3.4 0 3.4 3.4 8.53 0 0 3.4 0 3.4 8.53 0 0 3.4 3.4 3.4 0 8.53 0 3.4 3.4 0 0 3.4 0 3.4 0 0 3.4 0 3.4 3.4 8.53 0 0 3.4 8.53 0 0 0 3.4 0 0 8.53 0 8.53 0 3.4 0 3.4 8.53 3.4 0 0 0 3.4 0 3.4 0 3.4 0 0 0 3.4 3.4 3.4 0 0 3.4 0 3.4 8.53 3.4 0 3.4 0 3.4 0 0 0 3.4 3.4 0 3.4 3.4 8.53 0 3.4 8.53 0 3.4 3.4 0 3.4 0 3.4 8.53 3.4 0 3.4 0 3.4 3.4 0 3.4 0 3.4 3.4 8.53 0 3.4 0 3.4 3.4 3.4 0 0 0 3.4 0 3.4 3.4 3.4 0 0 0 3.4 0 0 3.4 0 3.4 0 8.53 0 3.4 0 3.4"/></svg>
+</div>
+
+<script>
+/* tiny scroll nav state */
+const head=document.querySelector('.site-head');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY||window.scrollTopY||window.scrollTop;
+  if(y>40)head.style.background='rgba(1,13,4,.92)';
+  else head.style.background='linear-gradient(180deg,rgba(1,13,4,.5),rgba(1,13,4,.25))';
+},{passive:true});
+/* mobile burger toggle */
+document.querySelector('.burger').addEventListener('click',()=>{
+  const n=document.querySelector('.nav');
+  n.style.display=n.style.display==='flex'?'none':'flex';
+});
+document.querySelectorAll('.nav a[data-jump]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+</script>
+</body>
+</html>

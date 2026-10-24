@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Itzimná Real Estate — Developments Catalogue / Southeast MX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+/* ============ ITZIMNÁ · GRIDWORKS — brutalist-geo blueprint ============ */
+:root{
+  --green:#2e4f34;
+  --green-light:#8bb138;
+  --green-dark:#0c2110;
+  --white:#fefefe;
+  --yellow:#a27c3b;
+  --black:#010d04;
+  --blue-light:#7adcad;
+  --paper:#e9e4d6;
+  --ink:#183018;
+  --line:#2b2b28;
+  --mono:'Space Mono',monospace;
+  --disp:'Oswald',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--mono);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:.95rem;
+}
+::selection{background:var(--yellow);color:var(--white)}
+img{display:block;max-width:100%}
+
+.container{max-width:1200px;margin:0 auto;padding:0 1.4rem}
+.label{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.lined{display:flex;align-items:center;gap:.5rem;width:100%}
+.lined::before,.lined::after{content:'';flex:1;border-top:1px solid var(--line)}
+.sr{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow)}
+
+/* top ticker */
+.tick{background:var(--green-dark);color:var(--blue-light);font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;overflow:hidden;white-space:nowrap;padding:.6rem 0;border-bottom:2px solid var(--yellow)}
+.tick span{display:inline-block;padding-left:2rem}
+.tick em{color:var(--yellow)}
+
+/* header */
+.head{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:3px solid var(--line)}
+.head-row{display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:center;padding:.9rem 1.4rem}
+.brand{display:flex;align-items:center;gap:.6rem;background:var(--green);color:var(--white);padding:.4rem .8rem;font-weight:700;font-family:var(--disp);text-transform:uppercase;text-decoration:none;border:1px solid var(--line)}
+.brand img{width:1.8rem;height:1.8rem;border-radius:50%}
+.idx{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;color:var(--ink)}
+.nav{display:flex;gap:1.1rem}
+.nav a{text-decoration:none;color:var(--ink);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;padding:.3rem .5rem;border:1px solid var(--line)}
+.nav a:hover{background:var(--green);color:var(--white)}
+.nav a.cta{background:var(--yellow);color:var(--white)}
+.burger{display:none;cursor:pointer;border:1px solid var(--line);background:var(--white);font-family:var(--mono);padding:.2rem .6rem}
+.head-row .idx--mobile{display:none}
+
+/* hero */
+.hero{background:var(--green-dark);color:var(--white);padding:7rem 0 6rem;border-top:4px solid var(--yellow);position:relative}
+.hero .idline{margin-bottom:1rem;display:flex;justify-content:space-between;flex-wrap:wrap;color:var(--blue-light);font-family:var(--mono);font-size:.68rem}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3.5rem;align-items:center}
+.hero-copy .badge{display:inline-block;background:var(--yellow);color:var(--black);font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .7rem;margin-bottom:1.6rem}
+.hero-copy h1{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(2rem,5vw,3.7rem);line-height:1.02;color:var(--blue-light)}
+.hero-copy h1 .y{color:var(--yellow)}
+.hero-copy p{color:var(--sage);color:#cfe0c7;font-size:.95rem;line-height:1.7;max-width:52ch;margin:1.5rem 0 0}
+.hero-cta{display:flex;gap:.9rem;margin-top:2rem}
+.gh{background:var(--green-light);color:var(--black);border:1px solid var(--black);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;padding:.8rem 1.4rem;cursor:pointer}
+.gh.outline{background:transparent;color:var(--blue-light);border:1px solid var(--blue-light)}
+.hero-spec{border:1px solid var(--blue-light);background:rgba(1,13,4,.35);padding:1.4rem;font-family:var(--mono);font-size:.72rem}
+.hero-spec .title{color:var(--yellow);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.8rem}
+.hero-spec .row{display:flex;justify-content:space-between;color:var(--blue-light)}
+.hero-spec .row span{color:#cfe0c7}
+.hero-media{position:relative;border:2px solid var(--blue-light)}
+.hero-media img{width:100%;aspect-ratio:4/4.5;object-fit:cover}
+.hero-media .msk{position:absolute;inset:0;mix-blend-mode:multiply;background:linear-gradient(135deg,transparent 0%,rgba(1,13,4,.45) 100%)}
+.hero-media .tag{position:absolute;left:.6rem;top:.6rem;background:var(--yellow);color:var(--black);font-family:var(--mono);font-size:.66rem;padding:.25rem .6rem}
+
+/* stats band */
+.band{background:var(--green);color:var(--white);border-top:3px solid var(--line);padding:2.6rem 0}
+.band-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.band-item{background:rgba(255,255,255,.06);padding:1.6rem;border:1px solid rgba(255,255,255,.2)}
+.band-item .n{font-family:var(--disp);font-size:2rem;font-weight:700;color:var(--yellow)}
+.band-item .l{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:.4rem}
+
+/* catalogue / regions */
+.cat{background:var(--paper);color:var(--ink);padding:6rem 0;position:relative}
+.cat .masthead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.4rem}
+.cat .masthead h2{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(1.7rem,3.4vw,2.7rem);color:var(--ink)}
+.cat .masthead .sr{color:var(--green)}
+.regions{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem}
+.region .r-h{display:flex;gap:1rem;align-items:baseline}
+.region .num{font-family:var(--disp);font-size:2rem;font-weight:700;color:var(--yellow);width:3rem;text-align:center;border:1px solid var(--line)}
+.region h3{font-family:var(--disp);font-size:1.3rem;text-transform:uppercase;color:var(--ink)}
+.region .bar{height:.5rem;background:var(--line);margin:1rem 0}
+.region .bar i{display:block;height:.5rem;background:var(--green)}
+.region p{font-family:var(--mono);font-size:.72rem;color:var(--ink);line-height:1.7}
+.region .span{font-family:var(--mono);font-size:.8rem;color:var(--green);margin-top:.3rem}
+.r1 .bar i{width:100%}
+.r2 .bar i{width:82%}
+.r3 .bar i{width:64%}
+.r4 .bar i{width:47%}
+
+/* catalogue cards */
+.cards{background:var(--white);color:var(--ink);padding:6rem 0;border-top:3px solid var(--line);position:relative}
+.cards .masthead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.6rem}
+.cards .masthead h2{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(1.6rem,3.2vw,2.5rem)}
+.cards .masthead a.cta-index{background:var(--green);color:var(--white);font-family:var(--mono);font-size:.68rem;padding:.4rem .8rem;border:1px solid var(--line);text-decoration:none}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem}
+.ccard{border:2px solid var(--line);background:var(--white);text-align:left}
+.ccard .top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--green);padding:.3rem .5rem;border-bottom:1px solid var(--line)}
+.ccard .ph{border-top:1px solid var(--line)}
+.ccard .ph img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.ccard .ph .no{position:absolute;top:.3rem;right:.4rem;background:var(--yellow);color:var(--black);font-family:var(--mono);font-size:.6rem;padding:.15rem .4rem}
+.ccard .ph{position:relative}
+.ccard .body{padding:.8rem .7rem}
+.ccard h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1rem}
+.ccard .loc{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.05em;margin-top:.4rem;display:flex;justify-content:space-between}
+.ccard .price{font-family:var(--mono);font-size:.72rem;color:var(--green-dark);margin-top:.5rem}
+.ccard a.go{display:inline-block;margin-top:.7rem;font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;padding:.2rem .6rem;border:1px solid var(--line);color:var(--ink);text-decoration:none}
+.ccard a.go:hover{background:var(--yellow);color:var(--white)}
+
+/* gallery / developers */
+.devs{background:var(--green);color:var(--white);padding:6rem 0;border-top:3px solid var(--line)}
+.devs .masthead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.4rem}
+.devs .masthead h2{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(1.7rem,3.4vw,2.7rem);color:var(--blue-light)}
+.devs .masthead .sr{color:var(--yellow)}
+.gstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.gcell{border:1px solid rgba(255,255,255,.3)}
+.gcell img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.gcell .cap{display:block;background:var(--green-dark);color:var(--blue-light);font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;padding:.35rem .6rem}
+.gside{grid-column:1/-1;background:var(--green-dark);color:var(--white);padding:2rem;border:2px solid var(--yellow);display:grid;grid-template-columns:1.2fr 1fr;gap:1.6rem}
+.gside h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.25rem;color:var(--yellow)}
+.gside p{font-family:var(--mono);font-size:.72rem;line-height:1.7;color:var(--blue-light)}
+.gside ul{list-style:none;font-family:var(--mono);font-size:.7rem;color:var(--blue-light)}
+.gside li::before{content:'+ ';color:var(--yellow);padding-right:.3rem}
+.gside .gh-out{background:var(--yellow);color:var(--black);border:1px solid var(--black);font-family:var(--mono);font-size:.68rem;text-transform:uppercase;padding:.6rem 1.1rem;margin-top:1rem;cursor:pointer}
+
+/* contact */
+.contact{background:var(--green-dark);color:var(--white);padding:7rem 0;border-top:4px solid var(--yellow);text-align:center}
+.contact .cross{display:inline-block;background:var(--yellow);color:var(--black);font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .8rem;margin-bottom:1.5rem}
+.contact h2{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(1.9rem,4vw,3.2rem);color:var(--yellow)}
+.contact p{color:var(--blue-light);max-width:46ch;margin:1.2rem auto 0;font-family:var(--mono);font-size:.8rem;line-height:1.7}
+.contact .row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.4rem}
+.contact .gh{background:var(--green-light);color:var(--black);border:1px solid var(--black)}
+.contact .gh2{background:transparent;color:var(--yellow);border:1px solid var(--yellow)}
+
+/* footer */
+.foot{background:var(--green-dark);color:var(--white);padding:4rem 0 2.5rem;border-top:3px solid var(--line)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.6rem}
+.foot .brand{display:flex;align-items:center;gap:.6rem;background:var(--green);color:var(--white);font-family:var(--disp);font-weight:700;text-transform:uppercase;padding:.4rem .8rem;border:1px solid var(--line)}
+.foot .brand img{width:1.6rem;height:1.6rem;border-radius:50%}
+.foot p{color:var(--blue-light);font-family:var(--mono);font-size:.72rem;line-height:1.7}
+.foot h5{color:var(--yellow);font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+.foot a{color:var(--blue-light);text-decoration:none;font-family:var(--mono);font-size:.68rem;display:block;padding:.4rem 0}
+.foot a:hover{color:var(--white)}
+.foot .copy{margin-top:3rem;border-top:1px solid var(--yellow);padding:1.5rem 0;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;color:var(--blue-light)}
+
+.whatsapp{position:fixed;right:1.3rem;bottom:1.3rem;z-index:60;width:3.4rem;height:3.4rem;border-radius:50%;background:var(--green);color:var(--white);display:grid;place-items:center;text-decoration:none;border:2px solid var(--yellow)}
+
+@media (max-width:900px){
+  .nav{display:none}
+  .burger{display:block}
+  .hero-grid{grid-template-columns:1fr}
+  .regions{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:repeat(2,1fr)}
+  .gstrip{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media (max-width:540px){
+  .cgrid,.gstrip{grid-template-columns:1fr}
+  .band-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="tick"><span>Itzinná <em>//</em> Estate Developments <em>//</em> Southeast Mexico <em>//</em> Est. Yucatán <em>//</em> Catalogue Open</span><span> Itzimná <em>//</em> Estate Developments <em>//</em> Southeast Mexico <em>//</em> Est. Yucatán <em>//</em> Catalogue Open</span></div>
+
+<header class="head">
+  <div class="head-row">
+    <a class="brand" href="#top"><img src="../public/images/logo.webp" alt="Itzimná logo" />Itzimná</a>
+    <div class="idx">Catalogue 2025 · Rev. 03</div>
+    <nav class="nav">
+      <a href="#regions">Regions</a>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#developers">Developers</a>
+      <a href="#contact">Contact</a>
+      <a class="cta" href="#contact">Enquire</a>
+    </nav>
+    <button class="burger">≡</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="idline">
+        <span>FILE: ITZ-SE-2025</span>
+        <span>LOC: YUCATÁN · SOUTHEAST MX</span>
+        <span>GRID: 21.17°N / 89.46°W</span>
+      </div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="badge">Secure connection · defined by ethics</span>
+          <h1>Your <span class="y">secure</span><br>way into<br>the southeast.</h1>
+          <p>Itzinná Real Estate curates developments across Yucatán and southeastern Mexico — homes in Mérida, investment lots, coastal luxury and industrial warehouses, all built on legal certainty and transparency.</p>
+          <div class="hero-cta">
+            <a class="gh" href="#catalogue">Open catalogue</a>
+            <a class="gh outline" href="#contact">Request dossier</a>
+          </div>
+        </div>
+        <div>
+          <div class="hero-spec">
+            <div class="title">// Project Specs</div>
+            <div class="row"><span>Type</span><b>Curated portfolio</b></div>
+            <div class="row"><span>Ethics</span><b>Guaranteed</b></div>
+            <div class="row"><span>Legal</span><b>Certainty</b></div>
+            <div class="row"><span>Region</span><b>Southeast MX</b></div>
+          </div>
+          <div class="hero-media">
+            <img src="../public/images/hero.webp" alt="Yucatán landscape" />
+            <div class="msk"></div>
+            <span class="tag">FRAME_01</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <section class="band">
+    <div class="container band-grid">
+      <div class="band-item"><div class="n">21.17°</div><div class="l">Latitude · Mérida</div></div>
+      <div class="band-item"><div class="n">4</div><div class="l">Portfolio classes</div></div>
+      <div class="band-item"><div class="n">100%</div><div class="l">Legal certainty</div></div>
+      <div class="band-item"><div class="n">NN</div><div class="l">Development units</div></div>
+    </div>
+  </section>
+
+  <!-- REGIONS -->
+  <section class="cat" id="regions">
+    <div class="container">
+      <div class="masthead">
+        <h2>Regions / Coverage</h2>
+        <div class="sr">V.02</div>
+      </div>
+      <div class="regions">
+        <div class="region r1">
+          <div class="r-h"><span class="num">01</span><h3>Mérida</h3></div>
+          <div class="bar"><i></i></div>
+          <p>Quality-of-life homes, gated communities and growing suburbs in the heart of Yucatán.</p>
+          <div class="span">Coverage · FULL</div>
+        </div>
+        <div class="region r2">
+          <div class="r-h"><span class="num">02</span><h3>Yucatecan Coast</h3></div>
+          <div class="bar"><i></i></div>
+          <p>Luxury apartments and beachfront lots along the coast, with transparent seaside living.</p>
+          <div class="span">Coverage · HIGH</div>
+        </div>
+        <div class="region r3">
+          <div class="r-h"><span class="num">03</span><h3>Southeast Region</h3></div>
+          <div class="bar"><i></i></div>
+          <p>Investment lots and residential opportunities across the broader southeast of Mexico.</p>
+          <div class="span">Coverage · ONGOING</div>
+        </div>
+        <div class="region r4">
+          <div class="r-h"><span class="num">04</span><h3>Industrial</h3></div>
+          <div class="bar"><i></i></div>
+          <p>Warehouses and industrial spaces for sale, with full legal diligence verified.</p>
+          <div class="span">Coverage · EARLY</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGUE -->
+  <section class="cards" id="catalogue">
+    <div class="container">
+      <div class="masthead">
+        <h2>Featured / Catalogue</h2>
+        <a class="cta-index" href="#">Index A–D</a>
+      </div>
+      <div class="cgrid">
+        <article class="ccard">
+          <div class="top"><span>Unit</span><span>A.01</span></div>
+          <div class="ph">
+            <img src="../public/images/hero.webp" alt="House Mérida" style="object-position:center 25%" />
+            <span class="no">01</span>
+          </div>
+          <div class="body">
+            <h3>Hacienda Norte</h3>
+            <div class="loc"><span>Mérida</span><span>HOUSE</span></div>
+            <div class="price">FROM €320K</div>
+            <a class="go" href="#">View →</a>
+          </div>
+        </article>
+        <article class="ccard">
+          <div class="top"><span>Unit</span><span>A.02</span></div>
+          <div class="ph">
+            <img src="../public/images/home-banner.webp" alt="Penthouse coast" style="object-position:center 30%" />
+            <span class="no">02</span>
+          </div>
+          <div class="body">
+            <h3>Mar Azul Penth.</h3>
+            <div class="loc"><span>Coast</span><span>LUXURY</span></div>
+            <div class="price">FROM €480K</div>
+            <a class="go" href="#">View →</a>
+          </div>
+        </article>
+        <article class="ccard">
+          <div class="top"><span>Unit</span><span>A.03</span></div>
+          <div class="ph">
+            <img src="../public/images/gallery/white.webp" alt="Investment lot" />
+            <span class="no">03</span>
+          </div>
+          <div class="body">
+            <h3>Rinconcito Inv.</h3>
+            <div class="loc"><span>Yucatán</span><span>INVEST</span></div>
+            <div class="price">FROM €72K</div>
+            <a class="go" href="#">View →</a>
+          </div>
+        </article>
+        <article class="ccard">
+          <div class="top"><span>Unit</span><span>A.04</span></div>
+          <div class="ph">
+            <img src="../public/images/home-banner.webp" alt="Industrial warehouse" style="object-position:center 60%" />
+            <span class="no">04</span>
+          </div>
+          <div class="body">
+            <h3>Pq. Industrial</h3>
+            <div class="loc"><span>Mérida</span><span>IND.</span></div>
+            <div class="price">FROM €150K</div>
+            <a class="go" href="#">View →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEVELOPERS / GALLERY -->
+  <section class="devs" id="developers">
+    <div class="container">
+      <div class="masthead">
+        <h2>For Devs / Exposure</h2>
+        <div class="sr">R.02</div>
+      </div>
+      <div class="gstrip">
+        <figure class="gcell"><img src="../public/images/home-banner.webp" alt="Showcase" /><span class="cap">01 · RES</span></figure>
+        <figure class="gcell"><img src="../public/images/hero.webp" alt="Showcase" /><span class="cap">02 · LOT</span></figure>
+        <figure class="gcell"><img src="../public/images/gallery/white.webp" alt="Showcase" /><span class="cap">03 · APT</span></figure>
+        <div class="gside">
+          <div>
+            <h3>Advertise with confidence</h3>
+            <p>Are you a developer in southeastern Mexico prioritizing ethics and legal certainty? Itzimná offers a wide-reach platform for your properties to reach qualified, security-seeking buyers.</p>
+            <a class="gh-out" href="#contact" style="text-decoration:none">Promote project</a>
+          </div>
+          <ul>
+            <li>Residential projects</li>
+            <li>Industrial warehouses</li>
+            <li>Lots with legal security</li>
+            <li>Transparent processes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <span class="cross">+ REQUEST / CONTACT</span>
+      <h2>Do you want us to contact you?</h2>
+      <p>Fill out the form and one of our consultants will reach out — or contact us directly. We respond fast, in your language.</p>
+      <div class="row">
+        <a class="gh" href="mailto:hello@itzimna.mx">✉ hello@itzimna.mx</a>
+        <a class="gh2" href="#">💬 WhatsApp</a>
+      </div>
+      <p class="label" style="margin-top:2rem;text-align:center">Mérida, Yucatán · ES / EN support</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand"><img src="../public/images/logo.webp" alt="Itzimná" />Itzimná</div>
+        <p style="margin-top:1rem">Estate developments across southeastern Mexico — where ethics, legal certainty and quality of life align.</p>
+      </div>
+      <div><h5>Deep links</h5><a href="#catalogue">Catalogue</a><a href="#regions">Regions</a><a href="#developers">Developers</a><a href="#contact">Contact</a></div>
+      <div><h5>Legal</h5><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+      <div><h5>Contact</h5><a href="#">Mérida, Yucatán</a><a href="mailto:hello@itzimna.mx">Email</a><a href="#">WhatsApp</a></div>
+    </div>
+    <p class="copy">© 2025 Itzimná Real Estate · All rights reserved · Designed by Dari Dev</p>
+  </div>
+</footer>
+
+<div class="whatsapp" title="WhatsApp">WA</div>
+
+<script>
+document.querySelector('.burger').addEventListener('click',()=>{
+  const n=document.querySelector('.nav');
+  n.style.display=n.style.display==='flex'?'none':'flex';
+});
+</script>
+</body>
+</html>
